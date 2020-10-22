@@ -16,30 +16,14 @@ class ApiController extends \yii\web\Controller
 
     public $user;
 
-    public function behaviors()
-    {
-        return array_merge(parent::behaviors(), [
-
-            // For cross-domain AJAX request
-            'corsFilter'  => [
-                'class' => \yii\filters\Cors::className(),
-                'cors'  => [
-                    // restrict access to domains:
-                    'Access-Control-Allow-Origin'      => ['*'],
-                    'Access-Control-Request-Method'    => ['*'],
-                    'Access-Control-Allow-Credentials' => false,
-                    'Access-Control-Max-Age'           => 3600,                 // Cache (seconds)
-                ],
-            ],
-
-        ]);
-    }
-
     public function beforeAction($action)
     {
+        header('Access-Control-Allow-Origin: *');
+
         Yii::$app->response->format = Response::FORMAT_JSON;
 
         $headers = Yii::$app->request->headers;
+
     
         $this->enableCsrfValidation = false;
 
@@ -84,7 +68,7 @@ class ApiController extends \yii\web\Controller
 
     public function actionDetail()
     {
-        $detail = Participant::find()->where(['user_id'=>$this->user->id])->one();
+        $detail = Participant::find()->with(['exam'])->asArray()->where(['user_id'=>$this->user->id])->one();
         return $detail;
     }
 

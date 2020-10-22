@@ -4,6 +4,7 @@ $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
+    'timeZone'=>'Asia/Jakarta',
     'name' => 'TMC IQ TEST',
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
