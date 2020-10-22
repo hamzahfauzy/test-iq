@@ -108,6 +108,12 @@ class Post extends \yii\db\ActiveRecord
           ->viaTable('post_items', ['child_id' => 'id']);
     }
 
+    public function getItems()
+    {
+        return $this->hasMany(Post::className(), ['id' => 'child_id'])
+          ->viaTable('post_items', ['parent_id' => 'id']);
+    }
+
     public function getParent()
     {
         return $this->hasOne(Post::className(), ['id' => 'parent_id'])

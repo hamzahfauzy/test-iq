@@ -102,6 +102,11 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return Yii::$app->security->generatePasswordHash($password);
     }
 
+    public function getParticipant()
+    {
+        return $this->hasOne(Participant::className(), ['user_id' => 'id']);
+    }
+
     public function beforeSave($insert)
     {
         if(parent::beforeSave($insert)){

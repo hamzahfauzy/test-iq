@@ -85,6 +85,11 @@ class Participant extends \yii\db\ActiveRecord
         return $this->hasMany(ExamParticipant::className(), ['participant_id' => 'id']);
     }
 
+    public function getExamParticipant()
+    {
+        return $this->hasOne(ExamParticipant::className(), ['participant_id' => 'id']);
+    }
+
     /**
      * Gets query for [[User]].
      *
