@@ -25,9 +25,9 @@ class ApiController extends \yii\web\Controller
                 'class' => \yii\filters\Cors::className(),
                 'cors'  => [
                     // restrict access to domains:
-                    'Origin'                           => ['*'],
+                    'Access-Control-Allow-Origin'      => ['*'],
                     'Access-Control-Request-Method'    => ['*'],
-                    'Access-Control-Allow-Credentials' => true,
+                    'Access-Control-Allow-Credentials' => false,
                     'Access-Control-Max-Age'           => 3600,                 // Cache (seconds)
                 ],
             ],
