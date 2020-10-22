@@ -141,11 +141,11 @@ class PostController extends Controller
             $transaction = \Yii::$app->db->beginTransaction();
             try {
                 $category = Category::findOne($model->category_id);
-                for ($row = 1; $row <= $highestRow; ++$row) { //$row = 2 artinya baris kedua yang dibaca dulu(header kolom diskip disesuaikan saja)
-
+                for ($row = 2; $row <= $highestRow; $row++) { //$row = 2 artinya baris kedua yang dibaca dulu(header kolom diskip disesuaikan saja)
+                    $no = $row-1;
                     // create post (soal)
                     $post = new Post;
-                    $post->post_title = "Soal ".$category->name." ".$row;
+                    $post->post_title = "Soal ".$category->name." ".$no;
                     $post->post_as    = "Soal";
                     $post->save(false);
                     
@@ -159,7 +159,7 @@ class PostController extends Controller
                     {
                         // save true answer
                         $child = new Post;
-                        $child->post_title = "Jawaban ".$category->name." ".$row;
+                        $child->post_title = "Jawaban ".$category->name." ".$no;
                         $child->post_content = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
                         $child->post_as = "Jawaban";
                         $child->post_type = "1";
@@ -170,7 +170,7 @@ class PostController extends Controller
                     {
                         // save A
                         $child = new Post;
-                        $child->post_title = "Jawaban A ".$category->name." ".$row;
+                        $child->post_title = "Jawaban A ".$category->name." ".$no;
                         $child->post_content = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
                         $child->post_as = "Jawaban";
                         $child->post_type = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
@@ -179,7 +179,7 @@ class PostController extends Controller
 
                         // save B
                         $child = new Post;
-                        $child->post_title = "Jawaban B ".$category->name." ".$row;
+                        $child->post_title = "Jawaban B ".$category->name." ".$no;
                         $child->post_content = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
                         $child->post_as = "Jawaban";
                         $child->post_type = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
@@ -190,7 +190,7 @@ class PostController extends Controller
                     {
                         // Save A
                         $child = new Post;
-                        $child->post_title = "Jawaban A ".$category->name." ".$row;
+                        $child->post_title = "Jawaban A ".$category->name." ".$no;
                         $child->post_content = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
                         $child->post_as = "Jawaban";
                         $child->post_type = "A";
@@ -199,7 +199,7 @@ class PostController extends Controller
 
                         // Save B
                         $child = new Post;
-                        $child->post_title = "Jawaban B ".$category->name." ".$row;
+                        $child->post_title = "Jawaban B ".$category->name." ".$no;
                         $child->post_content = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
                         $child->post_as = "Jawaban";
                         $child->post_type = "B";
@@ -214,7 +214,7 @@ class PostController extends Controller
                         for($i=0;$i<$num;$i++)
                         {
                             $child = new Post;
-                            $child->post_title = "Jawaban ".$alphabet[$i]." ".$category->name." ".$row;
+                            $child->post_title = "Jawaban ".$alphabet[$i]." ".$category->name." ".$no;
                             $child->post_content = $alphabet[$i];
                             $child->post_as = "Jawaban";
                             $child->post_type = $index == $alphabet[$i] ? 1 : 0;
