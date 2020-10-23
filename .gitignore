@@ -1,6 +1,8 @@
 # phpstorm project files
 .idea
 
+web/uploads
+
 #database config
 config/db.php
 

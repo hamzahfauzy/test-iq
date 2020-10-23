@@ -15,6 +15,7 @@ class ImportFile extends Model
 {
     public $category_id;
     public $file;
+    public $tipe;
 
 
     /**
@@ -23,7 +24,7 @@ class ImportFile extends Model
     public function rules()
     {
         return [
-            [['category_id', 'file'], 'required'],
+            [['category_id', 'file','tipe'], 'required'],
         ];
     }
 }

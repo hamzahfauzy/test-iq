@@ -27,10 +27,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'prompt' => '- Choose Category -',
             ])->label('Category') ?>
 
-            <?= $form->field($model, 'file')->input('file') ?>
+            <?= $form->field($model, 'file[]')->input('file',['multiple'=>'true']) ?>
 
             <div class="form-group">
-                <?= Html::submitButton('Import', ['class' => 'btn btn-success']) ?>
+                <?= Html::submitButton('Import 1', ['class' => 'btn btn-success','name'=>'ImportFile[tipe]','value'=>'questions']) ?>
+                <?= Html::submitButton('Import 2', ['class' => 'btn btn-primary','name'=>'ImportFile[tipe]','value'=>'images']) ?>
             </div>
 
             <?php ActiveForm::end(); ?>
