@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Category;
 use app\models\ExamAnswer;
 use app\models\Participant;
+use app\models\Post;
 use app\models\User;
 use Yii;
 use yii\filters\Cors;
@@ -96,11 +97,24 @@ class ApiController extends \yii\web\Controller
         $answer = new ExamAnswer();
 
         if($request->post()){
+
             $answer->exam_id = $request->post('exam_id');
             $answer->question_id = $request->post('question_id');
             $answer->answer_id = $request->post('answer_id');
-            $answer->score = $request->post('score');
             $answer->participant_id = $this->user->participant->id;
+
+            $exam_answer = ExamAnswer::find()->where([
+                'exam_id'=>$answer->exam_id,
+                'question_id'=>$answer->question_id,
+                'participant_id'=>$answer->participant_id,
+            ])->one();
+
+            if($exam_answer){
+                $answer = $exam_answer;
+            }
+
+            $post = Post::find()->where(['id'=>$request->post('answer_id')])->one();
+            $answer->score = $post->post_type;
 
             if($answer->save()){
                 return ['msg'=>'success','user'=>$this->user,'answer'=>$answer];
