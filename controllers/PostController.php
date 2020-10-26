@@ -256,7 +256,7 @@ class PostController extends Controller
                     $name = $name[0];
                     $title = $serial_names[$name].' '.$number;
                     $soal = Post::find()->where(['post_title'=>$title])->one();
-                    $soal->post_content .= '<p><img alt="" src="'.Url::to(['uploads/'.$file->baseName . '.' . $file->extension]).'" width="100%" /></p>';
+                    $soal->post_content .= '<p><img alt="" src="'.Url::to(['uploads/'.$file->baseName . '.' . $file->extension],true).'" width="100%" /></p>';
                     $soal->save(false);
                 }
                 Yii::$app->session->addFlash("success", "Import 2 Posts Success");
