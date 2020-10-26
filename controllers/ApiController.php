@@ -100,7 +100,6 @@ class ApiController extends \yii\web\Controller
 
             $answer->exam_id = $request->post('exam_id');
             $answer->question_id = $request->post('question_id');
-            $answer->answer_id = $request->post('answer_id');
             $answer->participant_id = $this->user->participant->id;
 
             $exam_answer = ExamAnswer::find()->where([
@@ -114,7 +113,23 @@ class ApiController extends \yii\web\Controller
             }
 
             $post = Post::find()->where(['id'=>$request->post('answer_id')])->one();
-            $answer->score = $post->post_type;
+
+            if($post){
+                $answer->answer_id = $post->id;
+                $answer->score = $post->post_type;
+            }else{
+
+                $question = Post::find()->where(['id'=>$request->post('question_id')])->one();
+                $checkAnswer = $question->getItems()->where(['post_content'=>strtolower($request->post('answer_id'))])->one();
+
+                if($checkAnswer){
+                    $answer->answer_id = $checkAnswer->id;
+                    $answer->score = $checkAnswer->post_type;
+                }else{
+                    $answer->answer_id = null;
+                    $answer->score = 0;
+                }
+            }
 
             if($answer->save()){
                 return ['msg'=>'success','user'=>$this->user,'answer'=>$answer];
