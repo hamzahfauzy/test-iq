@@ -35,10 +35,10 @@ class Participant extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'id_number'], 'integer'],
+            [['user_id'], 'integer'],
             [['id_number', 'name', 'address', 'birthdate'], 'required'],
             [['id_number'], 'unique'],
-            [['address'], 'string'],
+            [['address','id_number'], 'string'],
             [['birthdate','school','study','work_time','age'], 'safe'],
             [['name', 'phone'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
