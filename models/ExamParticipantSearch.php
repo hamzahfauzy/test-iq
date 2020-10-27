@@ -18,7 +18,7 @@ class ExamParticipantSearch extends ExamParticipant
     public function rules()
     {
         return [
-            [['name'], 'safe'],
+            [['name','status'], 'safe'],
             [['id', 'exam_id', 'participant_id'], 'integer'],
         ];
     }

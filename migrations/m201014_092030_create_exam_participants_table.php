@@ -16,6 +16,7 @@ class m201014_092030_create_exam_participants_table extends Migration
             'id' => $this->primaryKey(),
             'exam_id' => $this->integer(),
             'participant_id' => $this->integer(),
+            'status' => $this->string(),
         ]);
 
         $this->createIndex(

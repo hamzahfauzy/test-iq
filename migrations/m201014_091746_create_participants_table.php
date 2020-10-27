@@ -15,7 +15,7 @@ class m201014_091746_create_participants_table extends Migration
         $this->createTable('{{%participants}}', [
             'id' => $this->primaryKey(),
             'user_id' => $this->integer(),
-            'id_number' => $this->integer(),
+            'id_number' => $this->string(),
             'name' => $this->string(),
             'address' => $this->text(),
             'phone' => $this->string(),
