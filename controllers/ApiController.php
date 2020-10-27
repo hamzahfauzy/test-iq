@@ -4,6 +4,8 @@ namespace app\controllers;
 
 use app\models\Category;
 use app\models\ExamAnswer;
+use app\models\ExamCategory;
+use app\models\ExamParticipant;
 use app\models\Participant;
 use app\models\Post;
 use app\models\User;
@@ -69,7 +71,7 @@ class ApiController extends \yii\web\Controller
 
     public function actionDetail()
     {
-        $detail = Participant::find()->with(['exam'])->asArray()->where(['user_id'=>$this->user->id])->one();
+        $detail = Participant::find()->with(['exam','examParticipant'])->asArray()->where(['user_id'=>$this->user->id])->one();
         return $detail;
     }
 
@@ -83,6 +85,60 @@ class ApiController extends \yii\web\Controller
             return $user;
         }
         
+    }
+
+    public function actionNext(){
+        $request = Yii::$app->request;
+        $category = new ExamCategory();
+
+        if($request->post()){
+
+            $category->exam_id = intval($request->post('exam_id'));
+            $category->category_id = intval($request->post('category_id'));
+            $category->participant_id = $this->user->participant->id;
+
+            $exam_category = ExamCategory::find()->where([
+                'exam_id'=>$category->exam_id,
+                'category_id'=>$category->category_id,
+                'participant_id'=>$category->participant_id,
+            ])->one();
+
+            if($exam_category){
+                $category = $exam_category;
+            }
+
+            $category->time_left = $request->post('time_left');
+
+            if($category->save()){
+                return ['msg'=>'success','user'=>$this->user,'category'=>$category];
+            }
+
+        }
+
+        return ['msg'=>'failed','user'=>$this->user];
+        
+    }
+
+    public function actionStart(){
+        $participant = Participant::find()->where(['user_id'=>$this->user->id])->one();
+        $exam_participant = ExamParticipant::find()->where(['participant_id'=>$participant->id,'exam_id'=>$participant->exam->id])->one();
+        $exam_participant->status = 'start';
+        if($exam_participant->save()){
+            return ['msg'=>'success','user'=>$this->user];
+        }
+        return ['msg'=>'success','user'=>$this->user];
+    }
+
+
+    public function actionFinish(){
+        $participant = Participant::find()->where(['user_id'=>$this->user->id])->one();
+        $exam_participant = ExamParticipant::find()->where(['participant_id'=>$participant->id,'exam_id'=>$participant->exam->id])->one();
+        $exam_participant->status = 'finish';
+        if($exam_participant->save()){
+            $detail = Participant::find()->with(['exam','examParticipant'])->asArray()->where(['user_id'=>$this->user->id])->one();
+            return ['msg'=>'success','user'=>$this->user,'detail'=>$detail];
+        }
+        return ['msg'=>'success','user'=>$this->user];
     }
 
     public function actionCategories()
