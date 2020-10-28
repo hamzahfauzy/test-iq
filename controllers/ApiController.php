@@ -124,7 +124,8 @@ class ApiController extends \yii\web\Controller
         $exam_participant = ExamParticipant::find()->where(['participant_id'=>$participant->id,'exam_id'=>$participant->exam->id])->one();
         $exam_participant->status = 'start';
         if($exam_participant->save()){
-            return ['msg'=>'success','user'=>$this->user];
+            $detail = Participant::find()->with(['exam','examParticipant'])->asArray()->where(['user_id'=>$this->user->id])->one();
+            return ['msg'=>'success','user'=>$this->user,'detail'=>$detail];
         }
         return ['msg'=>'success','user'=>$this->user];
     }
