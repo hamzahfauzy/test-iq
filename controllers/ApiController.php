@@ -142,6 +142,16 @@ class ApiController extends \yii\web\Controller
         return ['msg'=>'success','user'=>$this->user];
     }
 
+    function actionAnswered(){
+        $participant = Participant::find()->where(['user_id'=>$this->user->id])->one();
+        $exam_answered = [];
+        foreach($participant->examAnswers as $answer){
+            $exam_answered[$answer->question_id] = "$answer->answer_id";
+        }
+
+        return $exam_answered;
+    }
+
     public function actionCategories()
     {
         $categories = Category::find()->joinWith(['posts'])->asArray()->orderBy(['sequenced_number'=>'asc'])->all();
