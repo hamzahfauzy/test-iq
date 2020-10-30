@@ -36,7 +36,7 @@ class Participant extends \yii\db\ActiveRecord
     {
         return [
             [['user_id'], 'integer'],
-            [['id_number', 'name', 'address', 'birthdate'], 'required'],
+            [['id_number', 'name', 'birthdate'], 'required'],
             [['id_number'], 'unique'],
             [['address','id_number'], 'string'],
             [['birthdate','school','study','work_time','age'], 'safe'],
@@ -83,6 +83,11 @@ class Participant extends \yii\db\ActiveRecord
     public function getExamParticipants()
     {
         return $this->hasMany(ExamParticipant::className(), ['participant_id' => 'id']);
+    }
+
+    public function getExamCategories()
+    {
+        return $this->hasMany(ExamCategory::className(), ['participant_id' => 'id'])->joinWith(['category']);
     }
 
     public function getExamParticipant()

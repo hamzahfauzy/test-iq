@@ -6,6 +6,8 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\Exam */
 /* @var $form yii\widgets\ActiveForm */
+$model->start_time = date('Y-m-d\TH:i',strtotime($model->start_time));
+$model->end_time = date('Y-m-d\TH:i',strtotime($model->end_time));
 ?>
 
 <div class="exam-form">

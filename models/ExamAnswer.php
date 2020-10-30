@@ -37,7 +37,7 @@ class ExamAnswer extends \yii\db\ActiveRecord
     {
         return [
             [['exam_id', 'question_id', 'answer_id', 'score', 'participant_id'], 'integer'],
-            [['created_at'], 'safe'],
+            [['created_at','answer_content'], 'safe'],
             [['answer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Post::className(), 'targetAttribute' => ['answer_id' => 'id']],
             [['exam_id'], 'exist', 'skipOnError' => true, 'targetClass' => Exam::className(), 'targetAttribute' => ['exam_id' => 'id']],
             [['participant_id'], 'exist', 'skipOnError' => true, 'targetClass' => Participant::className(), 'targetAttribute' => ['participant_id' => 'id']],
@@ -55,6 +55,7 @@ class ExamAnswer extends \yii\db\ActiveRecord
             'exam_id' => 'Exam ID',
             'question_id' => 'Question ID',
             'answer_id' => 'Answer ID',
+            'answer_content' => 'Answer Content',
             'score' => 'Score',
             'participant_id' => 'Participant ID',
             'created_at' => 'Created At',

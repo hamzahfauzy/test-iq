@@ -116,17 +116,27 @@ class ParticipantController extends Controller
               
             $transaction = \Yii::$app->db->beginTransaction();
             try {
-                // for ($row = 1; $row <= $highestRow; ++$row) { //$row = 2 artinya baris kedua yang dibaca dulu(header kolom diskip disesuaikan saja)
-                    // $participant = new Participant;
-                    //for ($col = 1; $col <= $highestColumnIndex; ++$col) {
-                    // echo $worksheet->getCellByColumnAndRow(1, $row)->getValue(); //3 artinya kolom ke3
-                    // $kolom10 = $worksheet->getCellByColumnAndRow(10, $row)->getValue(); // 10 artinya kolom 10
-                // }
+                for ($row = 2; $row <= $highestRow; $row++) { //$row = 2 artinya baris kedua yang dibaca dulu(header kolom diskip disesuaikan saja)
+                    $user = new User;
+                    $user->username = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                    $user->password_hash = "123";
+                    $user->email = $worksheet->getCellByColumnAndRow(2, $row)->getValue()."@mail.com";
+                    $user->save();
+
+                    $participant = new Participant;
+                    $participant->name = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                    $participant->id_number = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                    $participant->birthdate = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                    $participant->study = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                    $participant->user_id = $user->id;
+                    $participant->save(false);
+                }
                 $transaction->commit();
                 Yii::$app->session->addFlash("success", "Import Participant Success");
             } catch (\Throwable $th) {
                 throw $th;
                 $transaction->rollback();
+                Yii::$app->session->addFlash("error", "Import Participant Failed");
             }
             return $this->redirect(['imports']);
         }

@@ -146,7 +146,10 @@ class ApiController extends \yii\web\Controller
         $participant = Participant::find()->where(['user_id'=>$this->user->id])->one();
         $exam_answered = [];
         foreach($participant->examAnswers as $answer){
-            $exam_answered[$answer->question_id] = "$answer->answer_id";
+            if($answer->question->categoryPost->sequenced_number == 4)
+                $exam_answered[$answer->question_id] = "$answer->answer_content";
+            else
+                $exam_answered[$answer->question_id] = "$answer->answer_id";
         }
 
         return $exam_answered;
@@ -156,6 +159,12 @@ class ApiController extends \yii\web\Controller
     {
         $categories = Category::find()->joinWith(['posts'])->asArray()->orderBy(['sequenced_number'=>'asc'])->all();
         return $categories;
+    }
+
+    public function actionLastCategory($exam_id)
+    {
+        $category = $this->user->participant->getExamCategories()->asArray()->where(['exam_id'=>$exam_id])->orderBy(['categories.sequenced_number'=>SORT_DESC])->one();
+        return $category;
     }
 
     public function actionAnswer(){
@@ -188,6 +197,8 @@ class ApiController extends \yii\web\Controller
 
                 $question = Post::find()->where(['id'=>$request->post('question_id')])->one();
                 $checkAnswer = $question->getItems()->where(['post_content'=>strtolower($request->post('answer_id'))])->one();
+
+                $answer->answer_content = strtolower($request->post('answer_id'));
 
                 if($checkAnswer){
                     $answer->answer_id = $checkAnswer->id;
