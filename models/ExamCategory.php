@@ -34,8 +34,8 @@ class ExamCategory extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['exam_id', 'category_id', 'participant_id', 'time_left'], 'integer'],
-            [['created_at'], 'safe'],
+            [['exam_id', 'category_id', 'participant_id'], 'integer'],
+            [['created_at', 'time_left'], 'safe'],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
             [['exam_id'], 'exist', 'skipOnError' => true, 'targetClass' => Exam::className(), 'targetAttribute' => ['exam_id' => 'id']],
             [['participant_id'], 'exist', 'skipOnError' => true, 'targetClass' => Participant::className(), 'targetAttribute' => ['participant_id' => 'id']],
