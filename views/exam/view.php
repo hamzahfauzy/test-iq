@@ -53,8 +53,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h1>Participants</h1>
             </div>
             <div class="card-toolbar">
-                <?= Html::a('Imports', ['exam-participant/import'], ['class' => 'btn btn-primary']) ?>
-                &nbsp;
                 <?= Html::a('Add Participants', ['exam-participant/create','exam_id'=>$model->id], ['class' => 'btn btn-success']) ?>
             </div>
         </div>

@@ -23,6 +23,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
+            <?= $form->field($model, 'exam_id')->dropdownList($exams,[
+                'prompt' => '- Choose Exam -',
+            ])->label('Exam') ?>
+
             <?= $form->field($model, 'file')->input('file') ?>
 
             <div class="form-group">

@@ -4,12 +4,14 @@ namespace app\controllers;
 
 use Yii;
 use app\models\User;
+use app\models\Exam;
 use app\models\ImportParticipant;
 use app\models\Participant;
 use app\models\ParticipantSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 
 /**
  * ParticipantController implements the CRUD actions for Participant model.
@@ -96,7 +98,9 @@ class ParticipantController extends Controller
     public function actionImports()
     {
         $model = new ImportParticipant;
-        if (isset($_FILES['ImportParticipant'])){
+        $exams = Exam::find()->all();
+        $exams = ArrayHelper::map($exams,'id','name');
+        if ($model->load(Yii::$app->request->post())){
             $uploadedFile = \yii\web\UploadedFile::getInstance($model,'file');
             $extension    = $uploadedFile->extension;
             if($extension=='xlsx'){
@@ -130,6 +134,9 @@ class ParticipantController extends Controller
                     $participant->study = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
                     $participant->user_id = $user->id;
                     $participant->save(false);
+
+                    $exam = Exam::findOne($model->exam_id);
+                    $exam->link('participants',$participant);
                 }
                 $transaction->commit();
                 Yii::$app->session->addFlash("success", "Import Participant Success");
@@ -143,6 +150,7 @@ class ParticipantController extends Controller
 
         return $this->render('imports', [
             'model' => $model,
+            'exams' => $exams,
         ]);
     }
 

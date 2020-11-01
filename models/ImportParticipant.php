@@ -13,7 +13,7 @@ use yii\base\Model;
  */
 class ImportParticipant extends Model
 {
-    public $file;
+    public $file, $exam_id;
 
 
     /**
@@ -22,7 +22,7 @@ class ImportParticipant extends Model
     public function rules()
     {
         return [
-            [['file'], 'required'],
+            [['exam_id','file'], 'required'],
         ];
     }
 }
