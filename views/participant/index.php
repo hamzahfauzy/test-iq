@@ -18,20 +18,27 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h1><?= Html::encode($this->title) ?></h1>
             </div>
             <div class="card-toolbar">
+                <?= Html::a('Import Participant', ['imports'], ['class' => 'btn btn-primary']) ?>
+                &nbsp;
                 <?= Html::a('Create Participant', ['create'], ['class' => 'btn btn-success']) ?>
             </div>
         </div>
         <div class="card-body">    
+            <form action="">
+                <div class="form-group">
+                    <input type="text" name="ParticipantSearch[name]" class="form-control" placeholder="Search..." value="<?=$searchModel->name?>">
+                </div>
+            </form>
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
-                'filterModel' => $searchModel,
+                // 'filterModel' => $searchModel,
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
                     'id_number',
                     'name',
-                    'address:ntext',
-                    //'phone',
-                    //'birthdate',
+                    // 'address:ntext',
+                    // 'phone',
+                    // 'birthdate',
 
                     [
                         'class' => 'yii\grid\ActionColumn',

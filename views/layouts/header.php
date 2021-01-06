@@ -26,6 +26,7 @@ use yii\helpers\Url;
                         <a href="#" class="nav-link py-4 px-6 <?=$this->tab_active == 'exams' ? 'active' : '' ?>" data-toggle="tab" data-target="#kt_header_tab_2" role="tab">Exams</a>
                     </li>
                     <!--end::Item-->
+                    <?php /*
                     <!--begin::Item-->
                     <li class="nav-item mr-3">
                         <a href="#" class="nav-link py-4 px-6 <?=$this->tab_active == 'report' ? 'active' : '' ?>" data-toggle="tab" data-target="#kt_header_tab_3" role="tab">Report</a>
@@ -35,7 +36,7 @@ use yii\helpers\Url;
                     <li class="nav-item mr-3">
                         <a href="#" class="nav-link py-4 px-6 <?=$this->tab_active == '' ? 'users' : '' ?>" data-toggle="tab" data-target="#kt_header_tab_4" role="tab">Users</a>
                     </li>
-                    <!--end::Item-->
+                    <!--end::Item--> */ ?>
                 </ul>
                 <!--begin::Tab Navs-->
             </div>
@@ -79,6 +80,7 @@ use yii\helpers\Url;
                         <a href="#" class="nav-link btn btn-clean <?=$this->tab_active == 'exams' ? 'active' : '' ?>" data-toggle="tab" data-target="#kt_header_tab_2" role="tab">Exams</a>
                     </li>
                     <!--end::Item-->
+                    <?php /* 
                     <!--begin::Item-->
                     <li class="nav-item mr-2">
                         <a href="#" class="nav-link btn btn-clean <?=$this->tab_active == 'report' ? 'active' : '' ?>" data-toggle="tab" data-target="#kt_header_tab_3" role="tab">Reports</a>
@@ -88,7 +90,7 @@ use yii\helpers\Url;
                     <li class="nav-item mr-2">
                         <a href="#" class="nav-link btn btn-clean <?=$this->tab_active == 'users' ? 'active' : '' ?>" data-toggle="tab" data-target="#kt_header_tab_4" role="tab">Users</a>
                     </li>
-                    <!--end::Item-->
+                    <!--end::Item--> */ ?>
                 </ul>
                 <!--begin::Tab Navs-->
                 <!--begin::Tab Content-->

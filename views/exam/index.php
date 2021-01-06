@@ -23,15 +23,27 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
         <div class="card-body">    
+            <form action="">
+                <div class="form-group">
+                    <input type="text" name="ExamSearch[name]" class="form-control" placeholder="Search..." value="<?=$searchModel->name?>">
+                </div>
+            </form>
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
-                'filterModel' => $searchModel,
+                // 'filterModel' => $searchModel,
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
 
                     'name',
                     'start_time',
                     'end_time',
+                    [
+                        'attribute' => 'Report',
+                        'format' => 'raw',
+                        'value' => function($model){
+                            return Html::a('<i class="fa fa-download fa-fw"></i> Download', ['/report/download', 'id' => $model->id]);
+                        }
+                    ],
 
                     ['class' => 'yii\grid\ActionColumn'],
                 ],

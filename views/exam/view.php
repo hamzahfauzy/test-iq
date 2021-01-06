@@ -62,7 +62,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'dataProvider' => $dataProvider,
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
+                    'participant.id_number',
                     'participant.name',
+                    [
+                        'attribute' => 'Status',
+                        'format' => 'raw',
+                        'value' => function($model){
+                            return $model->status?$model->status:'-';
+                        }
+                    ],
                     [
                         'class' => 'yii\grid\ActionColumn',
                         'buttons' => [

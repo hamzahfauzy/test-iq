@@ -22,9 +22,14 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
         <div class="card-body">
+            <form action="">
+                <div class="form-group">
+                    <input type="text" name="PostSearch[post_title]" class="form-control" placeholder="Search..." value="<?=$searchModel->post_title?>">
+                </div>
+            </form>
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
-                'filterModel' => $searchModel,
+                // 'filterModel' => $searchModel,
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
 
