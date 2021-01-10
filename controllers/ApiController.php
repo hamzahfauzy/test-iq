@@ -133,13 +133,17 @@ class ApiController extends \yii\web\Controller
 
     public function actionFinish(){
         $participant = Participant::find()->where(['user_id'=>$this->user->id])->one();
-        $exam_participant = ExamParticipant::find()->where(['participant_id'=>$participant->id,'exam_id'=>$participant->exam->id])->one();
-        $exam_participant->status = 'finish';
-        if($exam_participant->save()){
-            $detail = Participant::find()->with(['exam','examParticipant'])->asArray()->where(['user_id'=>$this->user->id])->one();
-            return ['msg'=>'success','user'=>$this->user,'detail'=>$detail];
+        if($participant->exam)
+        {
+            $exam_participant = ExamParticipant::find()->where(['participant_id'=>$participant->id,'exam_id'=>$participant->exam->id])->one();
+            $exam_participant->status = 'finish';
+            if($exam_participant->save()){
+                $detail = Participant::find()->with(['exam','examParticipant'])->asArray()->where(['user_id'=>$this->user->id])->one();
+                return ['msg'=>'success','user'=>$this->user,'detail'=>$detail];
+            }
+            return ['msg'=>'success','user'=>$this->user];
         }
-        return ['msg'=>'success','user'=>$this->user];
+        return ['msg'=>'fail','user'=>$this->user,'data'=>'exam not found'];
     }
 
     function actionAnswered(){
@@ -209,9 +213,9 @@ class ApiController extends \yii\web\Controller
                 }
             }
 
-            if($answer->save()){
+            if($answer->save())
                 return ['msg'=>'success','user'=>$this->user,'answer'=>$answer];
-            }
+            return ['msg'=>'answer save fail','user'=>$this->user,'answer'=>$answer,'error_msg'=>$answer->getErrors()];
 
         }
 

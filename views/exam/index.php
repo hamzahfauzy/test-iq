@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'Report',
                         'format' => 'raw',
                         'value' => function($model){
-                            return Html::a('<i class="fa fa-download fa-fw"></i> Download', ['/report/download', 'id' => $model->id]);
+                            return Html::a('<i class="fa fa-download fa-fw"></i> Download', ['exam/download', 'id' => $model->id]);
                         }
                     ],
 

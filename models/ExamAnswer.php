@@ -36,7 +36,7 @@ class ExamAnswer extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['exam_id', 'question_id', 'answer_id', 'score', 'participant_id'], 'integer'],
+            [['exam_id', 'question_id', 'answer_id', 'participant_id'], 'integer'],
             [['created_at','answer_content'], 'safe'],
             [['answer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Post::className(), 'targetAttribute' => ['answer_id' => 'id']],
             [['exam_id'], 'exist', 'skipOnError' => true, 'targetClass' => Exam::className(), 'targetAttribute' => ['exam_id' => 'id']],

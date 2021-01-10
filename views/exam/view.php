@@ -22,6 +22,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h1><?= Html::encode($this->title) ?></h1>
             </div>
             <div class="card-toolbar">
+                <?= Html::a('<i class="fa fa-download fa-fw"></i> Download', ['exam/download', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+                &nbsp;
                 <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                 &nbsp;
                 <?= Html::a('Delete', ['delete', 'id' => $model->id], [

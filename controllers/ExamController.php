@@ -112,6 +112,52 @@ class ExamController extends Controller
         ]);
     }
 
+    function actionDownload($id)
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $model = Exam::find()->where([
+                    'exams.id'=>$id
+                ])
+                ->joinWith([
+                    'participants',
+                    'participants.examAnswers',
+                    'participants.examAnswers.answer',
+                    'participants.examAnswers.question',
+                    'participants.examAnswers.question.items',
+                    'participants.examAnswers.question.categoryPost'
+                ])->asArray()->one();
+        // return $model;
+        $report = [];
+        foreach($model['participants'] as $participant)
+        {
+            $score = ['CFIT'=>0,'Papikostick'=>"",'MSDT'=>""];
+            foreach($participant['examAnswers'] as $answer)
+            {
+                // CFIT -> score add 
+                // PAPICOSTIC
+                // MSDT
+                $cfit = ['CFIT 1','CFIT 2','CFIT 3','CFIT 4'];
+                if(in_array($answer['question']['categoryPost']['name'],$cfit))
+                {
+                    if($answer['answer'])
+                        $score['CFIT'] += (int) $answer['answer']['post_type'];
+                    else
+                    {
+                        $question_answer = $answer['question']['items'][0];
+                        $score['CFIT'] += $answer['answer_content'] == $question_answer['post_content'] ? 1 : 0;
+                    }
+                }
+                else
+                    $score[$answer['question']['categoryPost']['name']] .= $answer['answer']['post_type'];
+            }
+            unset($participant['examAnswers']);
+            $participant['score'] = $score;
+            $report[] = $participant;
+        }
+
+        return $report;
+    }
+
     /**
      * Deletes an existing Exam model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
