@@ -307,8 +307,9 @@ class ExamController extends Controller
             $report[] = $participant;
         }
 
-        return $this->render('report', [
+        return $this->renderPartial('report', [
             'report' => $report,
+            'name'   => $model['name']
         ]);
     }
 
