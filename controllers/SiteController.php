@@ -150,6 +150,11 @@ class SiteController extends Controller
                     'examAnswers.question.categoryPost'
                 ])->asArray()->one();
         // return $model;
+        if(!isset($participant['examAnswers']))
+        {
+            echo "tidak ada file";
+            return;
+        }
         $report = [];
         $score = ['CFIT'=>0,'Papikostick'=>""];
         foreach($participant['examAnswers'] as $answer)
