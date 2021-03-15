@@ -9,6 +9,7 @@ use app\models\ExamParticipant;
 use app\models\Participant;
 use app\models\Post;
 use app\models\User;
+use app\models\UserMetas;
 use Yii;
 use yii\filters\Cors;
 use yii\web\Response;
@@ -120,6 +121,17 @@ class ApiController extends \yii\web\Controller
     }
 
     public function actionStart(){
+        $request = Yii::$app->request;
+        $data = $request->post();
+        foreach($data as $key => $value)
+        {
+            $userMetas = new UserMetas;
+            $userMetas->user_id = $this->user->id;
+            $userMetas->meta_key = $key;
+            $userMetas->meta_value = $value;
+            $userMetas->save();
+        }
+
         $participant = Participant::find()->where(['user_id'=>$this->user->id])->one();
         $exam_participant = ExamParticipant::find()->where(['participant_id'=>$participant->id,'exam_id'=>$participant->exam->id])->one();
         $exam_participant->status = 'start';

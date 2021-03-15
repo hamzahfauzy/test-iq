@@ -103,6 +103,7 @@ if (YII_ENV_DEV) {
         'allowActions' => [
             // '*',
             'api/*',
+            'site/laporan'
             // 'admin/*',
             // 'gii/*',
             // 'debug/*',

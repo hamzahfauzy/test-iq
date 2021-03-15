@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "participants".
@@ -108,5 +109,12 @@ class Participant extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    public function getMeta($key)
+    {
+        $all_metas = UserMetas::find()->where(['user_id'=>$this->user_id])->all();
+        $all_metas = ArrayHelper::map($all_metas,'meta_key','meta_value');
+        return $all_metas[$key];
     }
 }

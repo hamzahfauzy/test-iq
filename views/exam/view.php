@@ -74,6 +74,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         }
                     ],
                     [
+                        'attribute' => 'Downlaod',
+                        'format' => 'raw',
+                        'value' => function($model){
+                            return $model->status?'<a href="'.Url::to(['exam-participant/download','id'=>$model->id]).'" target="_blank">Download</a>':'-';
+                        }
+                    ],
+                    [
                         'class' => 'yii\grid\ActionColumn',
                         'buttons' => [
                             'delete' => function($url, $model){

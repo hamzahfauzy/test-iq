@@ -4,13 +4,14 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Exam;
-use app\models\Participant;
-use app\models\ExamParticipant;
-use app\models\ExamParticipantSearch;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
+use app\models\Participant;
 use yii\filters\VerbFilter;
+use Spipu\Html2Pdf\Html2Pdf;
 use yii\helpers\ArrayHelper;
+use app\models\ExamParticipant;
+use yii\web\NotFoundHttpException;
+use app\models\ExamParticipantSearch;
 
 /**
  * ExamParticipantController implements the CRUD actions for ExamParticipant model.
@@ -45,6 +46,81 @@ class ExamParticipantController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    function actionDownload($id)
+    {
+        // \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $examParticipant = $this->findModel($id);
+        $peserta = $examParticipant->participant;
+        $participant = Participant::find()->where([
+                    'participants.id'=>$examParticipant->participant_id,
+                ])
+                ->joinWith([
+                    'examAnswers' => function($q) use ($examParticipant){
+                        $q->andWhere(['exam_id' => $examParticipant->exam_id]);
+                    },
+                    'examAnswers.answer',
+                    'examAnswers.question',
+                    'examAnswers.question.items',
+                    'examAnswers.question.categoryPost'
+                ])->asArray()->one();
+        // return $model;
+        $report = [];
+        $score = ['CFIT'=>0,'Papikostick'=>""];
+        foreach($participant['examAnswers'] as $answer)
+        {
+            // CFIT -> score add 
+            // PAPICOSTIC
+            $cfit = ['CFIT 1','CFIT 2','CFIT 3','CFIT 4'];
+            if(in_array($answer['question']['categoryPost']['name'],$cfit))
+            {
+                if($answer['answer'])
+                    $score['CFIT'] += (int) $answer['answer']['post_type'];
+                else
+                {
+                    $question_answer = $answer['question']['items'][0];
+                    $score['CFIT'] += $answer['answer_content'] == $question_answer['post_content'] ? 1 : 0;
+                }
+            }
+            elseif(isset($score[$answer['question']['categoryPost']['name']]))
+                $score[$answer['question']['categoryPost']['name']] .= $answer['answer']['post_type'];
+        }
+        unset($participant['examAnswers']);
+        $papikosticks = $score['Papikostick'];
+        $papikosticks = str_split($papikosticks);
+        $p_v = [
+            "G"=>0,
+            "A"=>0,
+            "N"=>0,
+            "F"=>0,
+            "Z"=>0,
+            "E"=>0,
+            "S"=>0,
+            "O"=>0,
+            "L"=>0,
+            "P"=>0,
+            "I"=>0,
+        ];
+        foreach($papikosticks as $p)
+            if(isset($p_v[$p])) $p_v[$p]++;
+            
+        $score['Papikostick'] = $p_v;
+
+        $participant['score'] = $score;
+
+        // header("Content-type: application/vnd-ms-excel");
+        // header("Content-Disposition: attachment; filename=Report-".$model['name'].".xls");
+
+        $content = $this->renderPartial('report', [
+            'participant' => $participant,
+            'peserta' => $peserta,
+        ]);
+
+        // return $content;
+        $html2pdf = new Html2Pdf();
+        $html2pdf->writeHTML($content);
+        $html2pdf->output();
     }
 
     /**
