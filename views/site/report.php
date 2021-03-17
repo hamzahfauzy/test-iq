@@ -71,7 +71,7 @@ body, h2 {
     <tr>
         <td class="border-cell">Asal Sekolah</td>
         <td class="border-cell">:</td>
-        <td class="border-cell"><?=$participant['school']?></td>
+        <td class="border-cell"><?=$examParticipant->exam->name?></td>
     </tr>
     <tr style="border-left:1px;border-right:1px">
         <td colspan="3" style="border-left:1px;border-right:1px">
@@ -81,7 +81,7 @@ body, h2 {
     <tr>
         <td width="200px">Tanggal Pemeriksaan</td>
         <td width="10px">:</td>
-        <td></td>
+        <td><?=$examParticipant->updated_at?></td>
     </tr>
     <tr>
         <td>Tujuan Pemeriksaan</td>
@@ -187,8 +187,9 @@ body, h2 {
         for($i=1;$i<=5;$i++)
         {
             $bg = $i==3 ? 'style="background:#eaeaea;text-align:center;"' : 'style="text-align:center;"';
+            $span = $i<=2 ? '<span style="background-color:yellow;">X</span>' : 'X';
             if($vp == $i)
-                $vp_value .= "<td width='10' $bg>$vp</td>";
+                $vp_value .= "<td width='10' $bg>$span</td>";
             else
                 $vp_value .= "<td width='10' $bg></td>";
         }

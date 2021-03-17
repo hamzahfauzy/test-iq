@@ -15,9 +15,9 @@ class m201014_091912_create_exams_table extends Migration
         $this->createTable('{{%exams}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string(),
-            'start_time' => $this->timestamp(),
-            'end_time' => $this->timestamp(),
-            'created_at' => $this->timestamp(),
+            'start_time' => 'timestamp NULL', //$this->timestamp(),
+            'end_time' => 'timestamp NULL', //$this->timestamp(),
+            'created_at' => 'timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP', //$this->timestamp(),
         ]);
     }
 

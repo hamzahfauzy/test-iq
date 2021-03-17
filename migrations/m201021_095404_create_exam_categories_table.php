@@ -18,7 +18,7 @@ class m201021_095404_create_exam_categories_table extends Migration
             'category_id' => $this->integer(),
             'participant_id' => $this->integer(),
             'time_left' => $this->time(),
-            'created_at' => $this->timestamp(),
+            'created_at' => 'timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP', //$this->timestamp(),
         ]);
 
         $this->createIndex(

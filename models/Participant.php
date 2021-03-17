@@ -111,10 +111,12 @@ class Participant extends \yii\db\ActiveRecord
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
-    public function getMeta($key)
+    public function getMeta($key = false)
     {
         $all_metas = UserMetas::find()->where(['user_id'=>$this->user_id])->all();
+        if($key == false)
+            return $all_metas;
         $all_metas = ArrayHelper::map($all_metas,'meta_key','meta_value');
-        return $all_metas[$key];
+        return isset($all_metas[$key]) ? $all_metas[$key] : '';
     }
 }
