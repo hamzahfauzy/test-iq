@@ -257,6 +257,7 @@ class SiteController extends Controller
         $content = $this->renderPartial('report', [
             'participant' => $participant,
             'peserta' => $peserta,
+            'examParticipant'=>$examParticipant
         ]);
 
         // return $content;

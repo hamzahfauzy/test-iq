@@ -20,6 +20,14 @@ class ApiController extends \yii\web\Controller
 
     public $user;
 
+    public function actionData()
+    {
+        return [
+            'uji_coba' => 'https://google.com',
+            'tutorial' => 'https://google.com',
+        ];
+    }
+
     public function beforeAction($action)
     {
         header('Access-Control-Allow-Origin: *');
@@ -31,7 +39,7 @@ class ApiController extends \yii\web\Controller
     
         $this->enableCsrfValidation = false;
 
-        if($action->id == 'login' || $action->id == 'logout'){
+        if($action->id == 'login' || $action->id == 'logout' || $action->id == 'data'){
             return parent::beforeAction($action);
         }
 
