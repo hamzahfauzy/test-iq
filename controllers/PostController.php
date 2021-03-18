@@ -283,7 +283,7 @@ class PostController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $category_post = $model->getCategoryPosts()->one();
+        $category_post = $model->categoryPosts ? $model->getCategoryPosts()->one() : new CategoryPost;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             if(in_array($model->post_as,['Soal','Instruksi']))
