@@ -142,6 +142,8 @@ class ExamController extends Controller
                 // CFIT -> score add 
                 // PAPICOSTIC
                 $cfit = ['CFIT 1','CFIT 2','CFIT 3','CFIT 4'];
+
+                $_papikosticks = ['Papikostik 1','Papikostik 2','Papikostik 3'];
                 if(in_array($answer['question']['categoryPost']['name'],$cfit))
                 {
                     if($answer['answer'])
@@ -152,6 +154,8 @@ class ExamController extends Controller
                         $score['CFIT'] += $answer['answer_content'] == $question_answer['post_content'] ? 1 : 0;
                     }
                 }
+                elseif(in_array($answer['question']['categoryPost']['name'],$_papikosticks))
+                    $score['Papikostick'] .= $answer['answer']['post_type'];
                 elseif(isset($score[$answer['question']['categoryPost']['name']]))
                     $score[$answer['question']['categoryPost']['name']] .= $answer['answer']['post_type'];
             }
