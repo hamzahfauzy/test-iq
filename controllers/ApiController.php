@@ -31,7 +31,7 @@ class ApiController extends \yii\web\Controller
     
         $this->enableCsrfValidation = false;
 
-        if($action->id == 'login' || $action->id == 'logout'){
+        if($action->id == 'login' || $action->id == 'logout' || $action->id == 'demo-categories'){
             return parent::beforeAction($action);
         }
 
@@ -172,6 +172,12 @@ class ApiController extends \yii\web\Controller
     }
 
     public function actionCategories()
+    {
+        $categories = Category::find()->joinWith(['posts'])->asArray()->orderBy(['sequenced_number'=>'asc'])->all();
+        return $categories;
+    }
+
+    public function actionDemoCategories()
     {
         $categories = Category::find()->joinWith(['posts'])->asArray()->orderBy(['sequenced_number'=>'asc'])->all();
         return $categories;
