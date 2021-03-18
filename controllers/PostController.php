@@ -288,6 +288,8 @@ class PostController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             if(in_array($model->post_as,['Soal','Instruksi']))
             {
+                if(!$category_post->post_id)
+                    $category_post->post_id = $model->id;
                 if($category_post->load(Yii::$app->request->post()))
                     $category_post->save();
             }
