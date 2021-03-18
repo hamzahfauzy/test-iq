@@ -175,6 +175,59 @@ class SiteController extends Controller
             elseif(isset($score[$answer['question']['categoryPost']['name']]))
                 $score[$answer['question']['categoryPost']['name']] .= $answer['answer']['post_type'];
         }
+        $cfit_maps = [];
+        $cfit_maps[0] = 38;
+        $cfit_maps[1] = 40;
+        $cfit_maps[2] = 43;
+        $cfit_maps[3] = 45;
+        $cfit_maps[4] = 47;
+        $cfit_maps[5] = 48;
+        $cfit_maps[6] = 52;
+        $cfit_maps[7] = 55;
+        $cfit_maps[8] = 57;
+        $cfit_maps[9] = 60;
+        $cfit_maps[10] = 63;
+        $cfit_maps[11] = 67;
+        $cfit_maps[12] = 70;
+        $cfit_maps[13] = 72;
+        $cfit_maps[14] = 75;
+        $cfit_maps[15] = 78;
+        $cfit_maps[16] = 81;
+        $cfit_maps[17] = 84;
+        $cfit_maps[18] = 88;
+        $cfit_maps[19] = 91;
+        $cfit_maps[20] = 94;
+        $cfit_maps[21] = 96;
+        $cfit_maps[22] = 100;
+        $cfit_maps[23] = 103;
+        $cfit_maps[24] = 106;
+        $cfit_maps[25] = 109;
+        $cfit_maps[26] = 113;
+        $cfit_maps[27] = 116;
+        $cfit_maps[28] = 119;
+        $cfit_maps[29] = 121;
+        $cfit_maps[30] = 124;
+        $cfit_maps[31] = 128;
+        $cfit_maps[32] = 131;
+        $cfit_maps[33] = 133;
+        $cfit_maps[34] = 137;
+        $cfit_maps[35] = 140;
+        $cfit_maps[36] = 142;
+        $cfit_maps[37] = 145;
+        $cfit_maps[38] = 149;
+        $cfit_maps[39] = 152;
+        $cfit_maps[40] = 155;
+        $cfit_maps[41] = 157;
+        $cfit_maps[42] = 161;
+        $cfit_maps[43] = 165;
+        $cfit_maps[44] = 167;
+        $cfit_maps[45] = 169;
+        $cfit_maps[46] = 173;
+        $cfit_maps[47] = 176;
+        $cfit_maps[48] = 179;
+        $cfit_maps[49] = 183;
+        $cfit_maps[50] = 183;
+        $score['CFIT'] = $cfit_maps[$score['CFIT']];
         unset($participant['examAnswers']);
         $papikosticks = $score['Papikostick'];
         $papikosticks = str_split($papikosticks);
@@ -204,6 +257,7 @@ class SiteController extends Controller
         $content = $this->renderPartial('report', [
             'participant' => $participant,
             'peserta' => $peserta,
+            'examParticipant'=>$examParticipant
         ]);
 
         // return $content;
