@@ -19,11 +19,10 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'has_timer')->dropdownList([
         'Countdown'=>'Countdown',
         'Ticker'=>'Ticker',
-        'step'=>1,
         'No'=>'No'
         ]) ?>
 
-<?= $form->field($model, 'countdown')->input('time') ?>
+<?= $form->field($model, 'countdown')->input('time',['step'=>1]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
