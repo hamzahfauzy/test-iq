@@ -170,7 +170,7 @@ class PostController extends Controller
                             $child->save(false);
                             $child->link('parents',$post);
                         }
-                        elseif($category->sequenced_number == 10) // for Papicostick
+                        elseif(in_array($category->sequenced_number,[10,11,12])) // for Papicostick
                         {
                             // save A
                             $child = new Post;
@@ -190,26 +190,26 @@ class PostController extends Controller
                             $child->save(false);
                             $child->link('parents',$post);
                         }
-                        elseif($category->sequenced_number == 12) // for MSDT
-                        {
-                            // Save A
-                            $child = new Post;
-                            $child->post_title = "Jawaban A ".$category->name." ".$no;
-                            $child->post_content = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
-                            $child->post_as = "Jawaban";
-                            $child->post_type = "A";
-                            $child->save(false);
-                            $child->link('parents',$post);
+                        // elseif($category->sequenced_number == 12) // for MSDT
+                        // {
+                        //     // Save A
+                        //     $child = new Post;
+                        //     $child->post_title = "Jawaban A ".$category->name." ".$no;
+                        //     $child->post_content = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                        //     $child->post_as = "Jawaban";
+                        //     $child->post_type = "A";
+                        //     $child->save(false);
+                        //     $child->link('parents',$post);
     
-                            // Save B
-                            $child = new Post;
-                            $child->post_title = "Jawaban B ".$category->name." ".$no;
-                            $child->post_content = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
-                            $child->post_as = "Jawaban";
-                            $child->post_type = "B";
-                            $child->save(false);
-                            $child->link('parents',$post);
-                        }
+                        //     // Save B
+                        //     $child = new Post;
+                        //     $child->post_title = "Jawaban B ".$category->name." ".$no;
+                        //     $child->post_content = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                        //     $child->post_as = "Jawaban";
+                        //     $child->post_type = "B";
+                        //     $child->save(false);
+                        //     $child->link('parents',$post);
+                        // }
                         else
                         {
                             $alphabet = range('a', 'z');
