@@ -71,7 +71,7 @@ class Category extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Post::className(),['id'=>'post_id'])
                 ->viaTable('category_post',['category_id'=>'id'])->with(['items'=>function($q){
-                    $q->select(['id','post_content']);
-                }])->limit(3);
+                    $q->select(['id','post_content'])->limit(3);
+                }]);
     }
 }
