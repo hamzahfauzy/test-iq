@@ -66,4 +66,12 @@ class Category extends \yii\db\ActiveRecord
                     $q->select(['id','post_content']);
                 }]);
     }
+
+    public function getDemoPosts()
+    {
+        return $this->hasMany(Post::className(),['id'=>'post_id'])
+                ->viaTable('category_post',['category_id'=>'id'])->with(['items'=>function($q){
+                    $q->select(['id','post_content']);
+                }])->limit(3);
+    }
 }
