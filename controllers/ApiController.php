@@ -187,7 +187,7 @@ class ApiController extends \yii\web\Controller
     
     public function actionDemoCategories()
     {
-        $categories = Category::find()->joinWith(['demoPost'])->asArray()->orderBy(['sequenced_number'=>'asc'])->all();
+        $categories = Category::find()->joinWith(['posts'])->asArray()->orderBy(['sequenced_number'=>'asc'])->all();
         return $categories;
     }
 
