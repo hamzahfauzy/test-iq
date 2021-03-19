@@ -19,6 +19,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'has_timer')->dropdownList([
         'Countdown'=>'Countdown',
         'Ticker'=>'Ticker',
+        'step'=>1,
         'No'=>'No'
         ]) ?>
 
