@@ -146,7 +146,7 @@ class ExamController extends Controller
                 // PAPICOSTIC
                 $cfit = ['CFIT 1','CFIT 2','CFIT 3','CFIT 4'];
 
-                $_papikosticks = ['Papikostik 1','Papikostik 2','Papikostik 3'];
+                $_papikosticks = ['Soal Papikostik (Halaman 1)','Soal Papikostik (Halaman 2)','Soal Papikostik (Halaman 3)'];
                 if(in_array($answer['question']['categoryPost']['name'],$cfit))
                 {
                     if($answer['answer'])
