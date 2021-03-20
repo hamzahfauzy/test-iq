@@ -38,7 +38,7 @@
     </tr>
     <?php 
     foreach($report as $key => $value): 
-        $total_nilai = $value['score']['CFIT'];
+        $total_nilai = 0; //$value['score']['CFIT'];
         // $total_nilai += $value['score']['MSDT']['msdt_final_value'];
 
         $IQ = "Mentally Defective";
