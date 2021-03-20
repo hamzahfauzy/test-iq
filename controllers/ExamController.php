@@ -113,7 +113,7 @@ class ExamController extends Controller
         ]);
     }
 
-    function actionDownload($id)
+    function actionDownload($id,$laporan=false)
     {
         // \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $model = Exam::find()->where([
@@ -137,6 +137,9 @@ class ExamController extends Controller
             $participant['study'] = $part->getMeta('pelajaran');
             $participant['work_time'] = $part->getMeta('lama_bekerja');
             $score = ['CFIT'=>0,'Papikostick'=>""];
+            $partial_cfit = [
+                'CFIT 1'=>0,'CFIT 2'=>0,'CFIT 3'=>0,'CFIT 4'=>0
+            ];
             foreach($participant['examAnswers'] as $answer)
             {
                 // CFIT -> score add 
@@ -147,11 +150,15 @@ class ExamController extends Controller
                 if(in_array($answer['question']['categoryPost']['name'],$cfit))
                 {
                     if($answer['answer'])
+                    {
                         $score['CFIT'] += (int) $answer['answer']['post_type'];
+                        $partial_cfit[$answer['question']['categoryPost']['name']] += (int) $answer['answer']['post_type'];
+                    }
                     else
                     {
                         $question_answer = $answer['question']['items'][0];
                         $score['CFIT'] += $answer['answer_content'] == $question_answer['post_content'] ? 1 : 0;
+                        $partial_cfit[$answer['question']['categoryPost']['name']] += $answer['answer_content'] == $question_answer['post_content'] ? 1 : 0;
                     }
                 }
                 elseif(in_array($answer['question']['categoryPost']['name'],$_papikosticks))
@@ -159,6 +166,7 @@ class ExamController extends Controller
                 elseif(isset($score[$answer['question']['categoryPost']['name']]))
                     $score[$answer['question']['categoryPost']['name']] .= $answer['answer']['post_type'];
             }
+            $score['partial_cfit'] = $partial_cfit;
             $cfit_maps = [];
             $cfit_maps[0] = 38;
             $cfit_maps[1] = 40;
@@ -228,21 +236,51 @@ class ExamController extends Controller
                 "P"=>0,
                 "I"=>0,
             ];
+            $p_v_all = [
+                "G"=>0,
+                "L"=>0,
+                "I"=>0,
+                "T"=>0,
+                "V"=>0,
+                "S"=>0,
+                "R"=>0,
+                "D"=>0,
+                "C"=>0,
+                "E"=>0,
+                "N"=>0,
+                "A"=>0,
+                "P"=>0,
+                "X"=>0,
+                "B"=>0,
+                "O"=>0,
+                "Z"=>0,
+                "K"=>0,
+                "F"=>0,
+                "W"=>0,
+            ];
             foreach($papikosticks as $p)
+            {
                 if(isset($p_v[$p])) $p_v[$p]++;
+                if(isset($p_v_all[$p])) $p_v_all[$p]++;
+            }
                 
             $score['Papikostick'] = $p_v;
+            $score['PapikostickAll'] = $p_v_all;
 
             $participant['score'] = $score;
             $report[] = $participant;
         }
 
-        header("Content-type: application/vnd-ms-excel");
-        header("Content-Disposition: attachment; filename=Report-".$model['name'].".xls");
+        
 
-        $content = $this->renderPartial('report', [
+        $file_report = $laporan == 'CFIT' ? 'report-cfit' : ($laporan == 'Papikostick'?'report-papikostick':'report');
+
+        header("Content-type: application/vnd-ms-excel");
+        header("Content-Disposition: attachment; filename=Report-".$model['name']."-".$file_report.".xls");
+
+        $content = $this->renderPartial($file_report, [
             'report' => $report,
-            'name'   => $model['name']
+            'name'   => $model['name'],
         ]);
 
         return $content;

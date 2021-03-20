@@ -41,14 +41,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'CFIT',
                         'format' => 'raw',
                         'value' => function($model){
-                            return Html::a('<i class="fa fa-download fa-fw"></i> Download', ['exam/download', 'id' => $model->id]);
+                            return Html::a('<i class="fa fa-download fa-fw"></i> Download', ['exam/download', 'id' => $model->id,'laporan'=>'CFIT']);
                         }
                     ],
                     [
                         'attribute' => 'PAPIKOSTIK',
                         'format' => 'raw',
                         'value' => function($model){
-                            return Html::a('<i class="fa fa-download fa-fw"></i> Download', ['exam/download', 'id' => $model->id]);
+                            return Html::a('<i class="fa fa-download fa-fw"></i> Download', ['exam/download', 'id' => $model->id,'laporan'=>'Papikostick']);
                         }
                     ],
                     [
