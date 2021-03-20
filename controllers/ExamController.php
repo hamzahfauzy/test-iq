@@ -132,7 +132,7 @@ class ExamController extends Controller
         foreach($model['participants'] as $participant)
         {
             $part = Participant::findOne($participant['id']);
-            $participant['name'] = $part->getMeta('nama_lengkap');
+            $participant['name'] = $part->name; // ->getMeta('nama_lengkap');
             $participant['school'] = $model['name'];
             $participant['study'] = $part->getMeta('pelajaran');
             $participant['work_time'] = $part->getMeta('lama_bekerja');
