@@ -8,7 +8,7 @@
         <td class="nowrap heading" rowspan="2">Lama Bekerja</td>
         <td class="nowrap heading" rowspan="2">Kategori IQ</td>
         <td class="nowrap heading" rowspan="2">IQ</td>
-        <td class="nowrap heading" colspan="3">Kemampuan Intelektual</td>
+        <td class="nowrap heading" colspan="4">Kemampuan Intelektual</td>
         <td class="nowrap heading" colspan="4">Motivasi Kerja</td>
         <td class="heading" rowspan="2">RERATA</td>
         <td class="nowrap heading" colspan="4">Sosiabilitas dan Pengendalian Diri</td>
@@ -20,6 +20,7 @@
         <td class="nowrap heading" rowspan="2">Keterangan</td>
     </tr>
     <tr>
+        <td class="heading">Tingkat Intelektual</td>
         <td class="heading">Fleksibilitas Berpikir</td>
         <td class="heading">Berpikir Analitis</td>
         <td class="heading">Berpikir Konseptual</td>
@@ -51,21 +52,14 @@
         if($value['score']['CFIT'] >= 80 && $value['score']['CFIT'] <= 89) $IQ = "Low Average";
         if($value['score']['CFIT'] >= 70 && $value['score']['CFIT'] <= 79) $IQ = "Borderline";
 
-        if($value['score']['CFIT'] >= 170) $IQ_VALUE = "<td>5</td><td>5</td><td>5</td>";
-        if($value['score']['CFIT'] >= 140 && $value['score']['CFIT'] <= 169) $IQ_VALUE = "<td>5</td><td>5</td><td>5</td>";
-        if($value['score']['CFIT'] >= 120 && $value['score']['CFIT'] <= 139) $IQ_VALUE = "<td>5</td><td>4</td><td>4</td>";
-        if($value['score']['CFIT'] >= 110 && $value['score']['CFIT'] <= 119) $IQ_VALUE = "<td>4</td><td>4</td><td>4</td>";
-        if($value['score']['CFIT'] >= 90 && $value['score']['CFIT'] <= 109) $IQ_VALUE = "<td>3</td><td>3</td><td>3</td>";
-        if($value['score']['CFIT'] >= 80 && $value['score']['CFIT'] <= 89) $IQ_VALUE = "<td>2</td><td>3</td><td>3</td>";
+        $min = 999999;
+        $max = 0;
 
-        if($value['score']['CFIT'] >= 170) $IQ_VALUE_ALL = 15;
-        if($value['score']['CFIT'] >= 140 && $value['score']['CFIT'] <= 169) $IQ_VALUE_ALL = 15;
-        if($value['score']['CFIT'] >= 120 && $value['score']['CFIT'] <= 139) $IQ_VALUE_ALL = 13;
-        if($value['score']['CFIT'] >= 110 && $value['score']['CFIT'] <= 119) $IQ_VALUE_ALL = 12;
-        if($value['score']['CFIT'] >= 90 && $value['score']['CFIT'] <= 109) $IQ_VALUE_ALL = 9;
-        if($value['score']['CFIT'] >= 80 && $value['score']['CFIT'] <= 89) $IQ_VALUE_ALL = 8;
-        
-        $total_nilai += $IQ_VALUE_ALL;
+        foreach($value['score']['partial_cfit'] as $cfit)
+        {
+            $min = $cfit < $min ? $cfit : $min;
+            $max = $cfit > $max ? $cfit : $max;
+        }
     ?>
     <tr>
         <td><?=++$key?></td>
@@ -76,8 +70,129 @@
         <td><?=$value['work_time']?></td>
         <td><?=$value['score']['CFIT']?></td>
         <td class="nowrap"><?=$IQ?></td>
-        <?=$IQ_VALUE?>
+        <td class="nowrap">
+            <?php
+            $skor=$value['score']['CFIT'];
+            $s = 0;
+            if($skor>=130)
+            {
+                echo 5;
+                $s+=5;
+            }
+            elseif($skor >= 111 && $skor <= 129)
+            {
+                echo 4;
+                $s+=4;
+            }
+            elseif($skor >= 90 && $skor <= 110)
+            {
+                echo 3;
+                $s+=3;
+            }
+            elseif($skor >= 70 && $skor <= 89)
+            {
+                echo 2;
+                $s+=2;
+            }
+            else
+            {
+                echo 1;
+                $s+=1;
+            }
+            ?>
+        </td>
+        <td class="nowrap">
+            <?php
+            $skor=$max-$min;
+            if($skor==0)
+            {
+                echo 5;
+                $s+=5;
+            }
+            elseif($skor >= 1 && $skor <= 3)
+            {
+                echo 4;
+                $s+=4;
+            }
+            elseif($skor >= 4 && $skor <= 6)
+            {
+                echo 3;
+                $s+=3;
+            }
+            elseif($skor >= 7 && $skor <= 9)
+            {
+                echo 2;
+                $s+=2;
+            }
+            else
+            {
+                echo 1;
+                $s+=1;
+            }
+            ?>
+        </td>
+        <td class="nowrap">
+            <?php
+            $skor=$total;
+            if($skor>=41)
+            {
+                echo 5;
+                $s+=5;
+            }
+            elseif($skor >= 31 && $skor <= 40)
+            {
+                echo 4;
+                $s+=4;
+            }
+            elseif($skor >= 21 && $skor <= 30)
+            {
+                echo 3;
+                $s+=3;
+            }
+            elseif($skor >= 11 && $skor <= 20)
+            {
+                echo 2;
+                $s+=2;
+            }
+            else
+            {
+                echo 1;
+                $s+=1;
+            }
+            ?>
+        </td>
+        <td class="nowrap">
+            <?php
+            $skor=$value['score']['partial_cfit']['CFIT 4'];
+            if($skor>=9)
+            {
+                echo 5;
+                $s+=5;
+            }
+            elseif($skor >= 7 && $skor <= 8)
+            {
+                echo 4;
+                $s+=4;
+            }
+            elseif($skor >= 5 && $skor <= 6)
+            {
+                echo 3;
+                $s+=3;
+            }
+            elseif($skor >= 3 && $skor <= 4)
+            {
+                echo 2;
+                $s+=2;
+            }
+            else
+            {
+                echo 1;
+                $s+=1;
+            }
+            ?>
+        </td>
         <?php 
+        $total_nilai += $s;
         $rerata1 = 0;
         $rerata2 = 0;
         $rerata3 = 0;
