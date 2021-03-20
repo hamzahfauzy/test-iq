@@ -121,19 +121,28 @@ class ParticipantController extends Controller
             $transaction = \Yii::$app->db->beginTransaction();
             try {
                 for ($row = 2; $row <= $highestRow; $row++) { //$row = 2 artinya baris kedua yang dibaca dulu(header kolom diskip disesuaikan saja)
-                    $user = new User;
-                    $user->username = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
-                    $user->password_hash = "123";
-                    $user->email = $worksheet->getCellByColumnAndRow(2, $row)->getValue()."@mail.com";
-                    $user->save();
+                    $check_user = User::find()->where(['username'=>$worksheet->getCellByColumnAndRow(2, $row)->getValue()]);
+                    $participant = [];
+                    if(!$check_user->exists())
+                    {
+                        $user = new User;
+                        $user->username = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                        $user->password_hash = "123";
+                        $user->email = $worksheet->getCellByColumnAndRow(2, $row)->getValue()."@mail.com";
+                        $user->save();
 
-                    $participant = new Participant;
-                    $participant->name = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
-                    $participant->id_number = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
-                    $participant->birthdate = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
-                    $participant->study = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
-                    $participant->user_id = $user->id;
-                    $participant->save(false);
+                        $participant = new Participant;
+                        $participant->name = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                        $participant->id_number = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                        $participant->birthdate = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                        $participant->study = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                        $participant->user_id = $user->id;
+                        $participant->save(false);
+                    }
+                    else
+                    {
+                        $participant = $check_user->one()->participant;
+                    }
 
                     $exam = Exam::findOne($model->exam_id);
                     $exam->link('participants',$participant);
