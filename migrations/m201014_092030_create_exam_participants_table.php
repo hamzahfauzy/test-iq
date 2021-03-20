@@ -17,6 +17,8 @@ class m201014_092030_create_exam_participants_table extends Migration
             'exam_id' => $this->integer(),
             'participant_id' => $this->integer(),
             'status' => $this->string(),
+            'started_at' => 'timestamp NULL', //$this->timestamp(),
+            'finished_at' => 'timestamp NULL', //$this->timestamp(),
             'updated_at' => 'timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP', //$this->timestamp(),
         ]);
 

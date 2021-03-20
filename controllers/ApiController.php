@@ -143,6 +143,7 @@ class ApiController extends \yii\web\Controller
         $participant = Participant::find()->where(['user_id'=>$this->user->id])->one();
         $exam_participant = ExamParticipant::find()->where(['participant_id'=>$participant->id,'exam_id'=>$participant->exam->id])->one();
         $exam_participant->status = 'start';
+        $exam_participant->started_at = date('Y-m-d H:i:s');
         if($exam_participant->save()){
             $detail = Participant::find()->with(['exam','examParticipant'])->asArray()->where(['user_id'=>$this->user->id])->one();
             return ['msg'=>'success','user'=>$this->user,'detail'=>$detail];
@@ -157,6 +158,7 @@ class ApiController extends \yii\web\Controller
         {
             $exam_participant = ExamParticipant::find()->where(['participant_id'=>$participant->id,'exam_id'=>$participant->exam->id])->one();
             $exam_participant->status = 'finish';
+            $exam_participant->finished_at = date('Y-m-d H:i:s');
             if($exam_participant->save()){
                 $detail = Participant::find()->with(['exam','examParticipant'])->asArray()->where(['user_id'=>$this->user->id])->one();
                 return ['msg'=>'success','user'=>$this->user,'detail'=>$detail];
