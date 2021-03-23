@@ -15,7 +15,7 @@ $min = 999999;
 $max = 0;
 
 $total=0;
-foreach($value['score']['partial_cfit'] as $cfit)
+foreach($participant['score']['partial_cfit'] as $cfit)
 {
     $total+=$cfit;
     $min = $cfit < $min ? $cfit : $min;
