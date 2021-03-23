@@ -11,6 +11,126 @@ if($participant['score']['CFIT'] >= 90 && $participant['score']['CFIT'] <= 109) 
 if($participant['score']['CFIT'] >= 80 && $participant['score']['CFIT'] <= 89) $IQ = "Low Average";
 if($participant['score']['CFIT'] >= 70 && $participant['score']['CFIT'] <= 79) $IQ = "Borderline";
 
+$min = 999999;
+$max = 0;
+
+$total=0;
+foreach($value['score']['partial_cfit'] as $cfit)
+{
+    $total+=$cfit;
+    $min = $cfit < $min ? $cfit : $min;
+    $max = $cfit > $max ? $cfit : $max;
+}
+
+$skor=$value['score']['CFIT'];
+$s = 0;
+if($skor>=130)
+{
+    echo 5;
+    $s+=5;
+}
+elseif($skor >= 111 && $skor <= 129)
+{
+    echo 4;
+    $s+=4;
+}
+elseif($skor >= 90 && $skor <= 110)
+{
+    echo 3;
+    $s+=3;
+}
+elseif($skor >= 70 && $skor <= 89)
+{
+    echo 2;
+    $s+=2;
+}
+else
+{
+    echo 1;
+    $s+=1;
+}
+
+$skor=$max-$min;
+if($skor==0)
+{
+    echo 5;
+    $s+=5;
+}
+elseif($skor >= 1 && $skor <= 3)
+{
+    echo 4;
+    $s+=4;
+}
+elseif($skor >= 4 && $skor <= 6)
+{
+    echo 3;
+    $s+=3;
+}
+elseif($skor >= 7 && $skor <= 9)
+{
+    echo 2;
+    $s+=2;
+}
+else
+{
+    echo 1;
+    $s+=1;
+}
+
+$skor=$total;
+if($skor>=41)
+{
+    echo 5;
+    $s+=5;
+}
+elseif($skor >= 31 && $skor <= 40)
+{
+    echo 4;
+    $s+=4;
+}
+elseif($skor >= 21 && $skor <= 30)
+{
+    echo 3;
+    $s+=3;
+}
+elseif($skor >= 11 && $skor <= 20)
+{
+    echo 2;
+    $s+=2;
+}
+else
+{
+    echo 1;
+    $s+=1;
+}
+
+$skor=$value['score']['partial_cfit']['CFIT 4'];
+if($skor>=9)
+{
+    echo 5;
+    $s+=5;
+}
+elseif($skor >= 7 && $skor <= 8)
+{
+    echo 4;
+    $s+=4;
+}
+elseif($skor >= 5 && $skor <= 6)
+{
+    echo 3;
+    $s+=3;
+}
+elseif($skor >= 3 && $skor <= 4)
+{
+    echo 2;
+    $s+=2;
+}
+else
+{
+    echo 1;
+    $s+=1;
+}
+
 ?>
 <style>
 body, h2 {
@@ -116,10 +236,7 @@ body, h2 {
         <td style="text-align:center;background:#eaeaea;">5</td>
     </tr>
     <?php 
-    $rerata1 = 0;
-    $rerata2 = 0;
-    $rerata3 = 0;
-    $total_nilai = 0;
+    $total_nilai = $s;
     $descriptions = [
         'G' => [
             'title' => 'Tingkat Intelektual',
@@ -179,9 +296,6 @@ body, h2 {
         else
             $vp = 1;
         $total_nilai += $vp;
-        if(in_array($key,['G','A','N','F'])) $rerata1 += $vp;
-        elseif(in_array($key,['Z','E','S','O'])) $rerata2 += $vp;
-        else $rerata3 += $vp;
 
         $vp_value = "";
         for($i=1;$i<=5;$i++)
