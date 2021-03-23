@@ -335,7 +335,7 @@ body, h2 {
     <i>Keterangan:  1: Sangat Kurang&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2: Kurang&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3: Cukup&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4: Baik&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5: Sangat Baik</i>
 </div>
 <br />
-<b>2. GRAFIK HASIL STUDENT PROFILING</b><br />
+<b>2. GRAFIK INDEKS PROFIL GURU</b><br />
 <p align="center">Coming Soon</p>
 <b>3. TINGKAT INDEKS PROFIL GURU (IPG)</b><br />
 <p></p>
