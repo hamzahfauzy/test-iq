@@ -22,7 +22,7 @@ foreach($participant['score']['partial_cfit'] as $cfit)
     $max = $cfit > $max ? $cfit : $max;
 }
 
-$skor=$value['score']['CFIT'];
+$skor=$participant['score']['CFIT'];
 $s = 0;
 if($skor>=130)
 {
@@ -104,7 +104,7 @@ else
     $s+=1;
 }
 
-$skor=$value['score']['partial_cfit']['CFIT 4'];
+$skor=$participant['score']['partial_cfit']['CFIT 4'];
 if($skor>=9)
 {
     echo 5;
