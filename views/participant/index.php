@@ -20,6 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="card-toolbar">
                 <?= Html::a('Import Participant', ['imports'], ['class' => 'btn btn-primary']) ?>
                 &nbsp;
+                <?= Html::a('Import DOB', ['imports-dob'], ['class' => 'btn btn-primary']) ?>
+                &nbsp;
                 <?= Html::a('Create Participant', ['create'], ['class' => 'btn btn-success']) ?>
             </div>
         </div>
@@ -38,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'name',
                     // 'address:ntext',
                     // 'phone',
-                    // 'birthdate',
+                    'birthdate',
 
                     [
                         'class' => 'yii\grid\ActionColumn',

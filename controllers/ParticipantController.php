@@ -3,15 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\User;
 use app\models\Exam;
-use app\models\ImportParticipant;
-use app\models\Participant;
-use app\models\ParticipantSearch;
+use app\models\User;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
+use app\models\ImportDob;
+use app\models\Participant;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
+use app\models\ImportParticipant;
+use app\models\ParticipantSearch;
+use yii\web\NotFoundHttpException;
 
 /**
  * ParticipantController implements the CRUD actions for Participant model.
@@ -160,6 +161,56 @@ class ParticipantController extends Controller
         return $this->render('imports', [
             'model' => $model,
             'exams' => $exams,
+        ]);
+    }
+
+    public function actionImportsDob()
+    {
+        $model = new ImportDob;
+        $model->mode = 'Import Dob';
+        if ($model->load(Yii::$app->request->post())){
+            $uploadedFile = \yii\web\UploadedFile::getInstance($model,'file');
+            $extension    = $uploadedFile->extension;
+            if($extension=='xlsx'){
+                $inputFileType = 'Xlsx';
+            }else{
+                $inputFileType = 'Xls';
+            }
+            $reader     = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($inputFileType);
+             
+            $spreadsheet = $reader->load($uploadedFile->tempName);
+            $worksheet   = $spreadsheet->getActiveSheet();
+            $highestRow  = $worksheet->getHighestRow();
+            $highestColumn = $worksheet->getHighestColumn();
+            $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn);
+             
+            //inilah looping untuk membaca cell dalam file excel,perkolom
+            $transaction = \Yii::$app->db->beginTransaction();
+            try {
+                for ($row = 1; $row <= $highestRow; $row++) { //$row = 2 artinya baris kedua yang dibaca dulu(header kolom diskip disesuaikan saja)
+                    $date = \DateTime::createFromFormat('d-m-Y', $worksheet->getCellByColumnAndRow(2, $row)->getValue());
+                    $dob =  $date->format('Y-m-d');
+                    $participant = Participant::find()->where(['id_number'=>$worksheet->getCellByColumnAndRow(1, $row)->getValue()]);
+                    if($participant->exists())
+                    {
+                        $participant = $participant->one();
+                        $participant->birthdate = $dob;
+                        $participant->save(false);
+                    }
+                }
+                $transaction->commit();
+                Yii::$app->session->addFlash("success", "Import DOB Success");
+            } catch (\Throwable $th) {
+                throw $th;
+                $transaction->rollback();
+                Yii::$app->session->addFlash("error", "Import DOB Failed");
+            }
+            return $this->redirect(['index']);
+            
+        }
+
+        return $this->render('imports-dob', [
+            'model' => $model,
         ]);
     }
 

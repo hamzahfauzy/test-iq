@@ -119,4 +119,12 @@ class Participant extends \yii\db\ActiveRecord
         $all_metas = ArrayHelper::map($all_metas,'meta_key','meta_value');
         return isset($all_metas[$key]) ? $all_metas[$key] : '';
     }
+
+    public function getAge()
+    {
+        $date = new \DateTime($this->birthdate);
+        $now = new \DateTime();
+        $interval = $now->diff($date);
+        return $interval->y;
+    }
 }
