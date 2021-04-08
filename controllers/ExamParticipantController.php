@@ -5,8 +5,10 @@ namespace app\controllers;
 use Yii;
 use app\models\Exam;
 use yii\web\Controller;
+use app\models\ExamAnswer;
 use app\models\Participant;
 use yii\filters\VerbFilter;
+use app\models\ExamCategory;
 use Spipu\Html2Pdf\Html2Pdf;
 use yii\helpers\ArrayHelper;
 use app\models\ExamParticipant;
@@ -308,5 +310,20 @@ class ExamParticipantController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionReset($id)
+    {
+        $model = $this->findModel($id);
+
+        ExamAnswer::deleteAll(['exam_id'=>$model->exam_id,'participant_id'=>$model->participant_id]);
+        ExamCategory::deleteAll(['exam_id'=>$model->exam_id,'participant_id'=>$model->participant_id]);
+
+        $model->status = "";
+        $model->started_at = NULL;
+        $model->finished_at = NULL;
+        $model->save();
+        
+        return $this->redirect(['exam/view','id'=>$model->exam_id]);
     }
 }

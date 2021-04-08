@@ -70,7 +70,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'Status',
                         'format' => 'raw',
                         'value' => function($model){
-                            return $model->status?$model->status:'-';
+                            $status = $model->status?$model->status:'-';
+                            if($status != '-')
+                                $status .= ' - <a href="'.Url::to(['exam-participant/reset','id'=>$model->id]).'">Reset</a>';
+                            return $status;
                         }
                     ],
                     [
