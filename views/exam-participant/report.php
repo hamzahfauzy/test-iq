@@ -16,7 +16,7 @@ if($participant['score']['CFIT'] < 70) $IQ = "Under Average";
 $min = 999999;
 $max = 0;
 
-$total=0;
+$total=0; 
 foreach($participant['score']['partial_cfit'] as $cfit)
 {
     $total+=$cfit;
