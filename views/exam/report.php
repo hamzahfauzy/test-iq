@@ -26,7 +26,7 @@
         <td class="heading">Tingkat Intelektual</td>
         <td class="heading">Fleksibilitas Berpikir</td>
         <td class="heading">Berpikir Analitis</td>
-        <td class="heading">Berpikir Konseptual</td>
+        <td class="heading">Berpikir Abstraksi</td>
         <td class="heading">Tanggung Jawab (N)</td>
         <td class="heading">Loyalitas (F)</td>
         <td class="heading">Daya Juang (G)</td>
@@ -72,8 +72,8 @@
         <td class="nowrap"><?=$value['study']?></td>
         <td class="nowrap"><?=$value['age']?> Tahun</td>
         <td><?=$value['work_time']?></td>
-        <td><?=$value['score']['CFIT']?></td>
         <td class="nowrap"><?=$IQ?></td>
+        <td><?=$value['score']['CFIT']?></td>
         <td class="nowrap">
             <?php
             $skor=$value['score']['CFIT'];
