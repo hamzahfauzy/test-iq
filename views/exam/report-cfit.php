@@ -29,13 +29,12 @@
         $IQ = "Mentally Defective";
         $IQ_VALUE = "<td>2</td><td>2</td><td>2</td><td>0</td>";
         $IQ_VALUE_ALL = 6;
-        if($value['score']['CFIT'] >= 170) $IQ = "Genius";
-        if($value['score']['CFIT'] >= 140 && $value['score']['CFIT'] <= 169) $IQ = "Very Superior";
-        if($value['score']['CFIT'] >= 120 && $value['score']['CFIT'] <= 139) $IQ = "Superior";
-        if($value['score']['CFIT'] >= 110 && $value['score']['CFIT'] <= 119) $IQ = "High Average";
-        if($value['score']['CFIT'] >= 90 && $value['score']['CFIT'] <= 109) $IQ = "Average";
-        if($value['score']['CFIT'] >= 80 && $value['score']['CFIT'] <= 89) $IQ = "Low Average";
-        if($value['score']['CFIT'] >= 70 && $value['score']['CFIT'] <= 79) $IQ = "Borderline";
+        if($value['score']['CFIT'] >= 130) $IQ = "Very Superior";
+        if($value['score']['CFIT'] >= 116 && $value['score']['CFIT'] <= 129) $IQ = "Superior";
+        if($value['score']['CFIT'] >= 101 && $value['score']['CFIT'] <= 115) $IQ = "High Average";
+        if($value['score']['CFIT'] >= 85 && $value['score']['CFIT'] <= 100) $IQ = "Average";
+        if($value['score']['CFIT'] >= 70 && $value['score']['CFIT'] <= 84) $IQ = "Low Average";
+        if($value['score']['CFIT'] < 70) $IQ = "Under Average";
 
         if($value['score']['CFIT'] >= 170) $IQ_VALUE = "<td>5</td><td>5</td><td>5</td><td>0</td>";
         if($value['score']['CFIT'] >= 140 && $value['score']['CFIT'] <= 169) $IQ_VALUE = "<td>5</td><td>5</td><td>5</td><td>0</td>";

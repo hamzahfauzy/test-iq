@@ -1,15 +1,17 @@
 <?php
 
 use yii\helpers\Url;
+$norma = \Yii::$app->params['norma'];
+
+$graphics = [];
 
 $IQ = "Mentally Defective";
-if($participant['score']['CFIT'] >= 170) $IQ = "Genius";
-if($participant['score']['CFIT'] >= 140 && $participant['score']['CFIT'] <= 169) $IQ = "Very Superior";
-if($participant['score']['CFIT'] >= 120 && $participant['score']['CFIT'] <= 139) $IQ = "Superior";
-if($participant['score']['CFIT'] >= 110 && $participant['score']['CFIT'] <= 119) $IQ = "High Average";
-if($participant['score']['CFIT'] >= 90 && $participant['score']['CFIT'] <= 109) $IQ = "Average";
-if($participant['score']['CFIT'] >= 80 && $participant['score']['CFIT'] <= 89) $IQ = "Low Average";
-if($participant['score']['CFIT'] >= 70 && $participant['score']['CFIT'] <= 79) $IQ = "Borderline";
+if($participant['score']['CFIT'] >= 130) $IQ = "Very Superior";
+if($participant['score']['CFIT'] >= 116 && $participant['score']['CFIT'] <= 129) $IQ = "Superior";
+if($participant['score']['CFIT'] >= 101 && $participant['score']['CFIT'] <= 115) $IQ = "High Average";
+if($participant['score']['CFIT'] >= 85 && $participant['score']['CFIT'] <= 100) $IQ = "Average";
+if($participant['score']['CFIT'] >= 70 && $participant['score']['CFIT'] <= 84) $IQ = "Low Average";
+if($participant['score']['CFIT'] < 70) $IQ = "Under Average";
 
 $min = 999999;
 $max = 0;
@@ -24,111 +26,135 @@ foreach($participant['score']['partial_cfit'] as $cfit)
 
 $skor=$participant['score']['CFIT'];
 $s = 0;
+$cfit_row = "<tr><td>Tingkat Intelektual</td><td width='400'>Tingkat potensi yang dimiliki oleh individu untuk mempelajari sesuatu lewat alat-alat berpikir</td>";
 if($skor>=130)
 {
-    echo 5;
+    $cfit_row .= "<td></td><td></td><td style='background:#eaeaea;'></td><td></td><td style='text-align:center;'>X</td></tr>";
     $s+=5;
+    $graphics[] = 5;
 }
 elseif($skor >= 111 && $skor <= 129)
 {
-    echo 4;
+    $cfit_row .= "<td></td><td></td><td style='background:#eaeaea;'></td><td style='text-align:center;'>X</td><td></td></tr>";
     $s+=4;
+    $graphics[] = 4;
 }
 elseif($skor >= 90 && $skor <= 110)
 {
-    echo 3;
+    $cfit_row .= "<td></td><td></td><td style='background:#eaeaea;'>X</td><td></td><td></td></tr>";
     $s+=3;
+    $graphics[] = 3;
 }
 elseif($skor >= 70 && $skor <= 89)
 {
-    echo 2;
+    $cfit_row .= "<td></td><td style='text-align:center'><span style='background-color:yellow;'>X</span></td><td style='background:#eaeaea;'></td><td></td><td></td></tr>";
     $s+=2;
+    $graphics[] = 2;
 }
 else
 {
-    echo 1;
+    $cfit_row .= "<td style='text-align:center'><span style='background-color:yellow;'>X</span></td><td></td><td style='background:#eaeaea;'></td><td></td><td></td></tr>";
     $s+=1;
+    $graphics[] = 1;
 }
 
+$cfit_row .= "<tr><td>Fleksibilitas Berpikir</td><td width='400'>Kemampuan menggunakan berbagai sudut pandang dalam menghadapi tuntutan perubahan</td>";
 $skor=$max-$min;
 if($skor==0)
 {
-    echo 5;
+    $cfit_row .= "<td></td><td></td><td style='background:#eaeaea;'></td><td></td><td style='text-align:center;'>X</td></tr>";
     $s+=5;
+    $graphics[] = 5;
 }
 elseif($skor >= 1 && $skor <= 3)
 {
-    echo 4;
+    $cfit_row .= "<td></td><td></td><td style='background:#eaeaea;'></td><td style='text-align:center;'>X</td><td></td></tr>";
     $s+=4;
+    $graphics[] = 4;
 }
 elseif($skor >= 4 && $skor <= 6)
 {
-    echo 3;
+    $cfit_row .= "<td></td><td></td><td style='background:#eaeaea;'>X</td><td></td><td></td></tr>";
     $s+=3;
+    $graphics[] = 3;
 }
 elseif($skor >= 7 && $skor <= 9)
 {
-    echo 2;
+    $cfit_row .= "<td></td><td style='text-align:center'><span style='background-color:yellow;'>X</span></td><td style='background:#eaeaea;'></td><td></td><td></td></tr>";
     $s+=2;
+    $graphics[] = 2;
 }
 else
 {
-    echo 1;
+    $cfit_row .= "<td style='text-align:center'><span style='background-color:yellow;'>X</span></td><td></td><td style='background:#eaeaea;'></td><td></td><td></td></tr>";
     $s+=1;
+    $graphics[] = 1;
 }
 
+$cfit_row .= "<tr><td>Berpikir Analitis</td><td width='400'>Kemampuan menguraikan permasalahan berdasarkan informasi yang relevan dari berbagai sumber secara komprehensif untuk mengiden-tifikasi penyebab dan dampak terhadap organisasi</td>";
 $skor=$total;
 if($skor>=41)
 {
-    echo 5;
+    $cfit_row .= "<td></td><td></td><td style='background:#eaeaea;'></td><td></td><td style='text-align:center;'>X</td></tr>";
     $s+=5;
+    $graphics[] = 5;
 }
 elseif($skor >= 31 && $skor <= 40)
 {
-    echo 4;
+    $cfit_row .= "<td></td><td></td><td style='background:#eaeaea;'></td><td style='text-align:center;'>X</td><td></td></tr>";
     $s+=4;
+    $graphics[] = 4;
 }
 elseif($skor >= 21 && $skor <= 30)
 {
-    echo 3;
+    $cfit_row .= "<td></td><td></td><td style='background:#eaeaea;'>X</td><td></td><td></td></tr>";
     $s+=3;
+    $graphics[] = 3;
 }
 elseif($skor >= 11 && $skor <= 20)
 {
-    echo 2;
+    $cfit_row .= "<td></td><td style='text-align:center'><span style='background-color:yellow;'>X</span></td><td style='background:#eaeaea;'></td><td></td><td></td></tr>";
     $s+=2;
+    $graphics[] = 2;
 }
 else
 {
-    echo 1;
+    $cfit_row .= "<td style='text-align:center'><span style='background-color:yellow;'>X</span></td><td></td><td style='background:#eaeaea;'></td><td></td><td></td></tr>";
     $s+=1;
+    $graphics[] = 1;
 }
 
+$cfit_row .= "<tr><td>Berpikir Abstraksi</td><td width='400'>Kemampuan untuk memproses sebuah informasi yang berkaitan dengan objek, prinsip, dan konsep-konsep, yang secara fisik tidak dapat dimunculkan</td>";
 $skor=$participant['score']['partial_cfit']['CFIT 4'];
 if($skor>=9)
 {
-    echo 5;
+    $cfit_row .= "<td></td><td></td><td style='background:#eaeaea;'></td><td></td><td style='text-align:center;'>X</td></tr>";
     $s+=5;
+    $graphics[] = 5;
 }
 elseif($skor >= 7 && $skor <= 8)
 {
-    echo 4;
+    $cfit_row .= "<td></td><td></td><td style='background:#eaeaea;'></td><td style='text-align:center;'>X</td><td></td></tr>";
     $s+=4;
+    $graphics[] = 4;
 }
 elseif($skor >= 5 && $skor <= 6)
 {
-    echo 3;
+    $cfit_row .= "<td></td><td></td><td style='background:#eaeaea;'>X</td><td></td><td></td></tr>";
     $s+=3;
+    $graphics[] = 3;
 }
 elseif($skor >= 3 && $skor <= 4)
 {
-    echo 2;
+    $cfit_row .= "<td></td><td style='text-align:center'><span style='background-color:yellow;'>X</span></td><td style='background:#eaeaea;'></td><td></td><td></td></tr>";
     $s+=2;
+    $graphics[] = 2;
 }
 else
 {
-    echo 1;
+    $cfit_row .= "<td style='text-align:center'><span style='background-color:yellow;'>X</span></td><td></td><td style='background:#eaeaea;'></td><td></td><td></td></tr>";
     $s+=1;
+    $graphics[] = 1;
 }
 
 ?>
@@ -153,6 +179,20 @@ body, h2 {
   padding-top: 12px;
   padding-bottom: 12px;
   background-color: #eaeaea;
+}
+
+ul.index {
+    list-style-type:none;
+    margin:0px;
+    padding:0px;
+    padding-left:-15px;
+    padding-bottom:-25px;
+}
+ul.index li {
+    height:25px;
+}
+.box {
+    background-color:red;
 }
 </style>
 <body>
@@ -235,9 +275,21 @@ body, h2 {
         <td style="text-align:center;background:#eaeaea;">4</td>
         <td style="text-align:center;background:#eaeaea;">5</td>
     </tr>
-    <?php 
+    <tr>
+        <td style="background:#eaeaea;" colspan="7"><b>KEMAMPUAN BERFIKIR</b></td>
+    </tr>
+    <?php
+    echo $cfit_row; 
     $total_nilai = $s;
     $descriptions = [
+        'N' => [
+            'title' => 'Berpikir Analitis',
+            'description' => 'Kemampuan menguraikan permasalahan berdasarkan informasi yang relevan dari berbagai sumber secara komprehensif untuk mengiden-tifikasi penyebab dan dampak terhadap organisasi'
+        ],
+        'F' => [
+            'title' => 'Berpikir Abstraksi',
+            'description' => 'kemampuan untuk memproses sebuah informasi yang berkaitan dengan objek, prinsip, dan konsep-konsep, yang secara fisik tidak dapat dimunculkan'
+        ],
         'G' => [
             'title' => 'Tingkat Intelektual',
             'description' => 'Tingkat potensi yang dimiliki oleh individu untuk mempelajari sesuatu lewat alat-alat berpikir'
@@ -246,13 +298,9 @@ body, h2 {
             'title' => 'Fleksibilitas Berpikir',
             'description' => 'Kemampuan menggunakan berbagai sudut pandang dalam menghadapi tuntutan perubahan'
         ],
-        'N' => [
-            'title' => 'Berpikir Analitis',
-            'description' => 'Kemampuan menguraikan permasalahan berdasarkan informasi yang relevan dari berbagai sumber secara komprehensif untuk mengiden-tifikasi penyebab dan dampak terhadap organisasi'
-        ],
-        'F' => [
-            'title' => 'Berpikir Abstraksi',
-            'description' => 'kemampuan untuk memproses sebuah informasi yang berkaitan dengan objek, prinsip, dan konsep-konsep, yang secara fisik tidak dapat dimunculkan'
+        'O' => [
+            'title' => 'Loyalitas',
+            'description' => 'Kepatuhan pada aturan dan prosedur, serta rasa memiliki terhadap perusahaan'
         ],
         'Z' => [
             'title' => 'Daya Juang',
@@ -266,9 +314,9 @@ body, h2 {
             'title' => 'Tanggung Jawab',
             'description' => 'Loyalitas, integritas dan komitmen untuk  melaksanakan tugas secara tuntas dan tepat waktu'
         ],
-        'O' => [
-            'title' => 'Loyalitas',
-            'description' => 'Kepatuhan pada aturan dan prosedur, serta rasa memiliki terhadap perusahaan'
+        'I' => [
+            'title' => 'Pengendalian Orang Lain',
+            'description' => 'Kemampuan dalam menyusun perencanaan, mengawasi proses dan hasil-hasilnya, mengarahkan dan memotivasi orang lain, dan pola komunikasi yang efektif'
         ],
         'L' => [
             'title' => 'Pengambilan Keputusan',
@@ -278,23 +326,19 @@ body, h2 {
             'title' => 'Peran Sebagai Pemimpin',
             'description' => 'Kecenderungan menggunakan orang lain untuk mencapai tujuan'
         ],
-        'I' => [
-            'title' => 'Pengendalian Orang Lain',
-            'description' => 'Kemampuan dalam menyusun perencanaan, mengawasi proses dan hasil-hasilnya, mengarahkan dan memotivasi orang lain, dan pola komunikasi yang efektif'
-        ]
     ];
     foreach($participant['score']['Papikostick'] as $key => $vp): 
         // echo $key;
-        if(in_array($vp,[8,9]))
-            $vp = 5;
-        elseif(in_array($vp,[6,7]))
-            $vp = 4;
-        elseif(in_array($vp,[4,5]))
-            $vp = 3;
-        elseif(in_array($vp,[2,3]))
-            $vp = 2;
-        else
-            $vp = 1;
+        $_norma = $norma[$key];
+        foreach($_norma as $n)
+        {
+            if(in_array($vp, $n['in_nilai']))
+            {
+                $vp = $n['nilai'];
+                break;
+            }
+        }
+        $graphics[] = $vp;
         $total_nilai += $vp;
 
         $vp_value = "";
@@ -308,15 +352,19 @@ body, h2 {
                 $vp_value .= "<td width='10' $bg></td>";
         }
         
-    if($key=='G'): ?>
+    if($key=='N'): ?>
     <tr>
-        <td style="background:#eaeaea;" colspan="7"><b>KEMAMPUAN BERPIKIR</b></td>
+        <td style="background:#eaeaea;" colspan="7"><b>TANGGUNG JAWAB DAN LOYALITAS</b></td>
+    </tr>
+    <?php elseif($key=='G'): ?>
+    <tr>
+        <td style="background:#eaeaea;" colspan="7"><b>KEHANDALAN DALAM BEKERJA</b></td>
     </tr>
     <?php elseif($key=='Z'): ?>
     <tr>
-        <td style="background:#eaeaea;" colspan="7"><b>KEMAMPUAN BERPIKIR</b></td>
+        <td style="background:#eaeaea;" colspan="7"><b>RASA MEMILIKI TERHADAP ORGANISASI</b></td>
     </tr>
-    <?php elseif($key=='L'): ?>
+    <?php elseif($key=='I'): ?>
     <tr>
         <td style="background:#eaeaea;" colspan="7"><b>KEPEMIMPINAN</b></td>
     </tr>
@@ -327,16 +375,63 @@ body, h2 {
         <?=$vp_value?>
     </tr>
     <?php endforeach ?>
-    
-    
 </table>
 <br />
 <div style="text-align:center;width:100%">
     <i>Keterangan:  1: Sangat Kurang&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2: Kurang&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3: Cukup&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4: Baik&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5: Sangat Baik</i>
 </div>
+<div style="page-break-after: always"></div>
 <br />
-<b>2. GRAFIK INDEKS PROFIL GURU</b><br />
-<p align="center">Coming Soon</p>
+<b>2. GRAFIK INDEKS PROFIL GURU</b><br /><br />
+<div style="width:100%;border:1px solid #000;min-height:100px;">
+    <p style="text-align:center;font-weight:bold;">GRAFIK INDEKS PROFIL GURU (IPG)</p>
+    <br />
+    <table id="customers" align="center" style="width:260px">
+        <tr>
+            <td style="width:15px">
+                <ul class="index">
+                    <li>5</li>
+                    <li>4</li>
+                    <li>3</li>
+                    <li>2</li>
+                    <li>1</li>
+                    <li>0</li>
+                </ul>
+            </td>
+            <?php foreach($graphics as $g): ?>
+            <td style="width:15px;vertical-align:bottom;"><div class="box" style="height:<?=$g*25?>px"></div></td>
+            <?php endforeach ?>
+        </tr>
+        <tr>
+            <td style="text-align:center;"></td>
+            <td style="text-align:center;">1</td>
+            <td style="text-align:center;">2</td>
+            <td style="text-align:center;">3</td>
+            <td style="text-align:center;">4</td>
+            <td style="text-align:center;">5</td>
+            <td style="text-align:center;">6</td>
+            <td style="text-align:center;">7</td>
+            <td style="text-align:center;">8</td>
+            <td style="text-align:center;">9</td>
+            <td style="text-align:center;">10</td>
+            <td style="text-align:center;">11</td>
+            <td style="text-align:center;">12</td>
+            <td style="text-align:center;">13</td>
+            <td style="text-align:center;">14</td>
+            <td style="text-align:center;">15</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td style="text-align:center;font-weight:bold" colspan="4">KEMAMPUAN<br />INTELEKTUAL</td>
+            <td style="text-align:center;font-weight:bold" colspan="2">TANGGUNG<br />JAWAB<br />DAN LOYALITAS</td>
+            <td style="text-align:center;font-weight:bold" colspan="3">KEHANDALAN<br />DALAM<br />BEKERJA</td>
+            <td style="text-align:center;font-weight:bold" colspan="3">RASA MEMILIKI<br />TERHADAP<br />ORGANISASI</td>
+            <td style="text-align:center;font-weight:bold" colspan="3">KEPEMIMPINAN</td>
+        </tr>
+    </table>
+    <br />
+</div>
+<br />
 <b>3. TINGKAT INDEKS PROFIL GURU (IPG)</b><br />
 <p></p>
 <table id="customers" align="center">

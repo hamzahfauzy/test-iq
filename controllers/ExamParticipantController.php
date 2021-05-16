@@ -162,17 +162,17 @@ class ExamParticipantController extends Controller
         $papikosticks = $score['Papikostick'];
         $papikosticks = str_split($papikosticks);
         $p_v = [
-            "G"=>0,
-            "A"=>0,
             "N"=>0,
             "F"=>0,
+            "G"=>0,
+            "A"=>0,
+            "O"=>0,
             "Z"=>0,
             "E"=>0,
             "S"=>0,
-            "O"=>0,
+            "I"=>0,
             "L"=>0,
             "P"=>0,
-            "I"=>0,
         ];
         $p_v_all = [
             "G"=>0,
