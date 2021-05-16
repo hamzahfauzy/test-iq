@@ -401,7 +401,7 @@ ul.index li {
             <?php foreach($graphics as $g): ?>
             <td style="width:15px;vertical-align:bottom;"><div class="box" style="height:<?=$g*25?>px"></div></td>
             <?php endforeach ?>
-        </tr>
+        </tr> 
         <tr>
             <td style="text-align:center;"></td>
             <td style="text-align:center;">1</td>
