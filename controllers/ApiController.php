@@ -141,6 +141,11 @@ class ApiController extends \yii\web\Controller
         }
 
         $participant = Participant::find()->where(['user_id'=>$this->user->id])->one();
+        if(isset($data['tanggal_lahir']))
+        {
+            $participant->birthdate = $data['tanggal_lahir'];
+            $participant->save(false);
+        }
         $exam_participant = ExamParticipant::find()->where(['participant_id'=>$participant->id,'exam_id'=>$participant->exam->id])->one();
         $exam_participant->status = 'start';
         $exam_participant->started_at = date('Y-m-d H:i:s');

@@ -4,12 +4,13 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Exam;
-use app\models\ExamSearch;
-use app\models\ExamParticipantSearch;
-use app\models\Participant;
+use app\models\User;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
+use app\models\ExamSearch;
+use app\models\Participant;
 use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
+use app\models\ExamParticipantSearch;
 
 /**
  * ExamController implements the CRUD actions for Exam model.
@@ -296,7 +297,13 @@ class ExamController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $exam = $this->findModel($id);
+        $users = [];
+        foreach($exam->participants as $participant)
+            $users[] = $participant->user_id;
+        
+        $exam->delete();
+        User::deleteAll(['in', 'id', $users]);
 
         return $this->redirect(['index']);
     }
