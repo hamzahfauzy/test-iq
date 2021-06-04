@@ -46,6 +46,7 @@ class ExamSearch extends Exam
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => false
         ]);
 
         $this->load($params);
