@@ -26,7 +26,7 @@ foreach($participant['score']['partial_cfit'] as $cfit)
 
 $skor=$participant['score']['CFIT'];
 $s = 0;
-$cfit_row = "<tr><td>Tingkat Intelektual</td><td width='400'>Tingkat potensi yang dimiliki oleh individu untuk mempelajari sesuatu lewat alat-alat berpikir</td>";
+$cfit_row = "<tr><td>1</td><td>Tingkat Intelektual</td><td width='380'>Tingkat potensi yang dimiliki oleh individu untuk mempelajari sesuatu lewat alat-alat berpikir</td>";
 if($skor>=130)
 {
     $cfit_row .= "<td></td><td></td><td style='background:#eaeaea;'></td><td></td><td style='text-align:center;'>X</td></tr>";
@@ -58,7 +58,7 @@ else
     $graphics[] = 1;
 }
 
-$cfit_row .= "<tr><td>Fleksibilitas Berpikir</td><td width='400'>Kemampuan menggunakan berbagai sudut pandang dalam menghadapi tuntutan perubahan</td>";
+$cfit_row .= "<tr><td>2</td><td>Fleksibilitas Berpikir</td><td width='380'>Kemampuan menggunakan berbagai sudut pandang dalam menghadapi tuntutan perubahan</td>";
 $skor=$max-$min;
 if($skor==0)
 {
@@ -91,7 +91,7 @@ else
     $graphics[] = 1;
 }
 
-$cfit_row .= "<tr><td>Berpikir Analitis</td><td width='400'>Kemampuan menguraikan permasalahan berdasarkan informasi yang relevan dari berbagai sumber secara komprehensif untuk mengiden-tifikasi penyebab dan dampak terhadap organisasi</td>";
+$cfit_row .= "<tr><td>3</td><td>Berpikir Analitis</td><td width='380'>Kemampuan menguraikan permasalahan berdasarkan informasi yang relevan dari berbagai sumber secara komprehensif untuk mengiden-tifikasi penyebab dan dampak terhadap organisasi</td>";
 $skor=$total;
 if($skor>=41)
 {
@@ -124,7 +124,7 @@ else
     $graphics[] = 1;
 }
 
-$cfit_row .= "<tr><td>Berpikir Abstraksi</td><td width='400'>Kemampuan untuk memproses sebuah informasi yang berkaitan dengan objek, prinsip, dan konsep-konsep, yang secara fisik tidak dapat dimunculkan</td>";
+$cfit_row .= "<tr><td>4</td><td>Berpikir Abstraksi</td><td width='380'>Kemampuan untuk memproses sebuah informasi yang berkaitan dengan objek, prinsip, dan konsep-konsep, yang secara fisik tidak dapat dimunculkan</td>";
 $skor=$participant['score']['partial_cfit']['CFIT 4'];
 if($skor>=9)
 {
@@ -260,10 +260,11 @@ ul.index li {
 <p></p>
 <table id="customers" align="center">
     <tr>
-        <th colspan="2"><h2 align="center">IQ : <?=$IQ?></h2></th>
+        <th colspan="3"><h2 align="center">IQ : <?=$IQ?></h2></th>
         <th colspan="5" style="text-align:center;"><h2 align="center">IQ : <?=$participant['score']['CFIT']?></h2><i>CFIT scale</i></th>
     </tr>
     <tr>
+        <td style="text-align:center;background:#eaeaea;" rowspan="2">NO</td>
         <td style="text-align:center;background:#eaeaea;" rowspan="2">ASPEK</td>
         <td style="text-align:center;background:#eaeaea;" rowspan="2">PENJELASAN</td>
         <td style="text-align:center;background:#eaeaea;" colspan="5">SKALA</td>
@@ -276,7 +277,7 @@ ul.index li {
         <td style="text-align:center;background:#eaeaea;">5</td>
     </tr>
     <tr>
-        <td style="background:#eaeaea;" colspan="7"><b>KEMAMPUAN BERFIKIR</b></td>
+        <td style="background:#eaeaea;" colspan="8"><b>KEMAMPUAN BERFIKIR</b></td>
     </tr>
     <?php
     echo $cfit_row; 
@@ -327,6 +328,7 @@ ul.index li {
             'description' => 'Kecenderungan menggunakan orang lain untuk mencapai tujuan'
         ],
     ];
+    $no=5;
     foreach($participant['score']['Papikostick'] as $key => $vp): 
         // echo $key;
         $_norma = $norma[$key];
@@ -354,24 +356,25 @@ ul.index li {
         
     if($key=='N'): ?>
     <tr>
-        <td style="background:#eaeaea;" colspan="7"><b>TANGGUNG JAWAB DAN LOYALITAS</b></td>
+        <td style="background:#eaeaea;" colspan="8"><b>TANGGUNG JAWAB DAN LOYALITAS</b></td>
     </tr>
     <?php elseif($key=='G'): ?>
     <tr>
-        <td style="background:#eaeaea;" colspan="7"><b>KEHANDALAN DALAM BEKERJA</b></td>
+        <td style="background:#eaeaea;" colspan="8"><b>KEHANDALAN DALAM BEKERJA</b></td>
     </tr>
     <?php elseif($key=='Z'): ?>
     <tr>
-        <td style="background:#eaeaea;" colspan="7"><b>RASA MEMILIKI TERHADAP ORGANISASI</b></td>
+        <td style="background:#eaeaea;" colspan="8"><b>RASA MEMILIKI TERHADAP ORGANISASI</b></td>
     </tr>
     <?php elseif($key=='I'): ?>
     <tr>
-        <td style="background:#eaeaea;" colspan="7"><b>KEPEMIMPINAN</b></td>
+        <td style="background:#eaeaea;" colspan="8"><b>KEPEMIMPINAN</b></td>
     </tr>
     <?php endif ?>
     <tr>
+        <td><?=$no++?></td>
         <td><?=$descriptions[$key]['title']?></td>
-        <td width="400"><?=$descriptions[$key]['description']?></td>
+        <td width="380"><?=$descriptions[$key]['description']?></td>
         <?=$vp_value?>
     </tr>
     <?php endforeach ?>
@@ -420,6 +423,7 @@ ul.index li {
             <td style="text-align:center;">14</td>
             <td style="text-align:center;">15</td>
         </tr>
+        <?php /*
         <tr>
             <td></td>
             <td style="text-align:center;font-weight:bold" colspan="4">KEMAMPUAN<br />INTELEKTUAL</td>
@@ -427,7 +431,7 @@ ul.index li {
             <td style="text-align:center;font-weight:bold" colspan="3">KEHANDALAN<br />DALAM<br />BEKERJA</td>
             <td style="text-align:center;font-weight:bold" colspan="3">RASA MEMILIKI<br />TERHADAP<br />ORGANISASI</td>
             <td style="text-align:center;font-weight:bold" colspan="3">KEPEMIMPINAN</td>
-        </tr>
+        </tr> */ ?>
     </table>
     <br />
 </div>
@@ -458,7 +462,7 @@ ul.index li {
 </table>
 <br /><br /><br />
 <div style="text-align:center;width:100%">
-    Medan, April 2021<br />
+    Medan, <?= date('d') ?> <?= Yii::$app->params['bulan'][(int) date('m')] ?> <?= date('Y')?><br />
     Penanggung Jawab
 </div>
 <p></p>
