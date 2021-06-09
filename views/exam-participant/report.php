@@ -284,48 +284,48 @@ ul.index li {
     $total_nilai = $s;
     $descriptions = [
         'N' => [
-            'title' => 'Berpikir Analitis',
-            'description' => 'Kemampuan menguraikan permasalahan berdasarkan informasi yang relevan dari berbagai sumber secara komprehensif untuk mengiden-tifikasi penyebab dan dampak terhadap organisasi'
+            'title' => 'Tanggung Jawab',
+            'description' => 'Loyalitas, integritas dan komitmen untuk  melaksanakan tugas secara tuntas dan tepat waktu '
         ],
         'F' => [
-            'title' => 'Berpikir Abstraksi',
-            'description' => 'kemampuan untuk memproses sebuah informasi yang berkaitan dengan objek, prinsip, dan konsep-konsep, yang secara fisik tidak dapat dimunculkan'
+            'title' => 'Loyalitas',
+            'description' => 'Kepatuhan pada aturan dan prosedur, serta rasa memiliki terhadap organisasi'
         ],
         'G' => [
-            'title' => 'Tingkat Intelektual',
-            'description' => 'Tingkat potensi yang dimiliki oleh individu untuk mempelajari sesuatu lewat alat-alat berpikir'
-        ],
-        'A' => [
-            'title' => 'Fleksibilitas Berpikir',
-            'description' => 'Kemampuan menggunakan berbagai sudut pandang dalam menghadapi tuntutan perubahan'
-        ],
-        'O' => [
-            'title' => 'Loyalitas',
-            'description' => 'Kepatuhan pada aturan dan prosedur, serta rasa memiliki terhadap perusahaan'
-        ],
-        'Z' => [
             'title' => 'Daya Juang',
             'description' => 'Kemampuan untuk mau bekerja keras dan tidak mudah putus asa dalam berusaha mencapai tujuan dan mampu mempertahankannya'
         ],
-        'E' => [
+        'A' => [
             'title' => 'Semangat Berprestasi',
             'description' => 'Kemampuan untuk selalu meningkatkan kinerja dengan lebih baik di atas standar secara terus-menerus'
         ],
+        'O' => [
+            'title' => 'Kepercayaan Diri',
+            'description' => 'Keyakinan yang kuat akan kemampuan dalam melaksanakan pekerjaan, berhubungan dan berkompetisi dengan orang lain'
+        ],
+        'Z' => [
+            'title' => 'Penyesuaian Diri',
+            'description' => 'Kemampuan untuk merespon perubahan, kemauan belajar dengan mendengarkan dan memahami pikiran, perasaan orang lain'
+        ],
+        'E' => [
+            'title' => 'Pengendalian Diri',
+            'description' => 'Kemampuan untuk mengendalikan diri pada saat menghadapi masalah yang sulit, kritik dari orang lain atau pada saat bekerja di bawah tekanan dengan sikap yang positif'
+        ],
         'S' => [
-            'title' => 'Tanggung Jawab',
-            'description' => 'Loyalitas, integritas dan komitmen untuk  melaksanakan tugas secara tuntas dan tepat waktu'
+            'title' => 'Kerja Sama Dalam Tim',
+            'description' => 'Tingkat relasi dan kemampuan menyelesaikan pekerjaan secara bersama-sama dengan menjadi bagian dari suatu kelompok untuk mencapai tujuan unit / organisasi'
         ],
         'I' => [
-            'title' => 'Pengendalian Orang Lain',
-            'description' => 'Kemampuan dalam menyusun perencanaan, mengawasi proses dan hasil-hasilnya, mengarahkan dan memotivasi orang lain, dan pola komunikasi yang efektif'
-        ],
-        'L' => [
             'title' => 'Pengambilan Keputusan',
             'description' => 'Kemampuan mengambil keputusan secara cepat dan tepat'
         ],
-        'P' => [
+        'L' => [
             'title' => 'Peran Sebagai Pemimpin',
             'description' => 'Kecenderungan menggunakan orang lain untuk mencapai tujuan'
+        ],
+        'P' => [
+            'title' => 'Pengendalian Orang Lain',
+            'description' => 'Kemampuan dalam menyusun perencanaan, mengawasi proses dan hasil-hasilnya, mengarahkan dan memotivasi orang lain, dan pola komunikasi yang efektif'
         ],
     ];
     $no=5;
