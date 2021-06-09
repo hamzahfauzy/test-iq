@@ -9,6 +9,7 @@ use yii\web\Controller;
 use app\models\ExamSearch;
 use app\models\Participant;
 use yii\filters\VerbFilter;
+use app\models\ImportExamFile;
 use yii\web\NotFoundHttpException;
 use app\models\ExamParticipantSearch;
 
@@ -62,6 +63,47 @@ class ExamController extends Controller
         return $this->render('view', [
             'model' => $this->findModel($id),
             'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionPenilaian($id)
+    {
+        $model = Exam::findOne($id);
+        $upload_model = ImportExamFile::find()->where(['exam_id'=>$id]);
+        $worksheet = [];
+        if(!$upload_model->exists())
+            $upload_model = new ImportExamFile;
+        else
+        {
+            $upload_model = $upload_model->one();
+            $extension = pathinfo($upload_model->file_path, PATHINFO_EXTENSION);
+
+            if($extension=='xlsx'){
+                $inputFileType = 'Xlsx';
+            }else{
+                $inputFileType = 'Xls';
+            }
+            $reader     = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($inputFileType);
+             
+            $spreadsheet = $reader->load($upload_model->file_path);
+            $worksheet   = $spreadsheet->getActiveSheet();
+            $highestRow  = $worksheet->getHighestRow();
+            $highestColumn = $worksheet->getHighestColumn();
+            $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn);
+        }
+        $upload_model->exam_id = $id;
+        if ($upload_model->load(Yii::$app->request->post())){
+            $path = 'uploads/'.$_FILES['ImportExamFile']['name']['file_path'];
+            copy($_FILES['ImportExamFile']['tmp_name']['file_path'],$path);
+            $upload_model->file_path = $path;
+            $upload_model->save(false);
+            Yii::$app->session->setFlash('success','File Berhasil di Upload');
+            return $this->redirect(['penilaian','id'=>$id]);
+        }
+        return $this->render('penilaian',[
+            'model' => $model,
+            'upload_model' => $upload_model,
+            'worksheet' => $worksheet,
         ]);
     }
 
