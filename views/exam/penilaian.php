@@ -55,6 +55,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="card-title">
                 <h1><?= Html::encode($this->title) ?></h1>
             </div>
+            <div class="card-toolbar">
+                <?= Html::a('Cetak', ['cetak','id'=>$model->id], ['class' => 'btn btn-success']) ?>
+            </div>
         </div>
         <div class="card-body">
             <div class="table-responsive">

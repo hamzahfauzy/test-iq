@@ -9,6 +9,7 @@ use yii\web\Controller;
 use app\models\ExamSearch;
 use app\models\Participant;
 use yii\filters\VerbFilter;
+use Spipu\Html2Pdf\Html2Pdf;
 use app\models\ImportExamFile;
 use yii\web\NotFoundHttpException;
 use app\models\ExamParticipantSearch;
@@ -87,9 +88,6 @@ class ExamController extends Controller
              
             $spreadsheet = $reader->load($upload_model->file_path);
             $worksheet   = $spreadsheet->getActiveSheet();
-            $highestRow  = $worksheet->getHighestRow();
-            $highestColumn = $worksheet->getHighestColumn();
-            $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn);
         }
         $upload_model->exam_id = $id;
         if ($upload_model->load(Yii::$app->request->post())){
@@ -105,6 +103,80 @@ class ExamController extends Controller
             'upload_model' => $upload_model,
             'worksheet' => $worksheet,
         ]);
+    }
+
+    public function actionCetak($id)
+    {
+        $model = ImportExamFile::find()->where(['exam_id'=>$id])->one();
+        $extension = pathinfo($model->file_path, PATHINFO_EXTENSION);
+
+        if($extension=='xlsx'){
+            $inputFileType = 'Xlsx';
+        }else{
+            $inputFileType = 'Xls';
+        }
+        $reader     = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($inputFileType);
+            
+        $spreadsheet = $reader->load($model->file_path);
+        $worksheet   = $spreadsheet->getActiveSheet();
+        $content     = "
+        <style>
+        body, h2 {
+            margin:0;padding:0
+        }
+        #customers {
+        border-collapse: collapse;
+        }
+
+        #customers td, #customers th {
+        border: 1px solid #000;
+        padding: 5px;
+        }
+
+        /* #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+        #customers tr:hover {background-color: #ddd;} */
+
+        #customers th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        background-color: #eaeaea;
+        }
+
+        ul.index {
+            list-style-type:none;
+            margin:0px;
+            padding:0px;
+            padding-left:-15px;
+            padding-bottom:-25px;
+        }
+        ul.index li {
+            height:25px;
+        }
+        .box {
+            background-color:red;
+        }
+        </style>
+        <body>
+        ";
+
+        $highestRow  = $worksheet->getHighestRow();
+        $highestColumn = $worksheet->getHighestColumn();
+        $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn);
+        for ($row = 4; $row <= $highestRow; $row++) { 
+        //     echo $worksheet->getCellByColumnAndRow(3, $row)->getValue() . '<br>';
+            $content .= $this->renderPartial('cetak',[
+                'worksheet' => $worksheet,
+                'row'       => $row
+            ]);
+        }
+
+        $content .= "<body>";
+
+        $html2pdf = new Html2Pdf();
+        $html2pdf->writeHTML($content);
+        $html2pdf->output();
+        return;
     }
 
     public function actionParticipants()
