@@ -164,6 +164,8 @@ class ExamController extends Controller
         $highestColumn = $worksheet->getHighestColumn();
         $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn);
         for ($row = 4; $row <= $highestRow; $row++) { 
+            $value = $worksheet->getCellByColumnAndRow(1, $row)->getCalculatedValue();
+            if($value == '') break;
         //     echo $worksheet->getCellByColumnAndRow(3, $row)->getValue() . '<br>';
             $content .= $this->renderPartial('cetak',[
                 'worksheet' => $worksheet,
