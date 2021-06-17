@@ -177,7 +177,7 @@ class ExamController extends Controller
 
         $html2pdf = new Html2Pdf();
         $html2pdf->writeHTML($content);
-        $html2pdf->output();
+        $html2pdf->output('laporan.pdf', 'D');
         return;
     }
 
