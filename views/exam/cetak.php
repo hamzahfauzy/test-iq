@@ -53,7 +53,7 @@
 </table>
 <div style="page-break-after: always"></div>
 <br />
-<b>1. TABEL HASIL STUDENT PROFILING</b><br />
+<b>1. TABEL HASIL PROFIL GURU</b><br />
 <p></p>
 <table id="customers" align="center">
     <tr>
