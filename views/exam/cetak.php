@@ -53,7 +53,7 @@
 </table>
 <div style="page-break-after: always"></div>
 <br />
-<b>1. TABEL HASIL PROFIL GURU</b><br />
+<b>1. PROFIL GURU</b><br />
 <p></p>
 <table id="customers" align="center">
     <tr>
@@ -173,7 +173,7 @@
 </div>
 <div style="page-break-after: always"></div>
 <br />
-<b>2. GRAFIK INDEKS PROFIL GURU</b><br /><br />
+<b>2. GRAFIK PROFIL GURU</b><br /><br />
 <div style="width:100%;border:1px solid #000;min-height:100px;">
     <p style="text-align:center;font-weight:bold;">GRAFIK INDEKS PROFIL GURU (IPG)</p>
     <br />
@@ -225,7 +225,7 @@
     <br />
 </div>
 <br />
-<b>3. TINGKAT INDEKS PROFIL GURU (IPG)</b><br />
+<b>3. INDEKS PROFIL GURU (IPG)</b><br />
 <p></p>
 <table id="customers" align="center">
     <tr>
