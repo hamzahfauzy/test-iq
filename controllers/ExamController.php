@@ -171,7 +171,7 @@ class ExamController extends Controller
         if($max_row > $num_rows)
             $max_row = $num_rows;
 
-        for ($row = $first_row; $row < $max_row; $row++) { 
+        for ($row = $first_row; $row <= $max_row; $row++) { 
             $value = $worksheet->getCellByColumnAndRow(3, $row)->getFormattedValue();
             if($value == '') continue;
         //     echo $worksheet->getCellByColumnAndRow(3, $row)->getValue() . '<br>';
