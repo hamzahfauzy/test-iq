@@ -163,7 +163,7 @@ class ExamController extends Controller
         $highestRow  = $worksheet->getHighestRow();
         $highestColumn = $worksheet->getHighestColumn();
         $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn);
-        $num_rows = ($highestRow - 7);
+        $num_rows = ($highestRow - 4);
         $count_partial = ceil($num_rows / 15);
         $part = $_GET['part'];
         $max_row = ($part * 15) + 4;
@@ -173,7 +173,7 @@ class ExamController extends Controller
 
         for ($row = $first_row; $row < $max_row; $row++) { 
             $value = $worksheet->getCellByColumnAndRow(3, $row)->getFormattedValue();
-            if($value == '') break;
+            if($value == '') continue;
         //     echo $worksheet->getCellByColumnAndRow(3, $row)->getValue() . '<br>';
             $content .= $this->renderPartial('cetak',[
                 'worksheet' => $worksheet,
