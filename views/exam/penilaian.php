@@ -46,6 +46,8 @@ $this->params['breadcrumbs'][] = $this->title;
         $highestRow  = $worksheet->getHighestRow();
         $highestColumn = $worksheet->getHighestColumn();
         $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn);
+        $num_rows = ($highestRow - 7);
+        $count_partial = ceil($num_rows / 15);
         // for ($row = 4; $row <= $highestRow; $row++) { 
         //     echo $worksheet->getCellByColumnAndRow(3, $row)->getValue() . '<br>';
         // }
@@ -56,7 +58,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h1><?= Html::encode($this->title) ?></h1>
             </div>
             <div class="card-toolbar">
-                <?= Html::a('Cetak', ['cetak','id'=>$model->id], ['class' => 'btn btn-success']) ?>
+            <?php for($i=1;$i<=$count_partial;$i++): ?>
+                <?= Html::a('Cetak '.$i, ['cetak','id'=>$model->id,'part'=>$i], ['class' => 'btn btn-success']) ?>
+                &nbsp;
+            <?php endfor; ?>
             </div>
         </div>
         <div class="card-body">

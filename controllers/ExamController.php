@@ -163,7 +163,15 @@ class ExamController extends Controller
         $highestRow  = $worksheet->getHighestRow();
         $highestColumn = $worksheet->getHighestColumn();
         $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn);
-        for ($row = 4; $row <= $highestRow; $row++) { 
+        $num_rows = ($highestRow - 7);
+        $count_partial = ceil($num_rows / 15);
+        $part = $_GET['part'];
+        $max_row = ($part * 15) + 4;
+        $first_row = (($part-1) * 15) + 4;
+        if($max_row > $num_rows)
+            $max_row = $num_rows;
+
+        for ($row = $first_row; $row < $max_row; $row++) { 
             $value = $worksheet->getCellByColumnAndRow(3, $row)->getCalculatedValue();
             if($value == '') break;
         //     echo $worksheet->getCellByColumnAndRow(3, $row)->getValue() . '<br>';
@@ -177,7 +185,8 @@ class ExamController extends Controller
 
         $html2pdf = new Html2Pdf();
         $html2pdf->writeHTML($content);
-        $html2pdf->output('laporan.pdf', 'D');
+        $html2pdf->output();
+        // $html2pdf->output('laporan.pdf', 'D');
         return;
     }
 
