@@ -172,7 +172,7 @@ class ExamController extends Controller
             $max_row = $num_rows;
 
         for ($row = $first_row; $row < $max_row; $row++) { 
-            $value = $worksheet->getCellByColumnAndRow(3, $row)->getCalculatedValue();
+            $value = $worksheet->getCellByColumnAndRow(3, $row)->getFormattedValue();
             if($value == '') break;
         //     echo $worksheet->getCellByColumnAndRow(3, $row)->getValue() . '<br>';
             $content .= $this->renderPartial('cetak',[

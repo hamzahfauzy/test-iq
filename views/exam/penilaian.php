@@ -115,7 +115,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <tr>
                             <?php 
                             for ($col = 2; $col <= 31; $col++) {
-                                $value = $worksheet->getCellByColumnAndRow($col, $row)->getCalculatedValue();
+                                $value = $worksheet->getCellByColumnAndRow($col, $row)->getFormattedValue();
                                 if($value == '' || $value == 'Job Profile') break;
                             ?>
                             <td><?= $value ?></td>

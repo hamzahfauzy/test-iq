@@ -38,7 +38,7 @@
     <tr>
         <td width="200px">Tanggal Pemeriksaan</td>
         <td width="10px">:</td>
-        <td><?=$worksheet->getCellByColumnAndRow(8, $row)->getValue()?></td>
+        <td><?=$worksheet->getCellByColumnAndRow(7, $row)->getValue()?></td>
     </tr>
     <tr>
         <td>Tujuan Pemeriksaan</td>
@@ -231,7 +231,7 @@
     <tr>
         <td colspan="3" width="400">Tingkat Indeks Profil Guru Berdasarkan Hasil adalah : </td>
         <td width="300" style="background:green;color:#FFF" colspan="2">
-            <h2 style="align:center"><?=$worksheet->getCellByColumnAndRow(30, $row)->getCalculatedValue()?>%</h2>
+            <h2 style="align:center"><?=$worksheet->getCellByColumnAndRow(30, $row)->getFormattedValue()?>%</h2>
         </td>
     </tr>
     <tr>
@@ -251,7 +251,7 @@
 </table>
 <br /><br /><br />
 <div style="text-align:center;width:100%">
-    Medan, <?= date('d') ?> <?= Yii::$app->params['bulan'][(int) date('m')] ?> <?= date('Y')?><br />
+    Medan, <?=$worksheet->getCellByColumnAndRow(8, $row)->getValue()?><br />
     Penanggung Jawab
 </div>
 <p></p>
