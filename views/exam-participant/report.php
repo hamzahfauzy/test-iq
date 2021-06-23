@@ -216,7 +216,7 @@ ul.index li {
     <tr>
         <td class="border-cell">Tempat, Tanggal Lahir</td>
         <td class="border-cell">:</td>
-        <td class="border-cell"><?=$peserta->getMeta('tempat_lahir')?$peserta->getMeta('tempat_lahir'):$peserta->getMeta('tempat_lahir').' '.$peserta->getMeta('tanggal_lahir');?></td>
+        <td class="border-cell"><?=$peserta->getMeta('tempat_tanggal_lahir')?$peserta->getMeta('tempat_lahir'):$peserta->getMeta('tempat_lahir').' '.$peserta->getMeta('tanggal_lahir');?></td>
     </tr>
     <tr>
         <td class="border-cell">Pendidikan Terakhir</td>
