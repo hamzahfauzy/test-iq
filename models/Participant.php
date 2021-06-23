@@ -122,9 +122,15 @@ class Participant extends \yii\db\ActiveRecord
 
     public function getAge()
     {
-        $date = new \DateTime($this->birthdate);
-        $now = new \DateTime();
-        $interval = $now->diff($date);
-        return $interval->y;
+        if($this->birthdate || $this->getMeta('tanggal_lahir'))
+        {
+            $birthdate = $this->birthdate??$this->getMeta('tanggal_lahir');
+            $date = new \DateTime($birthdate);
+            $now = new \DateTime();
+            $interval = $now->diff($date);
+            return $interval->y;
+        }
+
+        return 0;
     }
 }
