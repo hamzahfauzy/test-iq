@@ -227,7 +227,7 @@ ul.index li {
         <td class="border-cell">Bidang Studi</td>
         <td class="border-cell">:</td>
         <td class="border-cell"><?=$peserta->getMeta('pelajaran');?></td>
-    </tr>
+    </tr> 
     <tr>
         <td class="border-cell">Asal Sekolah</td>
         <td class="border-cell">:</td>
