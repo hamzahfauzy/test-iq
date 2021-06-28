@@ -96,9 +96,10 @@ class ParticipantController extends Controller
         ]);
     }
 
-    public function actionImports()
+    public function actionImports($exam_id = false)
     {
         $model = new ImportParticipant;
+        $model->exam_id = $exam_id;
         $exams = Exam::find()->all();
         $exams = ArrayHelper::map($exams,'id','name');
         if ($model->load(Yii::$app->request->post())){
@@ -155,7 +156,7 @@ class ParticipantController extends Controller
                 $transaction->rollback();
                 Yii::$app->session->addFlash("error", "Import Participant Failed");
             }
-            return $this->redirect(['imports']);
+            return $this->redirect(['exam/view','id'=>$exam_id]);
         }
 
         return $this->render('imports', [

@@ -36,6 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attributes' => [
                     'id',
                     'name',
+                    'test_tool',
                     'sequenced_number',
                     'has_timer',
                     'countdown',

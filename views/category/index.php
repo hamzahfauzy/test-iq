@@ -34,6 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['class' => 'yii\grid\SerialColumn'],
 
                     'name',
+                    'test_tool',
                     'sequenced_number',
                     'has_timer',
                     'countdown',

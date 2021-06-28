@@ -1,5 +1,6 @@
 <?php
 
+use app\models\User;
 use yii\db\Migration;
 
 /**
@@ -15,6 +16,12 @@ class m201014_090631_alter_table_user extends Migration
         $this->alterColumn('user', 'auth_key', $this->string()->defaultValue(NULL));
         $this->alterColumn('user', 'created_at', $this->timestamp()->defaultValue(NULL));
         $this->alterColumn('user', 'updated_at', $this->timestamp()->defaultValue(NULL));
+
+        $user = new User;
+        $user->username = "master";
+        $user->email = "master@master.com";
+        $user->password_hash = "semogasukses";
+        $user->save(false);
     }
 
     /**

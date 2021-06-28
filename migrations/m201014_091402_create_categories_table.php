@@ -18,6 +18,7 @@ class m201014_091402_create_categories_table extends Migration
             'sequenced_number' => $this->integer(),
             'has_timer' => $this->string(),
             'countdown' => $this->string()->defaultValue(NULL),
+            'test_tool' => $this->string()->defaultValue(NULL),
         ]);
     }
 

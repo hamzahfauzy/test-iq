@@ -4,6 +4,34 @@ return [
     'adminEmail' => 'admin@example.com',
     'senderEmail' => 'noreply@example.com',
     'senderName' => 'Example.com mailer',
+    'test_tools' => [
+        'TPA'=>'TPA',
+        'HOLLAND'=>'HOLLAND',
+        'PAPIKOSTICK'=>'PAPIKOSTICK'
+    ],
+    'test_group' => [
+        'group_1' => [
+            'id'   => 'group_1',
+            'name' => 'Group 1',
+            'tools' => [
+                'TPA'
+            ]
+        ],
+        'group_2' => [
+            'id'   => 'group_2',
+            'name' => 'Group 2',
+            'tools' => [
+                'TPA','HOLLAND'
+            ]
+        ],
+        'group_3' => [
+            'id'   => 'group_3',
+            'name' => 'Group 3',
+            'tools' => [
+                'TPA','HOLLAND','PAPIKOSTICK'
+            ]
+        ]
+    ],
     'bulan' => [
         '',
         'Januari',

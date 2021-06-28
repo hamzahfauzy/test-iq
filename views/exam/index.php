@@ -35,24 +35,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['class' => 'yii\grid\SerialColumn'],
 
                     'name',
+                    [
+                        'attribute' => 'Test Group',
+                        'format'    => 'raw',
+                        'value'     => function ($model) {
+                            return $model->groupName();
+                        }
+                    ],
                     'start_time',
                     'end_time',
                     [
-                        'attribute' => 'CFIT',
-                        'format' => 'raw',
-                        'value' => function($model){
-                            return Html::a('<i class="fa fa-download fa-fw"></i> Download', ['exam/download', 'id' => $model->id,'laporan'=>'CFIT']);
-                        }
-                    ],
-                    [
-                        'attribute' => 'PAPIKOSTIK',
-                        'format' => 'raw',
-                        'value' => function($model){
-                            return Html::a('<i class="fa fa-download fa-fw"></i> Download', ['exam/download', 'id' => $model->id,'laporan'=>'Papikostick']);
-                        }
-                    ],
-                    [
-                        'attribute' => 'JPM',
+                        'attribute' => 'Report',
                         'format' => 'raw',
                         'value' => function($model){
                             return Html::a('<i class="fa fa-download fa-fw"></i> Download', ['exam/download', 'id' => $model->id]);

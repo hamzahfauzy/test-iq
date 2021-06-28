@@ -31,6 +31,7 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             [['sequenced_number'], 'integer'],
+            [['name','test_tool','sequenced_number','has_timer'], 'required'],
             [['name','has_timer','countdown'], 'string', 'max' => 255],
         ];
     }

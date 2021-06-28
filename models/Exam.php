@@ -33,7 +33,7 @@ class Exam extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name','start_time', 'end_time'], 'required'],
+            [['name','test_group','start_time', 'end_time'], 'required'],
             [['name'], 'string', 'max' => 255],
         ];
     }
@@ -46,10 +46,17 @@ class Exam extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
+            'test_group' => 'Test Group',
             'start_time' => 'Start Time',
             'end_time' => 'End Time',
             'created_at' => 'Created At',
         ];
+    }
+
+    public function groupName()
+    {
+        $group = Yii::$app->params['test_group'][$this->test_group];
+        return $group['name'];
     }
 
     /**

@@ -43,6 +43,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attributes' => [
                     'id',
                     'name',
+                    [
+                        'attribute' => 'Test Group',
+                        'format'    => 'raw',
+                        'value'     => function ($model) {
+                            return $model->groupName();
+                        }
+                    ],
                     'start_time',
                     'end_time',
                 ],
@@ -58,6 +65,8 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
             <div class="card-toolbar">
                 <?= Html::a('Add Participants', ['exam-participant/create','exam_id'=>$model->id], ['class' => 'btn btn-success']) ?>
+                &nbsp;
+                <?= Html::a('Import', ['participant/imports','exam_id'=>$model->id], ['class' => 'btn btn-success']) ?>
             </div>
         </div>
 

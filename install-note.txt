@@ -1,0 +1,16 @@
+copy config/db-example.php to db.php
+update db.php database configuration file
+copy web/index.example.php to index.php
+
+
+run php yii migrate --migrationPath=@yii/rbac/migrations
+run php yii migrate --migrationPath=@mdm/admin/migrations
+run php yii migrate
+
+access /admin
+add /* on routes
+create role
+assign /* to role
+assign role to master user
+
+update web/index.php env variable from dev to prod
