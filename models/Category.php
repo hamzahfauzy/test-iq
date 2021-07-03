@@ -47,6 +47,7 @@ class Category extends \yii\db\ActiveRecord
             'sequenced_number' => 'Sequenced Number',
             'has_timer' => 'Has Timer',
             'countdown' => 'Countdown',
+            'test_tool' => 'Test Tool',
         ];
     }
 
