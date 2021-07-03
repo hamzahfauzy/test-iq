@@ -188,27 +188,6 @@ class PostController extends Controller
 
                             Holland::insert($no,$category,$worksheet,$post);
                         }
-
-                        
-                        // else
-                        // {
-                        //     $alphabet = range('a', 'z');
-                        //     $num = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
-                        //     $index = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
-                        //     for($i=0;$i<$num;$i++)
-                        //     {
-                        //         $child = new Post;
-                        //         $child->post_title = "Jawaban ".$alphabet[$i]." ".$category->name." ".$no;
-                        //         $child->post_content = $alphabet[$i];
-                        //         $child->post_as = "Jawaban";
-                        //         $child->post_type = $index == $alphabet[$i] ? 1 : 0;
-                        //         $child->save(false);
-                        //         $child->link('parents',$post);
-                        //     }
-                        // }
-                        //for ($col = 1; $col <= $highestColumnIndex; ++$col) {
-                        // echo $worksheet->getCellByColumnAndRow(1, $row)->getValue(); //3 artinya kolom ke3
-                        // $kolom10 = $worksheet->getCellByColumnAndRow(10, $row)->getValue(); // 10 artinya kolom 10
                     }
                     $transaction->commit();
                     Yii::$app->session->addFlash("success", "Import Posts Success");
@@ -219,23 +198,11 @@ class PostController extends Controller
             }
             else
             {
-                $serial_names = [
-                    'SUB 1' => 'Soal CFIT 1',
-                    'SUB 2' => 'Soal CFIT 2',
-                    'SUB 3' => 'Soal CFIT 3',
-                    'SUB 4' => 'Soal CFIT 4',
-                ];
-
                 foreach($uploadedFile as $file)
                 {
                     $file->saveAs('uploads/' . $file->baseName . '.' . $file->extension);
                     $name = $file->baseName;
-                    // get serial name
-                    $name = explode('-',$name);
-                    $number = $name[1];
-                    $name = $name[0];
-                    $title = $serial_names[$name].' '.$number;
-                    $soal = Post::find()->where(['post_title'=>$title])->one();
+                    $soal = Post::find()->where(['post_title'=>$name])->one();
                     $soal->post_content .= '<p><img alt="" src="'.Url::to(['uploads/'.$file->baseName . '.' . $file->extension],true).'" width="100%" /></p>';
                     $soal->save(false);
                 }
