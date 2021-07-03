@@ -23,7 +23,7 @@ class ApiController extends \yii\web\Controller
     public function actionData()
     {
         return [
-            'tutorial' => 'http://video.ujiantmc.online/',
+            'tutorial' => 'http://vmb3.ujiantmc.online/',
             'download' => '',
         ];
     }

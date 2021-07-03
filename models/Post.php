@@ -110,6 +110,11 @@ class Post extends \yii\db\ActiveRecord
 
     public function getItems()
     {
+        if($this->categoryPost->test_tool == 'TPA')
+        {
+            return $this->hasMany(Post::className(), ['id' => 'child_id'])
+            ->viaTable('post_items', ['parent_id' => 'id'])->orderBy(new Expression('rand()'));
+        }
         return $this->hasMany(Post::className(), ['id' => 'child_id'])
           ->viaTable('post_items', ['parent_id' => 'id']);
     }
