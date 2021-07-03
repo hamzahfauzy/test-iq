@@ -7,7 +7,8 @@ return [
     'test_tools' => [
         'TPA'=>'TPA',
         'HOLLAND'=>'HOLLAND',
-        'PAPIKOSTICK'=>'PAPIKOSTICK'
+        'PAPIKOSTICK'=>'PAPIKOSTICK',
+        'PSA'=>'PSA',
     ],
     'test_group' => [
         'group_1' => [
@@ -29,6 +30,13 @@ return [
             'name' => 'Group 3',
             'tools' => [
                 'TPA','HOLLAND','PAPIKOSTICK'
+            ]
+        ],
+        'group_4' => [
+            'id'   => 'group_4',
+            'name' => 'Group 4',
+            'tools' => [
+                'PSA'
             ]
         ]
     ],

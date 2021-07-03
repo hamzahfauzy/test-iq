@@ -10,7 +10,9 @@ use yii\helpers\ArrayHelper;
 $model->start_time = $model->start_time ? date('Y-m-d\TH:i',strtotime($model->start_time)) : date('Y-m-d\TH:i');
 $model->end_time = $model->end_time ? date('Y-m-d\TH:i',strtotime($model->end_time)) : date('Y-m-d\TH:i');
 $test_group = Yii::$app->params['test_group'];
-$test_group = ArrayHelper::map($test_group,'id','name');
+$test_group = ArrayHelper::map($test_group,'id',function($arr){
+    return $arr['name'] . '('.implode(',',$arr['tools']).')';
+});
 ?>
 
 <div class="exam-form">
