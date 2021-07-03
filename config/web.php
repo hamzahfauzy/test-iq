@@ -6,7 +6,7 @@ $db = require __DIR__ . '/db.php';
 $config = [
     'timeZone'=>'Asia/Jakarta',
     'name' => 'TMC IQ TEST',
-    'id' => 'basic',
+    'id' => 'minatbakatapp',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
@@ -35,7 +35,7 @@ $config = [
         ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'ZZBBLLDxzqiRhFUi--wNbS6CS_qbLbu7',
+            'cookieValidationKey' => 'minatbakatapp',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
