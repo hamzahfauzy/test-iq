@@ -65,10 +65,8 @@ class Category extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Post::className(),['id'=>'post_id'])
                 ->viaTable('category_post',['category_id'=>'id'])->with(['items'=>function($q) {
-                    if($this->test_tool == 'TPA')
-                        $q->select(['id','post_content'])->orderBy(new Expression('rand()'));
-                    else
-                        $q->select(['id','post_content', 'post_title']);
+                    $q->select(['id','post_content'])->orderBy(new Expression('rand()'));
+                    // $q->select(['id','post_content', 'post_title']);
                 }]);
     }
 
