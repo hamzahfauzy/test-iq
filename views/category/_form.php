@@ -26,7 +26,7 @@ $test_tools = array_merge(['Tidak Ada'=>'Tidak Ada'], $test_tools);
         'No'=>'No'
         ]) ?>
 
-    <?= $form->field($model, 'countdown')->input('time',['step'=>1]) ?>
+    <?= $form->field($model, 'countdown')->textInput()->label('Countdown (ex: 10:00 for 10 Minutes') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
