@@ -101,10 +101,10 @@ if (YII_ENV_DEV) {
     $config['as access'] =  [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
-            '*',
+            // '*',
             // 'api/*',
             // 'site/laporan'
-            // 'admin/*',
+            'admin/*',
             // 'gii/*',
             // 'debug/*',
             // 'ajax/*'
