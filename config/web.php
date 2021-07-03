@@ -102,9 +102,9 @@ if (YII_ENV_DEV) {
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
             // '*',
-            // 'api/*',
-            // 'site/laporan'
-            'admin/*',
+            'api/*',
+            'site/laporan'
+            // 'admin/*',
             // 'gii/*',
             // 'debug/*',
             // 'ajax/*'
