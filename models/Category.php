@@ -68,7 +68,7 @@ class Category extends \yii\db\ActiveRecord
                     if($test_tool == 'TPA')
                         $q->select(['id','post_content'])->orderBy(new Expression('rand()'));
                     else
-                        $q->select(['id','post_content']);
+                        $q->select(['id','post_content', 'post_title']);
                 }]);
     }
 
