@@ -165,12 +165,12 @@ class PostController extends Controller
                     
                         if($category->test_tool == 'PAPIKOSTICK')
                         {
-                            Papikostick::insert($no,$category,$worksheet,$post);
+                            Papikostick::insert($no,$category,$worksheet,$post,$row);
                         }
     
                         elseif($category->test_tool == 'CFIT' && $category->name == 'CFIT 2') // for CFIT subtest 2
                         {
-                            Cfit2::insert($no,$category,$worksheet,$post);
+                            Cfit2::insert($no,$category,$worksheet,$post,$row);
                         }
 
                         elseif($category->test_tool == 'TPA')
@@ -178,7 +178,7 @@ class PostController extends Controller
                             $post->post_content = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
                             $post->save(false);
 
-                            Tpa::insert($no,$category,$worksheet,$post);
+                            Tpa::insert($no,$category,$worksheet,$post,$row);
                         }
 
                         elseif($category->test_tool == 'HOLLAND')
@@ -186,7 +186,7 @@ class PostController extends Controller
                             $post->post_content = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
                             $post->save(false);
 
-                            Holland::insert($no,$category,$worksheet,$post);
+                            Holland::insert($no,$category,$worksheet,$post,$row);
                         }
                     }
                     $transaction->commit();
