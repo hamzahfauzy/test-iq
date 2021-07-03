@@ -5,7 +5,7 @@ use app\models\Post;
 
 class Cfit2
 {
-    static function insert($no, $category, $worksheet, $post)
+    static function insert($no, $category, $worksheet, $post, $row)
     {
         // save true answer
         $child = new Post;

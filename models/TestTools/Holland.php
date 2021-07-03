@@ -5,7 +5,7 @@ use app\models\Post;
 
 class Holland
 {
-    static function insert($no, $category, $worksheet, $post)
+    static function insert($no, $category, $worksheet, $post, $row)
     {
         for($i=1;$i<=5;$i++)
         {

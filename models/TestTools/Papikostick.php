@@ -5,7 +5,7 @@ use app\models\Post;
 
 class Papikostick
 {
-    static function insert($no, $category, $worksheet, $post)
+    static function insert($no, $category, $worksheet, $post, $row)
     {
         // save A
         $child = new Post;
