@@ -4,17 +4,21 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Post;
-use app\models\PostItems;
-use app\models\PostItemsSearch;
-use app\models\Category;
-use app\models\CategoryPost;
-use app\models\PostSearch;
-use app\models\ImportFile;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
+use yii\web\Controller;
+use app\models\Category;
+use app\models\PostItems;
+use app\models\ImportFile;
+use app\models\PostSearch;
+use yii\filters\VerbFilter;
+use app\models\CategoryPost;
+use yii\helpers\ArrayHelper;
+use app\models\TestTools\Tpa;
+use app\models\PostItemsSearch;
+use app\models\TestTools\Cfit2;
+use app\models\TestTools\Holland;
+use yii\web\NotFoundHttpException;
+use app\models\TestTools\Papikostick;
 
 /**
  * PostController implements the CRUD actions for Post model.
@@ -158,74 +162,50 @@ class PostController extends Controller
                         $category_post->category_id = $model->category_id;
                         $category_post->post_id = $post->id;
                         $category_post->save();
-    
-                        if($category->sequenced_number == 4) // for CFIT subtest 2
+                    
+                        if($category->test_tool == 'PAPIKOSTICK')
                         {
-                            // save true answer
-                            $child = new Post;
-                            $child->post_title = "Jawaban ".$category->name." ".$no;
-                            $child->post_content = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
-                            $child->post_as = "Jawaban";
-                            $child->post_type = "1";
-                            $child->save(false);
-                            $child->link('parents',$post);
+                            Papikostick::insert($no,$category,$worksheet,$post);
                         }
-                        elseif(in_array($category->sequenced_number,[10,11,12])) // for Papicostick
-                        {
-                            // save A
-                            $child = new Post;
-                            $child->post_title = "Jawaban A ".$category->name." ".$no;
-                            $child->post_content = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
-                            $child->post_as = "Jawaban";
-                            $child->post_type = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
-                            $child->save(false);
-                            $child->link('parents',$post);
     
-                            // save B
-                            $child = new Post;
-                            $child->post_title = "Jawaban B ".$category->name." ".$no;
-                            $child->post_content = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
-                            $child->post_as = "Jawaban";
-                            $child->post_type = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
-                            $child->save(false);
-                            $child->link('parents',$post);
+                        elseif($category->test_tool == 'CFIT' && $category->name == 'CFIT 2') // for CFIT subtest 2
+                        {
+                            Cfit2::insert($no,$category,$worksheet,$post);
                         }
-                        // elseif($category->sequenced_number == 12) // for MSDT
+
+                        elseif($category->test_tool == 'TPA')
+                        {
+                            $post->post_content = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                            $post->save(false);
+
+                            Tpa::insert($no,$category,$worksheet,$post);
+                        }
+
+                        elseif($category->test_tool == 'HOLLAND')
+                        {
+                            $post->post_content = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                            $post->save(false);
+
+                            Holland::insert($no,$category,$worksheet,$post);
+                        }
+
+                        
+                        // else
                         // {
-                        //     // Save A
-                        //     $child = new Post;
-                        //     $child->post_title = "Jawaban A ".$category->name." ".$no;
-                        //     $child->post_content = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
-                        //     $child->post_as = "Jawaban";
-                        //     $child->post_type = "A";
-                        //     $child->save(false);
-                        //     $child->link('parents',$post);
-    
-                        //     // Save B
-                        //     $child = new Post;
-                        //     $child->post_title = "Jawaban B ".$category->name." ".$no;
-                        //     $child->post_content = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
-                        //     $child->post_as = "Jawaban";
-                        //     $child->post_type = "B";
-                        //     $child->save(false);
-                        //     $child->link('parents',$post);
+                        //     $alphabet = range('a', 'z');
+                        //     $num = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                        //     $index = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                        //     for($i=0;$i<$num;$i++)
+                        //     {
+                        //         $child = new Post;
+                        //         $child->post_title = "Jawaban ".$alphabet[$i]." ".$category->name." ".$no;
+                        //         $child->post_content = $alphabet[$i];
+                        //         $child->post_as = "Jawaban";
+                        //         $child->post_type = $index == $alphabet[$i] ? 1 : 0;
+                        //         $child->save(false);
+                        //         $child->link('parents',$post);
+                        //     }
                         // }
-                        else
-                        {
-                            $alphabet = range('a', 'z');
-                            $num = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
-                            $index = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
-                            for($i=0;$i<$num;$i++)
-                            {
-                                $child = new Post;
-                                $child->post_title = "Jawaban ".$alphabet[$i]." ".$category->name." ".$no;
-                                $child->post_content = $alphabet[$i];
-                                $child->post_as = "Jawaban";
-                                $child->post_type = $index == $alphabet[$i] ? 1 : 0;
-                                $child->save(false);
-                                $child->link('parents',$post);
-                            }
-                        }
                         //for ($col = 1; $col <= $highestColumnIndex; ++$col) {
                         // echo $worksheet->getCellByColumnAndRow(1, $row)->getValue(); //3 artinya kolom ke3
                         // $kolom10 = $worksheet->getCellByColumnAndRow(10, $row)->getValue(); // 10 artinya kolom 10
