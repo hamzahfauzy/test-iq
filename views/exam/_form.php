@@ -11,7 +11,7 @@ $model->start_time = $model->start_time ? date('Y-m-d\TH:i',strtotime($model->st
 $model->end_time = $model->end_time ? date('Y-m-d\TH:i',strtotime($model->end_time)) : date('Y-m-d\TH:i');
 $test_group = Yii::$app->params['test_group'];
 $test_group = ArrayHelper::map($test_group,'id',function($arr){
-    return $arr['name'] . '('.implode(',',$arr['tools']).')';
+    return $arr['name'] . ' ('.implode(',',$arr['tools']).')';
 });
 ?>
 
