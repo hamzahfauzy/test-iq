@@ -62,10 +62,9 @@ class Category extends \yii\db\ActiveRecord
 
     public function getPosts()
     {
-        $test_tool = $this->test_tool;
         return $this->hasMany(Post::className(),['id'=>'post_id'])
-                ->viaTable('category_post',['category_id'=>'id'])->with(['items'=>function($q) use ($test_tool){
-                    if($test_tool == 'TPA')
+                ->viaTable('category_post',['category_id'=>'id'])->with(['items'=>function($q) {
+                    if($this->test_tool == 'TPA')
                         $q->select(['id','post_content'])->orderBy(new Expression('rand()'));
                     else
                         $q->select(['id','post_content', 'post_title']);
