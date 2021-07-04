@@ -226,7 +226,7 @@ class ApiController extends \yii\web\Controller
                 if(isset($post['items']) && $cat['test_tool'] == 'TPA')
                     shuffle($post['items']);
 
-                $posts[$post['id']] = $post;
+                $posts[] = $post;
                 if(in_array($cat['test_tool'],['TPA','HOLLAND']))
                 {
                     // 1 soal
