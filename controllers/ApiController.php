@@ -188,8 +188,26 @@ class ApiController extends \yii\web\Controller
 
     public function actionCategories()
     {
-        $categories = Category::find()->joinWith(['posts'])->asArray()->orderBy(['sequenced_number'=>'asc'])->all();
-        return $categories;
+        $categories = Category::find()
+                    ->with(['posts','posts.items'])
+                    ->asArray()
+                    ->orderBy(['sequenced_number'=>'asc'])->all();
+
+        $cats = [];
+        foreach($categories as $cat)
+        {
+            $posts = [];
+            foreach($cat['posts'] as $post)
+            {
+                if(isset($post['items']) && $cat['test_tool'] == 'TPA')
+                    shuffle($post['items']);
+
+                $posts[$post['id']] = $post;
+            }
+            $cat['posts'] =  $posts;
+            $cats[] = $cat;
+        }
+        return $cats;
     }
     
     public function actionDemoCategories()
