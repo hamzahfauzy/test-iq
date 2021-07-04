@@ -201,10 +201,10 @@ class PostController extends Controller
                 foreach($uploadedFile as $file)
                 {
                     $file->saveAs('uploads/' . $file->baseName . '.' . $file->extension);
-                    $name = $file->baseName;
-                    $soal = Post::find()->where(['post_title'=>$name])->one();
-                    $soal->post_content .= '<p><img alt="" src="'.Url::to(['uploads/'.$file->baseName . '.' . $file->extension],true).'" width="100%" /></p>';
-                    $soal->save(false);
+                    // $name = $file->baseName;
+                    // $soal = Post::find()->where(['post_title'=>$name])->one();
+                    // $soal->post_content .= '<p><img alt="" src="'.Url::to(['uploads/'.$file->baseName . '.' . $file->extension],true).'" width="100%" /></p>';
+                    // $soal->save(false);
                 }
                 Yii::$app->session->addFlash("success", "Import 2 Posts Success");
             }
