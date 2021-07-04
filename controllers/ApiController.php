@@ -212,8 +212,38 @@ class ApiController extends \yii\web\Controller
     
     public function actionDemoCategories()
     {
-        $categories = Category::find()->joinWith(['posts'])->asArray()->orderBy(['sequenced_number'=>'asc'])->all();
-        return $categories;
+        $categories = Category::find()
+                    ->with(['posts','posts.items'])
+                    ->asArray()
+                    ->orderBy(['sequenced_number'=>'asc'])->all();
+
+        $cats = [];
+        foreach($categories as $cat)
+        {
+            $posts = [];
+            foreach($cat['posts'] as $key => $post)
+            {
+                if(isset($post['items']) && $cat['test_tool'] == 'TPA')
+                    shuffle($post['items']);
+
+                $posts[$post['id']] = $post;
+                if(in_array($cat['test_tool'],['TPA','HOLLAND']))
+                {
+                    // 1 soal
+                    break;
+                }
+
+                if($cat['test_tool'] == 'PAPIKOSTICK' && $key == 3)
+                {
+                    // 3 soal
+                    break;
+                }
+
+            }
+            $cat['posts'] =  $posts;
+            $cats[] = $cat;
+        }
+        return $cats;
     }
 
     public function actionLastCategory($exam_id)
