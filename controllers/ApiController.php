@@ -202,7 +202,7 @@ class ApiController extends \yii\web\Controller
                 if(isset($post['items']) && $cat['test_tool'] == 'TPA')
                     shuffle($post['items']);
 
-                $posts[$post['id']] = $post;
+                $posts[] = $post;
             }
             $cat['posts'] =  $posts;
             $cats[] = $cat;
