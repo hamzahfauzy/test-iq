@@ -64,19 +64,10 @@ class Category extends \yii\db\ActiveRecord
 
     public function getPosts()
     {
-        if($this->test_tool == 'TPA')
-        {
-            return $this->hasMany(Post::className(),['id'=>'post_id'])
-                    ->viaTable('category_post',['category_id'=>'id'])->with(['items'=>function($q) {
-                        $q->select(['id','post_content'])->orderBy(new Expression('rand()'));
-                        // $q->select(['id','post_content', 'post_title']);
-                    }]);
-        }
-
         return $this->hasMany(Post::className(),['id'=>'post_id'])
-                    ->viaTable('category_post',['category_id'=>'id'])->with(['items'=>function($q) {
-                        $q->select(['id','post_content', 'post_title']);
-                    }]);
+                ->viaTable('category_post',['category_id'=>'id'])->with(['items'=>function($q) {
+                    $q->select(['id','post_content']);
+                }]);
     }
 
     public function getDemoPosts()
