@@ -22,8 +22,15 @@ class ApiController extends \yii\web\Controller
 
     public function actionData()
     {
+        $detail = $this->actionDetail();
+        $exam = $detail['exam'];
+        $tutorial = [
+            'group_1' => 'http://video.ujiantmc.online/vmb1',
+            'group_2' => 'http://video.ujiantmc.online/vmb2',
+            'group_3' => 'http://video.ujiantmc.online/vmb3',
+        ];
         return [
-            'tutorial' => 'http://video.ujiantmc.online/vmb3',
+            'tutorial' => $tutorial[$exam['test_group']],
             'download' => '',
         ];
     }
