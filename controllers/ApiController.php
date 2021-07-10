@@ -231,7 +231,7 @@ class ApiController extends \yii\web\Controller
     
     public function actionDemoCategories()
     {
-        $detail = $this->actionDetail();
+        $detail = $this->actionDetail(1);
         $exam = $detail['exam'];
         $test_group = Yii::$app->params['test_group'];
         $test_group = $test_group[$exam['test_group']];
