@@ -46,7 +46,7 @@ class ApiController extends \yii\web\Controller
     
         $this->enableCsrfValidation = false;
 
-        if($action->id == 'login' || $action->id == 'logout' || $action->id == 'demo-categories'){
+        if($action->id == 'login' || $action->id == 'logout'){
             return parent::beforeAction($action);
         }
 
