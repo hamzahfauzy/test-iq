@@ -23,7 +23,7 @@ class ApiController extends \yii\web\Controller
     public function actionData()
     {
         $detail = $this->actionDetail(1);
-        $exam = $detail['exam'];
+        $exam = $detail['firstExam'];
         $tutorial = [
             'group_1' => 'http://video.ujiantmc.online/vmb1',
             'group_2' => 'http://video.ujiantmc.online/vmb2',
@@ -232,7 +232,7 @@ class ApiController extends \yii\web\Controller
     public function actionDemoCategories()
     {
         $detail = $this->actionDetail(1);
-        $exam = $detail['exam'];
+        $exam = $detail['firstExam'];
         $test_group = Yii::$app->params['test_group'];
         $test_group = $test_group[$exam['test_group']];
         $tools = $test_group['tools'];
