@@ -195,7 +195,17 @@ class ApiController extends \yii\web\Controller
 
     public function actionCategories()
     {
+        $detail = $this->actionDetail();
+        $exam = $detail['exam'];
+        $test_group = Yii::$app->params['test_group'];
+        $test_group = $test_group[$exam['test_group']];
+        $tools = $test_group['tools'];
+        // return [
+        //     'tutorial' => $tutorial[$exam['test_group']],
         $categories = Category::find()
+                    ->where([
+                        'in', 'test_tool', $tools
+                    ])
                     ->with(['posts','posts.items'])
                     ->asArray()
                     ->orderBy(['sequenced_number'=>'asc'])->all();
@@ -219,7 +229,17 @@ class ApiController extends \yii\web\Controller
     
     public function actionDemoCategories()
     {
+        $detail = $this->actionDetail();
+        $exam = $detail['exam'];
+        $test_group = Yii::$app->params['test_group'];
+        $test_group = $test_group[$exam['test_group']];
+        $tools = $test_group['tools'];
+        // return [
+        //     'tutorial' => $tutorial[$exam['test_group']],
         $categories = Category::find()
+                    ->where([
+                        'in', 'test_tool', $tools
+                    ])
                     ->with(['posts','posts.items'])
                     ->asArray()
                     ->orderBy(['sequenced_number'=>'asc'])->all();
