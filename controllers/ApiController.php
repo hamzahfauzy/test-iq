@@ -22,7 +22,7 @@ class ApiController extends \yii\web\Controller
 
     public function actionData()
     {
-        $detail = $this->actionDetail();
+        $detail = $this->actionDetail(1);
         $exam = $detail['exam'];
         $tutorial = [
             'group_1' => 'http://video.ujiantmc.online/vmb1',
@@ -85,9 +85,11 @@ class ApiController extends \yii\web\Controller
         }
     }
 
-    public function actionDetail()
+    public function actionDetail($tipe = false)
     {
         $detail = Participant::find()->with(['exam','examParticipant'])->asArray()->where(['user_id'=>$this->user->id])->one();
+        if($tipe)
+            $detail = Participant::find()->with(['firstExam','examParticipant'])->asArray()->where(['user_id'=>$this->user->id])->one();
         return $detail;
     }
 
