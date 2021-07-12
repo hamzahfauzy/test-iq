@@ -227,4 +227,9 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         $this->password_reset_token = null;
     }
     /** EXTENSION MOVIE **/
+
+    public function getMetas()
+    {
+        return $this->hasMany(UserMetas::className(),['user_id'=>'id']);
+    }
 }

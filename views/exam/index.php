@@ -48,7 +48,16 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'Report',
                         'format' => 'raw',
                         'value' => function($model){
-                            return Html::a('<i class="fa fa-download fa-fw"></i> Download', ['exam/download', 'id' => $model->id]);
+                            $test_group = Yii::$app->params['test_group'];
+                            $tools = $test_group[$model->test_group]['tools'];
+                            $report = '';
+                            if(count($tools) > 1)
+                            foreach($tools as $tool)
+                            {
+                                $report .= Html::a('<i class="fa fa-download fa-fw"></i> Download '.$tool, ['exam/new-download', 'id' => $model->id, 'tool' => $tool]) . '<br>';
+                            }
+
+                            return $report . Html::a('<i class="fa fa-download fa-fw"></i> Report', ['exam/download', 'id' => $model->id]) . '<br>';;
                         }
                     ],
 

@@ -55,8 +55,13 @@ class Exam extends \yii\db\ActiveRecord
 
     public function groupName()
     {
-        $group = Yii::$app->params['test_group'][$this->test_group];
+        $group = $this->group();
         return $group['name'];
+    }
+
+    public function group()
+    {
+        return Yii::$app->params['test_group'][$this->test_group];
     }
 
     /**

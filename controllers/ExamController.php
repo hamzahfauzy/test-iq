@@ -239,7 +239,62 @@ class ExamController extends Controller
         ]);
     }
 
-    function actionDownload($id,$laporan=false)
+    function actionDownload($id)
+    {
+        // \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $test_group = [
+            'group_1' => 'app\models\TestGroup\Group1',
+            'group_2' => 'app\models\TestGroup\Group2',
+            'group_3' => 'app\models\TestGroup\Group3',
+        ];
+
+        $model = Exam::find()->where([
+            'exams.id'=>$id,
+        ])
+        ->joinWith([
+            'participants',
+            'participants.user',
+            'participants.user.metas',
+            'participants.examAnswers',
+            'participants.examAnswers.answer',
+            'participants.examAnswers.question',
+            'participants.examAnswers.question.items',
+            'participants.examAnswers.question.categoryPost'
+        ])
+        // ->asArray()
+        ->one();
+
+        $report = (new $test_group[$model->test_group])->report($model);
+        $content = $report->render();
+
+        header("Content-type: application/vnd-ms-excel");
+        header("Content-Disposition: attachment; filename=Report-".$model->name.".xls");
+
+        return $content;
+    }
+
+    function actionNewDownload($id,$tool)
+    {
+        // \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $testTools = [
+            'TPA' => 'app\models\TestTools\Tpa',
+            'HOLLAND' => 'app\models\TestTools\Holland',
+            'PAPIKOSTICK' => 'app\models\TestTools\Papikostick',
+            'CFIT2' => 'app\models\TestTools\Cfit2',
+        ];
+
+        $model = Exam::findOne($id);
+
+        $report = (new $testTools[$tool])->report($id);
+        $content = $report->render();
+
+        header("Content-type: application/vnd-ms-excel");
+        header("Content-Disposition: attachment; filename=Report-".$model->name."-".$tool.".xls");
+
+        return $content;
+    }
+
+    function actionOldDownload($id,$laporan=false)
     {
         // \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $model = Exam::find()->where([
