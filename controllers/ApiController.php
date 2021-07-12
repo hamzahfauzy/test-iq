@@ -79,6 +79,7 @@ class ApiController extends \yii\web\Controller
         $request = Yii::$app->request;
         if($request->post()){
             $user = User::find()->where(['username'=>$request->post('username')])->one();
+            $this->user = $user;
             $user->auth_key = \Yii::$app->security->generateRandomString();
             $user->save();
             $detail = $this->actionDetail();
