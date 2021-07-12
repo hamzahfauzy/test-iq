@@ -81,7 +81,14 @@ class ApiController extends \yii\web\Controller
             $user = User::find()->where(['username'=>$request->post('username')])->one();
             $user->auth_key = \Yii::$app->security->generateRandomString();
             $user->save();
-            return $user;
+            $detail = $this->actionDetail();
+            return [
+                'user'=>$user,
+                'detail'=>$detail,
+                'categories'=>$this->actionCategories(),
+                'answered'=>$this->actionAnswered(),
+                'last_category'=>isset($detail['exam']['id'])?$this->actionLastCategory($detail['exam']['id']):[],
+            ];
         }
     }
 
