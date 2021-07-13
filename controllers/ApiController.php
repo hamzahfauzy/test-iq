@@ -217,7 +217,7 @@ class ApiController extends \yii\web\Controller
         $tools = $test_group['tools'];
         $id = $test_group['id'];
         if(file_exists($id.'.json'))
-            return file_get_contents($id.'.json');
+            return json_decode(file_get_contents($id.'.json'));
         // return [
         //     'tutorial' => $tutorial[$exam['test_group']],
         $categories = Category::find()
