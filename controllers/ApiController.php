@@ -181,7 +181,7 @@ class ApiController extends \yii\web\Controller
                     'detail'=>$detail,
                     'test_group'=>$id,
                     // 'categories'=>$this->actionGenerate($id),
-                    // 'answered'=>$this->actionAnswered(),
+                    'answered'=>$this->actionAnswered(),
                     // 'last_category'=>isset($detail['exam']['id'])?$this->actionLastCategory($detail['exam']['id']):[],
                 ];
             }
@@ -287,6 +287,13 @@ class ApiController extends \yii\web\Controller
     }
 
     function actionAnswered(){
+        if(file_exists('answers/'.$this->user->username.'.json'))
+        {
+            $data = file_get_contents('answers/'.$this->user->username.'.json');
+            $data = json_decode($data);
+            return $data;
+        }
+        return [];
         $participant = Participant::find()->where(['user_id'=>$this->user->id])->one();
         $exam_answered = [];
         foreach($participant->examAnswers as $answer){
