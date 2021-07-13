@@ -46,7 +46,7 @@ class ApiController extends \yii\web\Controller
     
         $this->enableCsrfValidation = false;
 
-        if($action->id == 'login' || $action->id == 'logout' || $action->id == 'generate'){
+        if($action->id == 'login' || $action->id == 'logout' || $action->id == 'generate' || $action->id == 'patch_peserta'){
             return parent::beforeAction($action);
         }
 
@@ -393,6 +393,14 @@ class ApiController extends \yii\web\Controller
     {
         $category = $this->user->participant->getExamCategories()->asArray()->where(['exam_id'=>$exam_id])->orderBy(['categories.sequenced_number'=>SORT_DESC])->one();
         return $category;
+    }
+
+    function actionSendAnswer()
+    {
+        $request = file_get_contents('php://input');
+        $data = json_decode($request);
+        file_put_contents("answers/".$this->user->username.'.json',$request);
+        return $data;
     }
 
     public function actionAnswer(){

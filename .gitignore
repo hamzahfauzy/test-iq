@@ -2,7 +2,11 @@
 .idea
 
 web/uploads
+web/answers
 web/index.php
+web/group_1.json
+web/group_2.json
+web/group_3.json
 
 #database config
 config/db.php
