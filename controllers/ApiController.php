@@ -46,7 +46,7 @@ class ApiController extends \yii\web\Controller
     
         $this->enableCsrfValidation = false;
 
-        if($action->id == 'login' || $action->id == 'logout' || $action->id == 'generate' || $action->id == 'patch_peserta'){
+        if($action->id == 'login' || $action->id == 'logout' || $action->id == 'generate' || $action->id == 'generate-demo' || $action->id == 'patch_peserta'){
             return parent::beforeAction($action);
         }
 
