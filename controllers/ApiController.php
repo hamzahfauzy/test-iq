@@ -215,6 +215,9 @@ class ApiController extends \yii\web\Controller
         $test_group = Yii::$app->params['test_group'];
         $test_group = $test_group[$exam['test_group']];
         $tools = $test_group['tools'];
+        $id = $test_group['id'];
+        if(file_exists($id.'.json'))
+            return file_get_contents($id.'.json');
         // return [
         //     'tutorial' => $tutorial[$exam['test_group']],
         $categories = Category::find()
@@ -239,6 +242,7 @@ class ApiController extends \yii\web\Controller
             $cat['posts'] =  $posts;
             $cats[] = $cat;
         }
+        file_put_contents($id.'.json',json_encode($cats));
         return $cats;
     }
     
