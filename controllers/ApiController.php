@@ -321,7 +321,7 @@ class ApiController extends \yii\web\Controller
 
             $post = Post::find()->where(['id'=>$request->post('answer_id')])->one();
 
-            if($post){
+            if($post){ 
                 $answer->answer_id = $post->id;
                 $answer->score = $post->post_type;
             }else{
