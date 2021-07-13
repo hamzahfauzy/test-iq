@@ -46,7 +46,7 @@ class ApiController extends \yii\web\Controller
     
         $this->enableCsrfValidation = false;
 
-        if($action->id == 'login' || $action->id == 'logout'){
+        if($action->id == 'login' || $action->id == 'logout' || $action->id == 'generate'){
             return parent::beforeAction($action);
         }
 
@@ -74,6 +74,90 @@ class ApiController extends \yii\web\Controller
         return parent::beforeAction($action);
     }
 
+    public function actionGenerate($group_id)
+    {
+        $test_group = Yii::$app->params['test_group'];
+        $test_group = $test_group[$group_id];
+        $tools = $test_group['tools'];
+        if(file_exists(Yii::getAlias('@web').'/'.$group_id.'.json'))
+            return json_decode(file_get_contents(Yii::getAlias('@web').'/'.$group_id.'.json'));
+        // return [
+        //     'tutorial' => $tutorial[$exam['test_group']],
+        $categories = Category::find()
+                    ->where([
+                        'in', 'test_tool', $tools
+                    ])
+                    ->with(['posts','posts.items'])
+                    ->asArray()
+                    ->orderBy(['sequenced_number'=>'asc'])->all();
+
+        $cats = [];
+        foreach($categories as $cat)
+        {
+            $posts = [];
+            foreach($cat['posts'] as $post)
+            {
+                if(isset($post['items']) && $cat['test_tool'] == 'TPA')
+                    shuffle($post['items']);
+
+                $posts[] = $post;
+            }
+            $cat['posts'] =  $posts;
+            $cats[] = $cat;
+        }
+        file_put_contents(Yii::getAlias('@web').'/'.$group_id.'.json',json_encode($cats));
+        return $cats;
+    }
+
+    public function actionGenerateDemo($group_id)
+    {
+        $test_group = Yii::$app->params['test_group'];
+        $test_group = $test_group[$group_id];
+        $tools = $test_group['tools'];
+        if(file_exists(Yii::getAlias('@web').'/'.$group_id.'.json'))
+            return json_decode(file_get_contents(Yii::getAlias('@web').'/'.$group_id.'.json'));
+        // return [
+        //     'tutorial' => $tutorial[$exam['test_group']],
+        $categories = Category::find()
+                    ->where([
+                        'in', 'test_tool', $tools
+                    ])
+                    ->with(['posts'=>function($q){
+                        return $q->limit(3);
+                    },'posts.items'])
+                    ->asArray()
+                    ->orderBy(['sequenced_number'=>'asc'])->all();
+
+        $cats = [];
+        foreach($categories as $cat)
+        {
+            $posts = [];
+            foreach($cat['posts'] as $key => $post)
+            {
+                if(isset($post['items']) && $cat['test_tool'] == 'TPA')
+                    shuffle($post['items']);
+
+                $posts[] = $post;
+                if(in_array($cat['test_tool'],['TPA','HOLLAND']))
+                {
+                    // 1 soal
+                    break;
+                }
+
+                if($cat['test_tool'] == 'PAPIKOSTICK' && $key == 3)
+                {
+                    // 3 soal
+                    break;
+                }
+
+            }
+            $cat['posts'] =  $posts;
+            $cats[] = $cat;
+        }
+        file_put_contents(Yii::getAlias('@web').'/'.$group_id.'.json',json_encode($cats));
+        return $cats;
+    }
+
     public function actionLogin()
     {
         $request = Yii::$app->request;
@@ -86,10 +170,15 @@ class ApiController extends \yii\web\Controller
                 $user->auth_key = \Yii::$app->security->generateRandomString();
                 $user->save();
                 $detail = $this->actionDetail();
+                $exam = $detail['exam'];
+                $test_group = Yii::$app->params['test_group'];
+                $test_group = $test_group[$exam['test_group']];
+                $tools = $test_group['tools'];
+                $id = $test_group['id'];
                 return [
                     'user'=>$user,
                     'detail'=>$detail,
-                    'categories'=>$this->actionCategories(),
+                    'categories'=>$this->actionGenerate($id),
                     'answered'=>$this->actionAnswered(),
                     'last_category'=>isset($detail['exam']['id'])?$this->actionLastCategory($detail['exam']['id']):[],
                 ];
@@ -262,7 +351,9 @@ class ApiController extends \yii\web\Controller
                     ->where([
                         'in', 'test_tool', $tools
                     ])
-                    ->with(['posts','posts.items'])
+                    ->with(['posts'=>function($q){
+                        return $q->limit(3);
+                    },'posts.items'])
                     ->asArray()
                     ->orderBy(['sequenced_number'=>'asc'])->all();
 
