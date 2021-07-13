@@ -79,8 +79,8 @@ class ApiController extends \yii\web\Controller
         $test_group = Yii::$app->params['test_group'];
         $test_group = $test_group[$group_id];
         $tools = $test_group['tools'];
-        if(file_exists(Yii::getAlias('@web').'/'.$group_id.'.json'))
-            return json_decode(file_get_contents(Yii::getAlias('@web').'/'.$group_id.'.json'));
+        if(file_exists($group_id.'.json'))
+            return json_decode(file_get_contents($group_id.'.json'));
         // return [
         //     'tutorial' => $tutorial[$exam['test_group']],
         $categories = Category::find()
@@ -105,7 +105,7 @@ class ApiController extends \yii\web\Controller
             $cat['posts'] =  $posts;
             $cats[] = $cat;
         }
-        file_put_contents(Yii::getAlias('@web').'/'.$group_id.'.json',json_encode($cats));
+        file_put_contents($group_id.'.json',json_encode($cats));
         return $cats;
     }
 
@@ -114,8 +114,8 @@ class ApiController extends \yii\web\Controller
         $test_group = Yii::$app->params['test_group'];
         $test_group = $test_group[$group_id];
         $tools = $test_group['tools'];
-        if(file_exists(Yii::getAlias('@web').'/'.$group_id.'.json'))
-            return json_decode(file_get_contents(Yii::getAlias('@web').'/'.$group_id.'.json'));
+        if(file_exists($group_id.'.json'))
+            return json_decode(file_get_contents($group_id.'.json'));
         // return [
         //     'tutorial' => $tutorial[$exam['test_group']],
         $categories = Category::find()
@@ -154,7 +154,7 @@ class ApiController extends \yii\web\Controller
             $cat['posts'] =  $posts;
             $cats[] = $cat;
         }
-        file_put_contents(Yii::getAlias('@web').'/'.$group_id.'.json',json_encode($cats));
+        file_put_contents($group_id.'.json',json_encode($cats));
         return $cats;
     }
 
@@ -305,8 +305,8 @@ class ApiController extends \yii\web\Controller
         $test_group = $test_group[$exam['test_group']];
         $tools = $test_group['tools'];
         $id = $test_group['id'];
-        if(file_exists(Yii::getAlias('@web').'/'.$id.'.json'))
-            return json_decode(file_get_contents(Yii::getAlias('@web').'/'.$id.'.json'));
+        if(file_exists($id.'.json'))
+            return json_decode(file_get_contents($id.'.json'));
         // return [
         //     'tutorial' => $tutorial[$exam['test_group']],
         $categories = Category::find()
@@ -331,7 +331,7 @@ class ApiController extends \yii\web\Controller
             $cat['posts'] =  $posts;
             $cats[] = $cat;
         }
-        file_put_contents(Yii::getAlias('@web').'/'.$id.'.json',json_encode($cats));
+        file_put_contents($id.'.json',json_encode($cats));
         return $cats;
     }
     
@@ -343,8 +343,8 @@ class ApiController extends \yii\web\Controller
         $test_group = $test_group[$exam['test_group']];
         $tools = $test_group['tools'];
         $id = $test_group['id'];
-        if(file_exists(Yii::getAlias('@web').'/'.$id.'-demo.json'))
-            return json_decode(file_get_contents(Yii::getAlias('@web').'/'.$id.'-demo.json'));
+        if(file_exists($id.'-demo.json'))
+            return json_decode(file_get_contents($id.'-demo.json'));
         // return [
         //     'tutorial' => $tutorial[$exam['test_group']],
         $categories = Category::find()
@@ -383,7 +383,7 @@ class ApiController extends \yii\web\Controller
             $cat['posts'] =  $posts;
             $cats[] = $cat;
         }
-        file_put_contents(Yii::getAlias('@web').'/'.$id.'-demo.json',json_encode($cats));
+        file_put_contents($id.'-demo.json',json_encode($cats));
         return $cats;
     }
 
