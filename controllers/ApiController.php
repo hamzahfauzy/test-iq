@@ -165,8 +165,8 @@ class ApiController extends \yii\web\Controller
             {
                 $user = $user->one();
 
-                $detail = $user->getParticipant()->with(['exam','examParticipant'])->asArray()->one();
-                $exam = $detail['exam'];
+                $detail = $user->getParticipant()->with(['exam','firstExam','examParticipant'])->asArray()->one();
+                $exam = $detail['firstExam'];
                 $test_group = Yii::$app->params['test_group'];
                 $test_group = $test_group[$exam['test_group']];
                 $tools = $test_group['tools'];
