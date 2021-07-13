@@ -169,14 +169,16 @@ class ApiController extends \yii\web\Controller
                 $this->user = $user;
                 $user->auth_key = \Yii::$app->security->generateRandomString();
                 $user->save();
-                $detail = $this->actionDetail();
+
+                $_user = User::find()->where(['username'=>$request->post('username')])->with(['participant','participant.exam','participant.examParticipant'])->asArray()->one();
+                $detail = $_user['participant'];
                 $exam = $detail['exam'];
                 $test_group = Yii::$app->params['test_group'];
                 $test_group = $test_group[$exam['test_group']];
                 $tools = $test_group['tools'];
                 $id = $test_group['id'];
                 return [
-                    'user'=>$user,
+                    'user'=>$_user,
                     'detail'=>$detail,
                     'categories'=>$this->actionGenerate($id),
                     'answered'=>$this->actionAnswered(),
