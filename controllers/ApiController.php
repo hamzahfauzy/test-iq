@@ -291,7 +291,7 @@ class ApiController extends \yii\web\Controller
         {
             $data = file_get_contents('answers/'.$this->user->username.'.json');
             $data = json_decode($data);
-            return $data['answers'];
+            return $data->answers;
         }
         return [];
         $participant = Participant::find()->where(['user_id'=>$this->user->id])->one();
