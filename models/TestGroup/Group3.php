@@ -4,7 +4,7 @@ namespace app\models\TestGroup;
 use app\models\Exam;
 use app\models\Post;
 
-class Group2
+class Group3
 {   
     public static $report_columns = [
         'Nama',
