@@ -14,24 +14,32 @@ class Group2
         'Jenis Kelamin',
         'Tanggal Pemeriksaan',
         'Pilihan Jurusan',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        'TOTAL',
+        'POTENSI AKADEMIK',
         'BHS',
         'IPS',
+        'TOTAL',
         'IPA',
-        'Skor',
-        'Kategori',
-        'Jurusan 1',
-        'Jurusan 2',
-        'Kemampuan Verbal',
-        'Kemampuan Spasial',
-        'Kemampuan Numerikal',
-        'Kepercayaan Diri (O)',
-        'Penyesuaian Diri (Z)',
-        'Hasrat Berprestasi (A)',
-        'Stabilitas Emosi (E)',
-        'Kontak Sosial (S)',
-        'Sistematika Belajar (C)',
-        'Daya Juang (G)',
-        'Daya Tahan Terhadap Stress (K)',
+        'JURUSAN',
+        'KEMAMPUAN VERBAL',
+        'KEMAMPUAN SPASIAL',
+        'KEMAMPUAN NUMERIKAL',
+        'KEPERCAYAAN DIRI (O)',
+        'PENYESUAIAN DIRI (Z)',
+        'HASRAT PRESTASI (A)',
+        'STABILITAS EMOSI (E)',
+        'KONTAK SOSIAL (S)',
+        'SISTEMATIKA BELAJAR (C)',
+        'DAYA JUANG (G)',
+        'DAYA TAHAN TERHADAP STRESS (K)',
         'R',
         'I',
         'A',
@@ -105,6 +113,16 @@ class Group2
                 'IPS'=>0,
                 'BAHASA'=>0,
                 'IPA'=>0,
+                'TPA' => [
+                    'S1'=>0,
+                    'S2'=>0,
+                    'S3'=>0,
+                    'S4'=>0,
+                    'S5'=>0,
+                    'S6'=>0,
+                    'S7'=>0,
+                    'S8'=>0,
+                ],
                 'Papikostick' => [],
                 'R'=>0,
                 'I'=>0,
@@ -121,7 +139,25 @@ class Group2
                     if(in_array($answer->question->categoryPost->name,$value) && $answer->answer)
                     {
                         if(!in_array($answer->question->categoryPost->test_tool,['TPA','HOLLAND']))
+                        {
                             $skor[$key] += (int) $answer->answer->post_type;
+                            if($answer->question->categoryPost->name == 'TPA 1')
+                                $skor['TPA']['S1']+=(int) $answer->answer->post_type;
+                            if($answer->question->categoryPost->name == 'TPA 2')
+                                $skor['TPA']['S2']+=(int) $answer->answer->post_type;
+                            if($answer->question->categoryPost->name == 'TPA 3')
+                                $skor['TPA']['S3']+=(int) $answer->answer->post_type;
+                            if($answer->question->categoryPost->name == 'TPA 4')
+                                $skor['TPA']['S4']+=(int) $answer->answer->post_type;
+                            if($answer->question->categoryPost->name == 'TPA 5')
+                                $skor['TPA']['S5']+=(int) $answer->answer->post_type;
+                            if($answer->question->categoryPost->name == 'TPA 6')
+                                $skor['TPA']['S6']+=(int) $answer->answer->post_type;
+                            if($answer->question->categoryPost->name == 'TPA 7')
+                                $skor['TPA']['S7']+=(int) $answer->answer->post_type;
+                            if($answer->question->categoryPost->name == 'TPA 8')
+                                $skor['TPA']['S8']+=(int) $answer->answer->post_type;
+                        }
                         else
                         {
                             // papikostick
@@ -144,7 +180,7 @@ class Group2
                 'C' => $skor['C'],
             ];
 
-            ksort($holland);
+            arsort($holland);
             $key_holland = array_keys($holland);
 
             $skor['HOLLAND'] = implode('',$key_holland);
@@ -184,13 +220,32 @@ class Group2
             $rows .= '<td>'.$re['participant']->getMeta('jenis_kelamin').'</td>';
             $rows .= '<td>'.$re['participant']->examParticipant->finished_at.'</td>';
             $rows .= '<td>'.$re['participant']->getMeta('jurusan').'</td>';
-            $rows .= '<td>'.$re['skor']['BAHASA'].'</td>';
-            $rows .= '<td>'.$re['skor']['IPS'].'</td>';
-            $rows .= '<td>'.$re['skor']['IPA'].'</td>';
+            $rows .= '<td>'.$re['skor']['TPA']['S1'].'</td>';
+            $rows .= '<td>'.$re['skor']['TPA']['S2'].'</td>';
+            $rows .= '<td>'.$re['skor']['TPA']['S3'].'</td>';
+            $rows .= '<td>'.$re['skor']['TPA']['S4'].'</td>';
+            $rows .= '<td>'.$re['skor']['TPA']['S5'].'</td>';
+            $rows .= '<td>'.$re['skor']['TPA']['S6'].'</td>';
+            $rows .= '<td>'.$re['skor']['TPA']['S7'].'</td>';
+            $rows .= '<td>'.$re['skor']['TPA']['S8'].'</td>';
             $rows .= '<td>'.$re['skor']['TOTAL'].'</td>';
             $rows .= '<td>'.self::category($re['skor']['TOTAL']).'</td>';
+            $rows .= '<td>'.$re['skor']['BAHASA'].'</td>';
+            $rows .= '<td>'.$re['skor']['IPS'].'</td>';
+            $rows .= '<td>'.($re['skor']['IPS']+$re['skor']['BAHASA']).'</td>';
+            $rows .= '<td>'.$re['skor']['IPA'].'</td>';
             $rows .= '<td>'.self::jurusan1($re['skor']).'</td>';
-            $rows .= '<td>'.self::jurusan2($re['skor']).'</td>';
+            $rows .= '<td>'.($re['skor']['TPA']['S1']+$re['skor']['TPA']['S2']+$re['skor']['TPA']['S3']+$re['skor']['TPA']['S4']).'</td>';
+            $rows .= '<td>'.($re['skor']['TPA']['S7']+$re['skor']['TPA']['S8']).'</td>';
+            $rows .= '<td>'.($re['skor']['TPA']['S5']+$re['skor']['TPA']['S6']).'</td>';
+            $rows .= '<td>'.$re['skor']['Papikostick']['O'].'</td>';
+            $rows .= '<td>'.$re['skor']['Papikostick']['Z'].'</td>';
+            $rows .= '<td>'.$re['skor']['Papikostick']['A'].'</td>';
+            $rows .= '<td>'.$re['skor']['Papikostick']['E'].'</td>';
+            $rows .= '<td>'.$re['skor']['Papikostick']['S'].'</td>';
+            $rows .= '<td>'.$re['skor']['Papikostick']['C'].'</td>';
+            $rows .= '<td>'.$re['skor']['Papikostick']['G'].'</td>';
+            $rows .= '<td>'.$re['skor']['Papikostick']['K'].'</td>';
             $rows .= '<td>'.$re['skor']['R'].'</td>';
             $rows .= '<td>'.$re['skor']['I'].'</td>';
             $rows .= '<td>'.$re['skor']['A'].'</td>';
