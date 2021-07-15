@@ -153,7 +153,7 @@ class Group2
                 'C' => $skor['C'],
             ];
 
-            ksort($holland);
+            arsort($holland);
             $key_holland = array_keys($holland);
 
             $skor['HOLLAND'] = implode('',$key_holland);
