@@ -1,11 +1,11 @@
 <?php
-namespace app\models\TestTools;
+namespace app\models\TestGroup;
 
 use app\models\Exam;
 use app\models\Post;
 
-class Tpa
-{
+class Group2
+{   
     public static $report_columns = [
         'Nama',
         'Username',
@@ -20,7 +20,25 @@ class Tpa
         'Skor',
         'Kategori',
         'Jurusan 1',
-        'Jurusan 2'
+        'Jurusan 2',
+        'Kemampuan Verbal',
+        'Kemampuan Spasial',
+        'Kemampuan Numerikal',
+        'Kepercayaan Diri (O)',
+        'Penyesuaian Diri (Z)',
+        'Hasrat Berprestasi (A)',
+        'Stabilitas Emosi (E)',
+        'Kontak Sosial (S)',
+        'Sistematika Belajar (C)',
+        'Daya Juang (G)',
+        'Daya Tahan Terhadap Stress (K)',
+        'R',
+        'I',
+        'A',
+        'S',
+        'E',
+        'C',
+        'HASIL',
     ];
 
     public static $categories = [
@@ -37,58 +55,99 @@ class Tpa
             'TPA 6',
             'TPA 7',
             'TPA 8',
+        ],
+        'R' => [
+            'Soal Holland R1',
+            'Soal Holland R2',
+            'Soal Holland R3',
+        ],
+        'I' => [
+            'Soal Holland I1',
+            'Soal Holland I2',
+            'Soal Holland I3',
+        ],
+        'A' => [
+            'Soal Holland A1',
+            'Soal Holland A2',
+            'Soal Holland A3',
+        ],
+        'S' => [
+            'Soal Holland S1',
+            'Soal Holland S2',
+            'Soal Holland S3',
+        ],
+        'E' => [
+            'Soal Holland E1',
+            'Soal Holland E2',
+            'Soal Holland E3',
+        ],
+        'C' => [
+            'Soal Holland C1',
+            'Soal Holland C2',
+            'Soal Holland C3',
+        ],
+        'PAPIKOSTICK' => [
+            'Soal Papikostik (Halaman 1)',
+            'Soal Papikostik (Halaman 2)',
+            'Soal Papikostik (Halaman 3)',
         ]
     ];
 
     public static $_report = [];
 
-    static function insert($no, $category, $worksheet, $post, $row)
+    static function report($model)
     {
-        for($i=1;$i<=4;$i++)
-        {
-            $child = new Post;
-            $child->post_title = "Jawaban ".$post->post_title." ".$i;
-            $child->post_content = $worksheet->getCellByColumnAndRow($i+1, $row)->getValue();
-            $child->post_as = "Jawaban";
-            $child->post_type = $i == 1 ? 1 : 0;
-            $child->save(false);
-            $child->link('parents',$post);
-        }
-    }
-
-    static function skor($participant)
-    {
-        $skor = ['IPS'=>0,'BAHASA'=>0,'IPA'=>0];
-        foreach($participant->examAnswers as $answer)
-        {
-            if($answer->question->categoryPost == NULL || $answer->question->categoryPost->test_tool != 'TPA') continue;
-            foreach(self::$categories as $key => $value)
-            {
-                if(in_array($answer->question->categoryPost->name,$value) && $answer->answer)
-                    $skor[$key] += (int) $answer->answer->post_type;
-            }
-        }
-        $skor['TOTAL'] = $skor['IPS']+$skor['BAHASA']+$skor['IPA'];
-
-        return $skor;
-    }
-
-    static function report($id)
-    {
+        ini_set('memory_limit',-1);
         $report = [];
         foreach($model->participants as $participant)
         {
-            $skor = ['IPS'=>0,'BAHASA'=>0,'IPA'=>0];
+            $skor = [
+                'IPS'=>0,
+                'BAHASA'=>0,
+                'IPA'=>0,
+                'Papikostick' => [],
+                'R'=>0,
+                'I'=>0,
+                'A'=>0,
+                'S'=>0,
+                'E'=>0,
+                'C'=>0
+            ];
             foreach($participant->examAnswers as $answer)
             {
-                if($answer->question->categoryPost->test_tool != 'TPA') continue;
+                if(!in_array($answer->question->categoryPost->test_tool,['TPA','HOLLAND','PAPIKOSTICK'])) continue;
                 foreach(self::$categories as $key => $value)
                 {
                     if(in_array($answer->question->categoryPost->name,$value) && $answer->answer)
-                        $skor[$key] += (int) $answer->answer->post_type;
+                    {
+                        if(!in_array($answer->question->categoryPost->test_tool,['TPA','HOLLAND']))
+                            $skor[$key] += (int) $answer->answer->post_type;
+                        else
+                        {
+                            // papikostick
+                            if(isset($skor['Papikostick'][$answer->answer->post_type]))
+                                $skor['Papikostick'][$answer->answer->post_type]++;
+                            else
+                                $skor['Papikostick'][$answer->answer->post_type] = 1;
+                        }
+                        
+                    }
                 }
             }
             $skor['TOTAL'] = $skor['IPS']+$skor['BAHASA']+$skor['IPA'];
+            $holland = [
+                'R' => $skor['R'],
+                'I' => $skor['I'],
+                'A' => $skor['A'],
+                'S' => $skor['S'],
+                'E' => $skor['E'],
+                'C' => $skor['C'],
+            ];
+
+            ksort($holland);
+            $key_holland = array_keys($holland);
+
+            $skor['HOLLAND'] = implode('',$key_holland);
 
             $report[] = [
                 'participant' => $participant,
@@ -132,6 +191,13 @@ class Tpa
             $rows .= '<td>'.self::category($re['skor']['TOTAL']).'</td>';
             $rows .= '<td>'.self::jurusan1($re['skor']).'</td>';
             $rows .= '<td>'.self::jurusan2($re['skor']).'</td>';
+            $rows .= '<td>'.$re['skor']['R'].'</td>';
+            $rows .= '<td>'.$re['skor']['I'].'</td>';
+            $rows .= '<td>'.$re['skor']['A'].'</td>';
+            $rows .= '<td>'.$re['skor']['S'].'</td>';
+            $rows .= '<td>'.$re['skor']['E'].'</td>';
+            $rows .= '<td>'.$re['skor']['C'].'</td>';
+            $rows .= '<td>'.$re['skor']['HOLLAND'].'</td>';
 
             $html .= $rows;
         }
@@ -172,6 +238,4 @@ class Tpa
 
         return 'IPS';
     }
-
-
 }

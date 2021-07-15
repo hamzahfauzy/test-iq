@@ -18,7 +18,7 @@ class m201014_092155_create_exam_answers_table extends Migration
             'question_id' => $this->integer(),
             'answer_id' => $this->integer(),
             'answer_content' => $this->string(),
-            'score' => $this->integer(),
+            'score' => $this->string(),
             'participant_id' => $this->integer(),
             'created_at' => $this->timestamp(),
         ]);

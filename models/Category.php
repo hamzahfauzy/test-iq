@@ -70,6 +70,12 @@ class Category extends \yii\db\ActiveRecord
                 }]);
     }
 
+    public function getQuestions()
+    {
+        return $this->hasMany(Post::className(),['id'=>'post_id'])
+                ->viaTable('category_post',['category_id'=>'id'])->with(['items']);
+    }
+
     public function getDemoPosts()
     {
         return $this->hasMany(Post::className(),['id'=>'post_id'])
