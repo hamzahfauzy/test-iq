@@ -19,9 +19,9 @@ class RunController extends Controller
         {
             echo 'file '.$file.' found and execute'."\n";
             $data = file_get_contents($file);
-            if(empty($data) || $data == null || $data == "") return;
-            $data = json_decode($data,1);
             print_r($data);
+            // if(empty($data) || $data == null || $data == "") return;
+            // $data = json_decode($data,1);
         }
     }
 
