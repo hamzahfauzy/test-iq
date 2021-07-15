@@ -138,7 +138,7 @@ class Group3
                 {
                     if(in_array($answer->question->categoryPost->name,$value) && $answer->answer)
                     {
-                        if(!in_array($answer->question->categoryPost->test_tool,['TPA','HOLLAND']))
+                        if(in_array($answer->question->categoryPost->test_tool,['TPA','HOLLAND']))
                         {
                             $skor[$key] += (int) $answer->answer->post_type;
                             if($answer->question->categoryPost->name == 'TPA 1')
