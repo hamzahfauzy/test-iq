@@ -122,21 +122,21 @@ class Group2
                     if(in_array($answer->question->categoryPost->name,$value) && $answer->answer)
                         $skor[$key] += (int) $answer->answer->post_type;
                     
-                    if($answer->question->categoryPost->name == 'TPA 1')
+                    if($answer->question->categoryPost->name == 'TPA 1' && $answer->answer)
                         $skor['TPA']['S1']+=(int) $answer->answer->post_type;
-                    if($answer->question->categoryPost->name == 'TPA 2')
+                    if($answer->question->categoryPost->name == 'TPA 2' && $answer->answer)
                         $skor['TPA']['S2']+=(int) $answer->answer->post_type;
-                    if($answer->question->categoryPost->name == 'TPA 3')
+                    if($answer->question->categoryPost->name == 'TPA 3' && $answer->answer)
                         $skor['TPA']['S3']+=(int) $answer->answer->post_type;
-                    if($answer->question->categoryPost->name == 'TPA 4')
+                    if($answer->question->categoryPost->name == 'TPA 4' && $answer->answer)
                         $skor['TPA']['S4']+=(int) $answer->answer->post_type;
-                    if($answer->question->categoryPost->name == 'TPA 5')
+                    if($answer->question->categoryPost->name == 'TPA 5' && $answer->answer)
                         $skor['TPA']['S5']+=(int) $answer->answer->post_type;
-                    if($answer->question->categoryPost->name == 'TPA 6')
+                    if($answer->question->categoryPost->name == 'TPA 6' && $answer->answer)
                         $skor['TPA']['S6']+=(int) $answer->answer->post_type;
-                    if($answer->question->categoryPost->name == 'TPA 7')
+                    if($answer->question->categoryPost->name == 'TPA 7' && $answer->answer)
                         $skor['TPA']['S7']+=(int) $answer->answer->post_type;
-                    if($answer->question->categoryPost->name == 'TPA 8')
+                    if($answer->question->categoryPost->name == 'TPA 8' && $answer->answer)
                         $skor['TPA']['S8']+=(int) $answer->answer->post_type;
                 }
             }
