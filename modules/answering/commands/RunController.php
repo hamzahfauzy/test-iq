@@ -11,6 +11,20 @@ use app\models\ExamParticipant;
 
 class RunController extends Controller
 {
+    public function actionCheck($id)
+    {
+        $file = 'web/answers/'.$id.'.json';
+        echo 'finding '.$file ."\n";
+        if(file_exists($file))
+        {
+            echo 'file '.$file.' found and execute'."\n";
+            $data = file_get_contents($file);
+            if(empty($data) || $data == null || $data == "") return;
+            $data = json_decode($data,1);
+            print_r($data);
+        }
+    }
+
     public function actionIndex($id)
     {
         $examParticipant = ExamParticipant::find()->where([
