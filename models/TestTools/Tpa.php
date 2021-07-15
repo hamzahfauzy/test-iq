@@ -73,7 +73,7 @@ class Tpa
         return $skor;
     }
 
-    static function report($id)
+    static function report($model)
     {
         $report = [];
         foreach($model->participants as $participant)
