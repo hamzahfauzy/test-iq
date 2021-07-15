@@ -32,7 +32,7 @@ class ExamParticipant extends \yii\db\ActiveRecord
         return [
             [['exam_id', 'participant_id'], 'integer'],
             [['participant_id'], 'required'],
-            [['status','updated_at','started_at','finished_at'], 'safe'],
+            [['status','updated_at','started_at','finished_at','queue_status'], 'safe'],
             [['exam_id'], 'exist', 'skipOnError' => true, 'targetClass' => Exam::className(), 'targetAttribute' => ['exam_id' => 'id']],
             [['participant_id'], 'exist', 'skipOnError' => true, 'targetClass' => Participant::className(), 'targetAttribute' => ['participant_id' => 'id']],
         ];
