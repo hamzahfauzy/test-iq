@@ -120,24 +120,26 @@ class Group2
                 foreach(self::$categories as $key => $value)
                 {
                     if(in_array($answer->question->categoryPost->name,$value) && $answer->answer)
+                    {
                         $skor[$key] += (int) $answer->answer->post_type;
+                        if($answer->question->categoryPost->name == 'TPA 1')
+                            $skor['TPA']['S1']+=(int) $answer->answer->post_type;
+                        if($answer->question->categoryPost->name == 'TPA 2')
+                            $skor['TPA']['S2']+=(int) $answer->answer->post_type;
+                        if($answer->question->categoryPost->name == 'TPA 3')
+                            $skor['TPA']['S3']+=(int) $answer->answer->post_type;
+                        if($answer->question->categoryPost->name == 'TPA 4')
+                            $skor['TPA']['S4']+=(int) $answer->answer->post_type;
+                        if($answer->question->categoryPost->name == 'TPA 5')
+                            $skor['TPA']['S5']+=(int) $answer->answer->post_type;
+                        if($answer->question->categoryPost->name == 'TPA 6')
+                            $skor['TPA']['S6']+=(int) $answer->answer->post_type;
+                        if($answer->question->categoryPost->name == 'TPA 7')
+                            $skor['TPA']['S7']+=(int) $answer->answer->post_type;
+                        if($answer->question->categoryPost->name == 'TPA 8')
+                            $skor['TPA']['S8']+=(int) $answer->answer->post_type;
+                    }
                     
-                    if($answer->question->categoryPost->name == 'TPA 1' && $answer->answer)
-                        $skor['TPA']['S1']+=(int) $answer->answer->post_type;
-                    if($answer->question->categoryPost->name == 'TPA 2' && $answer->answer)
-                        $skor['TPA']['S2']+=(int) $answer->answer->post_type;
-                    if($answer->question->categoryPost->name == 'TPA 3' && $answer->answer)
-                        $skor['TPA']['S3']+=(int) $answer->answer->post_type;
-                    if($answer->question->categoryPost->name == 'TPA 4' && $answer->answer)
-                        $skor['TPA']['S4']+=(int) $answer->answer->post_type;
-                    if($answer->question->categoryPost->name == 'TPA 5' && $answer->answer)
-                        $skor['TPA']['S5']+=(int) $answer->answer->post_type;
-                    if($answer->question->categoryPost->name == 'TPA 6' && $answer->answer)
-                        $skor['TPA']['S6']+=(int) $answer->answer->post_type;
-                    if($answer->question->categoryPost->name == 'TPA 7' && $answer->answer)
-                        $skor['TPA']['S7']+=(int) $answer->answer->post_type;
-                    if($answer->question->categoryPost->name == 'TPA 8' && $answer->answer)
-                        $skor['TPA']['S8']+=(int) $answer->answer->post_type;
                 }
             }
             $skor['TOTAL'] = $skor['IPS']+$skor['BAHASA']+$skor['IPA'];
