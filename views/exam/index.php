@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <input type="text" name="ExamSearch[name]" class="form-control" placeholder="Search..." value="<?=$searchModel->name?>">
                 </div>
             </form>
+            <div class="table-responsive">
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 // 'filterModel' => $searchModel,
@@ -60,10 +61,18 @@ $this->params['breadcrumbs'][] = $this->title;
                             return $report . Html::a('<i class="fa fa-download fa-fw"></i> Report', ['exam/download', 'id' => $model->id]) . '<br>';;
                         }
                     ],
+                    [
+                        'attribute' => 'Berita Acara',
+                        'format' => 'raw',
+                        'value' => function($model){
+                            return Html::a('<i class="fa fa-download fa-fw"></i> Download', ['exam/download-ba', 'id' => $model->id],['class'=>'btn btn-success']);
+                        }
+                    ],
 
                     ['class' => 'yii\grid\ActionColumn'],
                 ],
             ]); ?>
+            </div>
         </div>
     </div>
 </div>

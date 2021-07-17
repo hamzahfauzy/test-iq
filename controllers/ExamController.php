@@ -273,6 +273,73 @@ class ExamController extends Controller
         return $content;
     }
 
+    function actionDownloadBa($id)
+    {
+        $model = Exam::find()->where(['id'=>$id])->with(['examParticipants'])->one();
+        $html = "<table border='1' cellpadding='5' cellspacing='0'>";
+
+        $html .= "<tr>";
+        $html .= "<td></td>";
+        $html .= "<td>Asal Sekolah</td>";
+        $html .= "<td colspan='4'>".$model->name."</td>";
+        $html .= "</tr>";
+
+        $html .= "<tr>";
+        $html .= "<td></td>";
+        $html .= "<td>Jumlah Peserta</td>";
+        $html .= "<td colspan='4'>".$model->getExamParticipants()->count()."</td>";
+        $html .= "</tr>";
+
+        $html .= "<tr>";
+        $html .= "<td></td>";
+        $html .= "<td>Mulai</td>";
+        $html .= "<td colspan='4'>".$model->getExamParticipants()->where(['status'=>'start'])->count()."</td>";
+        $html .= "</tr>";
+
+        $html .= "<tr>";
+        $html .= "<td></td>";
+        $html .= "<td>Selesai</td>";
+        $html .= "<td colspan='4'>".$model->getExamParticipants()->where(['status'=>'finish'])->count()."</td>";
+        $html .= "</tr>";
+
+        $html .= "<tr>";
+        $html .= "<td></td>";
+        $html .= "<td>Tidak Mengikuti</td>";
+        $html .= "<td colspan='4'>".($model->getExamParticipants()->count()-($model->getExamParticipants()->where(['status'=>'start'])->count()+$model->getExamParticipants()->where(['status'=>'finish'])->count()))."</td>";
+        $html .= "</tr>";
+
+        $html .= "<tr>";
+        $html .= "<td colspan='6'></td>";
+        $html .= "</tr>";
+
+        $html .= "<tr>";
+        $html .= "<td>#</td>";
+        $html .= "<td>ID Number</td>";
+        $html .= "<td>Name</td>";
+        $html .= "<td>Status</td>";
+        $html .= "<td>Mulai</td>";
+        $html .= "<td>Selesai</td>";
+        $html .= "</tr>";
+        foreach($model->examParticipants as $key => $ep)
+        {
+            $row = "<tr>";
+            $row .= "<td>".++$key."</td>";
+            $row .= "<td>".$ep->participant->id_number."</td>";
+            $row .= "<td>".$ep->participant->name."</td>";
+            $row .= "<td>".$ep->status."</td>";
+            $row .= "<td>".$ep->started_at."</td>";
+            $row .= "<td>".$ep->finished_at."</td>";
+            $row .= "</tr>";
+            $html .= $row;
+        }
+        $html .= "</table>";
+
+        header("Content-type: application/vnd-ms-excel");
+        header("Content-Disposition: attachment; filename=BA-".$model->name.".xls");
+
+        return $html;
+    }
+
     function actionNewDownload($id,$tool)
     {
         // \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
