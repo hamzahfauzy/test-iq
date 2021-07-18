@@ -74,12 +74,12 @@ class ApiController extends \yii\web\Controller
         return parent::beforeAction($action);
     }
 
-    public function actionGenerate($group_id)
+    public function actionGenerate($group_id,$status=false)
     {
         $test_group = Yii::$app->params['test_group'];
         $test_group = $test_group[$group_id];
         $tools = $test_group['tools'];
-        if(file_exists($group_id.'.json'))
+        if(file_exists($group_id.'.json') && $status==false)
             return json_decode(file_get_contents($group_id.'.json'));
         // return [
         //     'tutorial' => $tutorial[$exam['test_group']],
@@ -109,12 +109,12 @@ class ApiController extends \yii\web\Controller
         return $cats;
     }
 
-    public function actionGenerateDemo($group_id)
+    public function actionGenerateDemo($group_id,$status=false)
     {
         $test_group = Yii::$app->params['test_group'];
         $test_group = $test_group[$group_id];
         $tools = $test_group['tools'];
-        if(file_exists($group_id.'-demo.json'))
+        if(file_exists($group_id.'-demo.json') && $status == false)
             return json_decode(file_get_contents($group_id.'-demo.json'));
         // return [
         //     'tutorial' => $tutorial[$exam['test_group']],
