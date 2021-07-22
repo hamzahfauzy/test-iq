@@ -52,14 +52,14 @@ class RunController extends Controller
                     ]);
                     if($exam_answer->exists()){
                         $exam_answer = $exam_answer->one();
-                        $answer->exam_id = $data['exam_id'];
-                        $answer->question_id = $key;
-                        $answer->participant_id = $examPart->participant_id;
-                        $answer->answer_id = $jawaban;
-                        $answer->answer_content = $post->post_content;
-                        $answer->score = $post->post_type;
+                        $exam_answer->exam_id = $data['exam_id'];
+                        $exam_answer->question_id = $key;
+                        $exam_answer->participant_id = $examPart->participant_id;
+                        $exam_answer->answer_id = $jawaban;
+                        $exam_answer->answer_content = $post->post_content;
+                        $exam_answer->score = $post->post_type;
 
-                        $answer->save(false);
+                        $exam_answer->save(false);
                         continue;
                     }
 
