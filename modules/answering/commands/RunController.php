@@ -50,22 +50,12 @@ class RunController extends Controller
                         'question_id'=>$key,
                         'participant_id'=>$examPart->participant_id,
                     ]);
+                    $post = Post::find()->where(['id'=>$jawaban])->one();
+                    $answer = new ExamAnswer();
                     if($exam_answer->exists()){
-                        $exam_answer = $exam_answer->one();
-                        $exam_answer->exam_id = $data['exam_id'];
-                        $exam_answer->question_id = $key;
-                        $exam_answer->participant_id = $examPart->participant_id;
-                        $exam_answer->answer_id = $jawaban;
-                        $exam_answer->answer_content = $post->post_content;
-                        $exam_answer->score = $post->post_type;
-
-                        $exam_answer->save(false);
-                        continue;
+                        $answer = $exam_answer->one();
                     }
 
-                    $post = Post::find()->where(['id'=>$jawaban])->one();
-
-                    $answer = new ExamAnswer();
                     $answer->exam_id = $data['exam_id'];
                     $answer->question_id = $key;
                     $answer->participant_id = $examPart->participant_id;
