@@ -153,9 +153,14 @@ class Group2
             ];
 
             arsort($holland);
-            $key_holland = array_keys($holland);
+            $holland_skor = "";
+            foreach($holland as $key => $value)
+                $holland_skor .= $key.'-';
+            
+            $holland_skor = substr($holland_skor, 0, -1);
+            // $key_holland = array_keys($holland);
 
-            $skor['HOLLAND'] = implode('',$key_holland);
+            $skor['HOLLAND'] = $holland_skor; //implode('',$key_holland);
 
             $report[] = [
                 'participant' => $participant,

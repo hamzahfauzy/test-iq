@@ -181,9 +181,14 @@ class Group3
             ];
 
             arsort($holland);
-            $key_holland = array_keys($holland);
+            $holland_skor = "";
+            foreach($holland as $key => $value)
+                $holland_skor .= $key.'-';
+            
+            $holland_skor = substr($holland_skor, 0, -1);
+            // $key_holland = array_keys($holland);
 
-            $skor['HOLLAND'] = implode('',$key_holland);
+            $skor['HOLLAND'] = $holland_skor; //implode('',$key_holland);
 
             $report[] = [
                 'participant' => $participant,
@@ -211,6 +216,15 @@ class Group3
 
         foreach($report as $key => $re)
         {
+            $verbal = $re['skor']['TPA']['S1']+$re['skor']['TPA']['S2']+$re['skor']['TPA']['S3']+$re['skor']['TPA']['S4'];
+            $spasial = $re['skor']['TPA']['S7']+$re['skor']['TPA']['S8'];
+            $numerikal = $re['skor']['TPA']['S5']+$re['skor']['TPA']['S6'];
+
+            $verbal = $this->tpa_norma($verbal,'verbal');
+            $spasial = $this->tpa_norma($spasial,'spasial');
+            $numerikal = $this->tpa_norma($numerikal,'numerikal');
+
+            $skor_papi = $this->papi_norma($re['skor']['Papikostick']);
             $rows = '<tr>';
             $rows .= '<td>'.++$key.'</td>';
             $rows .= '<td>'.$re['participant']->name.'</td>';
@@ -235,17 +249,17 @@ class Group3
             $rows .= '<td>'.($re['skor']['IPS']+$re['skor']['BAHASA']).'</td>';
             $rows .= '<td>'.$re['skor']['IPA'].'</td>';
             $rows .= '<td>'.self::jurusan1($re['skor']).'</td>';
-            $rows .= '<td>'.($re['skor']['TPA']['S1']+$re['skor']['TPA']['S2']+$re['skor']['TPA']['S3']+$re['skor']['TPA']['S4']).'</td>';
-            $rows .= '<td>'.($re['skor']['TPA']['S7']+$re['skor']['TPA']['S8']).'</td>';
-            $rows .= '<td>'.($re['skor']['TPA']['S5']+$re['skor']['TPA']['S6']).'</td>';
-            $rows .= '<td>'.(isset($re['skor']['Papikostick']['O'])?$re['skor']['Papikostick']['O']:0).'</td>';
-            $rows .= '<td>'.(isset($re['skor']['Papikostick']['Z'])?$re['skor']['Papikostick']['Z']:0).'</td>';
-            $rows .= '<td>'.(isset($re['skor']['Papikostick']['A'])?$re['skor']['Papikostick']['A']:0).'</td>';
-            $rows .= '<td>'.(isset($re['skor']['Papikostick']['E'])?$re['skor']['Papikostick']['E']:0).'</td>';
-            $rows .= '<td>'.(isset($re['skor']['Papikostick']['S'])?$re['skor']['Papikostick']['S']:0).'</td>';
-            $rows .= '<td>'.(isset($re['skor']['Papikostick']['C'])?$re['skor']['Papikostick']['C']:0).'</td>';
-            $rows .= '<td>'.(isset($re['skor']['Papikostick']['G'])?$re['skor']['Papikostick']['G']:0).'</td>';
-            $rows .= '<td>'.(isset($re['skor']['Papikostick']['K'])?$re['skor']['Papikostick']['K']:0).'</td>';
+            $rows .= '<td>'.$verbal.'</td>';
+            $rows .= '<td>'.$spasial.'</td>';
+            $rows .= '<td>'.$numerikal.'</td>';
+            $rows .= '<td>'.(isset($skor_papi['O'])?$skor_papi['O']:0).'</td>';
+            $rows .= '<td>'.(isset($skor_papi['Z'])?$skor_papi['Z']:0).'</td>';
+            $rows .= '<td>'.(isset($skor_papi['A'])?$skor_papi['A']:0).'</td>';
+            $rows .= '<td>'.(isset($skor_papi['E'])?$skor_papi['E']:0).'</td>';
+            $rows .= '<td>'.(isset($skor_papi['S'])?$skor_papi['S']:0).'</td>';
+            $rows .= '<td>'.(isset($skor_papi['C'])?$skor_papi['C']:0).'</td>';
+            $rows .= '<td>'.(isset($skor_papi['G'])?$skor_papi['G']:0).'</td>';
+            $rows .= '<td>'.(isset($skor_papi['K'])?$skor_papi['K']:0).'</td>';
             $rows .= '<td>'.$re['skor']['R'].'</td>';
             $rows .= '<td>'.$re['skor']['I'].'</td>';
             $rows .= '<td>'.$re['skor']['A'].'</td>';
@@ -292,5 +306,119 @@ class Group3
             return 'BAHASA';
 
         return 'IPS';
+    }
+
+    function tpa_norma($value, $type)
+    {
+        if($type == 'verbal')
+        {
+            if($value >= 65)
+                return 5;
+            
+            if($value >= 48 && $value <= 64)
+                return 4;
+            if($value >= 32 && $value <= 47)
+                return 3;
+            if($value >= 16 && $value <= 31)
+                return 2;
+        }
+
+        if($type == 'spasial' || $type == 'numerikal')
+        {
+            if($value >= 33)
+                return 5;
+            
+            if($value >= 25 && $value <= 32)
+                return 4;
+            if($value >= 17 && $value <= 24)
+                return 3;
+            if($value >= 9 && $value <= 16)
+                return 2;
+                
+        }
+
+        return 1;
+    }
+
+    function papi_norma($papi)
+    {
+        foreach($papi as $key => $value)
+        {
+            if($key == 'G')
+            {
+                if($value >= 0 && $value <= 4)
+                    $papi['G'] = 2;
+                if($value >= 5 && $value <= 9)
+                    $papi['G'] = 4;
+            }
+
+            if($key == 'S')
+            {
+                if($value >= 0 && $value <= 5)
+                    $papi['S'] = 2;
+                if($value >= 6 && $value <= 9)
+                    $papi['S'] = 4;
+            }
+
+            if($key == 'C')
+            {
+                if($value >= 0 && $value <= 3)
+                    $papi['C'] = 2;
+                if($value >= 4 && $value <= 6)
+                    $papi['C'] = 3;
+                if($value >= 7 && $value <= 9)
+                    $papi['C'] = 4;
+            }
+
+            if($key == 'E')
+            {
+                if($value >= 0 && $value <= 3)
+                    $papi['E'] = 2;
+                if($value >= 4 && $value <= 6)
+                    $papi['E'] = 4;
+                if($value >= 7 && $value <= 9)
+                    $papi['E'] = 3;
+            }
+
+            if($key == 'A')
+            {
+                if($value >= 0 && $value <= 4)
+                    $papi['A'] = 2;
+                if($value >= 5 && $value <= 9)
+                    $papi['A'] = 4;
+            }
+
+            if($key == 'O')
+            {
+                if(($value >= 0 && $value <= 2) || ($value >= 5 && $value <= 7))
+                    $papi['O'] = 2;
+                if($value >= 3 && $value <= 4)
+                    $papi['O'] = 3;
+                if($value >= 8 && $value <= 9)
+                    $papi['O'] = 4;
+            }
+
+            if($key == 'Z')
+            {
+                if(($value >= 0 && $value <= 4) || ($value == 9))
+                    $papi['Z'] = 2;
+                if($value >= 7 && $value <= 8)
+                    $papi['Z'] = 3;
+                if($value >= 5 && $value <= 6)
+                    $papi['Z'] = 4;
+            }
+
+            if($key == 'K')
+            {
+                if(($value >= 0 && $value <= 2) || ($value == 5))
+                    $papi['K'] = 2;
+                if(($value >= 3 && $value <= 4) || ($value >= 8 && $value <= 9))
+                    $papi['K'] = 3;
+                if($value >= 6 && $value <= 7)
+                    $papi['K'] = 4;
+            }
+        }
+
+        return $papi;
     }
 }
