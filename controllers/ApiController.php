@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Post;
 use app\models\User;
+use yii\helpers\Url;
 use yii\filters\Cors;
 use yii\web\Response;
 use app\models\Category;
@@ -34,7 +35,7 @@ class ApiController extends \yii\web\Controller
         ];
         return [
             'tutorial' => $tutorial[$exam['test_group']],
-            'download' => $model->exists() ? Yii::$app->request->url . '/api/download-laporan?id='.$exam['id'].'&nisn='.$this->user->username : '',
+            'download' => $model->exists() ? Url::base(true) . '/api/download-laporan?id='.$exam['id'].'&nisn='.$this->user->username : '',
         ];
     }
 
