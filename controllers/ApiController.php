@@ -2,17 +2,19 @@
 
 namespace app\controllers;
 
-use app\models\Category;
-use app\models\ExamAnswer;
-use app\models\ExamCategory;
-use app\models\ExamParticipant;
-use app\models\Participant;
+use Yii;
 use app\models\Post;
 use app\models\User;
-use app\models\UserMetas;
-use Yii;
 use yii\filters\Cors;
 use yii\web\Response;
+use app\models\Category;
+use app\models\UserMetas;
+use app\models\ExamAnswer;
+use app\models\Participant;
+use app\models\ExamCategory;
+use Spipu\Html2Pdf\Html2Pdf;
+use app\models\ImportExamFile;
+use app\models\ExamParticipant;
 
 class ApiController extends \yii\web\Controller
 {
@@ -24,6 +26,7 @@ class ApiController extends \yii\web\Controller
     {
         $detail = $this->actionDetail(1);
         $exam = $detail['firstExam'];
+        $model = ImportExamFile::find()->where(['exam_id'=>$exam['id']]);
         $tutorial = [
             'group_1' => 'http://video.ujiantmc.online/vmb1',
             'group_2' => 'http://video.ujiantmc.online/vmb2',
@@ -31,7 +34,7 @@ class ApiController extends \yii\web\Controller
         ];
         return [
             'tutorial' => $tutorial[$exam['test_group']],
-            'download' => '',
+            'download' => $model->exists() ? Yii::$app->request->url . '/api/download-laporan?id='.$exam['id'].'&nisn='.$this->user->username : '',
         ];
     }
 
@@ -46,7 +49,7 @@ class ApiController extends \yii\web\Controller
     
         $this->enableCsrfValidation = false;
 
-        if($action->id == 'login' || $action->id == 'logout' || $action->id == 'generate' || $action->id == 'generate-demo' || $action->id == 'patch_peserta'){
+        if($action->id == 'login' || $action->id == 'logout' || $action->id == 'generate' || $action->id == 'generate-demo' || $action->id == 'patch_peserta' || $action->id == 'download-laporan'){
             return parent::beforeAction($action);
         }
 
@@ -72,6 +75,85 @@ class ApiController extends \yii\web\Controller
         }
 
         return parent::beforeAction($action);
+    }
+
+    public function actionDownloadLaporan($id, $nisn)
+    {
+        $model = ImportExamFile::find()->where(['exam_id'=>$id])->one();
+        $extension = pathinfo($model->file_path, PATHINFO_EXTENSION);
+
+        if($extension=='xlsx'){
+            $inputFileType = 'Xlsx';
+        }else{
+            $inputFileType = 'Xls';
+        }
+        $reader     = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($inputFileType);
+            
+        $spreadsheet = $reader->load($model->file_path);
+        $worksheet   = $spreadsheet->getActiveSheet();
+        $content     = "
+        <style>
+        body, h2 {
+            margin:0;padding:0
+        }
+        #customers {
+        border-collapse: collapse;
+        }
+
+        #customers td, #customers th {
+        border: 1px solid #000;
+        padding: 5px;
+        }
+
+        /* #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+        #customers tr:hover {background-color: #ddd;} */
+
+        #customers th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        background-color: #eaeaea;
+        }
+
+        ul {
+            margin:0px;
+            padding:0px;
+            padding-left:-15px;
+            padding-bottom:-25px;
+        }
+        .box {
+            background-color:red;
+        }
+        </style>
+        <body>
+        ";
+
+        $highestRow  = $worksheet->getHighestRow();
+        $highestColumn = $worksheet->getHighestColumn();
+        $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn);
+        $exists = false;
+        for ($row = 3; $row <= $highestRow; $row++) { 
+            $value = $worksheet->getCellByColumnAndRow(3, $row)->getFormattedValue();
+            $_nisn = $worksheet->getCellByColumnAndRow(4, $row)->getFormattedValue();
+            if($value == '' || $_nisn != $nisn) continue;
+        //     echo $worksheet->getCellByColumnAndRow(3, $row)->getValue() . '<br>';
+            $content .= $this->renderPartial('cetak',[
+                'worksheet' => $worksheet,
+                'row'       => $row
+            ]);
+            $exists = true;
+            break;
+        }
+
+        if(!$exists) return "<h2>Not Found</h2>";
+
+        $content .= "<body>";
+
+        $html2pdf = new Html2Pdf();
+        $html2pdf->writeHTML($content);
+        $html2pdf->output();
+        // $html2pdf->output('laporan.pdf', 'D');
+        return;
     }
 
     public function actionGenerate($group_id,$status=false)
