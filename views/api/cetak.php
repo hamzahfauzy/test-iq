@@ -417,8 +417,8 @@ $dev = [
         <th colspan="2"><h2 align="center">ASPEK YANG PERLU DIKEMBANGKAN</h2></th>
     </tr>
     <tr>
-        <th>ASPEK</th>
-        <th>SARAN PENGEMBANGAN</th>
+        <th width="150">ASPEK</th>
+        <th width="400">SARAN PENGEMBANGAN</th>
     </tr>
     <?php 
     for($i=15;$i<=25;$i++):
@@ -426,8 +426,8 @@ $dev = [
         if($_value >= 3) continue;
     ?>
     <tr>
-        <td><?=$dev[$i][0]?></td>
-        <td><?=$dev[$i][1]?></td>
+        <td width="150"><?=$dev[$i][0]?></td>
+        <td width="400"><?=$dev[$i][1]?></td>
     </tr>
     <?php endfor ?>
 </table>
