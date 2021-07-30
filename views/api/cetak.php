@@ -199,8 +199,6 @@
 <br />
 <br />
 <br />
-<br />
-<br />
 <?php
 $d = [
     'INVESTIGATIVE' => [
@@ -363,7 +361,7 @@ $d = [
         </td>
     </tr>
 </table>
-<br /><br /><br />
+<br /><br />
 <?php
 $dev = [
     15 => [
