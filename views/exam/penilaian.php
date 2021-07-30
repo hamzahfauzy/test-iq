@@ -68,6 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="table-responsive">
                 <table class="table table-bordered table-striped">
                     <tbody>
+                        <?php /*
                         <tr>
                             <?php 
                             for ($col = 2; $col <= 31; $col++) { 
@@ -111,10 +112,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             <td style="text-align:center;vertical-align:middle;"><?=$worksheet->getCellByColumnAndRow($col, 3)->getValue()?></td>
                             <?php } ?>
                         </tr>
-                        <?php for ($row = 4; $row <= $highestRow; $row++) { ?>
+                        */ ?>
+                        <?php for ($row = 3; $row <= $highestRow; $row++) { ?>
                         <tr>
                             <?php 
-                            for ($col = 2; $col <= 31; $col++) {
+                            for ($col = 3; $col <= 27; $col++) {
                                 $value = $worksheet->getCellByColumnAndRow($col, $row)->getFormattedValue();
                                 if($value == '' || $value == 'Job Profile') break;
                             ?>
