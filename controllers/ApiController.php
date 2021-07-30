@@ -150,9 +150,11 @@ class ApiController extends \yii\web\Controller
 
         $content .= "<body>";
 
+        $participant = Participant::find()->where(['id_number'=>$nisn])->one();
+
         $html2pdf = new Html2Pdf();
         $html2pdf->writeHTML($content);
-        $html2pdf->output();
+        $html2pdf->output($participant->name.'.pdf');
         // $html2pdf->output('laporan.pdf', 'D');
         return;
     }

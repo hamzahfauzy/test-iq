@@ -364,7 +364,75 @@ $d = [
     </tr>
 </table>
 <br /><br /><br />
+<?php
+$dev = [
+    15 => [
+        'Kemampuan Verbal',
+        'Agar kemampuan berbahasanya dapat semakin meningkat, ananda perlu lebih banyak  membaca buku dan mengikuti acara talkshow, diskusi dan debat di televisi/radio/media on line, dan langsung mempraktekkannya dalam bahasa lisan dan tulisan, dan aktifitas sehari-hari.'
+    ],
+    16 => [
+        'Kemampuan Spasial',
+        'Agar kemampuan spasial Ananda dapat semakin meningkat, Ananda perlu belajar secara sungguh-sungguh dan tekun dengan memecahkan soal-soal matematika ruang (geometri).  '
+    ],
+    17 => [
+        'Kemampuan Numerikal',
+        'Agar kemampuan numerical Ananda dapat semakin meningkat, Ananda perlu belajar secara sungguh-sungguh dan tekun dengan memecahkan soal-soal aritmatika secara cepat dan teliti.   '
+    ],
+    18 => [
+        'Kepercayaan Diri',
+        'Untuk meningkatkan kepercayaan dirinya, Ananda perlu melibatkan diri dalam banyak kegiatan-kegiatan kompetisi, banyak berlatih dengan mengikuti try out sebelum menghadapi ujian, dan  sering terlibat dalam berbagai kegiatan komunitas, terutama yang mampu menunjang masa depan, sesuai bakat dan minat.'
+    ],
+    19 => [
+        'Penyesuaian Diri',
+        'Untuk meningkatkan kemampuan untuk cepat berubah sesuai tuntutan lingkungan, Ananda perlu berlatih untuk lebih banyak mendengar, menghayati harapan dan kebutuhan orang lain. Melibatkan diri dalam banyak komunitas sesuai bakat minat dan mengambil peran di dalamnya, akan banyak mendorong dan mengasah kemampuan Ananda dalam memahami berbagai karakter orang dan mengetahui kiat-kiat memenuhi dan menyenangkan orang lain.'
+    ],
+    20 => [
+        'Hasrat Berprestasi',
+        'Untuk meningkatkan hasrat berprestasi, ananda perlu menyusun target-target pribadi yang SMART (spesific, measurable, attainable, realistic, timebound). Apa yang ingin dicapai dalam tahun ini, tahun mendatang, bahkan lima tahun lagi, sudah harus dirumuskan saat ini. target tersebut kemudian duraikan menjadi rencana pelaksanaan dan rencana detail kegiatan. Dengan adanya target yang demikian, ananda akan lebih fokus, dan termotivasi secara internal untuk bergerak maju kedepan.'
+    ],
+    21 => [
+        'Stabilitas Emosi',
+        'Agar rasa cemas yang  terkadang  muncul apabila Ananda berada dalam situasi yang menekan dapat diminimalisir, Ananda harus senantiasa mempersiapkan diri dengan baik dan dalam waktu yang cukup sehingga tidak tergesa-gesa,  banyak berlatih dengan mengikuti try out sebelum menghadapi ujian, dan  sering terlibat dalam berbagai kegiatan perlombaan,  terutama yang mampu menunjang masa depan  sesuai bakat dan minat. Di samping itu, Ananda perlu berlatih untuk menjadikan target dalam belajar sebagai motivasi, bukan sebagai beban.'
+    ],
+    22 => [
+        'Kontak Sosial',
+        'Untuk meningkatkan kemampuan berinteraksi dengan orang lain, Ananda perlu berlatih untuk melibatkan diri dalam banyak kegiatan/komunitas sesuai bakat minat dan mengambil peran di dalamnya, akan banyak mendorong dan mengasah kemampuan Ananda dalam memahami berbagai karakter orang dan mengetahui kiat-kiat memenuhi dan menyenangkan orang lain. '
+    ],
+    23 => [
+        'Sistematika Belajar',
+        'Untuk meningkatkan sistematika belajar,  Ananda perlu berlatih menjadi pribadi yang terorganisir (well organized), memiliki perencanaan yang lebih baik (well planned),  menggunakan waktu secara lebih efektif, sesuai perencanaan. Di samping itu, Ananda  perlu menyusun target-target pribadi yang jelas dan terukur.'
+    ],
+    24 => [
+        'Daya Juang',
+        'Untuk menumbuh-kembangkan daya juangnya, Ananda  perlu menyusun target-target pribadi yang jelas dan terukur, Belajar lebih disiplin, lebih lama, lebih keras dan lebih cerdas. Ananda harus berlatih untuk tidak mudah menyerah. Ananda harus melatih diri untuk bekerja keras mencapai target yang ditetapkan, seperti mencari jawaban yang benar terhadap soal-soal yang sulit sampai dapat, tidak mudah berganti-ganti tempat les dsb.  '
+    ],
+    25 => [
+        'Daya Tahan Terhadap Stress',
+        'Untuk meningkatkan daya tahan terhadap stress, Ananda harus sering melatih pengelolaan terhadap stress dengan cara membiasakan diri fokus pada pencapaian hasil, menemukan metode penyelesaian tugas yang nyaman, tidak cepat bosan dengan rutinitas pekerjaan, dan mengembangkan kemampuan mendedikasikan waktu dalam menyelesaikan tugas'
+    ]
+];
+?>
+<table id="customers" align="center">
+    <tr>
+        <th colspan="2"><h2 align="center">ASPEK YANG PERLU DIKEMBANGKAN</h2></th>
+    </tr>
+    <tr>
+        <th>ASPEK</th>
+        <th>SARAN PENGEMBANGAN</th>
+    </tr>
+    <?php 
+    for($i=15;$i<=25;$i++):
+        $_value = $worksheet->getCellByColumnAndRow($i, $row)->getValue();
+        if($_value >= 3) continue;
+    ?>
+    <tr>
+        <td><?=$dev[$i][0]?></td>
+        <td><?=$dev[$i][1]?></td>
+    </tr>
+    <?php endfor ?>
+</table>
+<br /><br /><br />
 <div style="text-align:center;width:100%">
-    Medan, <?=$worksheet->getCellByColumnAndRow(8, $row)->getValue()?><br />
+    Medan, <?=$worksheet->getCellByColumnAndRow(9, $row)->getValue()?><br />
     <img src="images/ttd-3.png" style="width:320px" />
 </div>
