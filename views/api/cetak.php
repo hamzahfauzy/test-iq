@@ -77,11 +77,6 @@
 <br />
 <img src="images/footer.png" style="width:100%">
 <div style="page-break-before: always"></div>
-<br />
-<br />
-<br />
-<br />
-<br />
 <table id="customers" align="center">
     <tr>
         <th colspan="2"><h2 align="center">POTENSI AKADEMIK</h2></th>
