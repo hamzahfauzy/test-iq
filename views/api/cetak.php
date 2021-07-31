@@ -197,8 +197,6 @@
     <i>Keterangan:  1: Kurang Sekali&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2: Kurang&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3: Rata Rata&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4: Baik&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5: Baik Sekali</i>
 </div>
 <br />
-<br />
-<br />
 <?php
 $d = [
     'INVESTIGATIVE' => [
@@ -364,7 +362,7 @@ $d = [
         </td>
     </tr>
 </table>
-<br /><br />
+<br />
 <?php
 $dev = [
     15 => [
@@ -419,7 +417,7 @@ $dev = [
     </tr>
     <tr>
         <th width="200">ASPEK</th>
-        <th width="400">SARAN PENGEMBANGAN</th>
+        <th width="500">SARAN PENGEMBANGAN</th>
     </tr>
     <?php 
     for($i=15;$i<=25;$i++):
@@ -428,7 +426,7 @@ $dev = [
     ?>
     <tr>
         <td width="200"><?=$dev[$i][0]?></td>
-        <td width="400"><?=$dev[$i][1]?></td>
+        <td width="500"><?=$dev[$i][1]?></td>
     </tr>
     <?php endfor ?>
 </table>
