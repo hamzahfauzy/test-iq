@@ -425,7 +425,7 @@ $dev = [
     </tr>
     <?php endfor ?>
 </table>
-<br /><br /><br />
+<br />
 <div style="text-align:center;width:100%;display:block;">
     Medan, <?=$worksheet->getCellByColumnAndRow(9, $row)->getValue()?><br />
     <img src="images/ttd-3.png" style="width:320px" />
