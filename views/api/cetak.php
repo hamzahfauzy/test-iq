@@ -356,6 +356,7 @@ $d = [
         <ul>
             <li>
             <?=implode('</li><li>',$d[$worksheet->getCellByColumnAndRow(26, $row)->getValue()][$worksheet->getCellByColumnAndRow(12, $row)->getValue()])?><br>
+            <?=implode('</li><li>',$d[$worksheet->getCellByColumnAndRow(27, $row)->getValue()][$worksheet->getCellByColumnAndRow(12, $row)->getValue()])?><br>
             </li>
         </ul>
         </td>
@@ -415,7 +416,7 @@ $dev = [
         <th colspan="2"><h2 align="center">ASPEK YANG PERLU DIKEMBANGKAN</h2></th>
     </tr>
     <tr>
-        <th width="150">ASPEK</th>
+        <th width="200">ASPEK</th>
         <th width="400">SARAN PENGEMBANGAN</th>
     </tr>
     <?php 
@@ -424,7 +425,7 @@ $dev = [
         if($_value >= 3) continue;
     ?>
     <tr>
-        <td width="150"><?=$dev[$i][0]?></td>
+        <td width="200"><?=$dev[$i][0]?></td>
         <td width="400"><?=$dev[$i][1]?></td>
     </tr>
     <?php endfor ?>
