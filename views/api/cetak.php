@@ -356,6 +356,8 @@ $d = [
         <ul>
             <li>
             <?=implode('</li><li>',$d[$worksheet->getCellByColumnAndRow(26, $row)->getValue()][$worksheet->getCellByColumnAndRow(12, $row)->getValue()])?><br>
+            </li>
+            <li>
             <?=implode('</li><li>',$d[$worksheet->getCellByColumnAndRow(27, $row)->getValue()][$worksheet->getCellByColumnAndRow(12, $row)->getValue()])?><br>
             </li>
         </ul>
