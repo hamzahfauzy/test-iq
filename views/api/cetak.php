@@ -313,6 +313,12 @@ $d = [
         ]
     ],
 ]
+
+$bakat_dan_minat_1 = $worksheet->getCellByColumnAndRow(26, $row)->getValue();
+$bakat_dan_minat_1 = strtoupper($bakat_dan_minat_1);
+
+$bakat_dan_minat_2 = $worksheet->getCellByColumnAndRow(27, $row)->getValue();
+$bakat_dan_minat_2 = strtoupper($bakat_dan_minat_2);
 ?>
 <table id="customers" align="center">
     <tr>
@@ -322,19 +328,19 @@ $d = [
         <td width="150"><b>BAKAT DAN MINAT</b></td>
         <td width="180" style="vertical-align:top;padding-right:20px">
             <b>UTAMA :</b><br>
-            <b><?=$d[$worksheet->getCellByColumnAndRow(26, $row)->getValue()]['jenis_minat']?></b><br>
+            <b><?=$d[$bakat_dan_minat_1]['jenis_minat']?></b><br>
             <ul>
                 <li>
-                    <?=implode('</li><li>',$d[$worksheet->getCellByColumnAndRow(26, $row)->getValue()]['penjelasan'])?><br>
+                    <?=implode('</li><li>',$d[$bakat_dan_minat_1]['penjelasan'])?><br>
                 </li>
             </ul>
         </td>
         <td width="180" style="vertical-align:top;padding-right:20px">
             <b>PENDUKUNG :</b><br>
-            <b><?=$d[$worksheet->getCellByColumnAndRow(27, $row)->getValue()]['jenis_minat']?></b><br>
+            <b><?=$d[$bakat_dan_minat_2]['jenis_minat']?></b><br>
             <ul>
                 <li>
-                <?=implode('</li><li>',$d[$worksheet->getCellByColumnAndRow(27, $row)->getValue()]['penjelasan'])?><br>
+                <?=implode('</li><li>',$d[$bakat_dan_minat_2]['penjelasan'])?><br>
                 </li>
             </ul>
         </td>
