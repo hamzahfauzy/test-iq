@@ -113,8 +113,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             <?php } ?>
                         </tr>
                         */ ?>
-                        <?php for ($row = 3; $row <= $highestRow; $row++) { ?>
+                        <?php for ($row = 3; $row <= $highestRow; $row++) { $no = $row-2;?>
                         <tr>
+                            <td><?=$no?></td>
                             <?php 
                             for ($col = 3; $col <= 27; $col++) {
                                 $value = $worksheet->getCellByColumnAndRow($col, $row)->getFormattedValue();
