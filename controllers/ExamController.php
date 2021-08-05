@@ -167,8 +167,8 @@ class ExamController extends Controller
         $limit = 30;
         $count_partial = ceil($num_rows / $limit);
         $part = $_GET['part'];
-        $max_row = ($part * $limit) + 4;
-        $first_row = (($part-1) * $limit) + 4;
+        $max_row = ($part * $limit);
+        $first_row = (($part-1) * $limit);
         if($max_row > $num_rows)
             $max_row = $num_rows;
 
