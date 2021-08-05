@@ -354,10 +354,10 @@ $bakat_dan_minat_2 = strtoupper($bakat_dan_minat_2);
         <td colspan="2" width="400">
         <ul>
             <li>
-            <?=implode('</li><li>',$d[$worksheet->getCellByColumnAndRow(26, $row)->getValue()][$worksheet->getCellByColumnAndRow(12, $row)->getValue()])?><br>
+            <?=implode('</li><li>',$d[$bakat_dan_minat_1][$worksheet->getCellByColumnAndRow(12, $row)->getValue()])?><br>
             </li>
             <li>
-            <?=implode('</li><li>',$d[$worksheet->getCellByColumnAndRow(27, $row)->getValue()][$worksheet->getCellByColumnAndRow(12, $row)->getValue()])?><br>
+            <?=implode('</li><li>',$d[$bakat_dan_minat_2][$worksheet->getCellByColumnAndRow(12, $row)->getValue()])?><br>
             </li>
         </ul>
         </td>
