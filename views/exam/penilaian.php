@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
         $highestRow  = $worksheet->getHighestRow();
         $highestColumn = $worksheet->getHighestColumn();
         $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn);
-        $num_rows = ($highestRow - 3);
+        $num_rows = ($highestRow - 6);
         $count_partial = ceil($num_rows / 30);
         // for ($row = 4; $row <= $highestRow; $row++) { 
         //     echo $worksheet->getCellByColumnAndRow(3, $row)->getValue() . '<br>';
