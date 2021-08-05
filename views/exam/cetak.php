@@ -1,7 +1,7 @@
 <img src="images/kop.png" style="width:100%">
 <p style="text-align:center;">
-<b>LAPORAN HASIL ASSESMEN GURU</b><br />
-<i>TEACHER ASSESMENT REPORT</i>
+<b>LAPORAN HASIL TES POTENSI INDIVIDUAL</b><br />
+<i>(INDIVIDUAL POTENTIAL REVIEW)</i>
 </p>
 
 <table id="customers" align="center">
@@ -13,22 +13,17 @@
     <tr>
         <td class="border-cell">Jenis Kelamin</td>
         <td class="border-cell">:</td>
-        <td class="border-cell"><?=$worksheet->getCellByColumnAndRow(5, $row)->getValue()?></td>
+        <td class="border-cell"><?=$worksheet->getCellByColumnAndRow(6, $row)->getValue()?></td>
     </tr>
     <tr>
         <td class="border-cell">Tempat, Tanggal Lahir</td>
         <td class="border-cell">:</td>
-        <td class="border-cell"><?=$worksheet->getCellByColumnAndRow(4, $row)->getValue()?></td>
-    </tr>
-    <tr>
-        <td class="border-cell">Pendidikan Terakhir / Bidang Studi</td>
-        <td class="border-cell">:</td>
-        <td class="border-cell" style="text-transform:capitalize;"><?=$worksheet->getCellByColumnAndRow(6, $row)->getValue()?></td>
+        <td class="border-cell"><?=$worksheet->getCellByColumnAndRow(5, $row)->getValue()?></td>
     </tr>
     <tr>
         <td class="border-cell">Asal Sekolah</td>
         <td class="border-cell">:</td>
-        <td class="border-cell"><?=$worksheet->getCellByColumnAndRow(9, $row)->getValue()?></td>
+        <td class="border-cell"><?=$worksheet->getCellByColumnAndRow(7, $row)->getValue()?></td>
     </tr>
     <tr style="border-left:1px;border-right:1px">
         <td colspan="3" style="border-left:1px;border-right:1px">
@@ -38,12 +33,12 @@
     <tr>
         <td width="200px">Tanggal Pemeriksaan</td>
         <td width="10px">:</td>
-        <td><?=$worksheet->getCellByColumnAndRow(7, $row)->getValue()?></td>
+        <td><?=$worksheet->getCellByColumnAndRow(8, $row)->getValue()?></td>
     </tr>
     <tr>
         <td>Tujuan Pemeriksaan</td>
         <td>:</td>
-        <td>Individual Assesment Review</td>
+        <td>Individual Potential Review</td>
     </tr>
     <tr>
         <td>Sifat Dokumen</td>
@@ -51,111 +46,136 @@
         <td>RAHASIA</td>
     </tr>
 </table>
-<div style="page-break-after: always"></div>
 <br />
-<b>1. PROFIL GURU</b><br />
-<p></p>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<img src="images/footer.png" style="width:100%">
+<div style="page-break-before: always"></div>
 <table id="customers" align="center">
     <tr>
-        <th colspan="3"><h2 align="center">IQ : <?=$worksheet->getCellByColumnAndRow(12, $row)->getValue()?></h2></th>
-        <th colspan="5" style="text-align:center;"><h2 align="center">IQ : <?=$worksheet->getCellByColumnAndRow(13, $row)->getValue()?></h2><i>CFIT scale</i></th>
+        <th colspan="2"><h2 align="center">POTENSI AKADEMIK</h2></th>
+        <th colspan="5" style="text-align:center;"><h2 align="center"><?=$worksheet->getCellByColumnAndRow(14, $row)->getValue()?></h2></th>
     </tr>
     <tr>
-        <td style="text-align:center;background:#eaeaea;" rowspan="2">NO</td>
         <td style="text-align:center;background:#eaeaea;" rowspan="2">ASPEK</td>
         <td style="text-align:center;background:#eaeaea;" rowspan="2">PENJELASAN</td>
         <td style="text-align:center;background:#eaeaea;" colspan="5">SKALA</td>
     </tr>
     <tr>
-        <td style="text-align:center;background:#eaeaea;">1</td>
-        <td style="text-align:center;background:#eaeaea;">2</td>
-        <td style="text-align:center;background:#eaeaea;">3</td>
-        <td style="text-align:center;background:#eaeaea;">4</td>
-        <td style="text-align:center;background:#eaeaea;">5</td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+    </tr>
+    <tr>
+        <td>Kemampuan Verbal</td>
+        <td width="340">Kemampuan mempersepsi adanya suatu hubungan di antara benda, bentuk atau persoalan</td>
+        <?php 
+        $_value = $worksheet->getCellByColumnAndRow(15, $row)->getValue();
+        for($i=1;$i<=5;$i++): 
+            $bg = $i==3 ? 'style="background:#eaeaea;text-align:center;"' : 'style="text-align:center;"';
+            $span = $i<=2 ? '<span style="background-color:yellow;">X</span>' : 'X';
+        ?>
+        <td <?=$bg ?>><?=$_value==$i?$span:''?></td>
+        <?php endfor ?>
+    </tr>
+    <tr>
+        <td>Kemampuan Spasial</td>
+        <td width="340">Kemampuan untuk terbuka dengan informasi atau instruksi yang berbeda-beda dan menyelesaikan beragam persoalan dengan baik</td>
+        <?php 
+        $_value = $worksheet->getCellByColumnAndRow(16, $row)->getValue();
+        for($i=1;$i<=5;$i++): 
+            $bg = $i==3 ? 'style="background:#eaeaea;text-align:center;"' : 'style="text-align:center;"';
+            $span = $i<=2 ? '<span style="background-color:yellow;">X</span>' : 'X';
+        ?>
+        <td <?=$bg ?>><?=$_value==$i?$span:''?></td>
+        <?php endfor ?>
+    </tr>
+    <tr>
+        <td>Kemampuan Numerikal</td>
+        <td width="300">Kemampuan untuk memecahkan persoalan secara efektif dengan cara-cara yang kreatif di luar kebiasaan</td>
+        <?php 
+        $_value = $worksheet->getCellByColumnAndRow(17, $row)->getValue();
+        for($i=1;$i<=5;$i++): 
+            $bg = $i==3 ? 'style="background:#eaeaea;text-align:center;"' : 'style="text-align:center;"';
+            $span = $i<=2 ? '<span style="background-color:yellow;">X</span>' : 'X';
+        ?>
+        <td <?=$bg ?>><?=$_value==$i?$span:''?></td>
+        <?php endfor ?>
     </tr>
     <?php
     $data = [
-        'Kemampuan Intelektual' => [
-            14 => [
-                'Tingkat Intelektual',
-                'Tingkat potensi yang dimiliki oleh individu untuk mempelajari sesuatu lewat alat-alat berpikir'
-            ],
-            15 => [
-                'Berfikir Fleksibilitas',
-                'Kemampuan menggunakan berbagai sudut pandang dalam menghadapi tuntutan perubahan'
-            ],
-            16 => [
-                'Berfikir Analitis',
-                'Kemampuan menguraikan permasalahan berdasarkan informasi yang relevan dari berbagai sumber secara komprehensif untuk mengiden-tifikasi penyebab dan dampak terhadap organisasi'
-            ],
-            17 => [
-                'Berfikir Abstraksi',
-                'Kemampuan untuk memproses sebuah informasi yang berkaitan dengan objek, prinsip, dan konsep-konsep, yang secara fisik tidak dapat dimunculkan'
-            ]
-        ],
-        'Tanggung Jawab dan Loyalitas' => [
+        'KEPRIBADIAN' => [
             18 => [
-                'Tanggung Jawab',
-                'Loyalitas, integritas dan komitmen untuk melaksanakan tugas secara tuntas dan tepat waktu'
+                'Kepercayaan Diri',
+                'Keyakinan yang kuat akan kemampuan diri'
             ],
             19 => [
-                'Loyalitas',
-                'Kepatuhan pada aturan dan prosedur, serta rasa memiliki terhadap organisasi'
-            ]
-        ],
-        'Kehandalan Dalam Bekerja' => [
+                'Penyesuaian Diri',
+                'Kemampuan menyesuaikan diri serta mampu mengambil sikap yang tepat sesuai tuntutan lingkungan saat itu'
+            ],
             20 => [
-                'Daya Juang',
-                'Kemampuan untuk mau bekerja keras dan tidak mudah putus asa dalam berusaha mencapai tujuan dan mampu mempertahankannya'
+                'Hasrat Berprestasi',
+                'Kemampuan untuk mendorong diri sendiri untuk mencapai hasil yang terbaik'
             ],
             21 => [
-                'Semangat Berprestasi',
-                'Kemampuan untuk selalu meningkatkan kinerja dengan lebih baik di atas standar secara terus-menerus'
+                'Stabilitas Emosi',
+                'Kemampuan untuk mengendalikan diri, tetap bersikap tenang dan tidak terpengaruh dengan  situasi di sekelilingnya'
             ],
             22 => [
-                'Kepercayaan Diri',
-                'Keyakinan yang kuat akan kemampuan dalam melaksanakan pekerjaan, berhubungan dan berkompetisi dengan orang lain'
+                'Kontak Sosial',
+                'Kesediaan untuk memulai interaksi dan membina hubungan baik dengan orang lain'
             ],
-        ],
-        'Rasa Memiliki Terhadap Organisasi' => [
             23 => [
-                'Penyesuaian Diri',
-                'Kemampuan untuk merespon perubahan, kemauan belajar dengan mendengarkan dan memahami pikiran, perasaan orang lain'
+                'Sistematika Belajar',
+                'Kemampuan menyusun perencanaan dan mempertahankan keteraturan dalam menyelesaikan tugas'
             ],
             24 => [
-                'Pengendalian Diri',
-                'Kemampuan untuk mengendalikan diri pada saat menghadapi masalah yang sulit, kritik dari orang lain atau pada saat bekerja di bawah tekanan dengan sikap yang positif'
+                'Daya Juang',
+                'Kemauan untuk menyelesaikan tugas hingga tuntas dan kemampuan dalam mempertahankan semangat meskipun menghadapi tugas-tugas yang sulit'
             ],
             25 => [
-                'Kerja Sama Dalam Tim',
-                'Tingkat relasi dan kemampuan menyelesaikan pekerjaan secara bersama-sama dengan menjadi bagian dari suatu kelompok untuk mencapai tujuan unit / organisasi'
-            ]
-        ],
-        'Kepemimpinan' => [
-            26 => [
-                'Pengambilan Keputusan',
-                'Tingkat relasi dan kemampuan menyelesaikan pekerjaan secara bersama-sama dengan menjadi bagian dari suatu kelompok untuk mencapai tujuan unit / organisasi',
-            ],
-            27 => [
-                'Peran Sebagai Pemimpin',
-                'Kecenderungan menggunakan orang lain untuk mencapai tujuan'
-            ],
-            28 => [
-                'Pengendalian Orang Lain',
-                'Kemampuan dalam menyusun perencanaan, mengawasi proses dan hasil-hasilnya, mengarahkan dan memotivasi orang lain, dan pola komunikasi yang efektif'
+                'Daya Tahan Terhadap Stress',
+                'Kemampuan untuk mengatasi semua hambatan dan tekanan dalam mengerjakan tugas'
             ]
         ]
     ];
     $no = 1;
     foreach($data as $key => $value) { ?>
     <tr>
-        <td style="background:#eaeaea;" colspan="8"><b><?=$key?></b></td>
+        <td style="background:#eaeaea;" colspan="7" style="text-align:center"><b><?=$key?></b></td>
     </tr>
     <?php foreach($value as $k => $v){ ?>
     <tr>
-        <td><?=$no++?></td>
         <td><?=$v[0]?></td>
-        <td width="380"><?=$v[1]?></td>
+        <td width="340"><?=$v[1]?></td>
         <?php 
         $_value = $worksheet->getCellByColumnAndRow($k, $row)->getValue();
         for($i=1;$i<=5;$i++): 
@@ -169,91 +189,244 @@
 </table>
 <br />
 <div style="text-align:center;width:100%">
-    <i>Keterangan:  1: Sangat Kurang&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2: Kurang&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3: Cukup&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4: Baik&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5: Sangat Baik</i>
-</div>
-<div style="page-break-after: always"></div>
-<br />
-<b>2. GRAFIK PROFIL GURU</b><br /><br />
-<div style="width:100%;border:1px solid #000;min-height:100px;">
-    <p style="text-align:center;font-weight:bold;">GRAFIK INDEKS PROFIL GURU (IPG)</p>
-    <br />
-    <table id="customers" align="center" style="width:260px">
-        <tr>
-            <td style="width:15px">
-                <ul class="index">
-                    <li>5</li>
-                    <li>4</li>
-                    <li>3</li>
-                    <li>2</li>
-                    <li>1</li>
-                    <li>0</li>
-                </ul>
-            </td>
-            <?php foreach($data as $key => $value) { ?>
-                <?php foreach($value as $k => $v){ $g = $worksheet->getCellByColumnAndRow($k, $row)->getValue(); ?>
-            <td style="width:15px;vertical-align:bottom;"><div class="box" style="height:<?=$g*25?>px"></div></td>
-            <?php } } ?>
-        </tr> 
-        <tr>
-            <td style="text-align:center;"></td>
-            <td style="text-align:center;">1</td>
-            <td style="text-align:center;">2</td>
-            <td style="text-align:center;">3</td>
-            <td style="text-align:center;">4</td>
-            <td style="text-align:center;">5</td>
-            <td style="text-align:center;">6</td>
-            <td style="text-align:center;">7</td>
-            <td style="text-align:center;">8</td>
-            <td style="text-align:center;">9</td>
-            <td style="text-align:center;">10</td>
-            <td style="text-align:center;">11</td>
-            <td style="text-align:center;">12</td>
-            <td style="text-align:center;">13</td>
-            <td style="text-align:center;">14</td>
-            <td style="text-align:center;">15</td>
-        </tr>
-        <?php /*
-        <tr>
-            <td></td>
-            <td style="text-align:center;font-weight:bold" colspan="4">KEMAMPUAN<br />INTELEKTUAL</td>
-            <td style="text-align:center;font-weight:bold" colspan="2">TANGGUNG<br />JAWAB<br />DAN LOYALITAS</td>
-            <td style="text-align:center;font-weight:bold" colspan="3">KEHANDALAN<br />DALAM<br />BEKERJA</td>
-            <td style="text-align:center;font-weight:bold" colspan="3">RASA MEMILIKI<br />TERHADAP<br />ORGANISASI</td>
-            <td style="text-align:center;font-weight:bold" colspan="3">KEPEMIMPINAN</td>
-        </tr> */ ?>
-    </table>
-    <br />
+    <i>Keterangan:  1: Kurang Sekali&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2: Kurang&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3: Rata Rata&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4: Baik&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5: Baik Sekali</i>
 </div>
 <br />
-<b>3. INDEKS PROFIL GURU (IPG)</b><br />
-<p></p>
+<?php
+$d = [
+    'INVESTIGATIVE' => [
+        'jenis_minat' => 'INVESTIGATIVE/PENELITIAN',
+        'penjelasan' => [
+            'Pekerjaan yang menuntut prestasi akademik yang tinggi',
+            'Menggunakan kemampuan teknis untuk menyelesaikan tugas',
+            'Melibatkan kegiatan penelitian ilmiah'
+        ],
+        'IPA' => [
+            'Kedokteran/Biologi Genetika/Farmasi',
+            'Teknik Lingkungan/ Teknik Kimia',
+            'Astronomi dan Geofisika',
+            'Pemrograman Komputer'
+        ],
+        'IPS' => [
+            'Sosiologi',
+            'Ilmu Politik',
+            'Ilmu Budaya'
+        ]
+    ],
+    'ARTISTIC' => [
+        'jenis_minat' => 'ARTISTIC/SENI/DESAIN',
+        'penjelasan' => [
+            'Pekerjaan yang tidak terstruktur',
+            'Terbuka pada keberagaman',
+            'Menghargai orisinalitas',
+            'Memerlukan kreativitas'
+        ],
+        'IPA' => [
+            'Arsitektur/Landscape',
+            'Desain Interior',
+            'Desain 3D',
+            'Desain Grafis'
+        ],
+        'IPS' => [
+            'Sastra',
+            'Seni Lukis/Musik/Suara',
+            'Desain Grafis'
+        ]
+    ],
+    'SOCIAL' => [
+        'jenis_minat' => 'SOCIAL/KEMANUSIAAN',
+        'penjelasan' => [
+            'Bekerjasama dengan orang lain',
+            'Berinteraksi dengan orang lain',
+            'Melayani orang lain',
+            'Menghargai perkembangan pribadi orang lain'
+        ],
+        'IPA' => [
+            'Psikologi',
+            'Kesehatan Masyarakat',
+            'Bimbingan Konseling',
+            'Manajemen SDM',
+            'Kesejahteraan/Pekerjaan Sosial',
+        ],
+        'IPS' => [
+            'Psikologi',
+            'Bimbingan Konseling',
+            'Manajemen SDM',
+            'Kesejahteraan/Pekerjaan Sosial',
+        ]
+    ],
+    'REALISTIC' => [
+        'jenis_minat' => 'REALISTIC/KEKUATAN TUBUH DAN PERALATAN',
+        'penjelasan' => [
+            'Bekerja pada kegiatan outdoor / lapangan',
+            'Memerlukan keterampilan teknis',
+            'Tugas tugas bersifat langsung'
+        ],
+        'IPA' => [
+            'Teknik Sipil/Geodesi/Perminyakan/Elektro',
+            'Akademi Penerbangan',
+            'Akademi Kepolisian/Akademi Militer',
+            'Pertanian/Perkebunan',
+        ],
+        'IPS' => [
+            'Akademi Kepolisian/Akademi Militer',
+            'Manajemen Pertanian/Perkebunan',
+            'Pendidikan Olahraga',
+        ]
+    ],
+    'ENTREPRENUER' => [
+        'jenis_minat' => 'ENTREPRENUER/USAHA/KERJA MANDIRI',
+        'penjelasan' => [
+            'Menghargai pencapaian dan tujuan ekonomi',
+            'Penuh target yang menantang',
+            'Mengelola unit kerja untuk merealisasikan capaian bisnis',
+            'Memimpin dengan strategi untuk memenangkan kompetisi',
+        ],
+        'IPA' => [
+            'Kewirausahaan/ Manajemen Pemasaran',
+            'Kedokteran',
+            'Akuntansi/Perpajakan',
+            'Teknik Sipil/Arsitektur/Elektro',
+        ],
+        'IPS' => [
+            'Kewirausahaan/Bisnis',
+            'Manajemen Pemasaran',
+            'Manajemen Perkantoran ',
+        ]
+    ],
+    'CONVENTIONAL' => [
+        'jenis_minat' => 'CONVENTIONAL/PEMELIHARA',
+        'penjelasan' => [
+            'Memerlukan perhatian terhadap detail',
+            'Berhubungan dengan data',
+            'Menghargai keseragaman dan keteraturan',
+        ],
+        'IPA' => [
+            'Akuntansi',
+            'Manajemen Administrasi',
+            'Perbankan',
+        ],
+        'IPS' => [
+            'Akuntansi',
+            'Manajemen Administrasi',
+            'Perbankan',
+        ]
+    ],
+]
+?>
 <table id="customers" align="center">
     <tr>
-        <td colspan="3" width="400">Tingkat Indeks Profil Guru Berdasarkan Hasil adalah : </td>
-        <td width="300" style="background:green;color:#FFF" colspan="2">
-            <h2 style="align:center"><?=$worksheet->getCellByColumnAndRow(30, $row)->getFormattedValue()?>%</h2>
+        <th colspan="3"><h2 align="center">BAKAT MINAT DAN PILIHAN JURUSAN</h2></th>
+    </tr>
+    <tr>
+        <td width="150"><b>BAKAT DAN MINAT</b></td>
+        <td width="180" style="vertical-align:top;padding-right:20px">
+            <b>UTAMA :</b><br>
+            <b><?=$d[$worksheet->getCellByColumnAndRow(26, $row)->getValue()]['jenis_minat']?></b><br>
+            <ul>
+                <li>
+                    <?=implode('</li><li>',$d[$worksheet->getCellByColumnAndRow(26, $row)->getValue()]['penjelasan'])?><br>
+                </li>
+            </ul>
+        </td>
+        <td width="180" style="vertical-align:top;padding-right:20px">
+            <b>PENDUKUNG :</b><br>
+            <b><?=$d[$worksheet->getCellByColumnAndRow(27, $row)->getValue()]['jenis_minat']?></b><br>
+            <ul>
+                <li>
+                <?=implode('</li><li>',$d[$worksheet->getCellByColumnAndRow(27, $row)->getValue()]['penjelasan'])?><br>
+                </li>
+            </ul>
         </td>
     </tr>
     <tr>
-        <td>Di bawah 55%</td>
-        <td>56 - 70 %</td>
-        <td>71 - 85 %</td>
-        <td>86 - 100 %</td>
-        <td>Di atas 100 %</td>
+        <td width="150"><b>JURUSAN DI SMA</b></td>
+        <td colspan="2" width="400"><?=$worksheet->getCellByColumnAndRow(12, $row)->getValue()?></td>
     </tr>
     <tr>
-        <td><i>Sangat Rendah</i></td>
-        <td><i>Rendah</i></td>
-        <td><i>Sedang</i></td>
-        <td><i>Tinggi</i></td>
-        <td><i>Sangat Tinggi</i></td>
+        <td width="150"><b>ALTERNATIF JURUSAN DI PERGURUAN TINGGI</b></td>
+        <td colspan="2" width="400">
+        <ul>
+            <li>
+            <?=implode('</li><li>',$d[$worksheet->getCellByColumnAndRow(26, $row)->getValue()][$worksheet->getCellByColumnAndRow(12, $row)->getValue()])?><br>
+            </li>
+            <li>
+            <?=implode('</li><li>',$d[$worksheet->getCellByColumnAndRow(27, $row)->getValue()][$worksheet->getCellByColumnAndRow(12, $row)->getValue()])?><br>
+            </li>
+        </ul>
+        </td>
     </tr>
 </table>
-<br /><br /><br />
-<div style="text-align:center;width:100%">
-    Medan, <?=$worksheet->getCellByColumnAndRow(8, $row)->getValue()?><br />
-    Penanggung Jawab
+<br />
+<?php
+$dev = [
+    15 => [
+        'Kemampuan Verbal',
+        'Agar kemampuan berbahasanya dapat semakin meningkat, ananda perlu lebih banyak  membaca buku dan mengikuti acara talkshow, diskusi dan debat di televisi/radio/media on line, dan langsung mempraktekkannya dalam bahasa lisan dan tulisan, dan aktifitas sehari-hari.'
+    ],
+    16 => [
+        'Kemampuan Spasial',
+        'Agar kemampuan spasial Ananda dapat semakin meningkat, Ananda perlu belajar secara sungguh-sungguh dan tekun dengan memecahkan soal-soal matematika ruang (geometri).  '
+    ],
+    17 => [
+        'Kemampuan Numerikal',
+        'Agar kemampuan numerical Ananda dapat semakin meningkat, Ananda perlu belajar secara sungguh-sungguh dan tekun dengan memecahkan soal-soal aritmatika secara cepat dan teliti.   '
+    ],
+    18 => [
+        'Kepercayaan Diri',
+        'Untuk meningkatkan kepercayaan dirinya, Ananda perlu melibatkan diri dalam banyak kegiatan-kegiatan kompetisi, banyak berlatih dengan mengikuti try out sebelum menghadapi ujian, dan  sering terlibat dalam berbagai kegiatan komunitas, terutama yang mampu menunjang masa depan, sesuai bakat dan minat.'
+    ],
+    19 => [
+        'Penyesuaian Diri',
+        'Untuk meningkatkan kemampuan untuk cepat berubah sesuai tuntutan lingkungan, Ananda perlu berlatih untuk lebih banyak mendengar, menghayati harapan dan kebutuhan orang lain. Melibatkan diri dalam banyak komunitas sesuai bakat minat dan mengambil peran di dalamnya, akan banyak mendorong dan mengasah kemampuan Ananda dalam memahami berbagai karakter orang dan mengetahui kiat-kiat memenuhi dan menyenangkan orang lain.'
+    ],
+    20 => [
+        'Hasrat Berprestasi',
+        'Untuk meningkatkan hasrat berprestasi, ananda perlu menyusun target-target pribadi yang SMART (spesific, measurable, attainable, realistic, timebound). Apa yang ingin dicapai dalam tahun ini, tahun mendatang, bahkan lima tahun lagi, sudah harus dirumuskan saat ini. target tersebut kemudian duraikan menjadi rencana pelaksanaan dan rencana detail kegiatan. Dengan adanya target yang demikian, ananda akan lebih fokus, dan termotivasi secara internal untuk bergerak maju kedepan.'
+    ],
+    21 => [
+        'Stabilitas Emosi',
+        'Agar rasa cemas yang  terkadang  muncul apabila Ananda berada dalam situasi yang menekan dapat diminimalisir, Ananda harus senantiasa mempersiapkan diri dengan baik dan dalam waktu yang cukup sehingga tidak tergesa-gesa,  banyak berlatih dengan mengikuti try out sebelum menghadapi ujian, dan  sering terlibat dalam berbagai kegiatan perlombaan,  terutama yang mampu menunjang masa depan  sesuai bakat dan minat. Di samping itu, Ananda perlu berlatih untuk menjadikan target dalam belajar sebagai motivasi, bukan sebagai beban.'
+    ],
+    22 => [
+        'Kontak Sosial',
+        'Untuk meningkatkan kemampuan berinteraksi dengan orang lain, Ananda perlu berlatih untuk melibatkan diri dalam banyak kegiatan/komunitas sesuai bakat minat dan mengambil peran di dalamnya, akan banyak mendorong dan mengasah kemampuan Ananda dalam memahami berbagai karakter orang dan mengetahui kiat-kiat memenuhi dan menyenangkan orang lain. '
+    ],
+    23 => [
+        'Sistematika Belajar',
+        'Untuk meningkatkan sistematika belajar,  Ananda perlu berlatih menjadi pribadi yang terorganisir (well organized), memiliki perencanaan yang lebih baik (well planned),  menggunakan waktu secara lebih efektif, sesuai perencanaan. Di samping itu, Ananda  perlu menyusun target-target pribadi yang jelas dan terukur.'
+    ],
+    24 => [
+        'Daya Juang',
+        'Untuk menumbuh-kembangkan daya juangnya, Ananda  perlu menyusun target-target pribadi yang jelas dan terukur, Belajar lebih disiplin, lebih lama, lebih keras dan lebih cerdas. Ananda harus berlatih untuk tidak mudah menyerah. Ananda harus melatih diri untuk bekerja keras mencapai target yang ditetapkan, seperti mencari jawaban yang benar terhadap soal-soal yang sulit sampai dapat, tidak mudah berganti-ganti tempat les dsb.  '
+    ],
+    25 => [
+        'Daya Tahan Terhadap Stress',
+        'Untuk meningkatkan daya tahan terhadap stress, Ananda harus sering melatih pengelolaan terhadap stress dengan cara membiasakan diri fokus pada pencapaian hasil, menemukan metode penyelesaian tugas yang nyaman, tidak cepat bosan dengan rutinitas pekerjaan, dan mengembangkan kemampuan mendedikasikan waktu dalam menyelesaikan tugas'
+    ]
+];
+?>
+<table id="customers" align="center">
+    <tr>
+        <th colspan="2"><h2 align="center">ASPEK YANG PERLU DIKEMBANGKAN</h2></th>
+    </tr>
+    <tr>
+        <th width="200">ASPEK</th>
+        <th width="425">SARAN PENGEMBANGAN</th>
+    </tr>
+    <?php 
+    for($i=15;$i<=25;$i++):
+        $_value = $worksheet->getCellByColumnAndRow($i, $row)->getValue();
+        if($_value >= 3) continue;
+    ?>
+    <tr>
+        <td width="200"><?=$dev[$i][0]?></td>
+        <td width="425"><?=$dev[$i][1]?></td>
+    </tr>
+    <?php endfor ?>
+</table>
+<br />
+<div style="text-align:center;width:100%;display:block;">
+    Medan, <?=$worksheet->getCellByColumnAndRow(9, $row)->getValue()?><br />
+    <img src="images/ttd-3.png" style="width:320px" />
 </div>
-<p></p>
-<img src="images/ttd.png" style="width:100%" />
-<div style="page-break-after: always"></div>
