@@ -312,7 +312,7 @@ $d = [
             'Perbankan',
         ]
     ],
-]
+];
 
 $bakat_dan_minat_1 = $worksheet->getCellByColumnAndRow(26, $row)->getValue();
 $bakat_dan_minat_1 = strtoupper($bakat_dan_minat_1);
