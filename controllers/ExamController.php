@@ -163,11 +163,12 @@ class ExamController extends Controller
         $highestRow  = $worksheet->getHighestRow();
         $highestColumn = $worksheet->getHighestColumn();
         $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn);
-        $num_rows = ($highestRow - 4);
-        $count_partial = ceil($num_rows / 15);
+        $num_rows = ($highestRow);
+        $limit = 30;
+        $count_partial = ceil($num_rows / $limit);
         $part = $_GET['part'];
-        $max_row = ($part * 15) + 4;
-        $first_row = (($part-1) * 15) + 4;
+        $max_row = ($part * $limit) + 4;
+        $first_row = (($part-1) * $limit) + 4;
         if($max_row > $num_rows)
             $max_row = $num_rows;
 
