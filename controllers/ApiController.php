@@ -133,17 +133,35 @@ class ApiController extends \yii\web\Controller
         $highestColumn = $worksheet->getHighestColumn();
         $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn);
         $exists = false;
-        for ($row = 3; $row <= $highestRow; $row++) { 
-            $value = $worksheet->getCellByColumnAndRow(3, $row)->getFormattedValue();
-            $_nisn = $worksheet->getCellByColumnAndRow(4, $row)->getFormattedValue();
-            if($value == '' || $_nisn != $nisn) continue;
-        //     echo $worksheet->getCellByColumnAndRow(3, $row)->getValue() . '<br>';
-            $content .= $this->renderPartial('cetak',[
-                'worksheet' => $worksheet,
-                'row'       => $row
-            ]);
-            $exists = true;
-            break;
+        if($worksheet->getCellByColumnAndRow(10, 2)->getFormattedValue() == 'BHS')
+        {
+            for ($row = 3; $row <= $highestRow; $row++) { 
+                $value = $worksheet->getCellByColumnAndRow(3, $row)->getFormattedValue();
+                $_nisn = $worksheet->getCellByColumnAndRow(4, $row)->getFormattedValue();
+                if($value == '' || $_nisn != $nisn) continue;
+            //     echo $worksheet->getCellByColumnAndRow(3, $row)->getValue() . '<br>';
+                $content .= $this->renderPartial('cetak_bhs',[
+                    'worksheet' => $worksheet,
+                    'row'       => $row
+                ]);
+                $exists = true;
+                break;
+            }
+        }
+        else
+        {
+            for ($row = 3; $row <= $highestRow; $row++) { 
+                $value = $worksheet->getCellByColumnAndRow(3, $row)->getFormattedValue();
+                $_nisn = $worksheet->getCellByColumnAndRow(4, $row)->getFormattedValue();
+                if($value == '' || $_nisn != $nisn) continue;
+            //     echo $worksheet->getCellByColumnAndRow(3, $row)->getValue() . '<br>';
+                $content .= $this->renderPartial('cetak',[
+                    'worksheet' => $worksheet,
+                    'row'       => $row
+                ]);
+                $exists = true;
+                break;
+            }
         }
 
         if(!$exists) return "<h2>Not Found</h2>";
