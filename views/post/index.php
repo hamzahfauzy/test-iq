@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'category',
                         'value'     => 'categoryPost.name',
                     ],
-                    // 'post_as',
+                    'jurusan',
                     'post_date',
 
                     ['class' => 'yii\grid\ActionColumn'],
