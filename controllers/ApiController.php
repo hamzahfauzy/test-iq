@@ -199,7 +199,7 @@ class ApiController extends \yii\web\Controller
             $posts = [];
             foreach($cat['posts'] as $post)
             {
-                if($jurusan && $jurusan != $post['jurusan']) continue;
+                if($cat->test_tool == 'IMJ' && $jurusan && $jurusan != $post['jurusan']) continue;
                 if(isset($post['items']) && $cat['test_tool'] == 'TPA')
                     shuffle($post['items']);
 
@@ -234,7 +234,7 @@ class ApiController extends \yii\web\Controller
             $posts = [];
             foreach($cat['posts'] as $key => $post)
             {
-                if($jurusan && $jurusan != $post['jurusan']) continue;
+                if($cat->test_tool == 'IMJ' && $jurusan && $jurusan != $post['jurusan']) continue;
                 if(isset($post['items']) && $cat['test_tool'] == 'TPA')
                     shuffle($post['items']);
 
