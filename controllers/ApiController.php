@@ -186,37 +186,20 @@ class ApiController extends \yii\web\Controller
         if(file_exists($group_id.($jurusan?'-'.$jurusan:'').'.json') && $status==false)
             return json_decode(file_get_contents($group_id.'.json'));
         
-        $categories = [];
-        if(!in_array('IMJ',$tools))
-        {
-            $categories = Category::find()
-                        ->where([
-                            'in', 'test_tool', $tools
-                        ])
-                        ->with(['posts','posts.items'])
-                        ->asArray()
-                        ->orderBy(['sequenced_number'=>'asc'])->all();
-    
-        }
-        else
-        {
-            $categories = Category::find()
-                        ->where([
-                            'in', 'test_tool', $tools
-                        ])
-                        ->with(['posts'=>function($q) use ($jurusan){
-                            $q->where('jurusan',$jurusan);
-                        },'posts.items'])
-                        ->asArray()
-                        ->orderBy(['sequenced_number'=>'asc'])->all();
-    
-        }
+        $categories = Category::find()
+                    ->where([
+                        'in', 'test_tool', $tools
+                    ])
+                    ->with(['posts','posts.items'])
+                    ->asArray()
+                    ->orderBy(['sequenced_number'=>'asc'])->all();
         $cats = [];
         foreach($categories as $cat)
         {
             $posts = [];
             foreach($cat['posts'] as $post)
             {
+                if($jurusan && $jurusan != $post['jurusan']) continue;
                 if(isset($post['items']) && $cat['test_tool'] == 'TPA')
                     shuffle($post['items']);
 
@@ -237,29 +220,13 @@ class ApiController extends \yii\web\Controller
         if(file_exists($group_id.($jurusan?'-'.$jurusan:'').'-demo.json') && $status == false)
             return json_decode(file_get_contents($group_id.'-demo.json'));
 
-        $categories = [];
-        if(!in_array('IMJ',$tools))
-        {
-            $categories = Category::find()
-                        ->where([
-                            'in', 'test_tool', $tools
-                        ])
-                        ->with(['posts','posts.items'])
-                        ->asArray()
-                        ->orderBy(['sequenced_number'=>'asc'])->all();
-        }
-        else
-        {
-            $categories = Category::find()
-                        ->where([
-                            'in', 'test_tool', $tools
-                        ])
-                        ->with(['posts'=>function($q) use ($jurusan){
-                            $q->where('jurusan',$jurusan);
-                        },'posts.items'])
-                        ->asArray()
-                        ->orderBy(['sequenced_number'=>'asc'])->all();
-        }
+        $categories = Category::find()
+                    ->where([
+                        'in', 'test_tool', $tools
+                    ])
+                    ->with(['posts','posts.items'])
+                    ->asArray()
+                    ->orderBy(['sequenced_number'=>'asc'])->all();
 
         $cats = [];
         foreach($categories as $cat)
@@ -267,6 +234,7 @@ class ApiController extends \yii\web\Controller
             $posts = [];
             foreach($cat['posts'] as $key => $post)
             {
+                if($jurusan && $jurusan != $post['jurusan']) continue;
                 if(isset($post['items']) && $cat['test_tool'] == 'TPA')
                     shuffle($post['items']);
 
