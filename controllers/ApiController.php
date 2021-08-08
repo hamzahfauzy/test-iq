@@ -183,7 +183,7 @@ class ApiController extends \yii\web\Controller
         $test_group = Yii::$app->params['test_group'];
         $test_group = $test_group[$group_id];
         $tools = $test_group['tools'];
-        if(file_exists($group_id.'.json') && $status==false)
+        if(file_exists($group_id.($jurusan?'-'.$jurusan:'').'.json') && $status==false)
             return json_decode(file_get_contents($group_id.'.json'));
         
         $categories = [];
@@ -225,7 +225,7 @@ class ApiController extends \yii\web\Controller
             $cat['posts'] =  $posts;
             $cats[] = $cat;
         }
-        file_put_contents($group_id.'.json',json_encode($cats));
+        file_put_contents($group_id.($jurusan?'-'.$jurusan:'').'.json',json_encode($cats));
         return $cats;
     }
 
@@ -234,7 +234,7 @@ class ApiController extends \yii\web\Controller
         $test_group = Yii::$app->params['test_group'];
         $test_group = $test_group[$group_id];
         $tools = $test_group['tools'];
-        if(file_exists($group_id.'-demo.json') && $status == false)
+        if(file_exists($group_id.($jurusan?'-'.$jurusan:'').'-demo.json') && $status == false)
             return json_decode(file_get_contents($group_id.'-demo.json'));
 
         $categories = [];
@@ -287,7 +287,7 @@ class ApiController extends \yii\web\Controller
             $cat['posts'] =  $posts;
             $cats[] = $cat;
         }
-        file_put_contents($group_id.'-demo.json',json_encode($cats));
+        file_put_contents($group_id.($jurusan?'-'.$jurusan:'').'-demo.json',json_encode($cats));
         return $cats;
     }
 
