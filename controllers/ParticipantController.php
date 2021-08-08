@@ -136,8 +136,8 @@ class ParticipantController extends Controller
                         $participant = new Participant;
                         $participant->name = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
                         $participant->id_number = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
-                        $participant->birthdate = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
-                        $participant->study = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                        $participant->birthdate = date('Y-m-d');
+                        $participant->study = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
                         $participant->user_id = $user->id;
                         $participant->save(false);
                     }
