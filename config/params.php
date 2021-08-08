@@ -8,7 +8,7 @@ return [
         'TPA'=>'TPA',
         'HOLLAND'=>'HOLLAND',
         'PAPIKOSTICK'=>'PAPIKOSTICK',
-        'PSA'=>'PSA',
+        'IMJ'=>'IMJ',
     ],
     'test_group' => [
         'group_1' => [
@@ -36,7 +36,7 @@ return [
             'id'   => 'group_4',
             'name' => 'Group 4',
             'tools' => [
-                'PSA'
+                'TPA','HOLLAND','PAPIKOSTICK','IMJ'
             ]
         ]
     ],

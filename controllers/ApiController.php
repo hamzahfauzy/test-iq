@@ -32,6 +32,7 @@ class ApiController extends \yii\web\Controller
             'group_1' => 'http://video.ujiantmc.online/vmb1',
             'group_2' => 'http://video.ujiantmc.online/vmb2',
             'group_3' => 'http://video.ujiantmc.online/vmb3',
+            'group_4' => 'http://video.ujiantmc.online/vmb4',
         ];
         return [
             'tutorial' => $tutorial[$exam['test_group']],
@@ -177,23 +178,39 @@ class ApiController extends \yii\web\Controller
         return;
     }
 
-    public function actionGenerate($group_id,$status=false)
+    public function actionGenerate($group_id,$status=false,$jurusan=false)
     {
         $test_group = Yii::$app->params['test_group'];
         $test_group = $test_group[$group_id];
         $tools = $test_group['tools'];
         if(file_exists($group_id.'.json') && $status==false)
             return json_decode(file_get_contents($group_id.'.json'));
-        // return [
-        //     'tutorial' => $tutorial[$exam['test_group']],
-        $categories = Category::find()
-                    ->where([
-                        'in', 'test_tool', $tools
-                    ])
-                    ->with(['posts','posts.items'])
-                    ->asArray()
-                    ->orderBy(['sequenced_number'=>'asc'])->all();
-
+        
+        $categories = [];
+        if(!in_array('IMJ',$tools))
+        {
+            $categories = Category::find()
+                        ->where([
+                            'in', 'test_tool', $tools
+                        ])
+                        ->with(['posts','posts.items'])
+                        ->asArray()
+                        ->orderBy(['sequenced_number'=>'asc'])->all();
+    
+        }
+        else
+        {
+            $categories = Category::find()
+                        ->where([
+                            'in', 'test_tool', $tools
+                        ])
+                        ->with(['posts'=>function($q) use ($jurusan){
+                            $q->where('jurusan',$jurusan);
+                        },'posts.items'])
+                        ->asArray()
+                        ->orderBy(['sequenced_number'=>'asc'])->all();
+    
+        }
         $cats = [];
         foreach($categories as $cat)
         {
@@ -212,22 +229,37 @@ class ApiController extends \yii\web\Controller
         return $cats;
     }
 
-    public function actionGenerateDemo($group_id,$status=false)
+    public function actionGenerateDemo($group_id,$status=false,$jurusan=false)
     {
         $test_group = Yii::$app->params['test_group'];
         $test_group = $test_group[$group_id];
         $tools = $test_group['tools'];
         if(file_exists($group_id.'-demo.json') && $status == false)
             return json_decode(file_get_contents($group_id.'-demo.json'));
-        // return [
-        //     'tutorial' => $tutorial[$exam['test_group']],
-        $categories = Category::find()
-                    ->where([
-                        'in', 'test_tool', $tools
-                    ])
-                    ->with(['posts','posts.items'])
-                    ->asArray()
-                    ->orderBy(['sequenced_number'=>'asc'])->all();
+
+        $categories = [];
+        if(!in_array('IMJ',$tools))
+        {
+            $categories = Category::find()
+                        ->where([
+                            'in', 'test_tool', $tools
+                        ])
+                        ->with(['posts','posts.items'])
+                        ->asArray()
+                        ->orderBy(['sequenced_number'=>'asc'])->all();
+        }
+        else
+        {
+            $categories = Category::find()
+                        ->where([
+                            'in', 'test_tool', $tools
+                        ])
+                        ->with(['posts'=>function($q) use ($jurusan){
+                            $q->where('jurusan',$jurusan);
+                        },'posts.items'])
+                        ->asArray()
+                        ->orderBy(['sequenced_number'=>'asc'])->all();
+        }
 
         $cats = [];
         foreach($categories as $cat)

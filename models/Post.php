@@ -36,7 +36,7 @@ class Post extends \yii\db\ActiveRecord
     {
         return [
             [['post_content'], 'string'],
-            [['post_date'], 'safe'],
+            [['post_date','jurusan'], 'safe'],
             [['post_title', 'post_as', 'post_type'], 'string', 'max' => 255],
         ];
     }
@@ -53,6 +53,7 @@ class Post extends \yii\db\ActiveRecord
             'post_as' => 'Post As',
             'post_type' => 'Post Type',
             'post_date' => 'Post Date',
+            'jurusan' => 'Jurusan',
         ];
     }
 

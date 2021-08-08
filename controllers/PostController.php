@@ -13,6 +13,7 @@ use app\models\PostSearch;
 use yii\filters\VerbFilter;
 use app\models\CategoryPost;
 use yii\helpers\ArrayHelper;
+use app\models\TestTools\Imj;
 use app\models\TestTools\Tpa;
 use app\models\PostItemsSearch;
 use app\models\TestTools\Cfit2;
@@ -155,6 +156,7 @@ class PostController extends Controller
                         $post = new Post;
                         $post->post_title = "Soal ".$category->name." ".$no;
                         $post->post_as    = "Soal";
+                        $post->jurusan    = $model->jurusan;
                         $post->save(false);
                         
                         // assign category to post (soal)
@@ -188,6 +190,14 @@ class PostController extends Controller
 
                             Holland::insert($no,$category,$worksheet,$post,$row);
                         }
+
+                        elseif($category->test_tool == 'IMJ')
+                        {
+                            $post->post_content = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                            $post->save(false);
+
+                            Imj::insert($no,$category,$worksheet,$post,$row);
+                        }
                     }
                     $transaction->commit();
                     Yii::$app->session->addFlash("success", "Import Posts Success");
@@ -213,10 +223,13 @@ class PostController extends Controller
 
         $categories = Category::find()->orderby(['sequenced_number'=>SORT_ASC])->all();
         $categories = ArrayHelper::map($categories,'id','name');
+        $jurusan    = Yii::$app->params['jurusan'];
+        $jurusan    = array_merge(['NULL'=>'Tidak Ada'], $jurusan);
 
         return $this->render('imports', [
             'model' => $model,
             'categories' => $categories,
+            'jurusan' => $jurusan,
         ]);
     }
 

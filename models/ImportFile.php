@@ -16,6 +16,7 @@ class ImportFile extends Model
     public $category_id;
     public $file;
     public $tipe;
+    public $jurusan;
 
 
     /**
@@ -25,6 +26,7 @@ class ImportFile extends Model
     {
         return [
             [['category_id', 'file','tipe'], 'required'],
+            [['jurusan'], 'safe'],
         ];
     }
 }

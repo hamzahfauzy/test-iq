@@ -27,6 +27,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'prompt' => '- Choose Category -',
             ])->label('Category') ?>
 
+            <?= $form->field($model, 'jurusan')->dropdownList($jurusan,[
+                // 'prompt' => '- Pilih Jurusan -',
+            ])->label('Jurusan') ?>
+
             <?= $form->field($model, 'file[]')->input('file',['multiple'=>'true']) ?>
 
             <div class="form-group">

@@ -1,6 +1,9 @@
 <?php
 
 $params = require __DIR__ . '/params.php';
+$jurusan = require __DIR__ . '/jurusan.php';
+
+$params = array_merge($params, $jurusan);
 $db = require __DIR__ . '/db.php';
 
 $config = [
