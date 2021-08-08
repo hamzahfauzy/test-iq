@@ -5,6 +5,9 @@ return [
         'TO'=>'TO',
         'TK'=>'TK',
         'AK'=>'AK',
-        'AP'=>'AP'
+        'AP'=>'AP',
+        'TKim'=>'TKim',
+        'TM'=>'TM',
+
     ]
 ];
