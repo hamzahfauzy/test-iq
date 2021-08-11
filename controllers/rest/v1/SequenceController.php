@@ -107,7 +107,7 @@ class SequenceController extends Controller
                 break;
             }
 
-            if($cacategories['test_tool'] == 'PAPIKOSTICK' && $key == 3)
+            if($categories['test_tool'] == 'PAPIKOSTICK' && $key == 3)
             {
                 // 3 soal
                 break;
