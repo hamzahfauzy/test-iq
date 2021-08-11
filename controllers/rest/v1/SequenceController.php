@@ -69,7 +69,7 @@ class SequenceController extends Controller
         $posts = [];
         foreach($categories['posts'] as $post)
         {
-            if($categories['test_tool'] == 'IMJ' && $jurusan && $jurusan != $post['jurusan']) continue;
+            if($categories['test_tool'] == 'IMJ' && strtolower($jurusan) != strtolower($post['jurusan'])) continue;
             if(isset($post['items']) && $categories['test_tool'] == 'TPA')
                 shuffle($post['items']);
 
@@ -92,7 +92,7 @@ class SequenceController extends Controller
                         ->one();
 
         $posts = [];
-        foreach($categories['posts'] as $post)
+        foreach($categories['posts'] as $key => $post)
         {
             if($categories['test_tool'] == 'IMJ' && $jurusan && $jurusan != $post['jurusan']) continue;
             if(isset($post['items']) && $categories['test_tool'] == 'TPA')
