@@ -173,9 +173,8 @@ class SequenceController extends Controller
         $user = Yii::$app->user->identity;
         $request = Yii::$app->request;
         $data = $request->post();
-        return $data['answered'];
-        $data = json_encode($data->answered);
-        file_put_contents("answers/".$data->id.'-'.$user->username.'.json',$request);
+        $data = json_encode($data['answered']);
+        file_put_contents("answers/".$data['id'].'-'.$user->username.'.json',$request);
         return $data;
     }
 
