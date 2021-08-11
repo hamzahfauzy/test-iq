@@ -48,7 +48,7 @@ class DashboardController extends Controller
             $exam = Exam::find()->where(['id'=>$ex['exam_id']])->asArray()->one();
             $now = strtotime('now');
             $exam['tutorial'] = $tutorial[$exam['test_group']];
-            $exam['in_time'] = strtotime($exam['start_time']) <= $now || strtotime($exam['end_time']) >= $now;
+            $exam['in_time'] = strtotime($exam['start_time']) <= $now && strtotime($exam['end_time']) >= $now;
             $examParticipants[$key]['exam'] = $exam;
 
         }
