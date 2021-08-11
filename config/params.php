@@ -38,6 +38,13 @@ return [
             'tools' => [
                 'TPA','HOLLAND','PAPIKOSTICK','IMJ'
             ]
+        ],
+        'group_5' => [
+            'id'   => 'group_5',
+            'name' => 'Group 5',
+            'tools' => [
+                'HOLLAND'
+            ]
         ]
     ],
     'bulan' => [
