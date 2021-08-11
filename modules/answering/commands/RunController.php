@@ -34,7 +34,7 @@ class RunController extends Controller
         ])->all();
         foreach($examParticipant as $examPart)
         {
-            $file = 'web/answers/'.$examPart->participant->id_number.'.json';
+            $file = 'web/answers/'.$id.'-'.$examPart->participant->id_number.'.json';
             echo 'finding '.$file ."\n";
             if(file_exists($file))
             {
