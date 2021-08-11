@@ -137,7 +137,7 @@ class SequenceController extends Controller
         $participant = Yii::$app->user->identity->participant;
         $request = Yii::$app->request;
         $data = $request->post();
-        $exam_participant = ExamParticipant::find()->where(['participant_id'=>$participant->id,'exam_id'=>$data['exam_id']])->one();
+        $exam_participant = ExamParticipant::find()->where(['participant_id'=>$participant->id,'exam_id'=>$data['id']])->one();
         $exam_participant->status = 'finish';
         $exam_participant->finished_at = date('Y-m-d H:i:s');
         $exam_participant->save();
