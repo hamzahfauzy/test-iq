@@ -101,6 +101,11 @@ class Participant extends \yii\db\ActiveRecord
         return $this->hasOne(Exam::className(), ['id' => 'exam_id'])->viaTable('exam_participants',['participant_id'=>'id'])->where(['>=','end_time',date("Y-m-d H:i:s")])->andWhere(['<=','start_time',date("Y-m-d H:i:s")]);
     }
 
+    public function getExams()
+    {
+        return $this->hasMany(Exam::className(), ['id' => 'exam_id'])->viaTable('exam_participants',['participant_id'=>'id']);
+    }
+
     public function getFirstExam()
     {
         return $this->hasOne(Exam::className(), ['id' => 'exam_id'])->viaTable('exam_participants',['participant_id'=>'id']);

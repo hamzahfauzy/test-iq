@@ -52,7 +52,7 @@ class Exam extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
         ];
     }
-
+    
     public function groupName()
     {
         $group = $this->group();

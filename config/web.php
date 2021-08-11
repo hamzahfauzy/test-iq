@@ -39,6 +39,9 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'minatbakatapp',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -70,16 +73,6 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-                [
-                    'pattern' => 'api/v1/login',
-                    'route'   => 'api/auth/login',
-                ],
-                [
-                    'pattern' => 'api/v1/exam',
-                    'route' => 'api/exam/index',
-                ]
-            ],
         ],
     ],
     'params' => $params,
@@ -106,6 +99,7 @@ if (YII_ENV_DEV) {
         'allowActions' => [
             // '*',
             'api/*',
+            'rest/*',
             'site/laporan'
             // 'admin/*',
             // 'gii/*',

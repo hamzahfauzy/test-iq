@@ -1,0 +1,73 @@
+{
+    "person_information":{
+        "nama_lengkap":{
+            "label":"Nama Lengkap",
+            "value":""
+        },
+        "tempat_lahir":{
+            "label":"Tempat Lahir",
+            "value":""
+        },
+        "tanggal_lahir":{
+            "label":"Tanggal Lahir",
+            "value":"",
+            "ttl":true
+        },
+        "NISN":{
+            "label":"NISN",
+            "value":""
+        },
+        "jenis_kelamin":{
+            "label":"Jenis Kelamin",
+            "value":"",
+            "options":["Laki-Laki","Perempuan"]
+        },
+        "sma":{
+            "label":"Nama SMA",
+            "value":""
+        },
+        "smp":{
+            "label":"Asal Sekolah SMP",
+            "value":""
+        },
+        "jurusan":{
+            "label":"Jurusan yang Diinginkan",
+            "value":["IPA","IPS","BAHASA"]
+        },
+        "cita_cita":{
+            "label":"Cita - cita",
+            "value":""
+        }
+    },
+    "academyc_information": {
+        "prestasi_akademik":{
+            "label":"Prestasi Akademik",
+            "items":{
+                "rangking_tertinggi":{
+                    "label":"Rangking Tertinggi Selama SMP",
+                    "value":""
+                }
+            }
+        },
+        "prestasi_non_akademik":{
+            "label":"Prestasi Non Akademik",
+            "items":{
+                "olimpiade": {
+                    "label":"Olimpiade",
+                    "value":[],
+                    "items":true
+                },
+                "olahraga": {
+                    "label":"Olahraga",
+                    "value":[],
+                    "items":true
+                },
+                "kesenian": {
+                    "label":"Kesenian",
+                    "value":[],
+                    "items":true
+                }
+            }
+        }
+    }
+}

@@ -239,7 +239,7 @@ class ApiController extends \yii\web\Controller
                     shuffle($post['items']);
 
                 $posts[] = $post;
-                if(in_array($cat['test_tool'],['TPA','HOLLAND']))
+                if(in_array($cat['test_tool'],['TPA','HOLLAND','IMJ']))
                 {
                     // 1 soal
                     break;
