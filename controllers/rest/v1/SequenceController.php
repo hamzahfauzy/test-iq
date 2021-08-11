@@ -57,6 +57,7 @@ class SequenceController extends Controller
 
     public function actionSingleCategories($category_id)
     {
+        $jurusan = Yii::$app->user->identity->participant->study;
         $categories = Category::find()->where(['categories.id'=>$category_id])
                         ->joinWith(['posts'=>function($q){
                             return $q->select(['id','post_title','post_content','jurusan']);
@@ -82,6 +83,7 @@ class SequenceController extends Controller
 
     public function actionSingleCategoriesDemo($category_id)
     {
+        $jurusan = Yii::$app->user->identity->participant->study;
         $categories = Category::find()->where(['categories.id'=>$category_id])
                         ->joinWith(['posts'=>function($q){
                             return $q->select(['id','post_title','post_content','jurusan']);
