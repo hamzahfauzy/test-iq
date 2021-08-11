@@ -101,18 +101,7 @@ class SequenceController extends Controller
                 shuffle($post['items']);
 
             $posts[] = $post;
-            if(in_array($categories['test_tool'],['TPA','HOLLAND','IMJ']))
-            {
-                // 1 soal
-                break;
-            }
-
-            if($categories['test_tool'] == 'PAPIKOSTICK' && $key == 3)
-            {
-                // 3 soal
-                break;
-            }
-
+            break;
         }
         $categories['posts'] =  $posts;
 
