@@ -33,13 +33,16 @@ class AuthController extends Controller
     public function actionLogin()
     {
         $request = Yii::$app->request;
-        $user = [];
+        $auth_key = null;
         if($request->post())
         {
-            $user = User::find()->where(['username'=>$request->post('username')])->select('auth_key')->one();
-            $user->auth_key = \Yii::$app->security->generateRandomString();
+            $auth_key = \Yii::$app->security->generateRandomString();
+            $user = User::find()->where(['username'=>$request->post('username')])->one();
+            $user->auth_key = $auth_key;
             $user->save();
+
+            $auth_key = ['auth_key'=>$auth_key];
         }
-        return $user;
+        return $auth_key;
     }
 }
