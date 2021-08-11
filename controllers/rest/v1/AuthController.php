@@ -35,7 +35,11 @@ class AuthController extends Controller
         $request = Yii::$app->request;
         $user = [];
         if($request->post())
+        {
             $user = User::find()->where(['username'=>$request->post('username')])->select('auth_key')->one();
+            $user->auth_key = \Yii::$app->security->generateRandomString();
+            $user->save();
+        }
         return $user;
     }
 }
