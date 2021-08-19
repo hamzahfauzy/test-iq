@@ -132,15 +132,6 @@ class Group5
 
         foreach($report as $key => $re)
         {
-            $verbal = $re['skor']['TPA']['S1']+$re['skor']['TPA']['S2']+$re['skor']['TPA']['S3']+$re['skor']['TPA']['S4'];
-            $spasial = $re['skor']['TPA']['S7']+$re['skor']['TPA']['S8'];
-            $numerikal = $re['skor']['TPA']['S5']+$re['skor']['TPA']['S6'];
-
-            $verbal = $this->tpa_norma($verbal,'verbal');
-            $spasial = $this->tpa_norma($spasial,'spasial');
-            $numerikal = $this->tpa_norma($numerikal,'numerikal');
-
-            $skor_papi = $this->papi_norma($re['skor']['Papikostick']);
             $rows = '<tr>';
             $rows .= '<td>'.++$key.'</td>';
             $rows .= '<td>'.$re['participant']->name.'</td>';
