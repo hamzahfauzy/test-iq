@@ -74,6 +74,55 @@ class RunController extends Controller
         echo "Success\n";
     }
 
+    public function actionNew($id)
+    {
+        $examParticipant = ExamParticipant::find()->where([
+            'exam_id' => $id,
+            'status'  => 'finish',
+            'queue_status' => 0
+        ])->all();
+        foreach($examParticipant as $examPart)
+        {
+            $file = 'web/answers/'.$id.'-'.$examPart->participant->id_number.'.json';
+            echo 'finding '.$file ."\n";
+            if(file_exists($file))
+            {
+                echo 'file '.$file.' found and execute'."\n";
+                $data = file_get_contents($file);
+                if(empty($data) || $data == null || $data == "") continue;
+                // $data = json_decode($data,1);
+                $data = str_split($data,4);
+                foreach($data as $jawaban)
+                {
+                    $exam_answer = ExamAnswer::find()->where([
+                        'exam_id'=>$id,
+                        'question_id'=>$key,
+                        'participant_id'=>$examPart->participant_id,
+                    ]);
+                    $post = Post::find()->where(['id'=>$jawaban])->one();
+                    $answer = new ExamAnswer();
+                    if($exam_answer->exists()){
+                        $answer = $exam_answer->one();
+                    }
+
+                    $answer->exam_id = $id;
+                    $answer->question_id = $post->parent->id;
+                    $answer->participant_id = $examPart->participant_id;
+                    $answer->answer_id = $jawaban;
+                    $answer->answer_content = $post->post_content;
+                    $answer->score = $post->post_type;
+
+                    $answer->save(false);
+
+                }
+            }
+
+            $examPart->queue_status = 1;
+            $examPart->save(false);
+        }
+        echo "Success\n";
+    }
+
     function actionPatchscore()
     {
         $categories = Category::find()->where(['test_tool'=>'PAPIKOSTICK'])->all();
