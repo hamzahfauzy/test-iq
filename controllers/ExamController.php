@@ -262,6 +262,8 @@ class ExamController extends Controller
             'group_1' => 'app\models\TestGroup\Group1',
             'group_2' => 'app\models\TestGroup\Group2',
             'group_3' => 'app\models\TestGroup\Group3',
+            'group_4' => 'app\models\TestGroup\Group4',
+            'group_5' => 'app\models\TestGroup\Group5',
         ];
 
         $model = Exam::find()->where([
