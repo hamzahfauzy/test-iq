@@ -94,12 +94,12 @@ class RunController extends Controller
                 $data = str_split($data,4);
                 foreach($data as $jawaban)
                 {
+                    $post = Post::find()->where(['id'=>$jawaban])->one();
                     $exam_answer = ExamAnswer::find()->where([
                         'exam_id'=>$id,
-                        'question_id'=>$key,
+                        'question_id'=>$post->parent->id,
                         'participant_id'=>$examPart->participant_id,
                     ]);
-                    $post = Post::find()->where(['id'=>$jawaban])->one();
                     $answer = new ExamAnswer();
                     if($exam_answer->exists()){
                         $answer = $exam_answer->one();
