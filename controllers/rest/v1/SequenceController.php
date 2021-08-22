@@ -171,11 +171,12 @@ class SequenceController extends Controller
             $old_file = file_get_contents($file);
             $d = [];
             $d[0] = json_decode($old_file,true);
-            $d[1] = $data['answered'];
-            $e = json_encode($d);
-            $e = json_decode($e,true);
-            $answered = array_merge($e[0],$e[1]);
-            $data['answered'] = $answered;
+            $data['answered'] = array_keys($d[0]);
+            // $d[1] = $data['answered'];
+            // $e = json_encode($d);
+            // $e = json_decode($e,true);
+            // $answered = array_merge($e[0],$e[1]);
+            // $data['answered'] = $answered;
         }
         $data = json_encode($data['answered']);
         file_put_contents($file,$data);
