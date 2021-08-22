@@ -169,8 +169,8 @@ class SequenceController extends Controller
         if(file_exists($file))
         {
             $old_file = file_get_contents($file);
-            $old_data = json_decode($old_file);
-            $data['answered'] = array_merge($old_data,$data['answered']);
+            $old_data = json_decode($old_file,1);
+            $data['answered'] = array_merge($old_data,json_decode(json_encode($data['answered']),1));
         }
         $data = json_encode($data['answered']);
         file_put_contents($file,$data);
