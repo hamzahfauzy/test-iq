@@ -166,21 +166,21 @@ class SequenceController extends Controller
         $data = $request->post();
         $id   = $data['id'];
         $file = "answers/".$id.'-'.$user->username.'.json';
-        if(file_exists($file))
-        {
-            $old_file = file_get_contents($file);
-            $d = [];
-            $d[0] = json_decode($old_file,true);
-            $keys = [];
-            foreach($d[0] as $k => $v)
-                $keys[] = $k;
-            $data['answered'] = $keys;
-            // $d[1] = $data['answered'];
-            // $e = json_encode($d);
-            // $e = json_decode($e,true);
-            // $answered = array_merge($e[0],$e[1]);
-            // $data['answered'] = $answered;
-        }
+        // if(file_exists($file))
+        // {
+        //     $old_file = file_get_contents($file);
+        //     $d = [];
+        //     $d[0] = json_decode($old_file,true);
+        //     $keys = [];
+        //     foreach($d[0] as $k => $v)
+        //         $keys[] = $k;
+        //     $data['answered'] = $keys;
+        //     // $d[1] = $data['answered'];
+        //     // $e = json_encode($d);
+        //     // $e = json_decode($e,true);
+        //     // $answered = array_merge($e[0],$e[1]);
+        //     // $data['answered'] = $answered;
+        // }
         $data = json_encode($data['answered']);
         file_put_contents($file,$data);
         return $data;
