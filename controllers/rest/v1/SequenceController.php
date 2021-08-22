@@ -172,12 +172,7 @@ class SequenceController extends Controller
             $d = [];
             $d[0] = json_decode($old_file,true);
             $d[1] = $data['answered'];
-            $vals = [];
-            foreach($d[0] as $k => $v)
-                $vals[$k] = $v;
-
-            $answered = array_merge($d[0],$d[1]);
-            $data['answered'] = $answered;
+            $data['answered'] = $d[0]+$d[1];
         }
         $data = json_encode($data['answered']);
         file_put_contents($file,$data);
