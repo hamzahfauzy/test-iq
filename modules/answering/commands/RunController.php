@@ -42,11 +42,11 @@ class RunController extends Controller
                 $data = file_get_contents($file);
                 if(empty($data) || $data == null || $data == "") continue;
                 $data = json_decode($data,1);
-                foreach($data['answers'] as $key => $jawaban)
+                foreach($data as $key => $jawaban)
                 {
                     if($jawaban == null) continue;
                     $exam_answer = ExamAnswer::find()->where([
-                        'exam_id'=>$data['exam_id'],
+                        'exam_id'=>$id,
                         'question_id'=>$key,
                         'participant_id'=>$examPart->participant_id,
                     ]);
@@ -56,7 +56,7 @@ class RunController extends Controller
                         $answer = $exam_answer->one();
                     }
 
-                    $answer->exam_id = $data['exam_id'];
+                    $answer->exam_id = $id;
                     $answer->question_id = $key;
                     $answer->participant_id = $examPart->participant_id;
                     $answer->answer_id = $jawaban;
