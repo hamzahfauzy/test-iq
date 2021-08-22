@@ -165,12 +165,12 @@ class SequenceController extends Controller
         $request = Yii::$app->request;
         $data = $request->post();
         $file = "answers/".$id.'-'.$user->username.'.json';
-        if(file_exists($file))
-        {
-            $old_file = file_get_contents($file);
-            $old_data = json_decode($file,1);
-            $data['answered'] = array_merge($old_data,$data['answered']);
-        }
+        // if(file_exists($file))
+        // {
+        //     $old_file = file_get_contents($file);
+        //     $old_data = json_decode($file,1);
+        //     $data['answered'] = array_merge($old_data,$data['answered']);
+        // }
         $id   = $data['id'];
         $data = json_encode($data['answered']);
         file_put_contents($file,$data);
