@@ -42,7 +42,7 @@ class RunController extends Controller
                 $data = file_get_contents($file);
                 if(empty($data) || $data == null || $data == "") continue;
                 $data = json_decode($data,1);
-                if($data == null) continue;
+                if(!$data) continue;
                 foreach($data as $key => $jawaban)
                 {
                     if($jawaban == null) continue;
