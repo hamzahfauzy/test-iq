@@ -41,8 +41,8 @@ class RunController extends Controller
                 echo 'file '.$file.' found and execute'."\n";
                 $data = file_get_contents($file);
                 if(empty($data) || $data == null || $data == "") continue;
-                if(!(json_last_error() === JSON_ERROR_NONE)) continue;
                 $data = json_decode($data,1);
+                if(!(json_last_error() === JSON_ERROR_NONE)) continue;
                 foreach($data as $key => $jawaban)
                 {
                     if($jawaban == null) continue;
