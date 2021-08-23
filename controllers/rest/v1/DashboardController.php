@@ -8,6 +8,7 @@ use app\models\User;
 use app\models\Category;
 use yii\rest\Controller;
 use app\models\Participant;
+use app\models\ImportExamFile;
 use yii\filters\auth\HttpBearerAuth;
 
 class DashboardController extends Controller
