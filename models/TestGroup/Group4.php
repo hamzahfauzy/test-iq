@@ -134,7 +134,7 @@ class Group4
                 'S'=>0,
                 'E'=>0,
                 'C'=>0,
-                'IMJ'
+                'IMJ'=>0
             ];
             foreach($participant->examAnswers as $answer)
             {
