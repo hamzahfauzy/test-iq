@@ -173,10 +173,7 @@ class RunController extends Controller
 
                     $jawaban = $question->getItems()
                     ->orderBy(new Expression('rand()'))
-                    ->one();
-
-                    print_r($jawaban);
-                    continue;
+                    ->asArray()->one(); print_r($jawaban); break;
 
                     // jika soal belum di jawab
                     $answer = new ExamAnswer();
