@@ -175,6 +175,9 @@ class RunController extends Controller
                     ->orderBy(new Expression('rand()'))
                     ->one();
 
+                    print_r($jawaban);
+                    continue;
+
                     // jika soal belum di jawab
                     $answer = new ExamAnswer();
                     $answer->exam_id = $id;
