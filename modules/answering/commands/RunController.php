@@ -153,7 +153,7 @@ class RunController extends Controller
         ])->all();
         foreach($examParticipant as $examPart)
         {
-            echo "Set Score for ".$examPart->participant->id_number.'\n';
+            echo "Set Score for ".$examPart->participant->id_number."\n";
             $exam   = $examPart->exam;
             $test_group = \Yii::$app->params['test_group'];
             $test_group = $test_group[$exam->test_group];
