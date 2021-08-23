@@ -46,8 +46,8 @@ class Group4
         'S',
         'E',
         'C',
+        'IMJ',
         'HASIL',
-        'IMJ'
     ];
 
     public static $categories = [
@@ -194,6 +194,9 @@ class Group4
             // $key_holland = array_keys($holland);
 
             $skor['HOLLAND'] = $holland_skor; //implode('',$key_holland);
+            $instrumen_jurusan = \Yii::$app->params['instrumen_jurusan'];
+            $instrumen_jurusan = $instrumen_jurusan[$participant->study];
+            $skor['HASIL'] = ($skor['IMJ']*0.5) + ($holland[$instrumen_jurusan]*0.5);
 
             $report[] = [
                 'participant' => $participant,
@@ -271,8 +274,8 @@ class Group4
             $rows .= '<td>'.$re['skor']['S'].'</td>';
             $rows .= '<td>'.$re['skor']['E'].'</td>';
             $rows .= '<td>'.$re['skor']['C'].'</td>';
-            $rows .= '<td>'.$re['skor']['HOLLAND'].'</td>';
             $rows .= '<td>'.$re['skor']['IMJ'].'</td>';
+            $rows .= '<td>'.$re['skor']['HASIL'].'</td>';
 
             $html .= $rows;
         }

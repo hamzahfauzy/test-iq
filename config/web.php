@@ -4,6 +4,20 @@ $params = require __DIR__ . '/params.php';
 $jurusan = require __DIR__ . '/jurusan.php';
 
 $params = array_merge($params, $jurusan);
+$params['instrumen_jurusan'] = [
+    'TO'=>'R',
+    'TK'=>'R',
+    'AK'=>'C',
+    'AP'=>'I',
+    'TKim'=>'I',
+    'TM'=>'R',
+    'ADK' => 'C',
+    'DISKOMVIS' => 'A',
+    'TLAS' => 'R',
+    'TELEK' => 'R',
+    'BUS' => 'A',
+    'TSIP' => 'R'
+];
 $db = require __DIR__ . '/db.php';
 
 $config = [
