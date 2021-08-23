@@ -100,7 +100,9 @@ class Group4
             'Soal Papikostik (Halaman 2)',
             'Soal Papikostik (Halaman 3)',
         ],
-        'IMJ'
+        'IMJ' => [
+            'Soal IMJ'
+        ]
     ];
 
     public static $_report = [];
@@ -136,7 +138,7 @@ class Group4
             ];
             foreach($participant->examAnswers as $answer)
             {
-                if(!in_array($answer->question->categoryPost->test_tool,['TPA','HOLLAND','PAPIKOSTICK'])) continue;
+                if(!in_array($answer->question->categoryPost->test_tool,['TPA','HOLLAND','PAPIKOSTICK','IMJ'])) continue;
                 foreach(self::$categories as $key => $value)
                 {
                     if(in_array($answer->question->categoryPost->name,$value) && $answer->answer)
