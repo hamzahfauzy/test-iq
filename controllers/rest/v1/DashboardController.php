@@ -5,6 +5,7 @@ namespace app\controllers\rest\v1;
 use Yii;
 use app\models\Exam;
 use app\models\User;
+use yii\helpers\Url;
 use app\models\Category;
 use yii\rest\Controller;
 use app\models\Participant;
