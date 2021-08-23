@@ -155,7 +155,7 @@ class RunController extends Controller
         {
             echo "Set Score for ".$examPart->participant->id_number.'\n';
             $exam   = $examPart->exam;
-            $test_group = Yii::$app->params['test_group'];
+            $test_group = \Yii::$app->params['test_group'];
             $test_group = $test_group[$exam->test_group];
             $categories = Category::find()->where(['in','test_tool',$test_group])->all();
             foreach($categories as $cat)
