@@ -3,6 +3,7 @@ namespace app\modules\answering\commands;
 
 use app\models\Exam;
 use app\models\Post;
+use yii\db\Expression;
 use app\models\Category;
 use yii\helpers\Console;
 use app\models\ExamAnswer;
