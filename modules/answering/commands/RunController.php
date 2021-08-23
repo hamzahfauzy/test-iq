@@ -173,16 +173,16 @@ class RunController extends Controller
 
                     $jawaban = $question->getItems()
                     ->orderBy(new Expression('rand()'))
-                    ->asArray()->one(); print_r($jawaban); break;
+                    ->asArray()->one();
 
                     // jika soal belum di jawab
                     $answer = new ExamAnswer();
                     $answer->exam_id = $id;
                     $answer->question_id = $question->id;
                     $answer->participant_id = $examPart->participant_id;
-                    $answer->answer_id = $jawaban->id;
-                    $answer->answer_content = $jawaban->post_content;
-                    $answer->score = $jawaban->post_type;
+                    $answer->answer_id = $jawaban['id'];
+                    $answer->answer_content = $jawaban['post_content'];
+                    $answer->score = $jawaban['post_type'];
 
                     $answer->save(false);
                 }
