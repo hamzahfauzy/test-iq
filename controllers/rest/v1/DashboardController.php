@@ -37,6 +37,7 @@ class DashboardController extends Controller
     {
         $participant = Yii::$app->user->identity->participant;
         $examParticipants = $participant->getExamParticipants()->select(['exam_id','status'])->asArray()->all();
+        
         $tutorial = [
             'group_1' => 'http://video.ujiantmc.online/vmb1',
             'group_2' => 'http://video.ujiantmc.online/vmb2',
@@ -46,10 +47,12 @@ class DashboardController extends Controller
         ];
         foreach($examParticipants as $key => $ex)
         {
-            $exam = Exam::find()->where(['id'=>$ex['exam_id']])->asArray()->one();
+            $exam   = Exam::find()->where(['id'=>$ex['exam_id']])->asArray()->one();
+            $report = ImportExamFile::find()->where(['exam_id'=>$exam['id']]);
             $now = strtotime('now');
             $exam['tutorial'] = $tutorial[$exam['test_group']];
             $exam['in_time'] = strtotime($exam['start_time']) <= $now && strtotime($exam['end_time']) >= $now;
+            $exam['download'] = $report->exists() ? Url::base(true) . '/api/download-laporan?id='.$exam['id'].'&nisn='.Yii::$app->user->identity->username : '';
             $examParticipants[$key]['exam'] = $exam;
 
         }
