@@ -47,6 +47,7 @@ class Group4
         'E',
         'C',
         'HASIL',
+        'IMJ'
     ];
 
     public static $categories = [
@@ -98,7 +99,8 @@ class Group4
             'Soal Papikostik (Halaman 1)',
             'Soal Papikostik (Halaman 2)',
             'Soal Papikostik (Halaman 3)',
-        ]
+        ],
+        'IMJ'
     ];
 
     public static $_report = [];
@@ -129,7 +131,8 @@ class Group4
                 'A'=>0,
                 'S'=>0,
                 'E'=>0,
-                'C'=>0
+                'C'=>0,
+                'IMJ'
             ];
             foreach($participant->examAnswers as $answer)
             {
@@ -138,7 +141,7 @@ class Group4
                 {
                     if(in_array($answer->question->categoryPost->name,$value) && $answer->answer)
                     {
-                        if(in_array($answer->question->categoryPost->test_tool,['TPA','HOLLAND']))
+                        if(in_array($answer->question->categoryPost->test_tool,['TPA','HOLLAND','IMJ']))
                         {
                             $skor[$key] += (int) $answer->answer->post_type;
                             if($answer->question->categoryPost->name == 'TPA 1')
@@ -267,6 +270,7 @@ class Group4
             $rows .= '<td>'.$re['skor']['E'].'</td>';
             $rows .= '<td>'.$re['skor']['C'].'</td>';
             $rows .= '<td>'.$re['skor']['HOLLAND'].'</td>';
+            $rows .= '<td>'.$re['skor']['IMJ'].'</td>';
 
             $html .= $rows;
         }
