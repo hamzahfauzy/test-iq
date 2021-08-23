@@ -80,7 +80,7 @@ class RunController extends Controller
         $examParticipant = ExamParticipant::find()->where([
             'exam_id' => $id,
             'status'  => 'finish',
-            'queue_status' => 0
+            // 'queue_status' => 0
         ])->all();
         foreach($examParticipant as $examPart)
         {
@@ -141,6 +141,51 @@ class RunController extends Controller
             }
         }
 
+        echo "Success\n";
+    }
+
+    public function actionScore($id)
+    {
+        $examParticipant = ExamParticipant::find()->where([
+            'exam_id' => $id,
+            'status'  => 'finish',
+            // 'queue_status' => 0
+        ])->all();
+        foreach($examParticipant as $examPart)
+        {
+            echo "Set Score for ".$examPart->participant->id_number.'\n';
+            $exam   = $examPart->exam;
+            $test_group = Yii::$app->params['test_group'];
+            $test_group = $test_group[$exam->test_group];
+            $categories = Category::find()->where(['in','test_tool',$test_group])->all();
+            foreach($categories as $cat)
+            {
+                // ambil pertanyaan
+                foreach($cat->questions as $question)
+                {
+                    // get jawaban berdasarkan soal dan peserta
+                    $exam_answer = ExamAnswer::find()->where(['question_id'=>$question->id,'participant_id'=>$examPart->participant_id]); // ->all();
+
+                    // cek apakah soal sudah di jawab
+                    if($exam_answer->exists()) continue;
+
+                    $jawaban = $question->getItems()
+                    ->orderBy(new Expression('rand()'))
+                    ->one();
+
+                    // jika soal belum di jawab
+                    $answer = new ExamAnswer();
+                    $answer->exam_id = $id;
+                    $answer->question_id = $question->id;
+                    $answer->participant_id = $examPart->participant_id;
+                    $answer->answer_id = $jawaban->id;
+                    $answer->answer_content = $jawaban->post_content;
+                    $answer->score = $jawaban->post_type;
+
+                    $answer->save(false);
+                }
+            }
+        }
         echo "Success\n";
     }
 }
