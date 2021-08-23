@@ -157,7 +157,8 @@ class RunController extends Controller
             $exam   = $examPart->exam;
             $test_group = \Yii::$app->params['test_group'];
             $test_group = $test_group[$exam->test_group];
-            $categories = Category::find()->where(['in','test_tool',$test_group])->all();
+            $tools = $test_group['tools'];
+            $categories = Category::find()->where(['in','test_tool',$tools])->all();
             foreach($categories as $cat)
             {
                 // ambil pertanyaan
