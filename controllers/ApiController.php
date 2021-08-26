@@ -81,7 +81,31 @@ class ApiController extends \yii\web\Controller
 
     public function actionDownloadLaporan($id, $nisn)
     {
+        $test_group = [
+            'group_1' => [
+                'bhs' => 'cetak_bhs',
+                'default' => 'cetak',
+            ],
+            'group_2' => [
+                'bhs' => 'cetak_group_2',
+                'default' => 'cetak_group_2',
+            ],
+            'group_3' => [
+                'bhs' => 'cetak_bhs',
+                'default' => 'cetak',
+            ],
+            'group_4' => [
+                'bhs' => 'cetak_bhs',
+                'default' => 'cetak',
+            ],
+            'group_5' => [
+                'bhs' => 'cetak_bhs',
+                'default' => 'cetak',
+            ],
+        ];
         $model = ImportExamFile::find()->where(['exam_id'=>$id])->one();
+        $exam  = $model->exam;
+        $test  = $test_group[$exam->test_group];
         $extension = pathinfo($model->file_path, PATHINFO_EXTENSION);
 
         if($extension=='xlsx'){
@@ -141,7 +165,7 @@ class ApiController extends \yii\web\Controller
                 $_nisn = $worksheet->getCellByColumnAndRow(4, $row)->getFormattedValue();
                 if($value == '' || $_nisn != $nisn) continue;
             //     echo $worksheet->getCellByColumnAndRow(3, $row)->getValue() . '<br>';
-                $content .= $this->renderPartial('cetak_bhs',[
+                $content .= $this->renderPartial($test['bhs'],[
                     'worksheet' => $worksheet,
                     'row'       => $row
                 ]);
@@ -156,7 +180,7 @@ class ApiController extends \yii\web\Controller
                 $_nisn = $worksheet->getCellByColumnAndRow(4, $row)->getFormattedValue();
                 if($value == '' || $_nisn != $nisn) continue;
             //     echo $worksheet->getCellByColumnAndRow(3, $row)->getValue() . '<br>';
-                $content .= $this->renderPartial('cetak',[
+                $content .= $this->renderPartial($test['default'],[
                     'worksheet' => $worksheet,
                     'row'       => $row
                 ]);

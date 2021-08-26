@@ -259,4 +259,87 @@ class Group2
 
         return 'IPS';
     }
+
+    function single_report($worksheet)
+    {
+        $content     = "
+        <style>
+        body, h2 {
+            margin:0;padding:0
+        }
+        #customers {
+        border-collapse: collapse;
+        }
+
+        #customers td, #customers th {
+        border: 1px solid #000;
+        padding: 5px;
+        }
+
+        /* #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+        #customers tr:hover {background-color: #ddd;} */
+
+        #customers th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        background-color: #eaeaea;
+        }
+
+        ul {
+            margin:0px;
+            padding:0px;
+            padding-left:-15px;
+            padding-bottom:-25px;
+        }
+        .box {
+            background-color:red;
+        }
+        </style>
+        <body>
+        ";
+
+        $highestRow  = $worksheet->getHighestRow();
+        $highestColumn = $worksheet->getHighestColumn();
+        $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn);
+        $exists = false;
+        if($worksheet->getCellByColumnAndRow(10, 2)->getFormattedValue() == 'BHS')
+        {
+            for ($row = 3; $row <= $highestRow; $row++) { 
+                $value = $worksheet->getCellByColumnAndRow(3, $row)->getFormattedValue();
+                $_nisn = $worksheet->getCellByColumnAndRow(4, $row)->getFormattedValue();
+                if($value == '' || $_nisn != $nisn) continue;
+            //     echo $worksheet->getCellByColumnAndRow(3, $row)->getValue() . '<br>';
+                $content .= $this->renderPartial('cetak_bhs_group_2',[
+                    'worksheet' => $worksheet,
+                    'row'       => $row
+                ]);
+                $exists = true;
+                break;
+            }
+        }
+        else
+        {
+            for ($row = 3; $row <= $highestRow; $row++) { 
+                $value = $worksheet->getCellByColumnAndRow(3, $row)->getFormattedValue();
+                $_nisn = $worksheet->getCellByColumnAndRow(4, $row)->getFormattedValue();
+                if($value == '' || $_nisn != $nisn) continue;
+            //     echo $worksheet->getCellByColumnAndRow(3, $row)->getValue() . '<br>';
+                $content .= $this->renderPartial('cetak_group_2',[
+                    'worksheet' => $worksheet,
+                    'row'       => $row
+                ]);
+                $exists = true;
+                break;
+            }
+        }
+
+        if(!$exists) return false;
+
+        $content .= "<body>";
+
+        $participant = Participant::find()->where(['id_number'=>$nisn])->one();
+
+        return ['content'=>$content,'name'=>$participant->name];
+    }
 }
