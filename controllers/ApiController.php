@@ -99,8 +99,8 @@ class ApiController extends \yii\web\Controller
                 'default' => 'cetak',
             ],
             'group_5' => [
-                'bhs' => 'cetak_group_5',
-                'default' => 'cetak_group_5',
+                'bhs' => 'cetak_group_2',
+                'default' => 'cetak_group_2',
             ],
         ];
         $model = ImportExamFile::find()->where(['exam_id'=>$id])->one();
