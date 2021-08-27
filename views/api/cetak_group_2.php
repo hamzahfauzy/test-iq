@@ -42,7 +42,7 @@
         <td class="border-cell">1.</td>
         <td class="border-cell">TINGKAT POTENSI AKADEMIK</td>
         <td class="border-cell">:</td>
-        <td><?=$worksheet->getCellByColumnAndRow(15, $row)->getValue()?></td>
+        <td class="border-cell"><?=$worksheet->getCellByColumnAndRow(15, $row)->getValue()?></td>
     </tr>
     <tr>
         <td class="border-cell">2.</td>
@@ -84,18 +84,4 @@
     </tr>
 </table>
 
-<div style="width:250px;margin-left:auto;text-align:center;width:100%;display:block;">
-    Medan, <?=$worksheet->getCellByColumnAndRow(9, $row)->getValue()?><br />
-    Penanggung Jawab Kegiatan,<br />
-    Direktur Psikologi<br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <b>MRA. Puspitasari, M.Psi., Psikolog</b><br />
-    SIPP :  0528-18-2-1
-</div>
-<img src="images/footer.png" style="width:100%">
+
