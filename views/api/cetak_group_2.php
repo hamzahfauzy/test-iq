@@ -69,7 +69,19 @@
         <td class="border-cell">:</td>
         <td class="border-cell" colspan="2"><?=$worksheet->getCellByColumnAndRow(13, $row)->getValue()?></td>
     </tr>
-    
+    <tr>
+        <td class="border-cell"> 4. </td>
+        <td class="border-cell">BAKAT DAN MINAT</td>
+        <td class="border-cell">:</td>
+        <td class="border-cell"><?=$worksheet->getCellByColumnAndRow(16, $row)->getValue()?></td>
+        <td class="border-cell"><?=$worksheet->getCellByColumnAndRow(17, $row)->getValue()?></td>
+    </tr>
+    <tr>
+        <td class="border-cell">5.</td>
+        <td class="border-cell">ALTERNATIF JURUSAN DI PERGURUAN TINGGI</td>
+        <td class="border-cell">:</td>
+        <td class="border-cell" colspan="2">- TERLAMPIR -</td>
+    </tr>
 </table>
 
 <div style="width:250px;margin-left:auto;text-align:center;width:100%;display:block;">
