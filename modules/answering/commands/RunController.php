@@ -31,7 +31,7 @@ class RunController extends Controller
         $examParticipant = ExamParticipant::find()->where([
             'exam_id' => $id,
             'status'  => 'finish',
-            // 'queue_status' => 0
+            'queue_status' => 0
         ])->all();
         foreach($examParticipant as $examPart)
         {
