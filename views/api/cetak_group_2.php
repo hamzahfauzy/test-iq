@@ -90,13 +90,11 @@
     Penanggung Jawab Kegiatan,<br />
     Direktur Psikologi<br />
     <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
+    <img src="images/ttd-4.jpg" style="width:80%">
     <br />
     <b>MRA. Puspitasari, M.Psi., Psikolog</b><br />
     SIPP :  0528-18-2-1
 </div>
 <img src="images/footer.png" style="width:100%">
+<div style="page-break-before: always"></div>
+<img src="images/lampiran.jpg" style="width:100%">
