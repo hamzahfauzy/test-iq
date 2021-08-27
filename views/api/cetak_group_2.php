@@ -35,7 +35,7 @@
     </tr>
 </table>
 
-<br><br>
+<br /><br />
 
 <table id="customers" align="center">
     <tr>
