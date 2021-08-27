@@ -9,9 +9,9 @@
         <td rowspan="5" class="border-cell" style="text-align:center;font-weight:bold;">
             LAPORAN HASIL TES<br />POTENSI AKADEMIK DAN <br />MINAT BAKAT
         </td>
-        <td class="border-cell" width="250">Nama</td>
+        <td class="border-cell" width="200">Nama</td>
         <td class="border-cell" width="30">:</td>
-        <td class="border-cell" width="250"><?=$worksheet->getCellByColumnAndRow(3, $row)->getValue()?></td>
+        <td class="border-cell" width="200"><?=$worksheet->getCellByColumnAndRow(3, $row)->getValue()?></td>
     </tr>
     <tr>
         <td class="border-cell">NISN</td>
@@ -37,3 +37,27 @@
 
 <br /><br />
 
+<table id="customers" align="center">
+    <tr>
+        <td class="border-cell">1.</td>
+        <td class="border-cell">TINGKAT POTENSI AKADEMIK</td>
+        <td class="border-cell">:</td>
+        <td class="border-cell" colspan="2"><?=$worksheet->getCellByColumnAndRow(15, $row)->getValue()?></td>
+    </tr>
+</table>
+
+<div style="width:250px;margin-left:auto;text-align:center;width:100%;display:block;">
+    Medan, <?=$worksheet->getCellByColumnAndRow(9, $row)->getValue()?><br />
+    Penanggung Jawab Kegiatan,<br />
+    Direktur Psikologi<br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <b>MRA. Puspitasari, M.Psi., Psikolog</b><br />
+    SIPP :  0528-18-2-1
+</div>
+<img src="images/footer.png" style="width:100%">
