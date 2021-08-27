@@ -87,14 +87,7 @@
 <br />
 <div style="width:250px;margin-left:auto;text-align:center;width:100%;display:block;">
     Medan, <?=$worksheet->getCellByColumnAndRow(9, $row)->getValue()?><br />
-    Penanggung Jawab Kegiatan,<br />
-    Direktur Psikologi<br />
-    <br />
-    <img src="images/ttd-4.jpg" style="width:150px">
-    <br />
-    <b>MRA. Puspitasari, M.Psi., Psikolog</b><br />
-    SIPP :  0528-18-2-1
+    <img src="images/ttd-4.jpg" style="width:250px">
 </div>
 <img src="images/footer.png" style="width:100%">
-<div style="page-break-before: always"></div>
 <img src="images/lampiran.jpg" style="width:100%">
