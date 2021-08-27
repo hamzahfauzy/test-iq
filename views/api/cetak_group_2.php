@@ -7,7 +7,7 @@
 <table id="customers" align="center">
     <tr>
         <td rowspan="5" class="border-cell" style="text-align:center;font-weight:bold;">
-            LAPORAN HASIL TES POTENSI AKADEMIK DAN MINAT BAKAT
+            LAPORAN HASIL TES<br />POTENSI AKADEMIK DAN <br />MINAT BAKAT
         </td>
         <td class="border-cell" width="250">Nama</td>
         <td class="border-cell" width="30">:</td>
