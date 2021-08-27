@@ -42,7 +42,7 @@
         <td class="border-cell">1.</td>
         <td class="border-cell" width="250">TINGKAT POTENSI AKADEMIK</td>
         <td class="border-cell" width="50">:</td>
-        <td class="border-cell" colspan="2"><?=$worksheet->getCellByColumnAndRow(15, $row)->getValue()?></td>
+        <td class="border-cell" width="250" colspan="2"><?=$worksheet->getCellByColumnAndRow(15, $row)->getValue()?></td>
     </tr>
     <tr>
         <td class="border-cell">2.</td>
