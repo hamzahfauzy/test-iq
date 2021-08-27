@@ -41,7 +41,7 @@
     <tr>
         <td class="border-cell">1.</td>
         <td class="border-cell" width="250">TINGKAT POTENSI AKADEMIK</td>
-        <td class="border-cell">:</td>
+        <td class="border-cell" width="50">:</td>
         <td class="border-cell" colspan="2"><?=$worksheet->getCellByColumnAndRow(15, $row)->getValue()?></td>
     </tr>
     <tr>
@@ -83,7 +83,8 @@
         <td class="border-cell" colspan="2">- TERLAMPIR -</td>
     </tr>
 </table>
-
+<br />
+<br />
 <div style="width:250px;margin-left:auto;text-align:center;width:100%;display:block;">
     Medan, <?=$worksheet->getCellByColumnAndRow(9, $row)->getValue()?><br />
     Penanggung Jawab Kegiatan,<br />
