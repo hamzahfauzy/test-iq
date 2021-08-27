@@ -40,10 +40,36 @@
 <table id="customers" align="center">
     <tr>
         <td class="border-cell">1.</td>
-        <td class="border-cell">TINGKAT POTENSI AKADEMIK</td>
+        <td class="border-cell" width="250">TINGKAT POTENSI AKADEMIK</td>
         <td class="border-cell">:</td>
         <td class="border-cell" colspan="2"><?=$worksheet->getCellByColumnAndRow(15, $row)->getValue()?></td>
     </tr>
+    <tr>
+        <td class="border-cell">2.</td>
+        <td class="border-cell" colspan="4">HASIL TES PEMINATAN ONLINE</td>
+    </tr>
+    <tr>
+        <td class="border-cell" colspan="2">KELOMPOK SOAL PEMINATAN IPA</td>
+        <td class="border-cell">:</td>
+        <td class="border-cell" colspan="2"><?=$worksheet->getCellByColumnAndRow(12, $row)->getValue()?></td>
+    </tr>
+    <tr>
+        <td class="border-cell" colspan="2">KELOMPOK SOAL PEMINATAN IPS</td>
+        <td class="border-cell">:</td>
+        <td class="border-cell" colspan="2"><?=$worksheet->getCellByColumnAndRow(11, $row)->getValue()?></td>
+    </tr>
+    <tr>
+        <td class="border-cell" colspan="2">KELOMPOK SOAL PEMINATAN BAHASA</td>
+        <td class="border-cell">:</td>
+        <td class="border-cell" colspan="2"><?=$worksheet->getCellByColumnAndRow(10, $row)->getValue()?></td>
+    </tr>
+    <tr>
+        <td class="border-cell">3.</td>
+        <td class="border-cell">JURUSAN SMA</td>
+        <td class="border-cell">:</td>
+        <td class="border-cell" colspan="2"><?=$worksheet->getCellByColumnAndRow(13, $row)->getValue()?></td>
+    </tr>
+    
 </table>
 
 <div style="width:250px;margin-left:auto;text-align:center;width:100%;display:block;">
