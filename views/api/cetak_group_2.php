@@ -16,7 +16,7 @@
     <tr>
         <td class="border-cell">NISN</td>
         <td class="border-cell">:</td>
-        
+        <td class="border-cell"><?=$worksheet->getCellByColumnAndRow(4, $row)->getValue()?></td>
     </tr>
     <tr>
         <td class="border-cell">Tempat, Tanggal Lahir</td>
@@ -86,16 +86,16 @@
 
 <div style="width:250px;margin-left:auto;text-align:center;width:100%;display:block;">
     Medan, <?=$worksheet->getCellByColumnAndRow(9, $row)->getValue()?><br />
-    Penanggung Jawab Kegiatan,<br>
-    Direktur Psikologi<br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <b>MRA. Puspitasari, M.Psi., Psikolog</b><br>
+    Penanggung Jawab Kegiatan,<br />
+    Direktur Psikologi<br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <b>MRA. Puspitasari, M.Psi., Psikolog</b><br />
     SIPP :  0528-18-2-1
 </div>
 <img src="images/footer.png" style="width:100%">
