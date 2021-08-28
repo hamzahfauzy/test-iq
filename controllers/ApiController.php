@@ -126,6 +126,14 @@ class ApiController extends \yii\web\Controller
         border-collapse: collapse;
         }
 
+        .center {
+            text-align:center;
+        }
+
+        .w-bold {
+            font-weight:bold;
+        }
+
         #customers td, #customers th {
         border: 1px solid #000;
         padding: 5px;
