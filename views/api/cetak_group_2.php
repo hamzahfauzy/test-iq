@@ -49,7 +49,7 @@
         <td class="border-cell w-bold" colspan="4">HASIL TES PEMINATAN ONLINE</td>
     </tr>
     <tr>
-        <td class="border-cell w-bold" colspan="2">KELOMPOK SOAL PEMINATAN IPA</td>
+        <td class="border-cell" colspan="2">KELOMPOK SOAL PEMINATAN IPA</td>
         <td class="center border-cell w-bold">:</td>
         <td class="border-cell w-bold center" colspan="2"><?=$worksheet->getCellByColumnAndRow(12, $row)->getValue()?></td>
     </tr>
