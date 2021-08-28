@@ -60,7 +60,7 @@
     </tr>
     <tr>
         <td class="border-cell" colspan="2">KELOMPOK SOAL PEMINATAN BAHASA</td>
-        <td class="center border-cell">:</td>
+        <td class="center border-cell w-bold">:</td>
         <td class="border-cell w-bold" colspan="2"><?=$worksheet->getCellByColumnAndRow(10, $row)->getValue()?></td>
     </tr>
     <tr>
