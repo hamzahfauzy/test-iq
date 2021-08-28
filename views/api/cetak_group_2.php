@@ -42,45 +42,45 @@
         <td class="border-cell w-bold">1.</td>
         <td class="border-cell w-bold" width="250">TINGKAT POTENSI AKADEMIK</td>
         <td class="center w-bold border-cell" width="50">:</td>
-        <td class="border-cell w-bold" width="250" colspan="2"><?=$worksheet->getCellByColumnAndRow(15, $row)->getValue()?></td>
+        <td class="border-cell w-bold center" width="250" colspan="2"><?=$worksheet->getCellByColumnAndRow(15, $row)->getValue()?></td>
     </tr>
     <tr>
         <td class="border-cell w-bold">2.</td>
-        <td class="border-cell w-bold" colspan="4">HASIL TES PEMINATAN ONLINE</td>
+        <td class="border-cell w-bold center" colspan="4">HASIL TES PEMINATAN ONLINE</td>
     </tr>
     <tr>
         <td class="border-cell w-bold" colspan="2">KELOMPOK SOAL PEMINATAN IPA</td>
         <td class="center border-cell w-bold">:</td>
-        <td class="border-cell w-bold" colspan="2"><?=$worksheet->getCellByColumnAndRow(12, $row)->getValue()?></td>
+        <td class="border-cell w-bold center" colspan="2"><?=$worksheet->getCellByColumnAndRow(12, $row)->getValue()?></td>
     </tr>
     <tr>
         <td class="border-cell" colspan="2">KELOMPOK SOAL PEMINATAN IPS</td>
         <td class="center border-cell w-bold">:</td>
-        <td class="border-cell w-bold" colspan="2"><?=$worksheet->getCellByColumnAndRow(11, $row)->getValue()?></td>
+        <td class="border-cell w-bold center" colspan="2"><?=$worksheet->getCellByColumnAndRow(11, $row)->getValue()?></td>
     </tr>
     <tr>
         <td class="border-cell" colspan="2">KELOMPOK SOAL PEMINATAN BAHASA</td>
         <td class="center border-cell w-bold">:</td>
-        <td class="border-cell w-bold" colspan="2"><?=$worksheet->getCellByColumnAndRow(10, $row)->getValue()?></td>
+        <td class="border-cell w-bold center" colspan="2"><?=$worksheet->getCellByColumnAndRow(10, $row)->getValue()?></td>
     </tr>
     <tr>
         <td class="border-cell w-bold">3.</td>
         <td class="border-cell w-bold">JURUSAN SMA</td>
         <td class="center border-cell w-bold">:</td>
-        <td class="border-cell w-bold" colspan="2"><?=$worksheet->getCellByColumnAndRow(13, $row)->getValue()?></td>
+        <td class="border-cell w-bold center" colspan="2"><?=$worksheet->getCellByColumnAndRow(13, $row)->getValue()?></td>
     </tr>
     <tr>
         <td class="border-cell w-bold"> 4. </td>
         <td class="border-cell w-bold">BAKAT DAN MINAT</td>
         <td class="center border-cell w-bold">:</td>
-        <td class="border-cell w-bold"><?=$worksheet->getCellByColumnAndRow(16, $row)->getValue()?></td>
-        <td class="border-cell"><?=$worksheet->getCellByColumnAndRow(17, $row)->getValue()?></td>
+        <td class="border-cell w-bold center"><?=$worksheet->getCellByColumnAndRow(16, $row)->getValue()?></td>
+        <td class="border-cell w-bold center"><?=$worksheet->getCellByColumnAndRow(17, $row)->getValue()?></td>
     </tr>
     <tr>
         <td class="border-cell w-bold">5.</td>
         <td class="border-cell w-bold">ALTERNATIF JURUSAN DI PERGURUAN TINGGI</td>
         <td class="center border-cell w-bold">:</td>
-        <td class="border-cell w-bold" colspan="2">- TERLAMPIR -</td>
+        <td class="border-cell w-bold center" colspan="2">- TERLAMPIR -</td>
     </tr>
 </table>
 <br />
