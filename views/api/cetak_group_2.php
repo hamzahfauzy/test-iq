@@ -46,7 +46,7 @@
     </tr>
     <tr>
         <td class="border-cell w-bold">2.</td>
-        <td class="border-cell w-bold center" colspan="4">HASIL TES PEMINATAN ONLINE</td>
+        <td class="border-cell w-bold" colspan="4">HASIL TES PEMINATAN ONLINE</td>
     </tr>
     <tr>
         <td class="border-cell w-bold" colspan="2">KELOMPOK SOAL PEMINATAN IPA</td>
