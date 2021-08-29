@@ -91,7 +91,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'Jurusan',
                         'format' => 'raw',
                         'value' => function($model){
-                            $status = $model->study?$model->study:'-';
+                            $status = $model->participant->study?$model->participant->study:'-';
                             return $status;
                         }
                     ],
