@@ -88,7 +88,15 @@ $this->params['breadcrumbs'][] = $this->title;
                         }
                     ],
                     [
-                        'attribute' => 'Downlaod',
+                        'attribute' => 'Jurusan',
+                        'format' => 'raw',
+                        'value' => function($model){
+                            $status = $model->study?$model->study:'-';
+                            return $status;
+                        }
+                    ],
+                    [
+                        'attribute' => 'Download',
                         'format' => 'raw',
                         'value' => function($model){
                             return $model->status?'<a href="'.Url::to(['exam-participant/download','id'=>$model->id]).'" target="_blank">Download</a>':'-';
