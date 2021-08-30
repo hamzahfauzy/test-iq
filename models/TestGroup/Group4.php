@@ -14,21 +14,33 @@ class Group4
         'Jenis Kelamin',
         'Tanggal Pemeriksaan',
         'Pilihan Jurusan',
-        '1',
-        '2',
-        '3',
-        '4',
-        '5',
-        '6',
-        '7',
-        '8',
-        'TOTAL',
-        'POTENSI AKADEMIK',
-        'BHS',
-        'IPS',
-        'TOTAL',
-        'IPA',
-        'JURUSAN',
+        'Alasan Memilih Jurusan',
+        'Cita - Cita',
+        'Skor',
+        'Kategori',
+        'Dukungan Potensi Akademik (%)',
+        'Kategori',
+        'Skor',
+        'Presentase (%)',
+        'Kategori',
+        'Hasil',
+        'Utama',
+        'Pendukung',
+        'Skor',
+        'Presentase (%)',
+        'Kategori',
+        'Skor',
+        'Presentase (%)',
+        'Kategori',
+        'Dukungan Minat (%)',
+        'Kategori',
+        'Dukungan Potensi Berpikir',
+        'Dukungan Bakat',
+        'HOLLAND (%)',
+        'INSTRUMEN MINAT JURUSAN(%)',
+        'DUKUNGAN MINAT (%)',
+        'TINGKAT KESESUAIAN DENGAN JURUSAN (%)',
+        'KATEGORI',
         'KEMAMPUAN VERBAL',
         'KEMAMPUAN SPASIAL',
         'KEMAMPUAN NUMERIKAL',
@@ -40,14 +52,6 @@ class Group4
         'SISTEMATIKA BELAJAR (C)',
         'DAYA JUANG (G)',
         'DAYA TAHAN TERHADAP STRESS (K)',
-        'R',
-        'I',
-        'A',
-        'S',
-        'E',
-        'C',
-        'IMJ',
-        'HASIL',
     ];
 
     public static $categories = [
@@ -194,6 +198,8 @@ class Group4
             // $key_holland = array_keys($holland);
 
             $skor['HOLLAND'] = $holland_skor; //implode('',$key_holland);
+            $skor['HOLLAND_SKOR'] = $holland[$instrumen_jurusan];
+            $skor['HOLLAND_PRESENTASE'] = ($holland[$instrumen_jurusan]*0.5); //implode('',$key_holland);
             $instrumen_jurusan = \Yii::$app->params['instrumen_jurusan'];
             $instrumen_jurusan = $instrumen_jurusan[$participant->study];
             $skor['HASIL'] = ($skor['IMJ']*0.5) + ($holland[$instrumen_jurusan]*0.5);
@@ -232,6 +238,8 @@ class Group4
             $spasial = $this->tpa_norma($spasial,'spasial');
             $numerikal = $this->tpa_norma($numerikal,'numerikal');
 
+            $holland = explode('-',$re['skor']['HOLLAND']);
+
             $skor_papi = $this->papi_norma($re['skor']['Papikostick']);
             $rows = '<tr>';
             $rows .= '<td>'.++$key.'</td>';
@@ -242,21 +250,31 @@ class Group4
             $rows .= '<td>'.$re['participant']->getMeta('jenis_kelamin').'</td>';
             $rows .= '<td>'.$re['participant']->examParticipant->finished_at.'</td>';
             $rows .= '<td>'.$re['participant']->getMeta('jurusan').'</td>';
-            $rows .= '<td>'.$re['skor']['TPA']['S1'].'</td>';
-            $rows .= '<td>'.$re['skor']['TPA']['S2'].'</td>';
-            $rows .= '<td>'.$re['skor']['TPA']['S3'].'</td>';
-            $rows .= '<td>'.$re['skor']['TPA']['S4'].'</td>';
-            $rows .= '<td>'.$re['skor']['TPA']['S5'].'</td>';
-            $rows .= '<td>'.$re['skor']['TPA']['S6'].'</td>';
-            $rows .= '<td>'.$re['skor']['TPA']['S7'].'</td>';
-            $rows .= '<td>'.$re['skor']['TPA']['S8'].'</td>';
+            $rows .= '<td>'.$re['participant']->getMeta('alasan').'</td>';
+            $rows .= '<td>'.$re['participant']->getMeta('cita_cita').'</td>';
             $rows .= '<td>'.$re['skor']['TOTAL'].'</td>';
             $rows .= '<td>'.self::category($re['skor']['TOTAL']).'</td>';
-            $rows .= '<td>'.$re['skor']['BAHASA'].'</td>';
-            $rows .= '<td>'.$re['skor']['IPS'].'</td>';
-            $rows .= '<td>'.($re['skor']['IPS']+$re['skor']['BAHASA']).'</td>';
-            $rows .= '<td>'.$re['skor']['IPA'].'</td>';
-            $rows .= '<td>'.self::jurusan1($re['skor']).'</td>';
+            $rows .= '<td> ?? </td>';
+            $rows .= '<td> ?? </td>';
+            $rows .= '<td> ?? </td>';
+            $rows .= '<td> ?? </td>';
+            $rows .= '<td> ?? </td>';
+            $rows .= '<td>'.$re['skor']['HOLLAND'].'</td>';
+            $rows .= '<td>'.$holland[0].'</td>';
+            $rows .= '<td>'.$holland[1].'</td>';
+            $rows .= '<td>'.$re['skor']['HOLLAND_SKOR'].'</td>';
+            $rows .= '<td>'.$re['skor']['HOLLAND_PRESENTASE'].'</td>';
+            $rows .= '<td> ?? </td>';
+            $rows .= '<td>'.$re['skor']['IMJ'].'</td>';
+            $rows .= '<td>'.($re['skor']['IMJ']*0.5).'</td>';
+            $rows .= '<td> ?? </td>';
+            $rows .= '<td> ?? </td>';
+            $rows .= '<td> ?? </td>';
+            $rows .= '<td> ?? </td>';
+            $rows .= '<td> ?? </td>';
+            $rows .= '<td> ?? </td>';
+            $rows .= '<td> ?? </td>';
+            $rows .= '<td> ?? </td>';
             $rows .= '<td>'.$verbal.'</td>';
             $rows .= '<td>'.$spasial.'</td>';
             $rows .= '<td>'.$numerikal.'</td>';
@@ -268,15 +286,6 @@ class Group4
             $rows .= '<td>'.(isset($skor_papi['C'])?$skor_papi['C']:0).'</td>';
             $rows .= '<td>'.(isset($skor_papi['G'])?$skor_papi['G']:0).'</td>';
             $rows .= '<td>'.(isset($skor_papi['K'])?$skor_papi['K']:0).'</td>';
-            $rows .= '<td>'.$re['skor']['R'].'</td>';
-            $rows .= '<td>'.$re['skor']['I'].'</td>';
-            $rows .= '<td>'.$re['skor']['A'].'</td>';
-            $rows .= '<td>'.$re['skor']['S'].'</td>';
-            $rows .= '<td>'.$re['skor']['E'].'</td>';
-            $rows .= '<td>'.$re['skor']['C'].'</td>';
-            $rows .= '<td>'.$re['skor']['IMJ'].'</td>';
-            $rows .= '<td>'.$re['skor']['HASIL'].'</td>';
-
             $html .= $rows;
         }
         return $html;

@@ -23,6 +23,25 @@ class Tpa
         'Jurusan 2'
     ];
 
+    public static $single_report_columns = [
+        'Nama',
+        'Username',
+        'Jurusan',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        'TOTAL',
+        'POTENSI AKADEMIK',
+        'IPS',
+        'IPA',
+        'JURUSAN'
+    ];
+
     public static $categories = [
         'IPS'=>[
             'TPA 1',
@@ -78,6 +97,7 @@ class Tpa
         $report = [];
         foreach($model->participants as $participant)
         {
+            $subtest = ['TPA 1'=>0,'TPA 2'=>0,'TPA 3'=>0,'TPA 4'=>0,'TPA 5'=>0,'TPA 6'=>0,'TPA 7'=>0,'TPA 8'=>0];
             $skor = ['IPS'=>0,'BAHASA'=>0,'IPA'=>0];
             foreach($participant->examAnswers as $answer)
             {
@@ -85,13 +105,17 @@ class Tpa
                 foreach(self::$categories as $key => $value)
                 {
                     if(in_array($answer->question->categoryPost->name,$value) && $answer->answer)
+                    {
+                        $subtest[$value] += (int) $answer->answer->post_type;
                         $skor[$key] += (int) $answer->answer->post_type;
+                    }
                 }
             }
             $skor['TOTAL'] = $skor['IPS']+$skor['BAHASA']+$skor['IPA'];
 
             $report[] = [
                 'participant' => $participant,
+                'subtest' => $subtest,
                 'skor' => $skor
             ];
         }
@@ -173,5 +197,34 @@ class Tpa
         return 'IPS';
     }
 
+    static function renderSingleReport()
+    {
+        $html = '<table border="1" cellpadding="5" cellspacing="0"><tr><th>NO</th>';
+        foreach(self::$single_report_columns as $column)
+            $html .= '<th>'.$column.'</th>';
+        
+        $html .= '</tr>';
+
+        $report = self::$_report;
+
+        foreach($report as $key => $re)
+        {
+            $rows = '<tr>';
+            $rows .= '<td>'.++$key.'</td>';
+            $rows .= '<td>'.$re['participant']->name.'</td>';
+            $rows .= '<td>\''.$re['participant']->user->username.'</td>';
+            $rows .= '<td>'.$re['participant']->getMeta('jurusan').'</td>';
+            foreach($re['subtest'] as $key => $value)
+                $rows .= '<td>'.$value.'</td>';
+            $rows .= '<td>'.$re['skor']['TOTAL'].'</td>';
+            $rows .= '<td>'.self::category($re['skor']['TOTAL']).'</td>';
+            $rows .= '<td>'.$re['skor']['IPS'].'</td>';
+            $rows .= '<td>'.$re['skor']['IPA'].'</td>';
+            $rows .= '<td>'.self::jurusan1($re['skor']).'</td>';
+
+            $html .= $rows;
+        }
+        return $html;
+    }
 
 }

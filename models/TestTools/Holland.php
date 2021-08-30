@@ -22,72 +22,101 @@ class Holland
         'Jurusan 2'
     ];
 
+    public static $single_report_columns = [
+        'Nama',
+        'Username',
+        'Jurusan',
+        'R',
+        'I',
+        'A',
+        'S',
+        'E',
+        'C',
+        'HASIL',
+        'UTAMA',
+        'PENDUKUNG'
+    ];
+
     public static $categories = [
-        'IPS'=>[
-            'TPA 1',
-            'TPA 2'
+        'R' => [
+            'Soal Holland R1',
+            'Soal Holland R2',
+            'Soal Holland R3',
         ],
-        'BAHASA' => [
-            'TPA 3',
-            'TPA 4'
+        'I' => [
+            'Soal Holland I1',
+            'Soal Holland I2',
+            'Soal Holland I3',
         ],
-        'IPA' => [
-            'TPA 5',
-            'TPA 6',
-            'TPA 7',
-            'TPA 8',
-        ]
+        'A' => [
+            'Soal Holland A1',
+            'Soal Holland A2',
+            'Soal Holland A3',
+        ],
+        'S' => [
+            'Soal Holland S1',
+            'Soal Holland S2',
+            'Soal Holland S3',
+        ],
+        'E' => [
+            'Soal Holland E1',
+            'Soal Holland E2',
+            'Soal Holland E3',
+        ],
+        'C' => [
+            'Soal Holland C1',
+            'Soal Holland C2',
+            'Soal Holland C3',
+        ],
     ];
 
     public static $_report = [];
 
-    static function insert($no, $category, $worksheet, $post, $row)
+    static function report($model)
     {
-        for($i=1;$i<=5;$i++)
-        {
-            $child = new Post;
-            $child->post_title = "Jawaban ".$post->post_title." ".$i;
-            $child->post_content = $worksheet->getCellByColumnAndRow($i+1, $row)->getValue();
-            $child->post_as = "Jawaban";
-            $child->post_type = $i;
-            $child->save(false);
-            $child->link('parents',$post);
-        }
-    }
-
-    static function report($id)
-    {
-        $model = Exam::find()->where([
-                    'exams.id'=>$id,
-                ])
-                ->joinWith([
-                    'participants',
-                    'participants.user',
-                    'participants.user.metas',
-                    'participants.examAnswers',
-                    'participants.examAnswers.answer',
-                    'participants.examAnswers.question',
-                    'participants.examAnswers.question.items',
-                    'participants.examAnswers.question.categoryPost' => function($q) {
-                        return $q->andOnCondition(['=', 'categories.test_tool', 'TPA']);
-                    }
-                ])
-                // ->asArray()
-                ->one();
+        ini_set('memory_limit',-1);
         $report = [];
         foreach($model->participants as $participant)
         {
-            $skor = ['IPS'=>0,'BAHASA'=>0,'IPA'=>0];
+            $skor = [
+                'R'=>0,
+                'I'=>0,
+                'A'=>0,
+                'S'=>0,
+                'E'=>0,
+                'C'=>0
+            ];
             foreach($participant->examAnswers as $answer)
             {
-                if($answer->question->categoryPost == NULL) continue;
+                if(!in_array($answer->question->categoryPost->test_tool,['HOLLAND'])) continue;
                 foreach(self::$categories as $key => $value)
                 {
                     if(in_array($answer->question->categoryPost->name,$value) && $answer->answer)
+                    {
                         $skor[$key] += (int) $answer->answer->post_type;
+                    }
+                    
                 }
             }
-            $skor['TOTAL'] = $skor['IPS']+$skor['BAHASA']+$skor['IPA'];
+            $skor['TOTAL'] = 0;
+            $holland = [
+                'R' => $skor['R'],
+                'I' => $skor['I'],
+                'A' => $skor['A'],
+                'S' => $skor['S'],
+                'E' => $skor['E'],
+                'C' => $skor['C'],
+            ];
+
+            arsort($holland);
+            $holland_skor = "";
+            foreach($holland as $key => $value)
+                $holland_skor .= $key.'-';
+            
+            $holland_skor = substr($holland_skor, 0, -1);
+            // $key_holland = array_keys($holland);
+
+            $skor['HOLLAND'] = $holland_skor; //implode('',$key_holland);
 
             $report[] = [
                 'participant' => $participant,
@@ -103,10 +132,25 @@ class Holland
         // ];
     }
 
-    function render()
+    static function insert($no, $category, $worksheet, $post, $row)
+    {
+        for($i=1;$i<=5;$i++)
+        {
+            $child = new Post;
+            $child->post_title = "Jawaban ".$post->post_title." ".$i;
+            $child->post_content = $worksheet->getCellByColumnAndRow($i+1, $row)->getValue();
+            $child->post_as = "Jawaban";
+            $child->post_type = $i;
+            $child->save(false);
+            $child->link('parents',$post);
+        }
+    }
+
+
+    function renderSingleReport()
     {
         $html = '<table border="1" cellpadding="5" cellspacing="0"><tr><th>NO</th>';
-        foreach(self::$report_columns as $column)
+        foreach(self::$single_report_columns as $column)
             $html .= '<th>'.$column.'</th>';
         
         $html .= '</tr>';
@@ -115,64 +159,23 @@ class Holland
 
         foreach($report as $key => $re)
         {
+            $holland = explode('-',$re['skor']['HOLLAND']);
             $rows = '<tr>';
             $rows .= '<td>'.++$key.'</td>';
             $rows .= '<td>'.$re['participant']->name.'</td>';
             $rows .= '<td>\''.$re['participant']->user->username.'</td>';
-            $rows .= '<td>'.$re['participant']->getMeta('tempat_lahir').'</td>';
-            $rows .= '<td>'.$re['participant']->getMeta('tanggal_lahir').'</td>';
-            $rows .= '<td>'.$re['participant']->getMeta('jenis_kelamin').'</td>';
-            $rows .= '<td>'.$re['participant']->examParticipant->finished_at.'</td>';
             $rows .= '<td>'.$re['participant']->getMeta('jurusan').'</td>';
-            $rows .= '<td>'.$re['skor']['BAHASA'].'</td>';
-            $rows .= '<td>'.$re['skor']['IPS'].'</td>';
-            $rows .= '<td>'.$re['skor']['IPA'].'</td>';
-            $rows .= '<td>'.$re['skor']['TOTAL'].'</td>';
-            $rows .= '<td>'.self::category($re['skor']['TOTAL']).'</td>';
-            $rows .= '<td>'.self::jurusan1($re['skor']).'</td>';
-            $rows .= '<td>'.self::jurusan2($re['skor']).'</td>';
-
+            $rows .= '<td>'.$re['skor']['R'].'</td>';
+            $rows .= '<td>'.$re['skor']['I'].'</td>';
+            $rows .= '<td>'.$re['skor']['A'].'</td>';
+            $rows .= '<td>'.$re['skor']['S'].'</td>';
+            $rows .= '<td>'.$re['skor']['E'].'</td>';
+            $rows .= '<td>'.$re['skor']['C'].'</td>';
+            $rows .= '<td>'.$re['skor']['HOLLAND'].'</td>';
+            $rows .= '<td>'.$holland[0].'</td>';
+            $rows .= '<td>'.$holland[1].'</td>';
             $html .= $rows;
         }
         return $html;
-    }
-
-    static function category($value)
-    {
-        if($value >= 100)
-            return 'Sangat Tinggi';
-        
-        if($value >= 80 && $value <= 99)
-            return 'Tinggi';
-
-        if($value >= 60 && $value <= 79)
-            return 'Sedang';
-
-        if($value >= 40 && $value <= 59)
-            return 'Sedang';
-        
-        return 'Sangat Kurang';
-    }
-
-    static function jurusan1($skor)
-    {
-        if($skor['TOTAL'] == 0) return '';
-        if($skor['BAHASA']+$skor['IPS'] > $skor['IPA'])
-            return 'IPS';
-        
-        return 'IPA';
-    }
-
-    static function jurusan2($skor)
-    {
-        if($skor['TOTAL'] == 0) return '';
-        if(self::jurusan1($skor) == 'IPS')
-        {
-            if($skor['BAHASA'] > $skor['IPS'])
-                return 'BAHASA';
-            return 'IPS';
-        }
-
-        return '-';
     }
 }
