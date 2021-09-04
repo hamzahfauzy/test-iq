@@ -366,6 +366,7 @@ class ExamController extends Controller
             'HOLLAND' => 'app\models\TestTools\Holland',
             'PAPIKOSTICK' => 'app\models\TestTools\Papikostick',
             'CFIT2' => 'app\models\TestTools\Cfit2',
+            'IMJ' => 'app\models\TestTools\Imj',
         ];
 
         $model = Exam::findOne($id);
