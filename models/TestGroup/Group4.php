@@ -117,6 +117,7 @@ class Group4
         $report = [];
         foreach($model->participants as $participant)
         {
+            if($participant->study == "" || emtpy($participant->study)) continue;
             $skor = [
                 'IPS'=>0,
                 'BAHASA'=>0,
