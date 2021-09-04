@@ -95,11 +95,16 @@ class Tpa
     static function report($model)
     {
         $report = [];
+        $cats = Category::find()->where(['test_tool'=>'TPA'])->with(['posts'])->all();
+        $post_id = [];
+        foreach($cats as $cat)
+            foreach($cat->posts as $post)
+                $post_id[] = $post->id;
         foreach($model->participants as $participant)
         {
             $subtest = ['TPA 1'=>0,'TPA 2'=>0,'TPA 3'=>0,'TPA 4'=>0,'TPA 5'=>0,'TPA 6'=>0,'TPA 7'=>0,'TPA 8'=>0];
             $skor = ['IPS'=>0,'BAHASA'=>0,'IPA'=>0];
-            foreach($participant->examAnswers as $answer)
+            foreach($participant->getExamAnswers()->where(['in','question_id',$post_id])->all() as $answer)
             {
                 if($answer->question->categoryPost->test_tool != 'TPA') continue;
                 foreach(self::$categories as $key => $value)
