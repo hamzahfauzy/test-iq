@@ -69,10 +69,13 @@ class Imj
             foreach($cats as $cat)
                 foreach($cat->getPosts()->where(['jurusan'=>$participant->study])->all() as $post)
                     $post_id[] = $post->id;
-            $skor = [];
+            $skor = ['N'=>[],'TOTAL'=>0];
             $answers = $participant->getExamAnswers()->where(['in','question_id',$post_id])->all();
             foreach($answers as $answer)
-                $skor[] += (int) $answer->answer->post_type;
+            {
+                $skor['N'][] += (int) $answer->answer->post_type;
+                $skor['TOTAL'] += (int) $answer->answer->post_type;
+            }
 
             $report[] = [
                 'participant' => $participant,
@@ -179,8 +182,9 @@ class Imj
             $rows .= '<td>'.$re['participant']->name.'</td>';
             $rows .= '<td>\''.$re['participant']->user->username.'</td>';
             $rows .= '<td>'.$re['participant']->getMeta('jurusan').'</td>';
-            foreach($re['skor'] as $key => $value)
+            foreach($re['skor']['N'] as $key => $value)
                 $rows .= '<td>'.$value.'</td>';
+            $rows .= '<td>'.$re['skor']['TOTAL'].'</td>';
             $html .= $rows;
         }
         return $html;
