@@ -198,7 +198,6 @@ class Imj
 
         foreach($report as $key => $re)
         {
-            $skor_papi = $this->papi_norma($re['skor']['Papikostick']);
             $rows = '<tr>';
             $rows .= '<td>'.++$key.'</td>';
             $rows .= '<td>'.$re['participant']->name.'</td>';
