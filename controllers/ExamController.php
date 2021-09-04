@@ -373,8 +373,11 @@ class ExamController extends Controller
         $report = (new $testTools[$tool])->report($model);
         $content = $report->renderSingleReport();
 
-        header("Content-type: application/vnd-ms-excel");
-        header("Content-Disposition: attachment; filename=Report-".$model->name."-".$tool.".xls");
+        if(!isset($_GET['debug']))
+        {
+            header("Content-type: application/vnd-ms-excel");
+            header("Content-Disposition: attachment; filename=Report-".$model->name."-".$tool.".xls");
+        }
 
         return $content;
     }
