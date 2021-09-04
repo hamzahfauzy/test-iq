@@ -242,6 +242,16 @@ class Group4
             $holland = explode('-',$re['skor']['HOLLAND']);
 
             $skor_papi = $this->papi_norma($re['skor']['Papikostick']);
+            $subskor = self::subskor($re);
+            $subskor_pre = $subskor/80*100;
+            
+            $holland_skor = $re['skor']['HOLLAND_SKOR'];
+            $holland_skor_pre = $holland_skor/225*100;
+
+            $imj_skor = $re['skor']['IMJ'];
+            $imj_skor_pre = $imj_skor/75*100;
+
+            $last_pre = ($subskor_pre*0.4) + ($holland_skor_pre*0.4) + ($imj_skor_pre*0.2);
             $rows = '<tr>';
             $rows .= '<td>'.++$key.'</td>';
             $rows .= '<td>'.$re['participant']->name.'</td>';
@@ -255,29 +265,29 @@ class Group4
             $rows .= '<td>'.$re['participant']->getMeta('cita_cita').'</td>';
             $rows .= '<td>'.$re['skor']['TOTAL'].'</td>';
             $rows .= '<td>'.self::category($re['skor']['TOTAL']).'</td>';
-            $rows .= '<td> ?? </td>';
-            $rows .= '<td> ?? </td>';
-            $rows .= '<td>'.self::subskor($re).'</td>';
-            $rows .= '<td> ?? </td>';
-            $rows .= '<td> ?? </td>';
+            $rows .= '<td>'.($re['skor']['TOTAL']/160*100).'</td>';
+            $rows .= '<td>'.self::category2($re['skor']['TOTAL']/160*100).'</td>';
+            $rows .= '<td>'.$subskor.'</td>';
+            $rows .= '<td>'.$subskor_pre.'</td>';
+            $rows .= '<td>'.self::category2($subskor_pre).'</td>';
             $rows .= '<td>'.$re['skor']['HOLLAND'].'</td>';
             $rows .= '<td>'.$holland[0].'</td>';
             $rows .= '<td>'.$holland[1].'</td>';
-            $rows .= '<td>'.$re['skor']['HOLLAND_SKOR'].'</td>';
-            $rows .= '<td>'.$re['skor']['HOLLAND_PRESENTASE'].'</td>';
-            $rows .= '<td> ?? </td>';
-            $rows .= '<td>'.$re['skor']['IMJ'].'</td>';
-            $rows .= '<td>'.($re['skor']['IMJ']*0.5).'</td>';
-            $rows .= '<td> ?? </td>';
-            $rows .= '<td> ?? </td>';
-            $rows .= '<td> ?? </td>';
-            $rows .= '<td> ?? </td>';
-            $rows .= '<td> ?? </td>';
-            $rows .= '<td> ?? </td>';
-            $rows .= '<td> ?? </td>';
-            $rows .= '<td> ?? </td>';
-            $rows .= '<td> ?? </td>';
-            $rows .= '<td> ?? </td>';
+            $rows .= '<td>'.$holland_skor.'</td>';
+            $rows .= '<td>'.$holland_skor_pre.'</td>';
+            $rows .= '<td>'.self::category2($holland_skor_pre).'</td>';
+            $rows .= '<td>'.$imj_skor.'</td>';
+            $rows .= '<td>'.$imj_skor_pre.'</td>';
+            $rows .= '<td>'.self::category2($imj_skor_pre).'</td>';
+            $rows .= '<td>'.(($imj_skor_pre*0.5)+($holland_skor_pre*0.5)).'</td>';
+            $rows .= '<td>'.self::category2(($imj_skor_pre*0.5)+($holland_skor_pre*0.5)).'</td>';
+            $rows .= '<td>'.($re['skor']['TOTAL']/160*100).'</td>';
+            $rows .= '<td>'.$subskor_pre.'</td>';
+            $rows .= '<td>'.$holland_skor_pre.'</td>';
+            $rows .= '<td>'.$imj_skor_pre.'</td>';
+            $rows .= '<td>'.(($imj_skor_pre*0.5)+($holland_skor_pre*0.5)).'</td>';
+            $rows .= '<td>'.$last_pre.'</td>';
+            $rows .= '<td>'.self::category2($last_pre).'</td>';
             $rows .= '<td>'.$verbal.'</td>';
             $rows .= '<td>'.$spasial.'</td>';
             $rows .= '<td>'.$numerikal.'</td>';
@@ -306,6 +316,23 @@ class Group4
             return 'Sedang';
 
         if($value >= 40 && $value <= 59)
+            return 'Sedang';
+        
+        return 'Sangat Kurang';
+    }
+
+    static function category2($value)
+    {
+        if($value >= 81)
+            return 'Sangat Tinggi';
+        
+        if($value >= 61 && $value <= 80)
+            return 'Tinggi';
+
+        if($value >= 41 && $value <= 60)
+            return 'Sedang';
+
+        if($value >= 21 && $value <= 40)
             return 'Sedang';
         
         return 'Sangat Kurang';
