@@ -143,12 +143,12 @@ class Group4
             ];
             foreach($participant->examAnswers as $answer)
             {
-                if(!in_array($answer->question->categoryPost->test_tool,['TPA','HOLLAND','PAPIKOSTICK','IMJ'])) continue;
+                if(!in_array($answer->question->categoryPost->test_tool,['TPA','HOLLAND','PAPIKOSTICK'])) continue;
                 foreach(self::$categories as $key => $value)
                 {
                     if(in_array($answer->question->categoryPost->name,$value) && $answer->answer)
                     {
-                        if(in_array($answer->question->categoryPost->test_tool,['TPA','HOLLAND','IMJ']))
+                        if(in_array($answer->question->categoryPost->test_tool,['TPA','HOLLAND']))
                         {
                             $skor[$key] += (int) $answer->answer->post_type;
                             if($answer->question->categoryPost->name == 'TPA 1')
@@ -249,7 +249,7 @@ class Group4
             $holland_skor_pre = $holland_skor/225*100;
 
             $imj_skor = $re['skor']['IMJ'];
-            $imj_skor_pre = $imj_skor/75*100;
+            $imj_skor_pre = $imj_skor/60*100;
 
             $last_pre = ($subskor_pre*0.4) + ($holland_skor_pre*0.4) + ($imj_skor_pre*0.2);
             $rows = '<tr>';
