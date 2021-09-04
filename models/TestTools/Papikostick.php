@@ -2,6 +2,7 @@
 namespace app\models\TestTools;
 
 use app\models\Post;
+use app\models\Category;
 
 class Papikostick
 {
@@ -32,13 +33,18 @@ class Papikostick
     static function report($model)
     {
         ini_set('memory_limit',-1);
+        $cats = Category::find()->where(['test_tool'=>'PAPIKOSTICK'])->with(['posts'])->all();
+        $post_id = [];
+        foreach($cats as $cat)
+            foreach($cat->posts as $post)
+                $post_id[] = $post->id;
         $report = [];
         foreach($model->participants as $participant)
         {
             $skor = [
                 'Papikostick' => []
             ];
-            foreach($participant->examAnswers as $answer)
+            foreach($participant->getExamAnswers()->where(['in','question_id',$post_id])->all() as $answer)
             {
                 if(!in_array($answer->question->categoryPost->test_tool,['TPA','HOLLAND','PAPIKOSTICK'])) continue;
                 foreach(self::$categories as $key => $value)
