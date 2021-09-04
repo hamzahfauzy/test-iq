@@ -139,7 +139,8 @@ class Group4
                 'S'=>0,
                 'E'=>0,
                 'C'=>0,
-                'IMJ'=>0
+                'IMJ'=>0,
+                'IMJ_DEBUG' => []
             ];
             foreach($participant->examAnswers as $answer)
             {
@@ -151,6 +152,7 @@ class Group4
                         if($answer->question->categoryPost->test_tool == 'IMJ')
                         {
                             $skor['IMJ'] += (int) $answer->answer->post_type;
+                            $skor['IMJ_DEBUG'][] = ['q'=>$answer->question,'a'=>$answer->answer];
                         }
                         if(in_array($answer->question->categoryPost->test_tool,['TPA','HOLLAND']))
                         {
@@ -280,7 +282,7 @@ class Group4
             $rows .= '<td>'.$holland_skor.'</td>';
             $rows .= '<td>'.$holland_skor_pre.'</td>';
             $rows .= '<td>'.self::category2($holland_skor_pre).'</td>';
-            $rows .= '<td>'.$imj_skor.'</td>';
+            $rows .= '<td>'.$imj_skor.' '.print_r($re['skor']['IMJ_DEBUG']).'</td>';
             $rows .= '<td>'.$imj_skor_pre.'</td>';
             $rows .= '<td>'.self::category2($imj_skor_pre).'</td>';
             $rows .= '<td>'.(($imj_skor_pre*0.5)+($holland_skor_pre*0.5)).'</td>';
