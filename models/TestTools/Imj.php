@@ -27,6 +27,27 @@ class Imj
         '15',
     ];
 
+    public static $single_report_columns = [
+        'Nama',
+        'Username',
+        'Jurusan',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        '10',
+        '11',
+        '12',
+        '13',
+        '14',
+        '15',
+    ];
+
     public static $categories = [
         'IMJ'=>[
             'TPA 1',
