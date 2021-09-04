@@ -2,6 +2,7 @@
 namespace app\models\TestTools;
 
 use app\models\Post;
+use app\models\Category;
 
 class Holland
 {
@@ -75,6 +76,11 @@ class Holland
     static function report($model)
     {
         ini_set('memory_limit',-1);
+        $cats = Category::find()->where(['test_tool'=>'HOLLAND'])->with(['posts'])->all();
+        $post_id = [];
+        foreach($cats as $cat)
+            foreach($cat->posts as $post)
+                $post_id[] = $post->id;
         $report = [];
         foreach($model->participants as $participant)
         {
@@ -86,7 +92,7 @@ class Holland
                 'E'=>0,
                 'C'=>0
             ];
-            foreach($participant->examAnswers as $answer)
+            foreach($participant->getExamAnswers()->where(['in','question_id',$post_id])->all() as $answer)
             {
                 if(!in_array($answer->question->categoryPost->test_tool,['HOLLAND'])) continue;
                 foreach(self::$categories as $key => $value)
