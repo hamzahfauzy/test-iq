@@ -18,6 +18,21 @@ $params['instrumen_jurusan'] = [
     'BUS' => 'A',
     'TSIP' => 'R'
 ];
+
+$params['norma_subtes'] = [
+    'TO'=>[5,6,7,8],
+    'TK'=>[5,6,7,8],
+    'AK'=>[1,3,5,6],
+    'AP'=>[1,3,5,6],
+    'TKim'=>[1,3,5,6],
+    'TM'=>[5,6,7,8],
+    'ADK' =>[1,3,5,6],
+    'DISKOMVIS' =>[5,6,7,8],
+    'TLAS' =>[5,6,7,8],
+    'TELEK' =>[5,6,7,8],
+    'BUS' =>[1,3,7,8],
+    'TSIP' =>[5,6,7,8]
+];
 $db = require __DIR__ . '/db.php';
 
 $config = [

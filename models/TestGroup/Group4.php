@@ -257,7 +257,7 @@ class Group4
             $rows .= '<td>'.self::category($re['skor']['TOTAL']).'</td>';
             $rows .= '<td> ?? </td>';
             $rows .= '<td> ?? </td>';
-            $rows .= '<td> ?? </td>';
+            $rows .= '<td>'.self::subskor($re).'</td>';
             $rows .= '<td> ?? </td>';
             $rows .= '<td> ?? </td>';
             $rows .= '<td>'.$re['skor']['HOLLAND'].'</td>';
@@ -268,6 +268,8 @@ class Group4
             $rows .= '<td> ?? </td>';
             $rows .= '<td>'.$re['skor']['IMJ'].'</td>';
             $rows .= '<td>'.($re['skor']['IMJ']*0.5).'</td>';
+            $rows .= '<td> ?? </td>';
+            $rows .= '<td> ?? </td>';
             $rows .= '<td> ?? </td>';
             $rows .= '<td> ?? </td>';
             $rows .= '<td> ?? </td>';
@@ -307,6 +309,16 @@ class Group4
             return 'Sedang';
         
         return 'Sangat Kurang';
+    }
+
+    static function subskor($re)
+    {
+        $norma_subtes = \Yii::$app->params['norma_subtes'];
+        $norma_subtes = $norma_subtes[$re['participant']->study];
+        $skor = 0;
+        foreach($norma_subtes as $n)
+            $skor += $re['skor']['TPA']['S'.$n];
+        return $skor;
     }
 
     static function jurusan1($skor)
