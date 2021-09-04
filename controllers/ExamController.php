@@ -285,8 +285,11 @@ class ExamController extends Controller
         $report = (new $test_group[$model->test_group])->report($model);
         $content = $report->render();
 
-        header("Content-type: application/vnd-ms-excel");
-        header("Content-Disposition: attachment; filename=Report-".$model->name.".xls");
+        if(!isset($_GET['debug']))
+        {
+            header("Content-type: application/vnd-ms-excel");
+            header("Content-Disposition: attachment; filename=Report-".$model->name.".xls");
+        }
 
         return $content;
     }
