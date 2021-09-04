@@ -112,7 +112,8 @@ class Tpa
                 {
                     if(in_array($answer->question->categoryPost->name,$value) && $answer->answer)
                     {
-                        // $sub_name = $answer->question->categoryPost->name;
+                        $sub_name = $answer->question->categoryPost->name;
+                        echo $sub_name;
                         // $subtest[$sub_name] += (int) $answer->answer->post_type;
                         $skor[$key] += (int) $answer->answer->post_type;
                     }
