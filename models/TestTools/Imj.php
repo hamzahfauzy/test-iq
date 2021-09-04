@@ -46,6 +46,7 @@ class Imj
         '13',
         '14',
         '15',
+        'TOTAL',
     ];
 
     public static $categories = [
@@ -203,8 +204,12 @@ class Imj
             $rows .= '<td>'.$re['participant']->name.'</td>';
             $rows .= '<td>\''.$re['participant']->user->username.'</td>';
             $rows .= '<td>'.$re['participant']->getMeta('jurusan').'</td>';
+            if(!empty($re['skor']['N']))
             foreach($re['skor']['N'] as $key => $value)
                 $rows .= '<td>'.$value.'</td>';
+            else
+            foreach([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15] as $key => $value)
+                $rows .= '<td>0</td>';
             $rows .= '<td>'.$re['skor']['TOTAL'].'</td>';
             $html .= $rows;
         }
