@@ -197,11 +197,11 @@ class Group4
             $holland_skor = substr($holland_skor, 0, -1);
             // $key_holland = array_keys($holland);
 
+            $instrumen_jurusan = \Yii::$app->params['instrumen_jurusan'];
+            $instrumen_jurusan = $instrumen_jurusan[$participant->study];
             $skor['HOLLAND'] = $holland_skor; //implode('',$key_holland);
             $skor['HOLLAND_SKOR'] = $holland[$instrumen_jurusan];
             $skor['HOLLAND_PRESENTASE'] = ($holland[$instrumen_jurusan]*0.5); //implode('',$key_holland);
-            $instrumen_jurusan = \Yii::$app->params['instrumen_jurusan'];
-            $instrumen_jurusan = $instrumen_jurusan[$participant->study];
             $skor['HASIL'] = ($skor['IMJ']*0.5) + ($holland[$instrumen_jurusan]*0.5);
 
             $report[] = [
