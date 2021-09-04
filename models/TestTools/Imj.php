@@ -8,22 +8,26 @@ class Imj
     public static $report_columns = [
         'Nama',
         'Username',
-        'Tempat Lahir',
-        'Tanggal Lahir',
-        'Jenis Kelamin',
-        'Tanggal Pemeriksaan',
-        'Pilihan Jurusan',
-        'BHS',
-        'IPS',
-        'IPA',
-        'Skor',
-        'Kategori',
-        'Jurusan 1',
-        'Jurusan 2'
+        'Jurusan',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        '10',
+        '11',
+        '12',
+        '13',
+        '14',
+        '15',
     ];
 
     public static $categories = [
-        'IPS'=>[
+        'IMJ'=>[
             'TPA 1',
             'TPA 2'
         ],
@@ -55,39 +59,20 @@ class Imj
         }
     }
 
-    static function report($id)
+    static function report($model)
     {
-        $model = Exam::find()->where([
-                    'exams.id'=>$id,
-                ])
-                ->joinWith([
-                    'participants',
-                    'participants.user',
-                    'participants.user.metas',
-                    'participants.examAnswers',
-                    'participants.examAnswers.answer',
-                    'participants.examAnswers.question',
-                    'participants.examAnswers.question.items',
-                    'participants.examAnswers.question.categoryPost' => function($q) {
-                        return $q->andOnCondition(['=', 'categories.test_tool', 'TPA']);
-                    }
-                ])
-                // ->asArray()
-                ->one();
         $report = [];
         foreach($model->participants as $participant)
         {
-            $skor = ['IPS'=>0,'BAHASA'=>0,'IPA'=>0];
-            foreach($participant->examAnswers as $answer)
-            {
-                if($answer->question->categoryPost == NULL) continue;
-                foreach(self::$categories as $key => $value)
-                {
-                    if(in_array($answer->question->categoryPost->name,$value) && $answer->answer)
-                        $skor[$key] += (int) $answer->answer->post_type;
-                }
-            }
-            $skor['TOTAL'] = $skor['IPS']+$skor['BAHASA']+$skor['IPA'];
+            $cats = Category::find()->where(['test_tool'=>'IMJ'])->all();
+            $post_id = [];
+            foreach($cats as $cat)
+                foreach($cat->getPosts()->where(['jurusan'=>$participant->study])->all() as $post)
+                    $post_id[] = $post->id;
+            $skor = [];
+            $answers = $participant->getExamAnswers()->where(['in','question_id',$post_id])->all();
+            foreach($answers as $answer)
+                $skor[] += (int) $answer->answer->post_type;
 
             $report[] = [
                 'participant' => $participant,
@@ -174,5 +159,30 @@ class Imj
         }
 
         return '-';
+    }
+
+    function renderSingleReport()
+    {
+        $html = '<table border="1" cellpadding="5" cellspacing="0"><tr><th>NO</th>';
+        foreach(self::$single_report_columns as $column)
+            $html .= '<th>'.$column.'</th>';
+        
+        $html .= '</tr>';
+
+        $report = self::$_report;
+
+        foreach($report as $key => $re)
+        {
+            $skor_papi = $this->papi_norma($re['skor']['Papikostick']);
+            $rows = '<tr>';
+            $rows .= '<td>'.++$key.'</td>';
+            $rows .= '<td>'.$re['participant']->name.'</td>';
+            $rows .= '<td>\''.$re['participant']->user->username.'</td>';
+            $rows .= '<td>'.$re['participant']->getMeta('jurusan').'</td>';
+            foreach($re['skor'] as $key => $value)
+                $rows .= '<td>'.$value.'</td>';
+            $html .= $rows;
+        }
+        return $html;
     }
 }
