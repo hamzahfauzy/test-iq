@@ -370,8 +370,8 @@ class ExamController extends Controller
 
         $model = Exam::findOne($id);
 
-        $report = (new $testTools[$tool])->report($id);
-        $content = $report->render();
+        $report = (new $testTools[$tool])->report($model);
+        $content = $report->renderSingleReport();
 
         header("Content-type: application/vnd-ms-excel");
         header("Content-Disposition: attachment; filename=Report-".$model->name."-".$tool.".xls");
