@@ -2,6 +2,7 @@
 namespace app\models\TestTools;
 
 use app\models\Post;
+use app\models\Category;
 
 class Imj
 {
