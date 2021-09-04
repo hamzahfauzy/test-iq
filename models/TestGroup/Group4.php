@@ -143,11 +143,15 @@ class Group4
             ];
             foreach($participant->examAnswers as $answer)
             {
-                if(!in_array($answer->question->categoryPost->test_tool,['TPA','HOLLAND','PAPIKOSTICK'])) continue;
+                if(!in_array($answer->question->categoryPost->test_tool,['TPA','HOLLAND','PAPIKOSTICK','IMJ'])) continue;
                 foreach(self::$categories as $key => $value)
                 {
                     if(in_array($answer->question->categoryPost->name,$value) && $answer->answer)
                     {
+                        if($answer->question->categoryPost->test_tool == 'IMJ')
+                        {
+                            $skor['IMJ'] += (int) $answer->answer->post_type;
+                        }
                         if(in_array($answer->question->categoryPost->test_tool,['TPA','HOLLAND']))
                         {
                             $skor[$key] += (int) $answer->answer->post_type;
