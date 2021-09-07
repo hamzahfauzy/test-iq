@@ -152,7 +152,7 @@ class ParticipantController extends Controller
                 $transaction->commit();
                 Yii::$app->session->addFlash("success", "Import Participant Success");
             } catch (\Throwable $th) {
-                throw $th;
+                // throw $th;
                 $transaction->rollback();
                 Yii::$app->session->addFlash("error", "Import Participant Failed");
             }
