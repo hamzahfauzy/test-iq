@@ -36,8 +36,8 @@ class Group4
         'Kategori',
         'Dukungan Minat (%)',
         'Kategori',
-        'Dukungan Potensi Berpikir',
-        'Dukungan Bakat',
+        'Dukungan Potensi Berpikir (%)',
+        'Dukungan Bakat (%)',
         'HOLLAND (%)',
         'INSTRUMEN MINAT JURUSAN(%)',
         'DUKUNGAN MINAT (%)',
@@ -232,14 +232,14 @@ class Group4
         $row_3 = '';
         foreach(self::$report_columns as $key => $column)
         {
-            if($key == 11){
+            if($key == 12){
                 $html .= '<th colspan="7">TINGKAT POTENSI AKADEMIK (TPA)</th>';
                 $row_2 .= '<td colspan="4">TINGKAT POTENSI AKADEMIK</td>';
                 $row_2 .= '<td colspan="3">DUKUNGAN BAKAT</td>';
                 // continue;
             }
 
-            if($key == 18)
+            if($key == 19)
             {
                 $html .= '<th colspan="11">DUKUNGAN MINAT</th>';
                 $row_2 .= '<td colspan="6">HOLLAND</td>';
@@ -247,19 +247,19 @@ class Group4
                 // continue;
             }
 
-            if($key == 29)
+            if($key == 30)
             {
                 $html .= '<th colspan="5">KESESUAIAN DENGAN JURUSAN</th>';
                 // continue;
             }
 
-            if($key == 35)
+            if($key == 36)
             {
                 $html .= '<th colspan="3">URAIAN PENILAIAN ASPEK POTENSI AKADEMIK</th>';
                 // continue;
             }
 
-            if($key == 38)
+            if($key == 39)
             {
                 $html .= '<th colspan="8">KEPRIBADIAN</th>';
                 // break;
@@ -268,15 +268,15 @@ class Group4
             // if($key >= 12 && $key <= 17) continue;
             // if($key >= 19 && $key <= 28) continue;
             // if($key >= 30 && $key <= 33) continue;
-            if($key <= 10 || in_array($key,[33,34]))
+            if($key <= 11 || in_array($key,[34,35]))
                 $html .= '<th rowspan="3">'.$column.'</th>';
             else
             {
-                if(in_array($key,[27,28,29,30]) || $key >= 35)
+                if(in_array($key,[28,29,30,31]) || $key >= 36)
                     $row_2 .= '<td rowspan="2">'.$column.'</td>';
                 else
                 {
-                    if($key == 31)
+                    if($key == 32)
                         $row_2 .= '<td colspan="3">DUKUNGAN MINAT %</td>';
                     $row_3 .= '<td>'.$column.'</td>';
                 }
