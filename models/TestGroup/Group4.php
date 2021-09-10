@@ -319,6 +319,7 @@ class Group4
             $rows .= '<td>'.$re['participant']->getMeta('tempat_lahir').'</td>';
             $rows .= '<td>'.$re['participant']->getMeta('tanggal_lahir').'</td>';
             $rows .= '<td>'.$re['participant']->getMeta('jenis_kelamin').'</td>';
+            $rows .= '<td>'.$re['participant']->study.'</td>';
             $rows .= '<td>'.$re['participant']->examParticipant->finished_at.'</td>';
             $rows .= '<td>'.$re['participant']->getMeta('jurusan').'</td>';
             $rows .= '<td>'.$re['participant']->getMeta('alasan').'</td>';
