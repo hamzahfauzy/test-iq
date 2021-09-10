@@ -267,11 +267,11 @@ class Group4
             // if($key >= 12 && $key <= 17) continue;
             // if($key >= 19 && $key <= 28) continue;
             // if($key >= 30 && $key <= 33) continue;
-            if($key <= 10 || in_array($key,[33,34]))
+            if($key <= 10 || in_array($key,[34,35]))
                 $html .= '<th rowspan="3">'.$column.'</th>';
             else
             {
-                if(in_array($key,[29,30,31,32]) || $key >= 35)
+                if(in_array($key,[29,30,31,32]) || $key >= 36)
                     $row_2 .= '<td rowspan="2">'.$column.'</td>';
                 else
                 {
