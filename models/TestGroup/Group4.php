@@ -241,6 +241,8 @@ class Group4
             if($key == 18)
             {
                 $html .= '<th colspan="11">DUKUNGAN MINAT</th>';
+                $row_2 .= '<td colspan="6">HOLLAND</td>';
+                $row_2 .= '<td colspan="3">INSTRUMENT MINAT JURUSAN</td>';
                 // continue;
             }
 
@@ -269,10 +271,14 @@ class Group4
                 $html .= '<th rowspan="3">'.$column.'</th>';
             else
             {
-                if(in_array($key,[27,28,29,30]) || $key >= 36)
+                if(in_array($key,[29,30,31,32]) || $key >= 38)
                     $row_2 .= '<td rowspan="2">'.$column.'</td>';
                 else
+                {
+                    if($key == 33)
+                        $row_2 .= '<td colspan="3">DUKUNGAN MINAT %</td>';
                     $row_3 .= '<td>'.$column.'</td>';
+                }
             }
         }
         $html .= '</tr>';
