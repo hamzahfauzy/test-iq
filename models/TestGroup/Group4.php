@@ -276,7 +276,7 @@ class Group4
                     $row_2 .= '<td rowspan="2">'.$column.'</td>';
                 else
                 {
-                    if($key == 32)
+                    if($key == 31)
                         $row_2 .= '<td colspan="3">DUKUNGAN MINAT %</td>';
                     $row_3 .= '<td>'.$column.'</td>';
                 }
