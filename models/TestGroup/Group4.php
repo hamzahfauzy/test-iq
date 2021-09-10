@@ -252,7 +252,7 @@ class Group4
                 // continue;
             }
 
-            if($key == 36)
+            if($key == 35)
             {
                 $html .= '<th colspan="3">URAIAN PENILAIAN ASPEK POTENSI AKADEMIK</th>';
                 // continue;
