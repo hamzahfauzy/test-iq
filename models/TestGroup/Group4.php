@@ -226,10 +226,58 @@ class Group4
     function render()
     {
         $html = '<table border="1" cellpadding="5" cellspacing="0"><tr><th>NO</th>';
-        foreach(self::$report_columns as $column)
-            $html .= '<th>'.$column.'</th>';
-        
+        $row_2 = '';
+        $row_3 = '';
+        foreach(self::$report_columns as $key => $column)
+        {
+            if($key == 11){
+                $html .= '<th colspan="7">TINGKAT POTENSI AKADEMIK (TPA)</th>';
+                $row_2 .= '<td colspan="4">TINGKAT POTENSI AKADEMIK</td>';
+                $row_2 .= '<td colspan="3">DUKUNGAN BAKAT</td>';
+                // continue;
+            }
+
+            if($key == 18)
+            {
+                $html .= '<th colspan="11">DUKUNGAN MINAT</th>';
+                // continue;
+            }
+
+            if($key == 29)
+            {
+                $html .= '<th colspan="5">KESESUAIAN DENGAN JURUSAN</th>';
+                // continue;
+            }
+
+            if($key == 36)
+            {
+                $html .= '<th colspan="3">URAIAN PENILAIAN ASPEK POTENSI AKADEMIK</th>';
+                // continue;
+            }
+
+            if($key == 37)
+            {
+                $html .= '<th colspan="8">KEPRIBADIAN</th>';
+                // break;
+            }
+
+            // if($key >= 12 && $key <= 17) continue;
+            // if($key >= 19 && $key <= 28) continue;
+            // if($key >= 30 && $key <= 33) continue;
+            if($key <= 10 || in_array($key,[34,35]))
+                $html .= '<th rowspan="3">'.$column.'</th>';
+            else
+            {
+                if(in_array($key,[27,28,29,30]) || $key >= 36)
+                    $row_2 .= '<td rowspan="2">'.$column.'</td>';
+                else
+                    $row_3 .= '<td>'.$column.'</td>';
+            }
+        }
         $html .= '</tr>';
+        $html .= '<tr>'.$row_2.'</tr>';
+        $html .= '<tr>'.$row_3.'</tr>';
+
 
         $report = self::$_report;
 
