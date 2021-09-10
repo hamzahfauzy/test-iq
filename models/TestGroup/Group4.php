@@ -272,7 +272,7 @@ class Group4
                 $html .= '<th rowspan="3">'.$column.'</th>';
             else
             {
-                if(in_array($key,[28,29,30,31]) || $key >= 36)
+                if(in_array($key,[27,28,29,30]) || $key >= 36)
                     $row_2 .= '<td rowspan="2">'.$column.'</td>';
                 else
                 {
