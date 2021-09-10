@@ -13,6 +13,7 @@ class Group4
         'Tempat Lahir',
         'Tanggal Lahir',
         'Jenis Kelamin',
+        'Jurusan',
         'Tanggal Pemeriksaan',
         'Pilihan Jurusan',
         'Alasan Memilih Jurusan',
