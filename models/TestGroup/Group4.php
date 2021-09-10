@@ -7,6 +7,7 @@ use app\models\Post;
 class Group4
 {   
     public static $report_columns = [
+        'No',
         'Nama',
         'Username',
         'Tempat Lahir',
@@ -225,7 +226,7 @@ class Group4
 
     function render()
     {
-        $html = '<table border="1" cellpadding="5" cellspacing="0"><tr><th>NO</th>';
+        $html = '<table border="1" cellpadding="5" cellspacing="0"><tr>'; // <th>NO</th>';
         $row_2 = '';
         $row_3 = '';
         foreach(self::$report_columns as $key => $column)
