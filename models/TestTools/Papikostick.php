@@ -10,14 +10,26 @@ class Papikostick
         'Nama',
         'Username',
         'Jurusan',
+        'G',
+        'L',
+        'I',
+        'T',
+        'V',
+        'S',
+        'R',
+        'D',
+        'C',
+        'E',
+        'N',
+        'A',
+        'P',
+        'X',
+        'B',
         'O',
         'Z',
-        'A',
-        'E',
-        'S',
-        'C',
-        'G',
         'K',
+        'F',
+        'W',
     ];
 
     public static $categories = [
@@ -98,8 +110,11 @@ class Papikostick
     function renderSingleReport()
     {
         $html = '<table border="1" cellpadding="5" cellspacing="0"><tr><th>NO</th>';
-        foreach(self::$single_report_columns as $column)
+        foreach(self::$single_report_columns as $n => $column)
+        {
             $html .= '<th>'.$column.'</th>';
+            if($n > 2) $html .= '<th>Norma</th>';
+        }
         
         $html .= '</tr>';
 
@@ -113,14 +128,12 @@ class Papikostick
             $rows .= '<td>'.$re['participant']->name.'</td>';
             $rows .= '<td>\''.$re['participant']->user->username.'</td>';
             $rows .= '<td>'.$re['participant']->getMeta('jurusan').'</td>';
-            $rows .= '<td>'.(isset($skor_papi['O'])?$skor_papi['O']:0).'</td>';
-            $rows .= '<td>'.(isset($skor_papi['Z'])?$skor_papi['Z']:0).'</td>';
-            $rows .= '<td>'.(isset($skor_papi['A'])?$skor_papi['A']:0).'</td>';
-            $rows .= '<td>'.(isset($skor_papi['E'])?$skor_papi['E']:0).'</td>';
-            $rows .= '<td>'.(isset($skor_papi['S'])?$skor_papi['S']:0).'</td>';
-            $rows .= '<td>'.(isset($skor_papi['C'])?$skor_papi['C']:0).'</td>';
-            $rows .= '<td>'.(isset($skor_papi['G'])?$skor_papi['G']:0).'</td>';
-            $rows .= '<td>'.(isset($skor_papi['K'])?$skor_papi['K']:0).'</td>';
+            foreach(self::$single_report_columns as $n => $column)
+            {
+                if($n <= 2) continue;
+                $rows .= '<td>'.(isset($re['skor']['Papikostick'][$column])?$re['skor']['Papikostick'][$column]:0).'</td>';
+                $rows .= '<td>'.(isset($skor_papi[$column])?$skor_papi[$column]:0).'</td>';
+            }
             $html .= $rows;
         }
         return $html;
@@ -136,6 +149,36 @@ class Papikostick
                     $papi['G'] = 2;
                 if($value >= 5 && $value <= 9)
                     $papi['G'] = 4;
+            }
+
+            if(in_array($key, ['L','P']))
+            {
+                if($value >= 0 && $value <= 4)
+                    $papi[$key] = 2;
+                if($value >= 5 && $value <= 8)
+                    $papi[$key] = 3;
+                if($value == 9)
+                    $papi[$key] = 4;
+            }
+
+            if($key == 'I')
+            {
+                if($value >= 0 && $value <= 4)
+                    $papi['I'] = 2;
+                if($value >= 5 && $value <= 7)
+                    $papi['I'] = 3;
+                if($value >= 8)
+                    $papi['I'] = 4;
+            }
+
+            if(in_array($key, ['T','V','R','D','X','B','W']))
+            {
+                if($value >= 0 && $value <= 3)
+                    $papi[$key] = 2;
+                if($value >= 4 && $value <= 6)
+                    $papi[$key] = 3;
+                if($value >= 7)
+                    $papi[$key] = 4;
             }
 
             if($key == 'S')
@@ -202,6 +245,26 @@ class Papikostick
                     $papi['K'] = 3;
                 if($value >= 6 && $value <= 7)
                     $papi['K'] = 4;
+            }
+
+            if($key == 'N')
+            {
+                if($value >= 0 && $value <= 4)
+                    $papi['N'] = 2;
+                if($value >= 5 && $value <= 6)
+                    $papi['N'] = 3;
+                if($value >= 7)
+                    $papi['N'] = 4;
+            }
+
+            if($key == 'F')
+            {
+                if($value >= 0 && $value <= 3)
+                    $papi['F'] = 2;
+                if($value >= 6 && $value <= 9)
+                    $papi['F'] = 3;
+                if($value >= 4 && $value <= 5)
+                    $papi['F'] = 4;
             }
         }
 
