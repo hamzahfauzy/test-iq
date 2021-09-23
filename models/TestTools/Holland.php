@@ -27,6 +27,36 @@ class Holland
         'Nama',
         'Username',
         'Jurusan',
+        'R1',
+        'R2',
+        'R3',
+        'R4',
+        'R5',
+        'I1',
+        'I2',
+        'I3',
+        'I4',
+        'I5',
+        'A1',
+        'A2',
+        'A3',
+        'A4',
+        'A5',
+        'S1',
+        'S2',
+        'S3',
+        'S4',
+        'S5',
+        'E1',
+        'E2',
+        'E3',
+        'E4',
+        'E5',
+        'C1',
+        'C2',
+        'C3',
+        'C4',
+        'C5',
         'R',
         'I',
         'A',
@@ -92,6 +122,21 @@ class Holland
                 'E'=>0,
                 'C'=>0
             ];
+            $skor_value = [
+                1 => 0,
+                2 => 0,
+                3 => 0,
+                4 => 0,
+                5 => 0,
+            ];
+            $skor_detail = [
+                'R' => $skor_value,
+                'I' => $skor_value,
+                'A' => $skor_value,
+                'S' => $skor_value,
+                'E' => $skor_value,
+                'C' => $skor_value,
+            ];
             foreach($participant->getExamAnswers()->where(['in','question_id',$post_id])->all() as $answer)
             {
                 if(!in_array($answer->question->categoryPost->test_tool,['HOLLAND'])) continue;
@@ -100,11 +145,13 @@ class Holland
                     if(in_array($answer->question->categoryPost->name,$value) && $answer->answer)
                     {
                         $skor[$key] += (int) $answer->answer->post_type;
+                        $skor_detail[$answer->answer->post_type]++;
                     }
                     
                 }
             }
             $skor['TOTAL'] = 0;
+            $skor['DETAIL'] = $skor_detail;
             $holland = [
                 'R' => $skor['R'],
                 'I' => $skor['I'],
@@ -171,6 +218,9 @@ class Holland
             $rows .= '<td>'.$re['participant']->name.'</td>';
             $rows .= '<td>\''.$re['participant']->user->username.'</td>';
             $rows .= '<td>'.$re['participant']->getMeta('jurusan').'</td>';
+            foreach($re['skor']['DETAIL'] as $key => $value)
+                foreach($value as $k => $v)
+                    $rows .= '<td>'.$v.'</td>';
             $rows .= '<td>'.$re['skor']['R'].'</td>';
             $rows .= '<td>'.$re['skor']['I'].'</td>';
             $rows .= '<td>'.$re['skor']['A'].'</td>';

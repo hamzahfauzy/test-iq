@@ -157,7 +157,7 @@ class Tpa
             $rows .= '<td>'.$re['participant']->examParticipant->finished_at.'</td>';
             $rows .= '<td>'.$re['participant']->getMeta('jurusan').'</td>';
             $rows .= '<td>'.$re['skor']['BAHASA'].'</td>';
-            $rows .= '<td>'.$re['skor']['IPS'].'</td>';
+            $rows .= '<td>'.($re['skor']['BAHASA']+$re['skor']['IPS']).'</td>';
             $rows .= '<td>'.$re['skor']['IPA'].'</td>';
             $rows .= '<td>'.$re['skor']['TOTAL'].'</td>';
             $rows .= '<td>'.self::category($re['skor']['TOTAL']).'</td>';
@@ -225,7 +225,7 @@ class Tpa
                 $rows .= '<td>'.$value.'</td>';
             $rows .= '<td>'.$re['skor']['TOTAL'].'</td>';
             $rows .= '<td>'.self::category($re['skor']['TOTAL']).'</td>';
-            $rows .= '<td>'.$re['skor']['IPS'].'</td>';
+            $rows .= '<td>'.($re['skor']['BAHASA']+$re['skor']['IPS']).'</td>';
             $rows .= '<td>'.$re['skor']['IPA'].'</td>';
             $rows .= '<td>'.self::jurusan1($re['skor']).'</td>';
 
