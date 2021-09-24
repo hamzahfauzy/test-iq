@@ -145,7 +145,7 @@ class Holland
                     if(in_array($answer->question->categoryPost->name,$value) && $answer->answer)
                     {
                         $skor[$key] += (int) $answer->answer->post_type;
-                        $skor_detail[$answer->answer->post_type]++;
+                        $skor_detail[$key][$answer->answer->post_type]++;
                     }
                     
                 }
