@@ -220,7 +220,7 @@ class Holland
             $rows .= '<td>'.$re['participant']->getMeta('jurusan').'</td>';
             foreach($re['skor']['DETAIL'] as $key => $value)
                 foreach($value as $k => $v)
-                    $rows .= '<td>'.$v.'</td>';
+                    $rows .= '<td>'.($v*$k).'</td>';
             $rows .= '<td>'.$re['skor']['R'].'</td>';
             $rows .= '<td>'.$re['skor']['I'].'</td>';
             $rows .= '<td>'.$re['skor']['A'].'</td>';
