@@ -123,11 +123,11 @@ class Holland
                 'C'=>0
             ];
             $skor_value = [
-                '1' => 0,
-                '2' => 0,
-                '3' => 0,
-                '4' => 0,
-                '5' => 0,
+                1 => 0,
+                2 => 0,
+                3 => 0,
+                4 => 0,
+                5 => 0,
             ];
             $skor_detail = [
                 'R' => $skor_value,
@@ -145,7 +145,7 @@ class Holland
                     if(in_array($answer->question->categoryPost->name,$value) && $answer->answer)
                     {
                         $skor[$key] += (int) $answer->answer->post_type;
-                        $skor_detail[$key]["'".$answer->answer->post_type."'"]++;
+                        $skor_detail[$key][$answer->answer->post_type]++;
                     }
                     
                 }
