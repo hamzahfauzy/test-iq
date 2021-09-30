@@ -306,7 +306,7 @@ class Group4
             $subskor_pre = $subskor/80*100;
             
             $holland_skor = $re['skor']['HOLLAND_SKOR'];
-            $holland_skor_pre = $holland_skor/225*100;
+            $holland_skor_pre = $holland_skor/165*100;
 
             $imj_skor = $re['skor']['IMJ'];
             $imj_skor_pre = $imj_skor/60*100;
