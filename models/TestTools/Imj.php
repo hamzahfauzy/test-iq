@@ -85,7 +85,11 @@ class Imj
     static function report($model)
     {
         $report = [];
-        foreach($model->participants as $participant)
+        if(isset($_GET['page']))
+            $participants = $model->getParticipants()->limit(50)->offset($_GET['page'])->all();
+        else
+            $participants = $model->participants;
+        foreach($participants as $participant)
         {
             $cats = Category::find()->where(['test_tool'=>'IMJ'])->all();
             $post_id = [];

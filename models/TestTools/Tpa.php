@@ -101,7 +101,11 @@ class Tpa
         foreach($cats as $cat)
             foreach($cat->posts as $post)
                 $post_id[] = $post->id;
-        foreach($model->participants as $participant)
+        if(isset($_GET['page']))
+            $participants = $model->getParticipants()->limit(50)->offset($_GET['page'])->all();
+        else
+            $participants = $model->participants;
+        foreach($participants as $participant)
         {
             $subtest = ['TPA 1'=>0,'TPA 2'=>0,'TPA 3'=>0,'TPA 4'=>0,'TPA 5'=>0,'TPA 6'=>0,'TPA 7'=>0,'TPA 8'=>0];
             $skor = ['IPS'=>0,'BAHASA'=>0,'IPA'=>0];

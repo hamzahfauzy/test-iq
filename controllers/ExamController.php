@@ -373,12 +373,6 @@ class ExamController extends Controller
         ];
 
         $model = Exam::findOne($id);
-        if(isset($_GET['debug']))
-        {
-            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            $report = (new $testTools[$tool])->report($model);
-            return $report::$_report;
-        }
 
         $report = (new $testTools[$tool])->report($model);
         $content = $report->renderSingleReport();

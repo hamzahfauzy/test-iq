@@ -51,7 +51,11 @@ class Papikostick
             foreach($cat->posts as $post)
                 $post_id[] = $post->id;
         $report = [];
-        foreach($model->participants as $participant)
+        if(isset($_GET['page']))
+            $participants = $model->getParticipants()->limit(50)->offset($_GET['page'])->all();
+        else
+            $participants = $model->participants;
+        foreach($participants as $participant)
         {
             $skor = [
                 'Papikostick' => []
