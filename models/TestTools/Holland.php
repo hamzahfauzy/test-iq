@@ -106,12 +106,15 @@ class Holland
     static function report($model)
     {
         ini_set('memory_limit',-1);
-        // $cats = Category::find()->where(['test_tool'=>'HOLLAND'])->with(['posts'])->all();
-        // $post_id = [];
-        // foreach($cats as $cat)
-        //     foreach($cat->posts as $post)
-        //         $post_id[] = $post->id;
+        $cats = Category::find()->where(['test_tool'=>'HOLLAND'])->with(['posts'])->all();
+        $post_id = [];
+        foreach($cats as $cat)
+            foreach($cat->posts as $post)
+                $post_id[] = $post->id;
         $report = [];
+        $participants = $model->participants;
+        if(isset($_GET['page']))
+            $participants = $model->getParticipants()->limit(50)->offset($_GET['page'])->get();
         foreach($model->participants as $participant)
         {
             $skor = [
@@ -137,7 +140,7 @@ class Holland
                 'E' => $skor_value,
                 'C' => $skor_value,
             ];
-            foreach($participant->examAnswers as $answer)
+            foreach($participant->getExamAnswers()->where(['in','question_id',$post_id])->all() as $answer)
             {
                 if(!in_array($answer->question->categoryPost->test_tool,['HOLLAND'])) continue;
                 foreach(self::$categories as $key => $value)
