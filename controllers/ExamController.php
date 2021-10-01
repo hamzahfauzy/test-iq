@@ -372,7 +372,7 @@ class ExamController extends Controller
             'IMJ' => 'app\models\TestTools\Imj',
         ];
 
-        $model = Exam::findOne($id)->with(['participants']);
+        $model = Exam::find()->where(['id'=>$id])->with(['participants'])->one();
         if(isset($_GET['debug']))
         {
             \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
