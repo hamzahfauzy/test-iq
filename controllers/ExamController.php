@@ -376,7 +376,8 @@ class ExamController extends Controller
         if(isset($_GET['debug']))
         {
             \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            return $model->participants;
+            $report = (new $testTools[$tool])->report($model);
+            return $report->_report;
         }
 
         $report = (new $testTools[$tool])->report($model);
