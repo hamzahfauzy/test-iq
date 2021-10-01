@@ -115,7 +115,7 @@ class Holland
         $participants = $model->participants;
         if(isset($_GET['page']))
             $participants = $model->getParticipants()->limit(50)->offset($_GET['page'])->all();
-        foreach($model->participants as $participant)
+        foreach($participants as $participant)
         {
             $skor = [
                 'R'=>0,
