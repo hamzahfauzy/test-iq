@@ -375,6 +375,7 @@ class ExamController extends Controller
         $model = Exam::findOne($id);
         if(isset($_GET['debug']))
         {
+            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             return $model;
         }
 
