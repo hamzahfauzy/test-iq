@@ -86,7 +86,12 @@ class Imj
     {
         $report = [];
         if(isset($_GET['page']))
-            $participants = $model->getParticipants()->limit(50)->offset($_GET['page'])->all();
+        {
+            $page = $_GET['page'];
+            $limit = 50;
+            $offset = $limit*($page-1);
+            $participants = $model->getParticipants()->limit($limit)->offset($offset)->all();
+        }
         else
             $participants = $model->participants;
         foreach($participants as $participant)
