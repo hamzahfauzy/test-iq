@@ -373,6 +373,10 @@ class ExamController extends Controller
         ];
 
         $model = Exam::findOne($id);
+        if(isset($_GET['debug']))
+        {
+            return $model;
+        }
 
         $report = (new $testTools[$tool])->report($model);
         $content = $report->renderSingleReport();
