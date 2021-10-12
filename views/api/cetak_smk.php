@@ -380,7 +380,7 @@ $bakat_dan_minat_1 = strtoupper($bakat_dan_minat_1);
 ?>
 <table id="customers" align="center">
     <tr>
-        <th colspan="3"><h2 align="center">MINAT DAN JURUSAN YANG SESUAI</h2></th>
+        <th colspan="3"><h4 align="center">MINAT DAN JURUSAN YANG SESUAI</h4></th>
     </tr>
     <tr>
         <td>Minat</td>
@@ -450,7 +450,7 @@ $dev = [
 ?>
 <table id="customers" align="center">
     <tr>
-        <th colspan="2"><h2 align="center">ASPEK YANG PERLU DIKEMBANGKAN</h2></th>
+        <th colspan="2"><h4 align="center">ASPEK YANG PERLU DIKEMBANGKAN</h4></th>
     </tr>
     <tr>
         <th width="200">ASPEK</th>
