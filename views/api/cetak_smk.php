@@ -372,7 +372,7 @@ $d = [
     ],
 ];
 
-$bakat_dan_minat_1 = $worksheet->getCellByColumnAndRow(17, $row)->getValue();
+$bakat_dan_minat_1 = $worksheet->getCellByColumnAndRow(18, $row)->getValue();
 $bakat_dan_minat_1 = strtoupper($bakat_dan_minat_1);
 
 // $bakat_dan_minat_2 = $worksheet->getCellByColumnAndRow(28, $row)->getValue();
