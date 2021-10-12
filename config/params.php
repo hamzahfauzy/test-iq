@@ -9,6 +9,7 @@ return [
         'HOLLAND'=>'HOLLAND',
         'PAPIKOSTICK'=>'PAPIKOSTICK',
         'IMJ'=>'IMJ',
+        'DISC'=>'DISC'
     ],
     'test_group' => [
         'group_1' => [
@@ -44,6 +45,13 @@ return [
             'name' => 'Group 5',
             'tools' => [
                 'HOLLAND'
+            ]
+        ],
+        'group_6' => [
+            'id'   => 'group_6',
+            'name' => 'Group 6',
+            'tools' => [
+                'TPA','PAPIKOSTICK','DIST','HOLLAND'
             ]
         ]
     ],

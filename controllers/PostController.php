@@ -156,7 +156,7 @@ class PostController extends Controller
                         $post = new Post;
                         $post->post_title = "Soal ".$category->name." ".$no;
                         $post->post_as    = "Soal";
-                        $post->jurusan    = $model->jurusan;
+                        $post->jurusan    = $model->jurusan?$model->jurusan:'';
                         $post->save(false);
                         
                         // assign category to post (soal)
@@ -164,6 +164,11 @@ class PostController extends Controller
                         $category_post->category_id = $model->category_id;
                         $category_post->post_id = $post->id;
                         $category_post->save();
+
+                        if($category->test_tool == 'DISC')
+                        {
+                            Disc::insert($no,$category,$worksheet,$post,$row);
+                        }
                     
                         if($category->test_tool == 'PAPIKOSTICK')
                         {
