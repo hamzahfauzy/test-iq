@@ -472,4 +472,3 @@ $dev = [
     Medan, <?=$worksheet->getCellByColumnAndRow(9, $row)->getValue()?><br />
     <img src="images/ttd-3.png" style="width:280px" />
 </div>
-<div style="page-break-before: always"></div>
