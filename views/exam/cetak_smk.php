@@ -470,8 +470,10 @@ $dev = [
 <br />
 <table>
     <tr>
-        <td width="100%" style="text-align:right;">
-            <div style="text-align:center;width:300px;">
+        <td width="200"></td>
+        <td width="200"></td>
+        <td width="200">
+            <div style="text-align:center;">
                 Medan, <?=$worksheet->getCellByColumnAndRow(10, $row)->getValue()?><br />
                 <img src="images/ttd-3.png" style="width:250px" />
             </div>
