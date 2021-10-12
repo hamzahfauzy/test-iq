@@ -15,6 +15,7 @@ use app\models\CategoryPost;
 use yii\helpers\ArrayHelper;
 use app\models\TestTools\Imj;
 use app\models\TestTools\Tpa;
+use app\models\TestTools\Disc;
 use app\models\PostItemsSearch;
 use app\models\TestTools\Cfit2;
 use app\models\TestTools\Holland;
