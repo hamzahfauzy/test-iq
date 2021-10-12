@@ -80,8 +80,8 @@
 <div style="page-break-before: always"></div>
 <table id="customers" align="center">
     <tr>
-        <th colspan="2"><h2 align="center">POTENSI AKADEMIK</h2></th>
-        <th colspan="5" style="text-align:center;"><h2 align="center"><?=$worksheet->getCellByColumnAndRow(14, $row)->getValue()?></h2></th>
+        <th colspan="2"><h4 align="center" style="margin:0px;">POTENSI AKADEMIK</h4></th>
+        <th colspan="5" style="text-align:center;"><h4 align="center" style="margin:0px;"><?=$worksheet->getCellByColumnAndRow(14, $row)->getValue()?></h4></th>
     </tr>
     <tr>
         <td style="text-align:center;background:#eaeaea;" rowspan="2">ASPEK</td>
@@ -195,27 +195,27 @@
 <br>
 <table id="customers" align="center">
     <tr>
-        <th colspan="3"><h2 align="center">KECOCOKAN POTENSI ANAK DENGAN JURUSAN YANG DIPILIH</h2></th>
+        <th colspan="3"><h4 align="center" style="margin:0px;">KECOCOKAN POTENSI ANAK DENGAN JURUSAN YANG DIPILIH</h4></th>
     </tr>
     <tr>
-        <td>DUKUNGAN POTENSI AKADEMIK</td>
-        <td><?=$worksheet->getCellByColumnAndRow(12, $row)->getValue()?></td>
-        <td><?=$worksheet->getCellByColumnAndRow(13, $row)->getValue()?></td>
+        <td width="200">DUKUNGAN POTENSI AKADEMIK</td>
+        <td width="200"><?=$worksheet->getCellByColumnAndRow(11, $row)->getValue()?></td>
+        <td width="200"><?=$worksheet->getCellByColumnAndRow(12, $row)->getValue()?></td>
     </tr>
     <tr>
         <td>DUKUNGAN BAKAT</td>
+        <td><?=$worksheet->getCellByColumnAndRow(14, $row)->getValue()?></td>
         <td><?=$worksheet->getCellByColumnAndRow(15, $row)->getValue()?></td>
-        <td><?=$worksheet->getCellByColumnAndRow(16, $row)->getValue()?></td>
     </tr>
     <tr>
         <td>DUKUNGAN MINAT</td>
+        <td><?=$worksheet->getCellByColumnAndRow(24, $row)->getValue()?></td>
         <td><?=$worksheet->getCellByColumnAndRow(25, $row)->getValue()?></td>
-        <td><?=$worksheet->getCellByColumnAndRow(26, $row)->getValue()?></td>
     </tr>
     <tr>
         <td><b>KECOCOKAN DENGAN JURUSAN</b></td>
+        <td><?=$worksheet->getCellByColumnAndRow(31, $row)->getValue()?></td>
         <td><?=$worksheet->getCellByColumnAndRow(32, $row)->getValue()?></td>
-        <td><?=$worksheet->getCellByColumnAndRow(33, $row)->getValue()?></td>
     </tr>
 </table>
 <br>
