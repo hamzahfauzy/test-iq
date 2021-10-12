@@ -95,8 +95,8 @@ class ApiController extends \yii\web\Controller
                 'default' => 'cetak',
             ],
             'group_4' => [
-                'bhs' => 'cetak_bhs',
-                'default' => 'cetak',
+                'bhs' => 'cetak_smk',
+                'default' => 'cetak_smk',
             ],
             'group_5' => [
                 'bhs' => 'cetak_group_2',

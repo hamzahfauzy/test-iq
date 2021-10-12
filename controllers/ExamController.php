@@ -108,6 +108,7 @@ class ExamController extends Controller
     public function actionCetak($id)
     {
         $model = ImportExamFile::find()->where(['exam_id'=>$id])->one();
+        $exam  = Exam::findOne($id);
         $extension = pathinfo($model->file_path, PATHINFO_EXTENSION);
 
         if($extension=='xlsx'){
@@ -172,13 +173,13 @@ class ExamController extends Controller
         if($max_row > $num_rows)
             $max_row = $num_rows;
 
-        if($worksheet->getCellByColumnAndRow(10, 2)->getFormattedValue() == 'BHS')
+        if($exam->test_group == 'group_4')
         {
             for ($row = $first_row; $row <= $max_row; $row++) { 
                 $value = $worksheet->getCellByColumnAndRow(3, $row)->getFormattedValue();
                 if($value == '') continue;
             //     echo $worksheet->getCellByColumnAndRow(3, $row)->getValue() . '<br>';
-                $content .= $this->renderPartial('cetak_bhs',[
+                $content .= $this->renderPartial('cetak_smk',[
                     'worksheet' => $worksheet,
                     'row'       => $row
                 ]);
@@ -186,16 +187,32 @@ class ExamController extends Controller
         }
         else
         {
-            for ($row = $first_row; $row <= $max_row; $row++) { 
-                $value = $worksheet->getCellByColumnAndRow(3, $row)->getFormattedValue();
-                if($value == '') continue;
-            //     echo $worksheet->getCellByColumnAndRow(3, $row)->getValue() . '<br>';
-                $content .= $this->renderPartial('cetak',[
-                    'worksheet' => $worksheet,
-                    'row'       => $row
-                ]);
+            if($worksheet->getCellByColumnAndRow(10, 2)->getFormattedValue() == 'BHS')
+            {
+                for ($row = $first_row; $row <= $max_row; $row++) { 
+                    $value = $worksheet->getCellByColumnAndRow(3, $row)->getFormattedValue();
+                    if($value == '') continue;
+                //     echo $worksheet->getCellByColumnAndRow(3, $row)->getValue() . '<br>';
+                    $content .= $this->renderPartial('cetak_bhs',[
+                        'worksheet' => $worksheet,
+                        'row'       => $row
+                    ]);
+                }
+            }
+            else
+            {
+                for ($row = $first_row; $row <= $max_row; $row++) { 
+                    $value = $worksheet->getCellByColumnAndRow(3, $row)->getFormattedValue();
+                    if($value == '') continue;
+                //     echo $worksheet->getCellByColumnAndRow(3, $row)->getValue() . '<br>';
+                    $content .= $this->renderPartial('cetak',[
+                        'worksheet' => $worksheet,
+                        'row'       => $row
+                    ]);
+                }
             }
         }
+
 
         $content .= "<body>";
 
