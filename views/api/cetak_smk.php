@@ -209,13 +209,13 @@
     </tr>
     <tr>
         <td>DUKUNGAN MINAT</td>
+        <td><?=$worksheet->getCellByColumnAndRow(26, $row)->getValue()?></td>
         <td><?=$worksheet->getCellByColumnAndRow(27, $row)->getValue()?></td>
-        <td><?=$worksheet->getCellByColumnAndRow(28, $row)->getValue()?></td>
     </tr>
     <tr>
         <td><b>KECOCOKAN DENGAN JURUSAN</b></td>
+        <td><?=$worksheet->getCellByColumnAndRow(33, $row)->getValue()?></td>
         <td><?=$worksheet->getCellByColumnAndRow(34, $row)->getValue()?></td>
-        <td><?=$worksheet->getCellByColumnAndRow(35, $row)->getValue()?></td>
     </tr>
 </table>
 <br>
