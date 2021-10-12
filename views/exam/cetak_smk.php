@@ -209,8 +209,8 @@
     </tr>
     <tr>
         <td>DUKUNGAN MINAT</td>
-        <td><?=number_format($worksheet->getCellByColumnAndRow(26, $row)->getValue())?>%</td>
-        <td><?=$worksheet->getCellByColumnAndRow(27, $row)->getValue()?></td>
+        <td><?=number_format($worksheet->getCellByColumnAndRow(25, $row)->getValue())?>%</td>
+        <td><?=$worksheet->getCellByColumnAndRow(26, $row)->getValue()?></td>
     </tr>
     <tr>
         <td><b>KECOCOKAN DENGAN JURUSAN</b></td>
