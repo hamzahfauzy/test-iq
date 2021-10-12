@@ -384,7 +384,7 @@ $bakat_dan_minat_1 = strtoupper($bakat_dan_minat_1);
     </tr>
     <tr>
         <td width="200">Minat</td>
-        <td colspan="2" width="425">
+        <td colspan="2" width="200">
             <b><?=$d[$bakat_dan_minat_1]['jenis_minat']?></b><br>
             <ul>
                 <li>
@@ -394,9 +394,9 @@ $bakat_dan_minat_1 = strtoupper($bakat_dan_minat_1);
         </td>
     </tr>
     <tr>
-        <td>Alternatif Jurusan di Perguruan Tinggi</td>
-        <td></td>
-        <td></td>
+        <td width="200">Alternatif Jurusan di Perguruan Tinggi</td>
+        <td width="200"></td>
+        <td width="200"></td>
     </tr>
 </table>
 <br>
@@ -470,6 +470,6 @@ $dev = [
 <br />
 <div style="text-align:center;width:100%;display:block;">
     Medan, <?=$worksheet->getCellByColumnAndRow(9, $row)->getValue()?><br />
-    <img src="images/ttd-3.png" style="width:320px" />
+    <img src="images/ttd-3.png" style="width:300px" />
 </div>
 <div style="page-break-before: always"></div>
