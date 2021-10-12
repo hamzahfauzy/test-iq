@@ -199,23 +199,23 @@
     </tr>
     <tr>
         <td width="200">DUKUNGAN POTENSI AKADEMIK</td>
-        <td width="200"><?=$worksheet->getCellByColumnAndRow(11, $row)->getValue()?></td>
-        <td width="200"><?=$worksheet->getCellByColumnAndRow(12, $row)->getValue()?></td>
+        <td width="200"><?=$worksheet->getCellByColumnAndRow(13, $row)->getValue()?>%</td>
+        <td width="200"><?=$worksheet->getCellByColumnAndRow(14, $row)->getValue()?></td>
     </tr>
     <tr>
         <td>DUKUNGAN BAKAT</td>
-        <td><?=$worksheet->getCellByColumnAndRow(14, $row)->getValue()?></td>
-        <td><?=$worksheet->getCellByColumnAndRow(15, $row)->getValue()?></td>
+        <td><?=$worksheet->getCellByColumnAndRow(16, $row)->getValue()?>%</td>
+        <td><?=$worksheet->getCellByColumnAndRow(17, $row)->getValue()?></td>
     </tr>
     <tr>
         <td>DUKUNGAN MINAT</td>
-        <td><?=$worksheet->getCellByColumnAndRow(24, $row)->getValue()?></td>
-        <td><?=$worksheet->getCellByColumnAndRow(25, $row)->getValue()?></td>
+        <td><?=$worksheet->getCellByColumnAndRow(27, $row)->getValue()?></td>
+        <td><?=$worksheet->getCellByColumnAndRow(28, $row)->getValue()?></td>
     </tr>
     <tr>
         <td><b>KECOCOKAN DENGAN JURUSAN</b></td>
-        <td><?=$worksheet->getCellByColumnAndRow(31, $row)->getValue()?></td>
-        <td><?=$worksheet->getCellByColumnAndRow(32, $row)->getValue()?></td>
+        <td><?=$worksheet->getCellByColumnAndRow(34, $row)->getValue()?></td>
+        <td><?=$worksheet->getCellByColumnAndRow(35, $row)->getValue()?></td>
     </tr>
 </table>
 <br>
