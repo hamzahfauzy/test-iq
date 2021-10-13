@@ -51,7 +51,7 @@ return [
             'id'   => 'group_6',
             'name' => 'Group 6',
             'tools' => [
-                'TPA','PAPIKOSTICK','DIST','HOLLAND'
+                'TPA','PAPIKOSTICK','DISC','HOLLAND'
             ]
         ]
     ],
