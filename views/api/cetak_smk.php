@@ -466,7 +466,7 @@ $dev = [
     </tr>
     <tr>
         <th width="200" align="center">ASPEK</th>
-        <th width="425" align="center">SARAN PENGEMBANGAN</th>
+        <th width="435" align="center">SARAN PENGEMBANGAN</th>
     </tr>
     <?php 
     for($i=35;$i<=45;$i++):
@@ -475,7 +475,7 @@ $dev = [
     ?>
     <tr>
         <td width="200"><?=$dev[$i][0]?></td>
-        <td width="425"><?=$dev[$i][1]?></td>
+        <td width="435"><?=$dev[$i][1]?></td>
     </tr>
     <?php endfor ?>
 </table>
