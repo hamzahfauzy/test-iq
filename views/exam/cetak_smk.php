@@ -383,8 +383,8 @@ $bakat_dan_minat_1 = strtoupper($bakat_dan_minat_1);
         <th colspan="3"><h4 align="center" style="margin:0px;">MINAT DAN JURUSAN YANG SESUAI</h4></th>
     </tr>
     <tr>
-        <td width="200">Minat</td>
-        <td colspan="2" width="180">
+        <td width="190">Minat</td>
+        <td colspan="2" width="200">
             <b><?=$d[$bakat_dan_minat_1]['jenis_minat']?></b><br>
             <ul>
                 <li>
@@ -394,7 +394,7 @@ $bakat_dan_minat_1 = strtoupper($bakat_dan_minat_1);
         </td>
     </tr>
     <tr>
-        <td width="200">Alternatif Jurusan di<br>Perguruan Tinggi</td>
+        <td width="190">Alternatif Jurusan di<br>Perguruan Tinggi</td>
         <td width="200">
             <ul>
                 <li>
