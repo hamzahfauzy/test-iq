@@ -394,8 +394,8 @@ $bakat_dan_minat_1 = strtoupper($bakat_dan_minat_1);
         </td>
     </tr>
     <tr>
-        <td>Alternatif Jurusan di Perguruan Tinggi</td>
-        <td>
+        <td width="200">Alternatif Jurusan di<br>Perguruan Tinggi</td>
+        <td width="200">
             <ul>
                 <li>
                 <?=implode('</li><li>',$d[$bakat_dan_minat_1]['IPA'])?><br>
