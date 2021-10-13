@@ -384,7 +384,7 @@ $bakat_dan_minat_1 = strtoupper($bakat_dan_minat_1);
     </tr>
     <tr>
         <td width="200">Minat</td>
-        <td colspan="2" width="425">
+        <td colspan="2" width="180">
             <b><?=$d[$bakat_dan_minat_1]['jenis_minat']?></b><br>
             <ul>
                 <li>
