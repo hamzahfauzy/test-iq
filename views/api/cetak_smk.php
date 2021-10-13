@@ -199,12 +199,12 @@
     </tr>
     <tr>
         <td width="200">DUKUNGAN POTENSI AKADEMIK</td>
-        <td width="200"><?=$worksheet->getCellByColumnAndRow(13, $row)->getValue()?>%</td>
+        <td width="200"><?=number_format($worksheet->getCellByColumnAndRow(13, $row)->getValue())?>%</td>
         <td width="200"><?=$worksheet->getCellByColumnAndRow(14, $row)->getValue()?></td>
     </tr>
     <tr>
         <td>DUKUNGAN BAKAT</td>
-        <td><?=$worksheet->getCellByColumnAndRow(16, $row)->getValue()?>%</td>
+        <td><?=number_format($worksheet->getCellByColumnAndRow(16, $row)->getValue())?>%</td>
         <td><?=$worksheet->getCellByColumnAndRow(17, $row)->getValue()?></td>
     </tr>
     <tr>
@@ -395,8 +395,20 @@ $bakat_dan_minat_1 = strtoupper($bakat_dan_minat_1);
     </tr>
     <tr>
         <td width="200">Alternatif Jurusan di Perguruan Tinggi</td>
-        <td width="200"></td>
-        <td width="200"></td>
+        <td width="200">
+            <ul>
+                <li>
+                <?=implode('</li><li>',$d[$bakat_dan_minat_1]['IPA'])?><br>
+                </li>
+            </ul>
+        </td>
+        <td width="200">
+            <ul>
+                <li>
+                <?=implode('</li><li>',$d[$bakat_dan_minat_1]['IPS'])?><br>
+                </li>
+            </ul>
+        </td>
     </tr>
 </table>
 <br>
