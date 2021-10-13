@@ -465,8 +465,8 @@ $dev = [
         <th colspan="2"><h4 align="center" style="margin:0px;">ASPEK YANG PERLU DIKEMBANGKAN</h4></th>
     </tr>
     <tr>
-        <th width="200">ASPEK</th>
-        <th width="425">SARAN PENGEMBANGAN</th>
+        <th width="200" align="center">ASPEK</th>
+        <th width="425" align="center">SARAN PENGEMBANGAN</th>
     </tr>
     <?php 
     for($i=35;$i<=45;$i++):
