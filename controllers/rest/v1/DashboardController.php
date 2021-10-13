@@ -46,6 +46,7 @@ class DashboardController extends Controller
             'group_3' => 'http://video.ujiantmc.online/vmb3',
             'group_4' => 'http://video.ujiantmc.online/vmb4',
             'group_5' => 'http://video.ujiantmc.online/vmb5',
+            'group_6' => 'http://video.ujiantmc.online/vmb5',
         ];
         foreach($examParticipants as $key => $ex)
         {
