@@ -402,7 +402,7 @@ $bakat_dan_minat_1 = strtoupper($bakat_dan_minat_1);
                 </li>
             </ul>
         </td>
-        <td width="200">
+        <td width="180">
             <ul>
                 <li>
                 <?=implode('</li><li>',$d[$bakat_dan_minat_1]['IPS'])?><br>
