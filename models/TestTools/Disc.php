@@ -9,31 +9,34 @@ class Disc
     public static $single_report_columns = [
         'Nama',
         'Username',
-        'Jurusan',
-        'G',
-        'L',
-        'I',
-        'T',
-        'V',
-        'S',
-        'R',
-        'D',
-        'C',
-        'E',
-        'N',
-        'A',
-        'P',
-        'X',
-        'B',
-        'O',
-        'Z',
-        'K',
-        'F',
-        'W',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        '10',
+        '11',
+        '12',
+        '13',
+        '14',
+        '15',
+        '16',
+        '17',
+        '18',
+        '19',
+        '20',
+        '21',
+        '22',
+        '23',
+        '24',
     ];
 
     public static $categories = [
-        'PAPIKOSTICK' => [
+        'DISC' => [
             'Soal Papikostik (Halaman 1)',
             'Soal Papikostik (Halaman 2)',
             'Soal Papikostik (Halaman 3)',
@@ -45,7 +48,7 @@ class Disc
     static function report($model)
     {
         ini_set('memory_limit',-1);
-        $cats = Category::find()->where(['test_tool'=>'PAPIKOSTICK'])->with(['posts'])->all();
+        $cats = Category::find()->where(['test_tool'=>'DISC'])->with(['posts'])->all();
         $post_id = [];
         foreach($cats as $cat)
             foreach($cat->posts as $post)
@@ -63,22 +66,13 @@ class Disc
         foreach($participants as $participant)
         {
             $skor = [
-                'Papikostick' => []
+                'DISC' => []
             ];
             foreach($participant->getExamAnswers()->where(['in','question_id',$post_id])->all() as $answer)
             {
-                if(!in_array($answer->question->categoryPost->test_tool,['TPA','HOLLAND','PAPIKOSTICK'])) continue;
+                if(!in_array($answer->question->categoryPost->test_tool,['DISC'])) continue;
                 foreach(self::$categories as $key => $value)
-                {
-                    if(in_array($answer->question->categoryPost->name,$value) && $answer->answer)
-                    {
-                        // papikostick
-                        if(isset($skor['Papikostick'][$answer->answer->post_type]))
-                            $skor['Papikostick'][$answer->answer->post_type]++;
-                        else
-                            $skor['Papikostick'][$answer->answer->post_type] = 1;
-                    }
-                }
+                    $skor['DISC'][$answer->question->id][$answer->answer_content] = $answer->answer->post_type;
             }
             
             $report[] = [
@@ -111,30 +105,44 @@ class Disc
 
     function renderSingleReport()
     {
-        $html = '<table border="1" cellpadding="5" cellspacing="0"><tr><th>NO</th>';
+        $html = '<table border="1" cellpadding="5" cellspacing="0"><tr><th rowspan="2">NO</th>';
         foreach(self::$single_report_columns as $n => $column)
         {
-            $html .= '<th>'.$column.'</th>';
-            if($n > 2) $html .= '<th>Norma</th>';
+            if($n <= 1)
+                $html .= '<th rowspan="2">'.$column.'</th>';
+            else
+                $html .= '<th colspan="2">'.$column.'</th>';
         }
         
+        $html .= '</tr><tr>';
+
+        foreach(self::$single_report_columns as $n => $column)
+        {
+            if($n <= 1)
+                continue;
+            else
+            {
+                $html .= '<td>M</td>';
+                $html .= '<td>L</td>';
+            }
+        }
+
         $html .= '</tr>';
 
         $report = self::$_report;
 
         foreach($report as $key => $re)
         {
-            $skor_papi = $this->papi_norma($re['skor']['Papikostick']);
             $rows = '<tr>';
             $rows .= '<td>'.++$key.'</td>';
             $rows .= '<td>'.$re['participant']->name.'</td>';
             $rows .= '<td>\''.$re['participant']->user->username.'</td>';
-            $rows .= '<td>'.$re['participant']->getMeta('jurusan').'</td>';
-            foreach(self::$single_report_columns as $n => $column)
+            foreach($re['skor']['DISC'] as $q_id => $answer)
             {
-                if($n <= 2) continue;
-                $rows .= '<td>'.(isset($re['skor']['Papikostick'][$column])?$re['skor']['Papikostick'][$column]:0).'</td>';
-                $rows .= '<td>'.(isset($skor_papi[$column])?$skor_papi[$column]:0).'</td>';
+                // if(isset($answer['M']))
+                //     print_r($answer['M']);
+                $rows .= '<td>'.(isset($answer['M'])?$answer['M']:1).'</td>';
+                $rows .= '<td>'.(isset($answer['L'])?$answer['L']:1).'</td>';
             }
             $html .= $rows;
         }

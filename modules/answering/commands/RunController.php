@@ -47,11 +47,21 @@ class RunController extends Controller
                 foreach($data as $key => $jawaban)
                 {
                     if($jawaban == null) continue;
-                    $exam_answer = ExamAnswer::find()->where([
+                    $ml_label = '';
+                    if(strpos($key,'-') !== false)
+                    {
+                        $jwb_arr = explode('-',$key);
+                        $key = $jwb_arr[0];
+                        $ml_label = $jwb_arr[1];
+                    }
+                    $clause = [
                         'exam_id'=>$id,
                         'question_id'=>$key,
                         'participant_id'=>$examPart->participant_id,
-                    ]);
+                    ];
+                    if($ml_label != '')
+                        $clause['answer_content'] = $ml_label;
+                    $exam_answer = ExamAnswer::find()->where($clause);
                     $post = Post::find()->where(['id'=>$jawaban])->one();
                     $answer = new ExamAnswer();
                     if($exam_answer->exists()){
@@ -62,7 +72,7 @@ class RunController extends Controller
                     $answer->question_id = $key;
                     $answer->participant_id = $examPart->participant_id;
                     $answer->answer_id = $jawaban;
-                    $answer->answer_content = $post->post_content;
+                    $answer->answer_content = $ml_label == '' ? $post->post_content : $ml_label;
                     $answer->score = $post->post_type;
 
                     $answer->save(false);
