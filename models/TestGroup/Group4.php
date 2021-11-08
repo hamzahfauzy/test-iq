@@ -384,19 +384,19 @@ class Group4
 
     static function category2($value)
     {
-        if($value >= 81)
+        if($value > 80)
             return 'Sangat Tinggi';
         
-        if($value >= 61 && $value <= 80)
+        if($value > 60 && $value <= 80)
             return 'Tinggi';
 
-        if($value >= 41 && $value <= 60)
+        if($value > 40 && $value <= 60)
             return 'Sedang';
 
         if($value >= 21 && $value <= 40)
-            return 'Sedang';
+            return 'Rendah';
         
-        return 'Sangat Kurang';
+        return 'Sangat Rendah';
     }
 
     static function subskor($re)
