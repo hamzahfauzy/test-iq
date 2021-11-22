@@ -416,7 +416,7 @@ class ExamController extends Controller
 
         if(isset($_GET['bulk_print']))
         {
-            $model = Exam::where(['exams.id'=>$id])
+            $model = Exam::find()->where(['exams.id'=>$id])
                     ->joinWith(['
                         participants' => function($query){
                             $query->where(['in','participants.id',$_GET['bulk_print']]);
