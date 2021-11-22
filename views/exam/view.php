@@ -132,6 +132,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ]); ?>
             <button class="btn btn-primary" onclick="downloadReport()"><i class="fa fa-file"></i> Download Report</button>
+            <?php
+            $test_group = Yii::$app->params['test_group'];
+            $tools = $test_group[$model->test_group]['tools'];
+            if(count($tools) > 1)
+            foreach($tools as $tool):
+            ?>
+            <button class="btn btn-primary" onclick="downloadNewReport('<?=$tool?>')"><i class="fa fa-file"></i> Download <?=$tool?></button>
+            <?php endforeach ?>
         </div>
     </div>
 </div>
@@ -146,5 +154,17 @@ function downloadReport()
     }
 
     window.open('/exam/download?id=<?=$_GET['id']?>&'+qs)
+}
+
+function downloadNewReport(tool)
+{
+    var ids = document.querySelectorAll('.bulk_print:checked')
+    var qs  = ""
+    for(i=0;i<ids.length;i++)
+    {
+        qs += "bulk_print[]="+ids[i].value+"&"
+    }
+
+    window.open('/exam/new-download?id=<?=$_GET['id']?>&tool='+tool+'&'+qs)
 }
 </script>

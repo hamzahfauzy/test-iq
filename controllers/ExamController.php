@@ -414,7 +414,20 @@ class ExamController extends Controller
             'DISC' => 'app\models\TestTools\Disc',
         ];
 
-        $model = Exam::findOne($id);
+        if(isset($_GET['bulk_print']))
+        {
+            $model = Exam::where(['exams.id'=>$id])
+                    ->joinWith(['
+                        participants' => function($query){
+                            $query->where(['in','participants.id',$_GET['bulk_print']]);
+                        }
+                    ])
+                    ->one();
+        }
+        else
+        {
+            $model = Exam::findOne($id);
+        }
 
         $report = (new $testTools[$tool])->report($model);
         $content = $report->renderSingleReport();
