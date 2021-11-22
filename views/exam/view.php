@@ -74,7 +74,13 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'columns' => [
-                    ['class' => 'yii\grid\SerialColumn'],
+                    [
+                        'attribute' => '#',
+                        'format'    => 'raw',
+                        'value'     => function($model){
+                            return '<input type="checkbox" class="bulk_print" name="bulk_print[]" value="'.$model->participant_id.'">';
+                        }
+                    ],
                     'participant.id_number',
                     'participant.name',
                     [
@@ -125,6 +131,20 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                 ],
             ]); ?>
+            <button class="btn btn-primary" onclick="downloadReport()"><i class="fa fa-file"></i> Download Report</button>
         </div>
     </div>
 </div>
+<script>
+function downloadReport()
+{
+    var ids = document.querySelectorAll('.bulk_print:checked')
+    var qs  = ""
+    for(i=0;i<ids.length;i++)
+    {
+        qs += "bulk_print[]="+ids[i].value+"&"
+    }
+
+    window.open('/exam/download?id=<?=$_GET['id']?>&'+qs)
+}
+</script>

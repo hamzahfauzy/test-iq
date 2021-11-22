@@ -283,21 +283,45 @@ class ExamController extends Controller
             'group_5' => 'app\models\TestGroup\Group5',
         ];
 
-        $model = Exam::find()->where([
-            'exams.id'=>$id,
-        ])
-        ->joinWith([
-            'participants',
-            'participants.user',
-            'participants.user.metas',
-            'participants.examAnswers',
-            'participants.examAnswers.answer',
-            'participants.examAnswers.question',
-            'participants.examAnswers.question.items',
-            'participants.examAnswers.question.categoryPost'
-        ])
-        // ->asArray()
-        ->one();
+        if(isset($_GET['bulk_print']))
+        {
+            $model = Exam::find()->where([
+                'exams.id'=>$id,
+            ])
+            ->joinWith([
+                'participants' => function($query){
+                    $query->where(['in','participants.id',$_GET['bulk_print']]);
+                },
+                'participants.user',
+                'participants.user.metas',
+                'participants.examAnswers',
+                'participants.examAnswers.answer',
+                'participants.examAnswers.question',
+                'participants.examAnswers.question.items',
+                'participants.examAnswers.question.categoryPost'
+            ])
+            // ->asArray()
+            ->one();
+        }
+        else
+        {
+            $model = Exam::find()->where([
+                'exams.id'=>$id,
+            ])
+            ->joinWith([
+                'participants',
+                'participants.user',
+                'participants.user.metas',
+                'participants.examAnswers',
+                'participants.examAnswers.answer',
+                'participants.examAnswers.question',
+                'participants.examAnswers.question.items',
+                'participants.examAnswers.question.categoryPost'
+            ])
+            // ->asArray()
+            ->one();
+        }
+
 
         $report = (new $test_group[$model->test_group])->report($model);
         $content = $report->render();
