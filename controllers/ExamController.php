@@ -757,9 +757,6 @@ class ExamController extends Controller
                 $html2pdf = new Html2Pdf();
                 $html2pdf->writeHTML($add_content);
                 $html2pdf->output(__DIR__ . '/../web/pdf/'.$worksheet->getCellByColumnAndRow(3, $row)->getFormattedValue().'.pdf','F');
-                // file_put_contents('pdf/'.$worksheet->getCellByColumnAndRow(3, $row)->getFormattedValue().'.pdf',$pdf);
-                // $exists = true;
-                // break;
             }
         }
         else
@@ -777,26 +774,20 @@ class ExamController extends Controller
                 $html2pdf = new Html2Pdf();
                 $html2pdf->writeHTML($add_content);
                 $html2pdf->output(__DIR__ . '/../web/pdf/'.$worksheet->getCellByColumnAndRow(3, $row)->getFormattedValue().'.pdf','F');
-                // $pdf = $html2pdf->output(''); //$html2pdf->output('/pdf/'.$worksheet->getCellByColumnAndRow(3, $row)->getFormattedValue().'.pdf','F');
-                // file_put_contents('pdf/'.$worksheet->getCellByColumnAndRow(3, $row)->getFormattedValue().'.pdf',$pdf);
-                // $exists = true;
-                // break;
             }
         }
 
         $zip = new \ZipArchive;
-        $tmp_file = $exam->name.'.zip';
+        $tmp_file = 'zip/'.$exam->name.'.zip';
         if ($zip->open($tmp_file,  \ZipArchive::CREATE)) {
-            $folder = __DIR__ . '/../web/pdf/';
+            $folder = 'pdf';
             for ($row = 3; $row <= $highestRow; $row++) { 
                 $filename = $worksheet->getCellByColumnAndRow(3, $row)->getFormattedValue().'.pdf';
-                $zip->addFile($folder.$filename, $filename);
+                $zip->addFile($folder.'/'.$filename,$filename);
             }
             $zip->close();
-            echo 'Archive created!';
-            header('Content-disposition: attachment; filename='.$exam->name.'.zip');
-            header('Content-type: application/zip');
-            readfile($tmp_file);
+            echo '{"filename":"'.$tmp_file.'"}';
+            return;
         } else {
             echo 'Failed!';
         }

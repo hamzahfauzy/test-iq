@@ -25,8 +25,8 @@
         <td class="border-cell">:</td>
         <td class="border-cell"><?=$worksheet->getCellByColumnAndRow(8, $row)->getValue()?></td>
     </tr>
-    <tr style="border-left:1px;border-right:1px">
-        <td colspan="3" style="border-left:1px;border-right:1px">
+    <tr style="border-left:0px;border-right:0px">
+        <td colspan="3" style="border-left:0px;border-right:0px">
             <br />
         </td>
     </tr>
@@ -346,7 +346,7 @@ $bakat_dan_minat_2 = strtoupper($bakat_dan_minat_2);
         </td>
     </tr>
     <tr>
-        <td width="150"><b>JURUSAN DI SMA</b></td>
+        <td width="150"><b>KELOMPOK JURUSAN</b></td>
         <td colspan="2" width="400"><?=$worksheet->getCellByColumnAndRow(15, $row)->getValue()?></td>
     </tr>
     <tr>
@@ -434,5 +434,6 @@ $dev = [
 <br />
 <div style="text-align:center;width:100%;display:block;">
     Medan, <?=$worksheet->getCellByColumnAndRow(10, $row)->getValue()?><br />
-    <img src="images/ttd-3-sma.png" style="width:320px" />
+    Penanggung Jawab Kegiatan<br>
+    <img src="images/new-ttd.png" style="width:320px" />
 </div>
