@@ -25,6 +25,11 @@
         <td class="border-cell">:</td>
         <td class="border-cell"><?=$worksheet->getCellByColumnAndRow(8, $row)->getValue()?></td>
     </tr>
+    <tr>
+        <td class="border-cell">Kelas</td>
+        <td class="border-cell">:</td>
+        <td class="border-cell"><?=$worksheet->getCellByColumnAndRow(5, $row)->getValue()?></td>
+    </tr>
     <tr style="border-left:0px;border-right:0px">
         <td colspan="3" style="border-left:0px;border-right:0px">
             <br />
@@ -434,6 +439,6 @@ $dev = [
 <br />
 <div style="text-align:center;width:100%;display:block;">
     Medan, <?=$worksheet->getCellByColumnAndRow(10, $row)->getValue()?><br />
-    Penanggung Jawab Kegiatan<br>
-    <img src="images/new-ttd.png" style="width:320px" />
+    Penanggung Jawab Kegiatan<br><br>
+    <img src="images/new-ttd.png" style="width:520px" />
 </div>
