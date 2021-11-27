@@ -58,7 +58,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h1><?= Html::encode($this->title) ?></h1>
             </div>
             <div class="card-toolbar">
-            <?= Html::a('Download PDF', ['download-all','id'=>$model->id], ['class' => 'btn btn-primary']) ?>&nbsp;
+            <a href="javascript:void();" onclick="downloadAll(this,<?=$model->id?>)" class="btn btn-primary">Download PDF</a>
+            &nbsp;
             <?php for($i=1;$i<=$count_partial;$i++): ?>
                 <?= Html::a('Cetak '.$i, ['cetak','id'=>$model->id,'part'=>$i], ['class' => 'btn btn-success']) ?>
                 &nbsp;
@@ -138,3 +139,15 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <?php endif ?>
 </div>
+<script>
+function downloadAll(el, id)
+{
+    el.innerHTML = "Sedang Generate Laporan..."
+    fetch('/exam/download-all?id='+id)
+    .then(res => res.json())
+    .then(res => {
+        el.innerHTML = "Download PDF"
+        location.href='/'+res.filename
+    })
+}
+</script>
