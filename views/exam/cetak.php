@@ -82,7 +82,7 @@
 <table id="customers" align="center">
     <tr>
         <th colspan="2"><h2 align="center">POTENSI AKADEMIK</h2></th>
-        <th colspan="5" style="text-align:center;"><h2 align="center"><?=$worksheet->getCellByColumnAndRow(15, $row)->getValue()?></h2></th>
+        <th colspan="5" style="text-align:center;"><h2 align="center"><?=$worksheet->getCellByColumnAndRow(14, $row)->getValue()?></h2></th>
     </tr>
     <tr>
         <td style="text-align:center;background:#eaeaea;" rowspan="2">ASPEK</td>
