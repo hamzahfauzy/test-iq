@@ -13,22 +13,22 @@
     <tr>
         <td class="border-cell">Jenis Kelamin</td>
         <td class="border-cell">:</td>
-        <td class="border-cell"><?=$worksheet->getCellByColumnAndRow(6, $row)->getValue()?></td>
+        <td class="border-cell"><?=$worksheet->getCellByColumnAndRow(7, $row)->getValue()?></td>
     </tr>
     <tr>
         <td class="border-cell">Tempat, Tanggal Lahir</td>
         <td class="border-cell">:</td>
-        <td class="border-cell"><?=$worksheet->getCellByColumnAndRow(5, $row)->getValue()?></td>
+        <td class="border-cell"><?=$worksheet->getCellByColumnAndRow(6, $row)->getValue()?></td>
     </tr>
     <tr>
         <td class="border-cell">Asal Sekolah</td>
         <td class="border-cell">:</td>
-        <td class="border-cell"><?=$worksheet->getCellByColumnAndRow(7, $row)->getValue()?></td>
+        <td class="border-cell"><?=$worksheet->getCellByColumnAndRow(8, $row)->getValue()?></td>
     </tr>
     <tr>
         <td class="border-cell">Jurusan</td>
         <td class="border-cell">:</td>
-        <td class="border-cell"><?=$worksheet->getCellByColumnAndRow(8, $row)->getValue()?></td>
+        <td class="border-cell"><?=$worksheet->getCellByColumnAndRow(9, $row)->getValue()?></td>
     </tr>
     <tr style="border-left:1px;border-right:1px">
         <td colspan="3" style="border-left:1px;border-right:1px">
@@ -38,7 +38,7 @@
     <tr>
         <td width="200px">Tanggal Pemeriksaan</td>
         <td width="10px">:</td>
-        <td><?=$worksheet->getCellByColumnAndRow(9, $row)->getValue()?></td>
+        <td><?=$worksheet->getCellByColumnAndRow(10, $row)->getValue()?></td>
     </tr>
     <tr>
         <td>Tujuan Pemeriksaan</td>
@@ -81,7 +81,7 @@
 <table id="customers" align="center">
     <tr>
         <th colspan="2"><h4 align="center" style="margin:0px;">POTENSI AKADEMIK</h4></th>
-        <th colspan="5" style="text-align:center;"><h4 align="center" style="margin:0px;"><?=$worksheet->getCellByColumnAndRow(12, $row)->getValue()?></h4></th>
+        <th colspan="5" style="text-align:center;"><h4 align="center" style="margin:0px;"><?=$worksheet->getCellByColumnAndRow(13, $row)->getValue()?></h4></th>
     </tr>
     <tr>
         <td style="text-align:center;background:#eaeaea;" rowspan="2">ASPEK</td>
@@ -99,7 +99,7 @@
         <td>Kemampuan Verbal</td>
         <td width="340">Kemampuan mempersepsi adanya suatu hubungan di antara benda, bentuk atau persoalan</td>
         <?php 
-        $_value = $worksheet->getCellByColumnAndRow(35, $row)->getValue();
+        $_value = $worksheet->getCellByColumnAndRow(36, $row)->getValue();
         for($i=1;$i<=5;$i++): 
             $bg = $i==3 ? 'style="background:#eaeaea;text-align:center;"' : 'style="text-align:center;"';
             $span = 'X';
@@ -111,7 +111,7 @@
         <td>Kemampuan Spasial</td>
         <td width="340">Kemampuan untuk terbuka dengan informasi atau instruksi yang berbeda-beda dan menyelesaikan beragam persoalan dengan baik</td>
         <?php 
-        $_value = $worksheet->getCellByColumnAndRow(36, $row)->getValue();
+        $_value = $worksheet->getCellByColumnAndRow(37, $row)->getValue();
         for($i=1;$i<=5;$i++): 
             $bg = $i==3 ? 'style="background:#eaeaea;text-align:center;"' : 'style="text-align:center;"';
             $span = 'X';
@@ -123,7 +123,7 @@
         <td>Kemampuan Numerikal</td>
         <td width="300">Kemampuan untuk memecahkan persoalan secara efektif dengan cara-cara yang kreatif di luar kebiasaan</td>
         <?php 
-        $_value = $worksheet->getCellByColumnAndRow(37, $row)->getValue();
+        $_value = $worksheet->getCellByColumnAndRow(38, $row)->getValue();
         for($i=1;$i<=5;$i++): 
             $bg = $i==3 ? 'style="background:#eaeaea;text-align:center;"' : 'style="text-align:center;"';
             $span = 'X';
@@ -134,35 +134,35 @@
     <?php
     $data = [
         'KEPRIBADIAN' => [
-            38 => [
+            39 => [
                 'Kepercayaan Diri',
                 'Keyakinan yang kuat akan kemampuan diri'
             ],
-            39 => [
+            40 => [
                 'Penyesuaian Diri',
                 'Kemampuan menyesuaikan diri serta mampu mengambil sikap yang tepat sesuai tuntutan lingkungan saat itu'
             ],
-            40 => [
+            41 => [
                 'Hasrat Berprestasi',
                 'Kemampuan untuk mendorong diri sendiri untuk mencapai hasil yang terbaik'
             ],
-            41 => [
+            42 => [
                 'Stabilitas Emosi',
                 'Kemampuan untuk mengendalikan diri, tetap bersikap tenang dan tidak terpengaruh dengan  situasi di sekelilingnya'
             ],
-            42 => [
+            43 => [
                 'Kontak Sosial',
                 'Kesediaan untuk memulai interaksi dan membina hubungan baik dengan orang lain'
             ],
-            43 => [
+            44 => [
                 'Sistematika Belajar',
                 'Kemampuan menyusun perencanaan dan mempertahankan keteraturan dalam menyelesaikan tugas'
             ],
-            44 => [
+            45 => [
                 'Daya Juang',
                 'Kemauan untuk menyelesaikan tugas hingga tuntas dan kemampuan dalam mempertahankan semangat meskipun menghadapi tugas-tugas yang sulit'
             ],
-            45 => [
+            46 => [
                 'Daya Tahan Terhadap Stress',
                 'Kemampuan untuk mengatasi semua hambatan dan tekanan dalam mengerjakan tugas'
             ]
@@ -199,23 +199,23 @@
     </tr>
     <tr>
         <td width="200">DUKUNGAN POTENSI AKADEMIK</td>
-        <td width="200"><?=number_format($worksheet->getCellByColumnAndRow(13, $row)->getValue())?>%</td>
-        <td width="200"><?=$worksheet->getCellByColumnAndRow(14, $row)->getValue()?></td>
+        <td width="200"><?=number_format($worksheet->getCellByColumnAndRow(14, $row)->getValue())?>%</td>
+        <td width="200"><?=$worksheet->getCellByColumnAndRow(15, $row)->getValue()?></td>
     </tr>
     <tr>
         <td>DUKUNGAN BAKAT</td>
-        <td><?=number_format($worksheet->getCellByColumnAndRow(16, $row)->getValue())?>%</td>
-        <td><?=$worksheet->getCellByColumnAndRow(17, $row)->getValue()?></td>
+        <td><?=number_format($worksheet->getCellByColumnAndRow(17, $row)->getValue())?>%</td>
+        <td><?=$worksheet->getCellByColumnAndRow(18, $row)->getValue()?></td>
     </tr>
     <tr>
         <td>DUKUNGAN MINAT</td>
-        <td><?=number_format($worksheet->getCellByColumnAndRow(26, $row)->getValue())?>%</td>
-        <td><?=$worksheet->getCellByColumnAndRow(27, $row)->getValue()?></td>
+        <td><?=number_format($worksheet->getCellByColumnAndRow(27, $row)->getValue())?>%</td>
+        <td><?=$worksheet->getCellByColumnAndRow(28, $row)->getValue()?></td>
     </tr>
     <tr>
         <td><b>KECOCOKAN DENGAN JURUSAN</b></td>
-        <td><?=number_format($worksheet->getCellByColumnAndRow(33, $row)->getValue())?>%</td>
-        <td><?=$worksheet->getCellByColumnAndRow(34, $row)->getValue()?></td>
+        <td><?=number_format($worksheet->getCellByColumnAndRow(34, $row)->getValue())?>%</td>
+        <td><?=$worksheet->getCellByColumnAndRow(35, $row)->getValue()?></td>
     </tr>
 </table>
 <br>
@@ -372,7 +372,7 @@ $d = [
     ],
 ];
 
-$bakat_dan_minat_1 = $worksheet->getCellByColumnAndRow(18, $row)->getValue();
+$bakat_dan_minat_1 = $worksheet->getCellByColumnAndRow(19, $row)->getValue();
 $bakat_dan_minat_1 = strtoupper($bakat_dan_minat_1);
 
 // $bakat_dan_minat_2 = $worksheet->getCellByColumnAndRow(28, $row)->getValue();
@@ -414,47 +414,47 @@ $bakat_dan_minat_1 = strtoupper($bakat_dan_minat_1);
 <br>
 <?php
 $dev = [
-    35 => [
+    36 => [
         'Kemampuan Verbal',
         'Agar kemampuan berbahasanya dapat semakin meningkat, ananda perlu lebih banyak  membaca buku dan mengikuti acara talkshow, diskusi dan debat di televisi/radio/media on line, dan langsung mempraktekkannya dalam bahasa lisan dan tulisan, dan aktifitas sehari-hari.'
     ],
-    36 => [
+    37 => [
         'Kemampuan Spasial',
         'Agar kemampuan spasial Ananda dapat semakin meningkat, Ananda perlu belajar secara sungguh-sungguh dan tekun dengan memecahkan soal-soal matematika ruang (geometri).  '
     ],
-    37 => [
+    38 => [
         'Kemampuan Numerikal',
         'Agar kemampuan numerical Ananda dapat semakin meningkat, Ananda perlu belajar secara sungguh-sungguh dan tekun dengan memecahkan soal-soal aritmatika secara cepat dan teliti.   '
     ],
-    38 => [
+    39 => [
         'Kepercayaan Diri',
         'Untuk meningkatkan kepercayaan dirinya, Ananda perlu melibatkan diri dalam banyak kegiatan-kegiatan kompetisi, banyak berlatih dengan mengikuti try out sebelum menghadapi ujian, dan  sering terlibat dalam berbagai kegiatan komunitas, terutama yang mampu menunjang masa depan, sesuai bakat dan minat.'
     ],
-    39 => [
+    40 => [
         'Penyesuaian Diri',
         'Untuk meningkatkan kemampuan untuk cepat berubah sesuai tuntutan lingkungan, Ananda perlu berlatih untuk lebih banyak mendengar, menghayati harapan dan kebutuhan orang lain. Melibatkan diri dalam banyak komunitas sesuai bakat minat dan mengambil peran di dalamnya, akan banyak mendorong dan mengasah kemampuan Ananda dalam memahami berbagai karakter orang dan mengetahui kiat-kiat memenuhi dan menyenangkan orang lain.'
     ],
-    40 => [
+    41 => [
         'Hasrat Berprestasi',
         'Untuk meningkatkan hasrat berprestasi, ananda perlu menyusun target-target pribadi yang SMART (spesific, measurable, attainable, realistic, timebound). Apa yang ingin dicapai dalam tahun ini, tahun mendatang, bahkan lima tahun lagi, sudah harus dirumuskan saat ini. target tersebut kemudian duraikan menjadi rencana pelaksanaan dan rencana detail kegiatan. Dengan adanya target yang demikian, ananda akan lebih fokus, dan termotivasi secara internal untuk bergerak maju kedepan.'
     ],
-    41 => [
+    42 => [
         'Stabilitas Emosi',
         'Agar rasa cemas yang  terkadang  muncul apabila Ananda berada dalam situasi yang menekan dapat diminimalisir, Ananda harus senantiasa mempersiapkan diri dengan baik dan dalam waktu yang cukup sehingga tidak tergesa-gesa,  banyak berlatih dengan mengikuti try out sebelum menghadapi ujian, dan  sering terlibat dalam berbagai kegiatan perlombaan,  terutama yang mampu menunjang masa depan  sesuai bakat dan minat. Di samping itu, Ananda perlu berlatih untuk menjadikan target dalam belajar sebagai motivasi, bukan sebagai beban.'
     ],
-    42 => [
+    43 => [
         'Kontak Sosial',
         'Untuk meningkatkan kemampuan berinteraksi dengan orang lain, Ananda perlu berlatih untuk melibatkan diri dalam banyak kegiatan/komunitas sesuai bakat minat dan mengambil peran di dalamnya, akan banyak mendorong dan mengasah kemampuan Ananda dalam memahami berbagai karakter orang dan mengetahui kiat-kiat memenuhi dan menyenangkan orang lain. '
     ],
-    43 => [
+    44 => [
         'Sistematika Belajar',
         'Untuk meningkatkan sistematika belajar,  Ananda perlu berlatih menjadi pribadi yang terorganisir (well organized), memiliki perencanaan yang lebih baik (well planned),  menggunakan waktu secara lebih efektif, sesuai perencanaan. Di samping itu, Ananda  perlu menyusun target-target pribadi yang jelas dan terukur.'
     ],
-    44 => [
+    45 => [
         'Daya Juang',
         'Untuk menumbuh-kembangkan daya juangnya, Ananda  perlu menyusun target-target pribadi yang jelas dan terukur, Belajar lebih disiplin, lebih lama, lebih keras dan lebih cerdas. Ananda harus berlatih untuk tidak mudah menyerah. Ananda harus melatih diri untuk bekerja keras mencapai target yang ditetapkan, seperti mencari jawaban yang benar terhadap soal-soal yang sulit sampai dapat, tidak mudah berganti-ganti tempat les dsb.  '
     ],
-    45 => [
+    46 => [
         'Daya Tahan Terhadap Stress',
         'Untuk meningkatkan daya tahan terhadap stress, Ananda harus sering melatih pengelolaan terhadap stress dengan cara membiasakan diri fokus pada pencapaian hasil, menemukan metode penyelesaian tugas yang nyaman, tidak cepat bosan dengan rutinitas pekerjaan, dan mengembangkan kemampuan mendedikasikan waktu dalam menyelesaikan tugas'
     ]
@@ -486,7 +486,7 @@ $dev = [
         <td width="200"></td>
         <td width="200">
             <div style="text-align:center;">
-                Medan, <?=$worksheet->getCellByColumnAndRow(10, $row)->getValue()?><br />
+                Medan, <?=$worksheet->getCellByColumnAndRow(11, $row)->getValue()?><br />
                 <img src="images/ttd-3.png" style="width:250px" />
             </div>
         </td>

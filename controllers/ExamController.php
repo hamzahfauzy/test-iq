@@ -653,4 +653,164 @@ class ExamController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    public function actionDownloadAll($id)
+    {
+        
+        $test_group = [
+            'group_1' => [
+                'bhs' => 'cetak_bhs',
+                'default' => 'cetak',
+            ],
+            'group_2' => [
+                'bhs' => 'cetak_group_2',
+                'default' => 'cetak_group_2',
+            ],
+            'group_3' => [
+                'bhs' => 'cetak_bhs',
+                'default' => 'cetak',
+            ],
+            'group_4' => [
+                'bhs' => 'cetak_smk',
+                'default' => 'cetak_smk',
+            ],
+            'group_5' => [
+                'bhs' => 'cetak_group_2',
+                'default' => 'cetak_group_2',
+            ],
+        ];
+        $model = ImportExamFile::find()->where(['exam_id'=>$id])->one();
+        $exam  = $model->exam;
+        $test  = $test_group[$exam->test_group];
+        $extension = pathinfo($model->file_path, PATHINFO_EXTENSION);
+
+        if($extension=='xlsx'){
+            $inputFileType = 'Xlsx';
+        }else{
+            $inputFileType = 'Xls';
+        }
+        $reader     = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($inputFileType);
+            
+        $spreadsheet = $reader->load($model->file_path);
+        $worksheet   = $spreadsheet->getActiveSheet();
+        $content     = "
+        <style>
+        body, h2 {
+            margin:0;padding:0
+        }
+        #customers {
+        border-collapse: collapse;
+        }
+
+        .center {
+            text-align:center;
+        }
+
+        .w-bold {
+            font-weight:bold;
+        }
+
+        #customers td, #customers th {
+        border: 1px solid #000;
+        padding: 5px;
+        }
+
+        /* #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+        #customers tr:hover {background-color: #ddd;} */
+
+        #customers th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        background-color: #eaeaea;
+        }
+
+        ul {
+            margin:0px;
+            padding:0px;
+            padding-left:-15px;
+            padding-bottom:-25px;
+        }
+        .box {
+            background-color:red;
+        }
+        </style>
+        <body>
+        ";
+
+        $highestRow  = $worksheet->getHighestRow();
+        $highestColumn = $worksheet->getHighestColumn();
+        $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn);
+        $exists = false;
+        if($worksheet->getCellByColumnAndRow(10, 2)->getFormattedValue() == 'BHS')
+        {
+            for ($row = 3; $row <= $highestRow; $row++) { 
+                $value = $worksheet->getCellByColumnAndRow(3, $row)->getFormattedValue();
+                $_nisn = $worksheet->getCellByColumnAndRow(4, $row)->getFormattedValue();
+                // if($value == '' || $_nisn != $nisn) continue;
+            //     echo $worksheet->getCellByColumnAndRow(3, $row)->getValue() . '<br>';
+                $add_content = $content. $this->renderPartial($test['bhs'],[
+                    'worksheet' => $worksheet,
+                    'row'       => $row
+                ]);
+
+                $html2pdf = new Html2Pdf();
+                $html2pdf->writeHTML($add_content);
+                $html2pdf->output(__DIR__ . '/../web/pdf/'.$worksheet->getCellByColumnAndRow(3, $row)->getFormattedValue().'.pdf','F');
+                // file_put_contents('pdf/'.$worksheet->getCellByColumnAndRow(3, $row)->getFormattedValue().'.pdf',$pdf);
+                // $exists = true;
+                // break;
+            }
+        }
+        else
+        {
+            for ($row = 3; $row <= $highestRow; $row++) { 
+                $value = $worksheet->getCellByColumnAndRow(3, $row)->getFormattedValue();
+                $_nisn = $worksheet->getCellByColumnAndRow(4, $row)->getFormattedValue();
+                // if($value == '' || $_nisn != $nisn) continue;
+            //     echo $worksheet->getCellByColumnAndRow(3, $row)->getValue() . '<br>';
+                $add_content = $content. $this->renderPartial($test['default'],[
+                    'worksheet' => $worksheet,
+                    'row'       => $row
+                ]);
+
+                $html2pdf = new Html2Pdf();
+                $html2pdf->writeHTML($add_content);
+                $html2pdf->output(__DIR__ . '/../web/pdf/'.$worksheet->getCellByColumnAndRow(3, $row)->getFormattedValue().'.pdf','F');
+                // $pdf = $html2pdf->output(''); //$html2pdf->output('/pdf/'.$worksheet->getCellByColumnAndRow(3, $row)->getFormattedValue().'.pdf','F');
+                // file_put_contents('pdf/'.$worksheet->getCellByColumnAndRow(3, $row)->getFormattedValue().'.pdf',$pdf);
+                // $exists = true;
+                // break;
+            }
+        }
+
+        $zip = new \ZipArchive;
+        $tmp_file = $exam->name.'.zip';
+        if ($zip->open($tmp_file,  \ZipArchive::CREATE)) {
+            $folder = __DIR__ . '/../web/pdf/';
+            for ($row = 3; $row <= $highestRow; $row++) { 
+                $filename = $worksheet->getCellByColumnAndRow(3, $row)->getFormattedValue().'.pdf';
+                $zip->addFile($folder.$filename, $filename);
+            }
+            $zip->close();
+            echo 'Archive created!';
+            header('Content-disposition: attachment; filename='.$exam->name.'.zip');
+            header('Content-type: application/zip');
+            readfile($tmp_file);
+        } else {
+            echo 'Failed!';
+        }
+
+        // if(!$exists) return "<h2>Not Found</h2>";
+
+        // $content .= "<body>";
+
+        // $participant = Participant::find()->where(['id_number'=>$nisn])->one();
+
+        // $html2pdf = new Html2Pdf();
+        // $html2pdf->writeHTML($content);
+        // $html2pdf->output('pdf/'.$participant->name.'.pdf','F');
+        // $html2pdf->output('laporan.pdf', 'D');
+        return;
+    }
 }

@@ -58,6 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h1><?= Html::encode($this->title) ?></h1>
             </div>
             <div class="card-toolbar">
+            <?= Html::a('Download PDF', ['download-all','id'=>$model->id], ['class' => 'btn btn-primary']) ?>&nbsp;
             <?php for($i=1;$i<=$count_partial;$i++): ?>
                 <?= Html::a('Cetak '.$i, ['cetak','id'=>$model->id,'part'=>$i], ['class' => 'btn btn-success']) ?>
                 &nbsp;
@@ -113,7 +114,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             <?php } ?>
                         </tr>
                         */ ?>
-                        <?php for ($row = 3; $row <= $highestRow; $row++) { $no = $row-2;?>
+                        <?php 
+                        for ($row = 3; $row <= $highestRow; $row++) { 
+                            $no = $row-2; 
+                            if($worksheet->getCellByColumnAndRow(2, $row)->getFormattedValue() == '') break;
+                        ?>
                         <tr>
                             <td><?=$no?></td>
                             <?php 
