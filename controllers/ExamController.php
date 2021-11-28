@@ -745,6 +745,7 @@ class ExamController extends Controller
         if($worksheet->getCellByColumnAndRow(10, 2)->getFormattedValue() == 'BHS')
         {
             for ($row = 3; $row <= $highestRow; $row++) { 
+                if($worksheet->getCellByColumnAndRow(2, $row)->getFormattedValue() == '') break;
                 $value = $worksheet->getCellByColumnAndRow(3, $row)->getFormattedValue();
                 $_nisn = $worksheet->getCellByColumnAndRow(4, $row)->getFormattedValue();
                 // if($value == '' || $_nisn != $nisn) continue;
@@ -762,6 +763,7 @@ class ExamController extends Controller
         else
         {
             for ($row = 3; $row <= $highestRow; $row++) { 
+                if($worksheet->getCellByColumnAndRow(2, $row)->getFormattedValue() == '') break;
                 $value = $worksheet->getCellByColumnAndRow(3, $row)->getFormattedValue();
                 $_nisn = $worksheet->getCellByColumnAndRow(4, $row)->getFormattedValue();
                 // if($value == '' || $_nisn != $nisn) continue;
