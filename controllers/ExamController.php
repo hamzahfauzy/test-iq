@@ -779,6 +779,7 @@ class ExamController extends Controller
 
         $zip = new \ZipArchive;
         $tmp_file = 'zip/'.$exam->name.'.zip';
+        if(file_exists($tmp_file)) unlink($tmp_file);
         if ($zip->open($tmp_file,  \ZipArchive::CREATE)) {
             $folder = 'pdf';
             for ($row = 3; $row <= $highestRow; $row++) { 
