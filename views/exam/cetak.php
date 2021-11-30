@@ -77,7 +77,7 @@
 <br />
 <br />
 <br />
-<img src="images/footer.png" style="width:100%">
+<img src="images/footer.png" style="width:100%;margin-top:20px;">
 <div style="page-break-before: always"></div>
 <table id="customers" align="center">
     <tr>
