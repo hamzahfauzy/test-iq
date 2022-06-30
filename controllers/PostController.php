@@ -225,7 +225,7 @@ class PostController extends Controller
                             {
                                 $child = new Post;
                                 $child->post_title = "Jawaban ".$i." ".$category->name;
-                                $child->post_content = $worksheet->getCellByColumnAndRow(1, ($row+$i))->getValue();
+                                $child->post_content = $worksheet->getCellByColumnAndRow(($i+1), $row)->getValue();
                                 $child->post_as = "Jawaban";
                                 $child->post_type = $i;
                                 $child->save(false);
