@@ -6,10 +6,12 @@ return [
     'senderName' => 'Example.com mailer',
     'test_tools' => [
         'TPA'=>'TPA',
+        'CFIT'=>'CFIT',
         'HOLLAND'=>'HOLLAND',
         'PAPIKOSTICK'=>'PAPIKOSTICK',
         'IMJ'=>'IMJ',
-        'DISC'=>'DISC'
+        'DISC'=>'DISC',
+        'GAYA BELAJAR'=>'GAYA BELAJAR',
     ],
     'test_group' => [
         'group_1' => [

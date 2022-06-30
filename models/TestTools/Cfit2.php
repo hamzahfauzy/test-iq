@@ -10,7 +10,7 @@ class Cfit2
         // save true answer
         $child = new Post;
         $child->post_title = "Jawaban ".$category->name." ".$no;
-        $child->post_content = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+        $child->post_content = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
         $child->post_as = "Jawaban";
         $child->post_type = "1";
         $child->save(false);

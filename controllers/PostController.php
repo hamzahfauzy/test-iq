@@ -15,6 +15,7 @@ use app\models\CategoryPost;
 use yii\helpers\ArrayHelper;
 use app\models\TestTools\Imj;
 use app\models\TestTools\Tpa;
+use app\models\TestTools\Cfit;
 use app\models\TestTools\Disc;
 use app\models\PostItemsSearch;
 use app\models\TestTools\Cfit2;
@@ -171,14 +172,24 @@ class PostController extends Controller
                             Disc::insert($no,$category,$worksheet,$post,$row);
                         }
                     
-                        if($category->test_tool == 'PAPIKOSTICK')
+                        elseif($category->test_tool == 'PAPIKOSTICK')
                         {
                             Papikostick::insert($no,$category,$worksheet,$post,$row);
                         }
     
-                        elseif($category->test_tool == 'CFIT' && $category->name == 'CFIT 2') // for CFIT subtest 2
+                        elseif($category->test_tool == 'CFIT')
                         {
-                            Cfit2::insert($no,$category,$worksheet,$post,$row);
+                            $post->post_content = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                            $post->save(false);
+
+                            if($category->name == 'CFIT 2') // for CFIT subtest 2
+                            {
+                                Cfit2::insert($no,$category,$worksheet,$post,$row);
+                            }
+                            else
+                            {
+                                Cfit::insert($no,$category,$worksheet,$post,$row);
+                            }
                         }
 
                         elseif($category->test_tool == 'TPA')
@@ -204,6 +215,24 @@ class PostController extends Controller
 
                             Imj::insert($no,$category,$worksheet,$post,$row);
                         }
+                        
+                        elseif($category->test_tool == 'GAYA BELAJAR')
+                        {
+                            $post->post_content = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                            $post->save(false);
+
+                            for($i=1;$i<=3;$i++)
+                            {
+                                $child = new Post;
+                                $child->post_title = "Jawaban ".$i." ".$category->name;
+                                $child->post_content = $worksheet->getCellByColumnAndRow(1, ($row+$i))->getValue();
+                                $child->post_as = "Jawaban";
+                                $child->post_type = $i;
+                                $child->save(false);
+                                $child->link('parents',$post);
+                            }
+                        }
+                        
                     }
                     $transaction->commit();
                     Yii::$app->session->addFlash("success", "Import Posts Success");
