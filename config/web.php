@@ -37,7 +37,7 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'timeZone'=>'Asia/Jakarta',
-    'name' => 'TMC IQ TEST',
+    'name' => 'Arunika Test Platform',
     'id' => 'minatbakatapp',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],

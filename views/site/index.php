@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'TMC IQ Test - Dashboard';
+$this->title = 'Dashboard';
 ?>
 <div class="site-index">
     <div class="body-content">
