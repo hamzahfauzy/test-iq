@@ -16,7 +16,7 @@ class Cfit
             $child->post_title = "Jawaban ".$alphabet[$i]." ".$category->name." ".$no;
             $child->post_content = $alphabet[$i];
             $child->post_as = "Jawaban";
-            $child->post_type = $index == $alphabet[$i] ? 1 : 0;
+            $child->post_type = $index == ($i+1) ? 1 : 0;
             $child->save(false);
             $child->link('parents',$post);
         }
