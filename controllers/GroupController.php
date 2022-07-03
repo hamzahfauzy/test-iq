@@ -57,6 +57,7 @@ class GroupController extends Controller
     {
         $searchModel = new GroupItemSearch();
         $queryParams = Yii::$app->request->queryParams;
+        $queryParams['GroupItemSearch']['group_id'] = $id;
         $queryParams['sort'] = 'sequenced_number';
         $dataProvider = $searchModel->search($queryParams);
         return $this->render('view', [

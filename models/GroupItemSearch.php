@@ -60,7 +60,9 @@ class GroupItemSearch extends GroupItem
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id
+            'id' => $this->id,
+            'category_id' => $this->category_id,
+            'group_id' => $this->group_id,
         ]);
 
         if(isset($this->name))
