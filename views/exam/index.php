@@ -40,34 +40,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'Test Group',
                         'format'    => 'raw',
                         'value'     => function ($model) {
-                            return $model->groupName();
+                            return $model->group?$model->group->name:'-';
                         }
                     ],
                     'start_time',
                     'end_time',
-                    [
-                        'attribute' => 'Report',
-                        'format' => 'raw',
-                        'value' => function($model){
-                            $test_group = Yii::$app->params['test_group'];
-                            $tools = $test_group[$model->test_group]['tools'];
-                            $report = '';
-                            if(count($tools) > 1)
-                            foreach($tools as $tool)
-                            {
-                                $report .= Html::a('<i class="fa fa-download fa-fw"></i> Download '.$tool, ['exam/new-download', 'id' => $model->id, 'tool' => $tool]) . '<br>';
-                            }
-
-                            return $report . Html::a('<i class="fa fa-download fa-fw"></i> Report', ['exam/download', 'id' => $model->id]) . '<br>';;
-                        }
-                    ],
-                    [
-                        'attribute' => 'Berita Acara',
-                        'format' => 'raw',
-                        'value' => function($model){
-                            return Html::a('<i class="fa fa-download fa-fw"></i> Download', ['exam/download-ba', 'id' => $model->id],['class'=>'btn btn-success']);
-                        }
-                    ],
 
                     ['class' => 'yii\grid\ActionColumn'],
                 ],

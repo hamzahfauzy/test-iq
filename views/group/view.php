@@ -9,7 +9,6 @@ use yii\grid\GridView;
 /* @var $model app\models\Exam */
 
 $this->title = $model->name;
-$this->tab_active = "groups";
 $this->menu_active = "all groups";
 $this->params['breadcrumbs'][] = ['label' => 'Groups', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;

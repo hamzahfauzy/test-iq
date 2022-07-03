@@ -6,7 +6,6 @@ use yii\helpers\Html;
 /* @var $model app\models\Exam */
 
 $this->title = 'Create Group';
-$this->tab_active = 'groups';
 $this->menu_active = 'add new group';
 $this->params['breadcrumbs'][] = ['label' => 'Groups', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;

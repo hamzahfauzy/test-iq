@@ -5,11 +5,13 @@ namespace app\controllers;
 use Yii;
 use app\models\Exam;
 use app\models\User;
+use app\models\Group;
 use yii\web\Controller;
 use app\models\ExamSearch;
 use app\models\Participant;
 use yii\filters\VerbFilter;
 use Spipu\Html2Pdf\Html2Pdf;
+use yii\helpers\ArrayHelper;
 use app\models\ImportExamFile;
 use yii\web\NotFoundHttpException;
 use app\models\ExamParticipantSearch;
@@ -242,13 +244,16 @@ class ExamController extends Controller
     public function actionCreate()
     {
         $model = new Exam();
-
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
-
+        
+        $groups = Group::find()->all();
+        $groups = ArrayHelper::map($groups,'id','name');
         return $this->render('create', [
             'model' => $model,
+            'groups' => $groups,
         ]);
     }
 
@@ -267,8 +272,12 @@ class ExamController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        $groups = Group::find()->all();
+        $groups = ArrayHelper::map($groups,'id','name');
+
         return $this->render('update', [
             'model' => $model,
+            'groups' => $groups,
         ]);
     }
 

@@ -8,7 +8,6 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Groups';
-$this->tab_active = "groups";
 $this->menu_active = "all groups";
 $this->params['breadcrumbs'][] = $this->title;
 ?>

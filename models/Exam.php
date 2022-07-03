@@ -33,7 +33,7 @@ class Exam extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name','test_group','start_time', 'end_time','group_id'], 'required'],
+            [['name','start_time', 'end_time', 'group_id'], 'required'],
             [['name'], 'string', 'max' => 255],
         ];
     }
@@ -50,19 +50,20 @@ class Exam extends \yii\db\ActiveRecord
             'start_time' => 'Start Time',
             'end_time' => 'End Time',
             'created_at' => 'Created At',
+            'group_id' => 'Group ID',
         ];
     }
     
-    public function groupName()
-    {
-        $group = $this->group();
-        return $group['name'];
-    }
+    // public function groupName()
+    // {
+    //     $group = $this->group();
+    //     return $group['name'];
+    // }
 
-    public function group()
-    {
-        return Yii::$app->params['test_group'][$this->test_group];
-    }
+    // public function group()
+    // {
+    //     return Yii::$app->params['test_group'][$this->test_group];
+    // }
 
     /**
      * Gets query for [[ExamAnswers]].

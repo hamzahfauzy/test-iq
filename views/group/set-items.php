@@ -9,7 +9,6 @@ use yii\helpers\ArrayHelper;
 /* @var $form yii\widgets\ActiveForm */
 
 $this->title = 'Set Group Items';
-$this->tab_active = 'groups';
 $this->menu_active = 'set group items';
 $this->params['breadcrumbs'][] = ['label' => 'Groups', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
