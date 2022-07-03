@@ -16,8 +16,6 @@ $test_tools = array_merge(['Tidak Ada'=>'Tidak Ada'], $test_tools);
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'sequenced_number')->textInput() ?>
-
     <?= $form->field($model, 'test_tool')->dropdownList($test_tools) ?>
 
     <?= $form->field($model, 'has_timer')->dropdownList([

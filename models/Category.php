@@ -91,4 +91,19 @@ class Category extends \yii\db\ActiveRecord
                     $q->select(['id','post_content']);
                 }]);
     }
+
+    public function sequenced_number($group_id)
+    {
+        $model = GroupItem::find()->where([
+            'group_id'=>$group_id,
+            'category_id'=>$this->id
+        ]);
+
+        if($model->exists())
+        {
+            return $model->one()->sequenced_number;
+        }
+
+        return 0;
+    }
 }

@@ -129,6 +129,29 @@ use yii\helpers\Url;
                                         </ul>
                                     </div>
                                 </li>
+                                <li class="menu-item menu-item-submenu menu-item-rel <?=$this->menu_active == 'groups' ? 'menu-item-active' : '' ?>" data-menu-toggle="click" aria-haspopup="true">
+                                    <a href="javascript:;" class="menu-link menu-toggle">
+                                        <span class="menu-text">Groups</span>
+                                        <span class="menu-desc"></span>
+                                        <i class="menu-arrow"></i>
+                                    </a>
+                                    <div class="menu-submenu menu-submenu-classic menu-submenu-left">
+                                        <ul class="menu-subnav">
+                                            <li class="menu-item">
+                                                <a href="<?=Url::to(['group/create'])?>" class="menu-link">
+                                                    <span class="menu-icon fas fa-plus"></span>
+                                                    <span class="menu-text">Add New</span>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="<?=Url::to(['group/index'])?>" class="menu-link">
+                                                    <span class="menu-icon fas fa-list"></span>
+                                                    <span class="menu-text">All Groups</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
                                 <li class="menu-item menu-item-submenu menu-item-rel <?=$this->menu_active == 'posts' ? 'menu-item-active' : '' ?>" data-menu-toggle="click" aria-haspopup="true">
                                     <a href="javascript:;" class="menu-link menu-toggle">
                                         <span class="menu-text">Posts</span>

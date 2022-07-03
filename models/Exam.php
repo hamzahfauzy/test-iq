@@ -33,7 +33,7 @@ class Exam extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name','test_group','start_time', 'end_time'], 'required'],
+            [['name','test_group','start_time', 'end_time','group_id'], 'required'],
             [['name'], 'string', 'max' => 255],
         ];
     }
@@ -98,5 +98,15 @@ class Exam extends \yii\db\ActiveRecord
     public function getExamQuestions()
     {
         return $this->hasMany(ExamQuestion::className(), ['exam_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Group]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getGroup()
+    {
+        return $this->hasOne(Group::className(), ['id' => 'group_id']);
     }
 }
