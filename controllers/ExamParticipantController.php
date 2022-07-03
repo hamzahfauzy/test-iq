@@ -317,7 +317,7 @@ class ExamParticipantController extends Controller
     {
         $model = $this->findModel($id);
 
-        // ExamAnswer::deleteAll(['exam_id'=>$model->exam_id,'participant_id'=>$model->participant_id]);
+        ExamAnswer::deleteAll(['exam_id'=>$model->exam_id,'participant_id'=>$model->participant_id]);
         ExamCategory::deleteAll(['exam_id'=>$model->exam_id,'participant_id'=>$model->participant_id]);
 
         $model->status = NULL;
