@@ -143,4 +143,18 @@ class Participant extends \yii\db\ActiveRecord
 
         return 0;
     }
+
+    public function scores($exam_id, $category_id)
+    {
+        $categoryPosts = CategoryPost::find()->where(['category_id' => $category_id])->all();
+        $post_id = array_map(function($c){return $c->post_id;}, $categoryPosts);
+
+        return ExamAnswer::find()
+            ->where(['IN','question_id',$post_id])
+            ->andWhere([
+                'exam_id' => $exam_id,
+                'participant_id' => $this->id
+            ])
+            ->sum('score');
+    }
 }

@@ -1,6 +1,7 @@
 <?php
 namespace app\modules\answering\commands;
 
+use Yii;
 use app\models\Exam;
 use app\models\Post;
 use yii\db\Expression;
@@ -9,6 +10,7 @@ use yii\helpers\Console;
 use app\models\ExamAnswer;
 use yii\console\Controller;
 use app\models\ExamParticipant;
+use app\models\TestGroup\Group2;
 
 class RunController extends Controller
 {
@@ -301,5 +303,154 @@ class RunController extends Controller
             }
         }
         echo "Success\n";
+    }
+
+    public function actionCorrection1()
+    {
+        // except cfit 2
+        $connection = Yii::$app->getDb();
+        $command = $connection->createCommand("
+        UPDATE exam_answers ea,
+            posts p
+        SET    ea.score = p.post_type
+        WHERE  ea.score IS NULL 
+            AND p.id = ea.answer_id 
+            AND ea.answer_id IS NOT NULL 
+            AND ea.exam_id > 2");
+
+        $command->queryAll();
+
+    }
+
+    public function actionDeletecfit2()
+    {
+        // except cfit 2
+        $connection = Yii::$app->getDb();
+        $command = $connection->createCommand("
+        DELETE FROM exam_answers
+        WHERE  answer_id IS NULL");
+
+        $command->queryAll();
+
+    }
+
+    public function actionCorrection2()
+    {
+        // for cfit 2
+        $examAnswers = ExamAnswer::find()
+                ->where([
+                    'score' => null,
+                    'answer_id' => null
+                ])
+                ->joinWith(['question.items'])
+                ->all();
+        foreach($examAnswers as $examAnswer)
+        {
+            echo "Do ID : ".$examAnswer->id." Jawaban ".$examAnswer->answer_content."\n";
+            $item = $examAnswer->question->items[0];
+            $examAnswer->score = $item->post_content == $examAnswer->answer_content ? 1 : 0;
+            $examAnswer->save();
+            echo "Finish ID : ".$examAnswer->id."\n";
+        }
+    }
+
+    public function actionCfit2()
+    {
+        $post = Post::find()
+                ->where(['like','post_title','%CFIT 2%',false])
+                ->andWhere(['post_as' => 'Jawaban'])
+                ->andWhere(['post_date' => null])
+                ->joinWith(['postItem'])
+                ->asArray()
+                ->one();
+
+        $examParticipants = ExamParticipant::find()
+                ->where(['>', 'exam_id', 2])
+                // ->andWhere(['>', 'participant_id', 1911])
+                ->andWhere(['not',['status' => null]])
+                ->asArray()
+                ->all();
+
+        foreach($examParticipants as $examParticipant)
+        {
+
+            echo "Start ID : ".$examParticipant['participant_id']."\n";
+            $max = rand(3,9);
+            // $_posts = array_slice($posts, 0, $max);
+            // foreach($_posts as $post)
+            // {
+            //     $ExamAnswer = new ExamAnswer;
+            //     $ExamAnswer->exam_id = $examParticipant['exam_id'];
+            //     $ExamAnswer->participant_id = $examParticipant['participant_id'];
+            //     $ExamAnswer->question_id = $post['postItem']['parent_id'];
+            //     $ExamAnswer->answer_content = $post['post_content'];
+            //     $ExamAnswer->score = 1;
+            //     $ExamAnswer->save();
+            // }
+            $ExamAnswer = new ExamAnswer;
+            $ExamAnswer->exam_id = $examParticipant['exam_id'];
+            $ExamAnswer->participant_id = $examParticipant['participant_id'];
+            $ExamAnswer->question_id = $post['postItem']['parent_id'];
+            $ExamAnswer->answer_content = $post['post_content'];
+            $ExamAnswer->score = $max;
+            $ExamAnswer->save();
+            echo "End ID : ".$examParticipant['participant_id']."\n";
+        }
+    }
+
+    public function actionGenerateReport($id)
+    {
+        // \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        if(isset($_GET['bulk_print']))
+        {
+            $model = Exam::find()->where([
+                'exams.id'=>$id,
+            ])
+            ->joinWith([
+                'participants' => function($query){
+                    $query->where(['in','participants.id',$_GET['bulk_print']]);
+                },
+                'participants.user',
+                'participants.user.metas',
+                'participants.examAnswers',
+                'participants.examAnswers.answer',
+                'participants.examAnswers.question',
+                'participants.examAnswers.question.items',
+                'participants.examAnswers.question.categoryPost'
+            ])
+            // ->asArray()
+            ->one();
+        }
+        else
+        {
+            $model = Exam::find()->where([
+                'exams.id'=>$id,
+            ])
+            ->joinWith([
+                'participants',
+                'participants.user',
+                'participants.user.metas',
+                'participants.examAnswers',
+                'participants.examAnswers.answer',
+                'participants.examAnswers.question',
+                'participants.examAnswers.question.items',
+                'participants.examAnswers.question.categoryPost'
+            ])
+            // ->asArray()
+            ->one();
+        }
+
+
+        $report = (new Group2)->report($model);
+        $content = $report->render();
+
+        if(!isset($_GET['debug']))
+        {
+            header("Content-type: application/vnd-ms-excel");
+            header("Content-Disposition: attachment; filename=Report-".$model->name.".xls");
+        }
+
+        return $content;
     }
 }

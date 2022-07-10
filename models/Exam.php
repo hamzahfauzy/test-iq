@@ -90,6 +90,12 @@ class Exam extends \yii\db\ActiveRecord
         return $this->hasMany(Participant::className(), ['id' => 'participant_id'])
                 ->viaTable('exam_participants',['exam_id'=>'id']);
     }
+    
+    public function getParticipant()
+    {
+        return $this->hasOne(Participant::className(), ['id' => 'participant_id'])
+                ->viaTable('exam_participants',['exam_id'=>'id']);
+    }
 
     /**
      * Gets query for [[ExamQuestions]].

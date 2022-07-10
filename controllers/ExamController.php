@@ -6,6 +6,7 @@ use Yii;
 use app\models\Exam;
 use app\models\User;
 use app\models\Group;
+use app\Models\Report;
 use yii\web\Controller;
 use app\models\ExamSearch;
 use app\models\Participant;
@@ -13,6 +14,7 @@ use yii\filters\VerbFilter;
 use Spipu\Html2Pdf\Html2Pdf;
 use yii\helpers\ArrayHelper;
 use app\models\ImportExamFile;
+use app\models\TestGroup\Group2;
 use yii\web\NotFoundHttpException;
 use app\models\ExamParticipantSearch;
 
@@ -281,7 +283,7 @@ class ExamController extends Controller
         ]);
     }
 
-    function actionDownload($id)
+    function actionOldDownload2($id)
     {
         // \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $test_group = [
@@ -332,8 +334,60 @@ class ExamController extends Controller
         }
 
 
-        $report = (new $test_group[$model->test_group])->report($model);
+        $report = (new Group2)->report($model);
         $content = $report->render();
+
+        if(!isset($_GET['debug']))
+        {
+            header("Content-type: application/vnd-ms-excel");
+            header("Content-Disposition: attachment; filename=Report-".$model->name.".xls");
+        }
+
+        return $content;
+    }
+
+    function actionDownload($id)
+    {
+        // \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        if(isset($_GET['bulk_print']))
+        {
+            $model = Exam::find()->where([
+                'exams.id'=>$id,
+            ])
+            ->joinWith([
+                'participants' => function($query){
+                    $query->where(['in','participants.id',$_GET['bulk_print']]);
+                },
+                'group.items' => function($q){
+                    $q->orderby(['group_items.sequenced_number'=>'asc']);
+                },
+                'group.items.category' => function($q){
+                    $q->where(['not like','categories.name','%Instruksi%',false]);
+                },
+            ])
+            // ->asArray()
+            ->one();
+        }
+        else
+        {
+            $model = Exam::find()->where([
+                'exams.id'=>$id,
+            ])
+            ->joinWith([
+                'participants',
+                'group.items' => function($q){
+                    $q->orderby(['group_items.sequenced_number'=>'asc']);
+                },
+                'group.items.category' => function($q){
+                    $q->where(['not like','categories.name','%Instruksi%',false]);
+                },
+            ])
+            // ->asArray()
+            ->one();
+        }
+
+        $content = new Report($model);
+        $content = $content->render();
 
         if(!isset($_GET['debug']))
         {

@@ -40,48 +40,48 @@ class Group2
 
     public static $categories = [
         'IPS'=>[
-            'TPA 1',
-            'TPA 2'
+            'Soal TPA 1',
+            'Soal TPA 2'
         ],
         'BAHASA' => [
-            'TPA 3',
-            'TPA 4'
+            'Soal TPA 3',
+            'Soal TPA 4'
         ],
         'IPA' => [
-            'TPA 5',
-            'TPA 6',
-            'TPA 7',
-            'TPA 8',
+            'Soal TPA 5',
+            'Soal TPA 6',
+            'Soal TPA 7',
+            'Soal TPA 8',
         ],
         'R' => [
-            'Soal Holland R1',
-            'Soal Holland R2',
-            'Soal Holland R3',
+            'Soal Holland - R1',
+            'Soal Holland - R2',
+            'Soal Holland - R3',
         ],
         'I' => [
-            'Soal Holland I1',
-            'Soal Holland I2',
-            'Soal Holland I3',
+            'Soal Holland - I1',
+            'Soal Holland - I2',
+            'Soal Holland - I3',
         ],
         'A' => [
-            'Soal Holland A1',
-            'Soal Holland A2',
-            'Soal Holland A3',
+            'Soal Holland - A1',
+            'Soal Holland - A2',
+            'Soal Holland - A3',
         ],
         'S' => [
-            'Soal Holland S1',
-            'Soal Holland S2',
-            'Soal Holland S3',
+            'Soal Holland - S1',
+            'Soal Holland - S2',
+            'Soal Holland - S3',
         ],
         'E' => [
-            'Soal Holland E1',
-            'Soal Holland E2',
-            'Soal Holland E3',
+            'Soal Holland - E1',
+            'Soal Holland - E2',
+            'Soal Holland - E3',
         ],
         'C' => [
-            'Soal Holland C1',
-            'Soal Holland C2',
-            'Soal Holland C3',
+            'Soal Holland - C1',
+            'Soal Holland - C2',
+            'Soal Holland - C3',
         ],
     ];
 
@@ -122,21 +122,21 @@ class Group2
                     if(in_array($answer->question->categoryPost->name,$value) && $answer->answer)
                     {
                         $skor[$key] += (int) $answer->answer->post_type;
-                        if($answer->question->categoryPost->name == 'TPA 1')
+                        if($answer->question->categoryPost->name == 'Soal TPA 1')
                             $skor['TPA']['S1']+=(int) $answer->answer->post_type;
-                        if($answer->question->categoryPost->name == 'TPA 2')
+                        if($answer->question->categoryPost->name == 'Soal TPA 2')
                             $skor['TPA']['S2']+=(int) $answer->answer->post_type;
-                        if($answer->question->categoryPost->name == 'TPA 3')
+                        if($answer->question->categoryPost->name == 'Soal TPA 3')
                             $skor['TPA']['S3']+=(int) $answer->answer->post_type;
-                        if($answer->question->categoryPost->name == 'TPA 4')
+                        if($answer->question->categoryPost->name == 'Soal TPA 4')
                             $skor['TPA']['S4']+=(int) $answer->answer->post_type;
-                        if($answer->question->categoryPost->name == 'TPA 5')
+                        if($answer->question->categoryPost->name == 'Soal TPA 5')
                             $skor['TPA']['S5']+=(int) $answer->answer->post_type;
-                        if($answer->question->categoryPost->name == 'TPA 6')
+                        if($answer->question->categoryPost->name == 'Soal TPA 6')
                             $skor['TPA']['S6']+=(int) $answer->answer->post_type;
-                        if($answer->question->categoryPost->name == 'TPA 7')
+                        if($answer->question->categoryPost->name == 'Soal TPA 7')
                             $skor['TPA']['S7']+=(int) $answer->answer->post_type;
-                        if($answer->question->categoryPost->name == 'TPA 8')
+                        if($answer->question->categoryPost->name == 'Soal TPA 8')
                             $skor['TPA']['S8']+=(int) $answer->answer->post_type;
                     }
                     
@@ -166,6 +166,8 @@ class Group2
                 'participant' => $participant,
                 'skor' => $skor
             ];
+
+            break;
         }
 
         self::$_report = $report;
@@ -192,11 +194,11 @@ class Group2
             $rows .= '<td>'.++$key.'</td>';
             $rows .= '<td>'.$re['participant']->name.'</td>';
             $rows .= '<td>\''.$re['participant']->user->username.'</td>';
-            $rows .= '<td>'.$re['participant']->getMeta('tempat_lahir').'</td>';
-            $rows .= '<td>'.$re['participant']->getMeta('tanggal_lahir').'</td>';
+            $rows .= '<td>'.$re['participant']->getMeta('place_birth').'</td>';
+            $rows .= '<td>'.$re['participant']->getMeta('date_birth').'</td>';
             $rows .= '<td>'.$re['participant']->getMeta('jenis_kelamin').'</td>';
             $rows .= '<td>'.$re['participant']->examParticipant->finished_at.'</td>';
-            $rows .= '<td>'.$re['participant']->getMeta('jurusan').'</td>';
+            $rows .= '<td>'.$re['participant']->getMeta('major').'</td>';
             $rows .= '<td>'.$re['skor']['TPA']['S1'].'</td>';
             $rows .= '<td>'.$re['skor']['TPA']['S2'].'</td>';
             $rows .= '<td>'.$re['skor']['TPA']['S3'].'</td>';
@@ -221,6 +223,8 @@ class Group2
             $rows .= '<td>'.$re['skor']['HOLLAND'].'</td>';
 
             $html .= $rows;
+
+            break;
         }
         return $html;
     }
