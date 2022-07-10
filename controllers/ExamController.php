@@ -6,7 +6,7 @@ use Yii;
 use app\models\Exam;
 use app\models\User;
 use app\models\Group;
-use app\Models\Report;
+use app\models\Report;
 use yii\web\Controller;
 use app\models\ExamSearch;
 use app\models\Participant;
