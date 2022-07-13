@@ -89,7 +89,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         'value' => function($model){
                             $status = $model->status?$model->status:'-';
                             if($status != '-')
-                                $status .= ' - <a href="'.Url::to(['exam-participant/reset','id'=>$model->id]).'">Reset</a>';
+                            {
+                                $status .= ' - <a href="'.Url::to(['exam-participant/reset','id'=>$model->id]).'">Reset Semua</a>';
+                                $status .= ' - <a href="'.Url::to(['exam-participant/reset-session','id'=>$model->id]).'">Reset Sesi</a>';
+                            }
                             return $status;
                         }
                     ],

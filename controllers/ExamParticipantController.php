@@ -327,4 +327,20 @@ class ExamParticipantController extends Controller
         
         return $this->redirect(['exam/view','id'=>$model->exam_id]);
     }
+
+    public function actionResetSession($id)
+    {
+        $model = $this->findModel($id);
+
+        // ExamAnswer::deleteAll(['exam_id'=>$model->exam_id,'participant_id'=>$model->participant_id]);
+        // ExamCategory::deleteAll(['exam_id'=>$model->exam_id,'participant_id'=>$model->participant_id]);
+
+        $model->status = NULL;
+        $model->queue_status = 0;
+        $model->category_index = 0;
+        $model->finished_at = NULL;
+        $model->save();
+        
+        return $this->redirect(['exam/view','id'=>$model->exam_id]);
+    }
 }

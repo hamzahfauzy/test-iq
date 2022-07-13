@@ -7,6 +7,14 @@ class Report
     public $report_columns = [
         'Nama',
         'Username',
+        'Tempat Lahir',
+        'Tanggal Lahir',
+        // 'Jenis Kelamin',
+        'Jurusan',
+        'Cita-cita',
+        'Asal SMP',
+        'Prestasi Akademik',
+        'Prestasi Non-Akademik',
         'SUBTEST 1',
         'SUBTEST 2',
         'SUBTEST 3',
@@ -119,6 +127,14 @@ class Report
             $rows .= '<td>'.++$key.'</td>';
             $rows .= '<td>'.$participant['name'].'</td>';
             $rows .= '<td>\''.$participant['id_number'].'</td>';
+            $rows .= '<td>'.$participant->getMeta('place_birth').'</td>';
+            $rows .= '<td>'.$participant->getMeta('date_birth').'</td>';
+            // $rows .= '<td>'.$participant->getMeta('gender').'</td>';
+            $rows .= '<td>'.$participant->getMeta('major').'</td>';
+            $rows .= '<td>'.$participant->getMeta('goals').'</td>';
+            $rows .= '<td>'.$participant->getMeta('middle_school').'</td>';
+            $rows .= '<td>'.$participant->getMeta('academic').'</td>';
+            $rows .= '<td>'.$participant->getMeta('non_academic').'</td>';
 
             foreach($this->data['group']['items'] as $column)
             {
