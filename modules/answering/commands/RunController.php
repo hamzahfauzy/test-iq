@@ -321,6 +321,61 @@ class RunController extends Controller
         $command->queryAll();
 
     }
+    
+    public function actionCorrection3()
+    {
+        // updated and please using this
+        $connection = Yii::$app->getDb();
+        $command = $connection->createCommand("
+        UPDATE exam_answers ea,
+            posts p
+        SET    ea.score = p.post_type
+        WHERE  ea.score IS NULL 
+            AND ea.answer_content REGEXP '^[0-9]+$'
+            AND p.id = ea.answer_content
+            AND ea.exam_id > 2");
+
+        $command->queryAll();
+
+    }
+    
+    public function actionCorrectioncfit1()
+    {
+        // for cfit true
+        $connection = Yii::$app->getDb();
+        $command = $connection->createCommand("
+        UPDATE exam_answers ea,
+            posts p, posts a, post_items pi
+        SET    ea.score = 1
+        WHERE  ea.score IS NULL 
+            AND p.id = ea.question_id
+            AND pi.parent_id = p.id
+            AND a.id = pi.child_id
+            AND ea.answer_content = a.post_content
+            AND ea.exam_id > 2");
+
+        $command->queryAll();
+
+    }
+    
+    public function actionCorrectioncfit2()
+    {
+        // for cfit false
+        $connection = Yii::$app->getDb();
+        $command = $connection->createCommand("
+        UPDATE exam_answers ea,
+            posts p, posts a, post_items pi
+        SET    ea.score = 0
+        WHERE  ea.score IS NULL 
+            AND p.id = ea.question_id
+            AND pi.parent_id = p.id
+            AND a.id = pi.child_id
+            AND ea.answer_content != a.post_content
+            AND ea.exam_id > 2");
+
+        $command->queryAll();
+
+    }
 
     public function actionDeletecfit2()
     {
