@@ -335,7 +335,7 @@ class ExamParticipantController extends Controller
         // ExamAnswer::deleteAll(['exam_id'=>$model->exam_id,'participant_id'=>$model->participant_id]);
         // ExamCategory::deleteAll(['exam_id'=>$model->exam_id,'participant_id'=>$model->participant_id]);
 
-        $model->status = NULL;
+        $model->status = 'start';
         $model->queue_status = 0;
         $model->category_index = 0;
         $model->finished_at = NULL;
