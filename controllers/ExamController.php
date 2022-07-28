@@ -448,7 +448,7 @@ class ExamController extends Controller
         {
             $row = "<tr>";
             $row .= "<td>".++$key."</td>";
-            $row .= "<td>".$ep->participant->id_number."</td>";
+            $row .= "<td>'".$ep->participant->id_number."</td>";
             $row .= "<td>".$ep->participant->name."</td>";
             $row .= "<td>".$ep->status."</td>";
             $row .= "<td>".$ep->started_at."</td>";
