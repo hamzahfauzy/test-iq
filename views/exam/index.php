@@ -46,6 +46,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     'start_time',
                     'end_time',
 
+                    [
+                        'attribute' => 'Berita Acara',
+                        'format'    => 'raw',
+                        'value'     => function ($model) {
+                            return Html::a('Download', ['download-ba','id'=> $model->id]);
+                        }
+                    ],
+
                     ['class' => 'yii\grid\ActionColumn'],
                 ],
             ]); ?>

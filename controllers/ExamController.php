@@ -439,11 +439,10 @@ class ExamController extends Controller
 
         $html .= "<tr>";
         $html .= "<td>#</td>";
-        $html .= "<td>ID Number</td>";
-        $html .= "<td>Name</td>";
+        $html .= "<td>Username</td>";
+        $html .= "<td>Nama</td>";
         $html .= "<td>Status</td>";
         $html .= "<td>Mulai</td>";
-        $html .= "<td>Selesai</td>";
         $html .= "</tr>";
         foreach($model->examParticipants as $key => $ep)
         {
@@ -453,7 +452,6 @@ class ExamController extends Controller
             $row .= "<td>".$ep->participant->name."</td>";
             $row .= "<td>".$ep->status."</td>";
             $row .= "<td>".$ep->started_at."</td>";
-            $row .= "<td>".$ep->finished_at."</td>";
             $row .= "</tr>";
             $html .= $row;
         }
